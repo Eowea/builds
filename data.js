@@ -967,6 +967,7 @@
         builds:[
           {
             enabled: true, order: 1, label: { fr: 'Build recommandé', en: 'Recommanded Build' },
+            updatedAt: { fr: '6 Mai 2026', en: 'May 6, 2026' },
             summary: { fr: 'Build qui passe partout, peu importe le mode de jeu.', en: 'Maximizes the impact of the silence zone.' },
             buildCodeTitle: { fr: "A COLLER DANS L\'ARBRE DES TALENTS", en: "PASTE" },
             buildCode: "[T3322212,Stukov]", videos:[],
@@ -1102,6 +1103,7 @@
         builds:[
           {
             enabled: true, order: 1, label: { fr: 'Build E', en: 'E Build' },
+            updatedAt: { fr: '6 Mai 2026', en: 'May 6, 2026' },
             summary: { fr: 'Étourdissements réguliers et soins continus.', en: 'Reliable stuns and sustained healing.' },
             buildCodeTitle: { fr: "A COLLER DANS L'ARBRE DES TALENTS", en: "PASTE IN TALENT TREE" },
             buildCode: "[T2332312,Tyrande]", videos: [],
