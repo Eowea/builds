@@ -524,12 +524,15 @@ window.goToBuild = (heroId, buildIndex) => {
 
 // Fonction pour scroller en douceur au niveau de la liste des héros
    function scrollToHeroes() {
-      const layoutEl = document.querySelector('.layout');
-      if (layoutEl) {
-        const y = layoutEl.getBoundingClientRect().top + window.scrollY - 130;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      }
-    }
+     const layoutEl = document.querySelector('.layout');
+     if (layoutEl) {
+         // On augmente la marge de sécurité (190px sur PC, 160px sur mobile)
+         const offset = window.innerWidth <= 640 ? 160 : 190;
+         const y = layoutEl.getBoundingClientRect().top + window.scrollY - offset;
+         
+         window.scrollTo({ top: y, behavior: 'smooth' });
+     }
+ }
 
 // Un timer pour éviter que la recherche ne saccade à chaque lettre frappée
     let searchTimeout;
