@@ -516,7 +516,7 @@ window.goToBuild = (heroId, buildIndex) => {
     const detailEl = document.getElementById('detailViewWrap');
     if (!detailEl) return;
 
-    const offset = window.innerWidth <= 640 ? 120 : 160;
+    const offset = window.innerWidth <= 640 ? 160 : 190;
     const y = detailEl.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top: y, behavior: 'smooth' });
   });
@@ -565,7 +565,7 @@ els.heroList.addEventListener('click', (e) => {
     const detailEl = document.getElementById('detailViewWrap');
     if (!detailEl) return;
 
-    const offset = window.innerWidth <= 640 ? 120 : 140;
+    const offset = window.innerWidth <= 640 ? 160 : 190;
     const y = detailEl.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top: y, behavior: 'smooth' });
   }, 0);
@@ -594,7 +594,7 @@ els.heroList.addEventListener('click', (e) => {
         if (state.heroId) {
           const detailEl = document.getElementById('detailViewWrap');
           if (detailEl) {
-            const offset = window.innerWidth <= 640 ? 120 : 140;
+            const offset = window.innerWidth <= 640 ? 160 : 190;
             const y = detailEl.getBoundingClientRect().top + window.scrollY - offset;
             window.scrollTo({ top: y, behavior: 'smooth' });
           }
@@ -667,7 +667,7 @@ if (location.hash.includes('hero=')) {
     setTimeout(() => {
         const detailEl = document.getElementById('detailViewWrap');
         if (detailEl) {
-            const offset = window.innerWidth <= 640 ? 120 : 140;
+            const offset = window.innerWidth <= 640 ? 160 : 190;
             const y = detailEl.getBoundingClientRect().top + window.scrollY - offset;
             
             // Effectue le scroll vers le héros
