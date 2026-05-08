@@ -403,7 +403,7 @@ function bindFloatingTriggers(root = document) {
       t.addEventListener('mouseenter', () => showFloatingTooltip(t));
       t.addEventListener('mouseleave', () => hideFloatingTooltip());
       t.addEventListener('focus', () => showFloatingTooltip(t));
-      t.addEventListener('blur', () => hideFloatingTooltip(true));
+      t.addEventListener('blur', () => hideFloatingTooltip());
       
     } else {
       // Mobile / tactile
