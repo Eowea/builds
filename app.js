@@ -358,7 +358,15 @@ function renderBuildCode(b) {
     function queueTooltipPosition() { if (!activeFloatingTrigger || tooltipRaf) return; tooltipRaf = requestAnimationFrame(() => { tooltipRaf = 0; const t = $('activeFloatingTooltip'); if (activeFloatingTrigger && t) positionTooltip(activeFloatingTrigger, t); }); }
 function showFloatingTooltip(tr) { 
     if(!tr) return; 
-    clearTimeout(hideTooltipTimer); activeFloatingTrigger=tr; 
+    clearTimeout(hideTooltipTimer); 
+    
+    // --- NOUVEAUTÉ : On empêche le rechargement si l'infobulle est déjà active
+    if (activeFloatingTrigger === tr && els.tooltipPortal.getAttribute('aria-hidden') === 'false') {
+        return; 
+    }
+    // -------------------------------------------------------------------------
+
+    activeFloatingTrigger=tr; 
     const title = tr.dataset.floatingTitle||'';
     const desc = tr.dataset.floatingDescription||'';
     const did = tr.dataset.floatingDemo||''; 
