@@ -657,6 +657,8 @@ els.langSwitcher.addEventListener('click', (e) => {
     window.addEventListener('resize',()=>{queueTooltipPosition();queueLayoutSync();});
     window.addEventListener('scroll', queueTooltipPosition, { passive: true, capture: true });
 
+restoreFromHash(); mountTwitch(); syncTwitchUI(); renderRandomBuildCard(); renderAll();
+
     // --- NOUVEAU : Auto-scroll au chargement si on arrive via un lien de partage ---
 if (location.hash.includes('hero=')) {
     setTimeout(() => {
