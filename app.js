@@ -669,4 +669,4 @@ if (location.hash.includes('hero=')) {
             window.scrollTo({ top: y, behavior: 'smooth' }); 
         }
     }, 150); 
-}
+};
