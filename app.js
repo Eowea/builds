@@ -190,7 +190,7 @@ function mountTwitch() {
     function renderHeader() { 
       els.siteTitle.textContent = loc(STREAMER_CONFIG.siteTitle); 
       els.siteSubtitle.textContent = loc(STREAMER_CONFIG.siteSubtitle); 
-      els.socials.innerHTML = STREAMER_CONFIG.socials.map(s=>`<a class="social-link" href="${s.url}" target="_blank" rel="noreferrer">${ICONS[s.icon]||''}<span>${s.label}</span></a>`).join(''); 
+      els.socials.innerHTML = STREAMER_CONFIG.socials.map(s=>`<a class="social-link" data-network="${s.icon}" href="${s.url}" target="_blank" rel="noreferrer">${ICONS[s.icon]||''}<span>${s.label}</span></a>`).join('');
     }
     
     function renderFilters() { els.roleFilters.innerHTML=roles().map(r=>`<button class="filter-chip${state.role===r?' active':''}" type="button" data-role="${r}">${locRole(r)}</button>`).join(''); }
