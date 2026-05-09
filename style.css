@@ -988,36 +988,57 @@
     .combo-title { font-size: 14px; font-weight: 700; color: var(--text-bright); margin-bottom: 4px; overflow-wrap: break-word; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; }
     .combo-desc { font-size: 12px; color: var(--text-dim); line-height: 1.5; overflow-wrap: break-word; }
 
-    /* ── Lightbox ── */
-    .video-overlay {
-      display: none; position: fixed; inset: 0; background: rgba(8, 12, 20, 0.95);
-      z-index: 9999; place-items: center; cursor: zoom-out; padding: 20px; backdrop-filter: blur(12px);
-    }
-    .video-overlay.active { display: grid; }
+/* ── Lightbox ── */
+.video-overlay {
+  display: none; 
+  position: fixed; 
+  inset: 0; 
+  background: rgba(8, 12, 20, 0.95);
+  z-index: 20000 !important; /* MISE À JOUR : Passe au-dessus des drapeaux (10000) et réseaux (9999) */
+  place-items: center; 
+  cursor: zoom-out; 
+  padding: 20px; 
+  backdrop-filter: blur(12px);
+}
 
-    .video-modal { width: min(1100px, 94vw); position: relative; z-index: 2; cursor: default; }
-    .video-frame {
-      width: 100%; aspect-ratio: 16 / 9; border-radius: 4px; overflow: hidden; background: #000;
-      box-shadow: 0 20px 80px rgba(0,0,0,1), 0 0 30px var(--blue-glow); border: 1px solid var(--blue-border);
-    }
-    .video-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+.video-overlay.active { display: grid; }
 
-    .overlay-status { position: absolute; inset: 0; display: none; place-items: center; color: var(--text-bright); font-size: 14px; z-index: 1; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; }
-    .video-overlay.loading .overlay-status, .video-overlay.error .overlay-status { display: grid; }
+.video-modal { width: min(1100px, 94vw); position: relative; z-index: 2; cursor: default; }
+.video-frame {
+  width: 100%; aspect-ratio: 16 / 9; border-radius: 4px; overflow: hidden; background: #000;
+  box-shadow: 0 20px 80px rgba(0,0,0,1), 0 0 30px var(--blue-glow); border: 1px solid var(--blue-border);
+}
+.video-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
 
-    .overlay-status-box { display: inline-flex; align-items: center; gap: 12px; padding: 16px 24px; border: 1px solid var(--blue-border); background: var(--bg-2); border-radius: 2px; }
+.overlay-status { position: absolute; inset: 0; display: none; place-items: center; color: var(--text-bright); font-size: 14px; z-index: 1; font-family: 'Rajdhani', sans-serif; text-transform: uppercase; letter-spacing: 0.05em; }
+.video-overlay.loading .overlay-status, .video-overlay.error .overlay-status { display: grid; }
 
-    .overlay-spinner { width: 20px; height: 20px; border-radius: 50%; border: 2px solid rgba(0, 229, 255, 0.2); border-top-color: var(--blue-bright); animation: spin .8s linear infinite; }
-    .video-overlay.error .overlay-spinner { display: none; }
-    @keyframes spin { to { transform: rotate(360deg); } }
+.overlay-status-box { display: inline-flex; align-items: center; gap: 12px; padding: 16px 24px; border: 1px solid var(--blue-border); background: var(--bg-2); border-radius: 2px; }
 
-    .close-overlay {
-      position: absolute; top: 20px; right: 20px; width: 50px; height: 50px;
-      background: rgba(0, 0, 0, 0.5); color: var(--text-bright); border-radius: 2px;
-      display: grid; place-items: center; font-size: 32px; font-family: sans-serif;
-      cursor: pointer; transition: all .2s; z-index: 10001; border: 1px solid var(--blue-border);
-    }
-    .close-overlay:hover { background: rgba(0, 229, 255, 0.2); border-color: var(--blue-bright); color: var(--blue-bright); box-shadow: 0 0 15px var(--blue-glow); }
+.overlay-spinner { width: 20px; height: 20px; border-radius: 50%; border: 2px solid rgba(0, 229, 255, 0.2); border-top-color: var(--blue-bright); animation: spin .8s linear infinite; }
+.video-overlay.error .overlay-spinner { display: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.close-overlay {
+  position: absolute; 
+  top: 20px; 
+  right: 20px; 
+  width: 50px; 
+  height: 50px;
+  background: rgba(0, 0, 0, 0.5); 
+  color: var(--text-bright); 
+  border-radius: 2px;
+  display: grid; 
+  place-items: center; 
+  font-size: 32px; 
+  font-family: sans-serif;
+  cursor: pointer; 
+  transition: all .2s; 
+  z-index: 20001 !important; /* MISE À JOUR : Le bouton fermer doit être tout devant */
+  border: 1px solid var(--blue-border);
+}
+
+.close-overlay:hover { background: rgba(0, 229, 255, 0.2); border-color: var(--blue-bright); color: var(--blue-bright); box-shadow: 0 0 15px var(--blue-glow); }
 
     .hero-name-row {
       display: flex;
