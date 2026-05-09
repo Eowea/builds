@@ -113,7 +113,7 @@
        HEADER
        ═══════════════════════════════ */
     .topbar {
-      display: flex;
+      display: none !important;
       flex-wrap: wrap;
       justify-content: space-between;
       gap: 16px;
@@ -222,43 +222,6 @@
     }
     .social-link svg { width: 14px; height: 14px; }
 
-    /* ── Lang Switcher ── */
-    .lang-switcher {
-      display: inline-flex;
-      border: 1px solid var(--blue-border);
-      border-radius: 2px;
-      overflow: hidden;
-      height: 40px;
-    }
-    .lang-btn {
-      background: rgba(0, 0, 0, 0.4);
-      color: var(--text-dim);
-      border: none;
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 0 12px;
-      cursor: pointer;
-      transition: all var(--t);
-    }
-    .lang-btn:hover {
-      background: rgba(0, 229, 255, 0.1);
-      color: var(--blue-bright);
-    }
-    .lang-btn.active {
-      background: var(--blue-soft);
-      color: var(--blue-bright);
-      box-shadow: inset 0 0 10px var(--blue-glow);
-    }
-
-    /* ── Twitch player ── */
-    .twitch-card {
-      display: none; /* Cacher par défaut (Live OFF) */
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      border: 1px solid var(--blue-border);
-      background: var(--bg-2);
-    }
 
     .twitch-head {
       display: flex;
@@ -1432,4 +1395,218 @@
 .social-link[data-network="x"]:hover {
     background-color: #222222;
     border-color: #444444;
+}
+
+/* Fixer le switch de langue à droite */
+
+.center-random-container {
+  padding: 10px;
+  animation: fadeIn 0.3s ease-out; /* Petite animation d'apparition douce */
+}
+
+.center-random-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 colonnes par défaut */
+  gap: 20px; /* Espace entre les builds */
+}
+
+/* On force un fond sur les cartes pour qu'elles se détachent du fond principal */
+.center-random-card {
+  background-color: rgba(25, 27, 35, 0.6); 
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.center-random-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================================================================
+   SÉLECTEUR DE LANGUE (Drapeaux - Fixe PC & Mobile)
+   ========================================================================== */
+#langSwitcher {
+    position: fixed !important;
+    top: 50% !important;
+    right: 8px !important; /* On les décolle un tout petit peu du bord de l'écran */
+    transform: translateY(-50%) !important;
+    z-index: 10000 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important; /* Espace entre les drapeaux */
+    
+    /* SUPPRESSION DE L'ENCADRÉ ICI */
+    background: transparent !important; 
+    border: none !important;
+    padding: 0 !important;
+    
+    list-style: none !important; 
+    margin: 0 !important;
+    pointer-events: none !important; /* Laisse passer les clics autour */
+}
+
+.lang-btn {
+    width: 40px !important; 
+    height: 28px !important; 
+    padding: 0 !important;
+    border: 1px solid var(--blue-border) !important;
+    background: transparent !important;
+    cursor: pointer;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all var(--t);
+    border-radius: 2px !important;
+    overflow: hidden !important;
+    opacity: 0.8;
+    flex-shrink: 0 !important; /* Empêche les drapeaux de devenir des points ! */
+    text-decoration: none !important;
+}
+
+.lang-btn img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+}
+
+.lang-btn:hover {
+    transform: scale(1.05);
+    opacity: 1;
+    border-color: var(--blue-bright) !important;
+    box-shadow: 0 0 10px var(--blue-glow) !important;
+}
+
+/* ==========================================================================
+   1. Conteneur des réseaux (PC & Mobile)
+   ========================================================================== */
+#socials {
+    position: fixed;
+    top: 50%; 
+    left: 0;  
+    transform: translateY(-50%); 
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* 2. Bouton de base */
+#socials .social-link {
+    display: flex;
+    align-items: center;
+    height: 44px;
+    width: 44px; 
+    padding: 0 13px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0 4px 4px 0; 
+    color: #ffffff;
+    text-decoration: none;
+    transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0.7; 
+    box-sizing: border-box;
+    outline: none;
+    -webkit-tap-highlight-color: transparent; /* Supprime le flash de sélection bleu sur mobile */
+}
+
+/* 3. Couleurs pleines appliquées au repos */
+#socials .social-link[data-network="twitch"] { background: #9146FF; }
+#socials .social-link[data-network="youtube"] { background: #FF0000; }
+#socials .social-link[data-network="discord"] { background: #5865F2; }
+#socials .social-link[data-network="x"] { background: #111111; }
+#socials .social-link[data-network="kofi"] { background: #FF5E5B; }
+
+/* 4. Icône et Texte */
+#socials .social-link svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    fill: currentColor;
+}
+
+#socials .social-link span {
+    margin-left: 14px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
+    opacity: 0; 
+    white-space: nowrap;
+    transition: opacity 0.2s ease 0.1s; 
+    display: inline-block;
+}
+
+/* ==========================================================================
+   5. GESTION DE L'OUVERTURE (Séparation PC / Mobile)
+   ========================================================================== */
+
+/* Sur PC : Le survol de la souris gère l'ouverture classique */
+@media (min-width: 769px) {
+    #socials .social-link:hover {
+        width: 150px;
+        opacity: 1;
+        border-color: rgba(255, 255, 255, 0.3);
+    }
+    #socials .social-link:hover span {
+        opacity: 1;
+    }
+}
+
+/* Sur Mobile : On utilise la classe .is-open gérée par le script JavaScript */
+@media (max-width: 768px) {
+    
+
+    /* --- 2. RÉSEAUX SOCIAUX --- */
+    #socials .social-link {
+        width: 36px !important;  
+        height: 40px !important; 
+        padding: 0 !important;
+        padding-left: 10px !important; /* Pousse l'icône exactement au centre du petit carré */
+        flex: 0 0 auto !important; 
+        
+        /* CORRIGE LE BUG DE L'ICÔNE : force le contenu à s'aligner à gauche pour que le texte invisible ne pousse pas l'icône dehors */
+        justify-content: flex-start !important; 
+    }
+    
+    /* Ajustement de l'icône */
+    #socials .social-link svg {
+        width: 16px !important;
+        height: 16px !important;
+        margin: 0 !important;
+    }
+
+    /* Ajustement du texte */
+    #socials .social-link span {
+        margin-left: 10px !important;
+        font-size: 12px !important;
+    }
+
+    /* --- 3. COMPORTEMENT À L'OUVERTURE (1 Tap) --- */
+    #socials .social-link.is-open {
+        width: 130px !important; /* Ne prend pas tout l'écran */
+        opacity: 1 !important;
+        border-color: rgba(255, 255, 255, 0.3) !important;
+    }
+    
+    #socials .social-link.is-open span {
+        opacity: 1 !important;
+    }
+}
+/* ==========================================================================
+   CORRECTION DES ZONES MORTES (Clics bloqués sur les bords)
+   ========================================================================== */
+/* 1. On désactive les clics sur les grandes "boîtes invisibles" qui contiennent les boutons */
+#socials, 
+#langSwitcher {
+    pointer-events: none !important;
+}
+
+/* 2. On réactive les clics UNIQUEMENT sur les vrais boutons colorés/drapeaux */
+#socials .social-link, 
+#langSwitcher .lang-btn {
+    pointer-events: auto !important;
 }

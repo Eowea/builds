@@ -128,54 +128,7 @@ const getInitialLang = () => {
     function ensureSelection() { const l=filteredHeroes(); if(state.heroId&&(!currentHero()||!l.some(h=>h.id===state.heroId))){state.heroId=null;state.buildIndex=0;} clampBuildIndex(currentHero()); }
 
     function twitchFrame() { if(!STREAMER_CONFIG.twitchChannel) return ''; return `<iframe src="https://player.twitch.tv/?channel=${encodeURIComponent(STREAMER_CONFIG.twitchChannel)}&parent=${encodeURIComponent(location.hostname||'localhost')}&muted=true" allowfullscreen loading="lazy"></iframe>`; }
-    // --- GESTION TWITCH & BUILD ALEATOIRE ---
-function setStreamOnline() {
-  $('desktopTwitchCard').style.display = 'block';
-  $('randomBuildCard').classList.add('active');
 
-  const mobileTwitchCard = $('mobileTwitchCard');
-  const mobileRandomBuildCard = $('mobileRandomBuildCard');
-
-  if (mobileTwitchCard) mobileTwitchCard.style.display = 'block';
-  if (mobileRandomBuildCard) mobileRandomBuildCard.classList.add('active');
-
-  renderRandomBuildCard();
-}
-
-function setStreamOffline() {
-  $('desktopTwitchCard').style.display = 'none';
-  $('randomBuildCard').classList.add('active');
-
-  const mobileTwitchCard = $('mobileTwitchCard');
-  const mobileRandomBuildCard = $('mobileRandomBuildCard');
-
-  if (mobileTwitchCard) mobileTwitchCard.style.display = 'none';
-  if (mobileRandomBuildCard) mobileRandomBuildCard.classList.add('active');
-
-  renderRandomBuildCard();
-}
-
-function mountTwitch() {
-  els.desktopTwitchMount.innerHTML = '<div id="twitch-player-desktop"></div>';
-
-  if (els.mobileTwitchMount) {
-    els.mobileTwitchMount.innerHTML = twitchFrame();
-  }
-
-  const player = new Twitch.Player('twitch-player-desktop', {
-    width: '100%',
-    height: 200,
-    channel: STREAMER_CONFIG.twitchChannel,
-    parent:[location.hostname || 'localhost'],
-    muted: true,
-  });
-
-  // On fait uniquement confiance aux événements officiels de l'API
-  player.addEventListener(Twitch.Player.ONLINE, setStreamOnline);
-  player.addEventListener(Twitch.Player.OFFLINE, setStreamOffline);
-}
-
-    function syncTwitchUI() { els.desktopTwitchCard.classList.toggle('is-collapsed',!state.twitchOpen); els.toggleTwitch.textContent=state.twitchOpen?t('twitchClose'):t('twitchOpen'); }
 
     function updateStaticLang() {
       const el = id => { const e = $(id); if (e) return e; return { textContent: '', placeholder: '' }; };
@@ -347,8 +300,82 @@ function renderBuildCode(b) {
      bindFloatingTriggers(); 
     }
 
-    function renderDetail() { hideFloatingTooltip(true); const h=currentHero(); if(!h){els.detailView.innerHTML=`<div class="empty-state">${t('emptySelection')}</div>`;return;} clampBuildIndex(h); els.detailView.innerHTML=`<section class="hero-header"><div class="detail-portrait" data-fallback="${esc(initials(loc(h.name)))}"><img src="${h.portrait}" alt="${esc(loc(h.name))}" loading="lazy" onerror="this.parentNode.classList.add('fallback');this.remove();" /></div><div><h2 class="detail-title">${esc(loc(h.name))}</h2><div class="role-badge">${esc(locRole(h.role))}</div><p class="detail-headline">${esc(loc(h.headline))}</p></div></section><section class="meta-grid"><article class="card"><div class="card-head">${t('gameplay')}</div><div class="card-body"><p>${esc(loc(h.gameplay))}</p>${renderSpells(h.spells)}</div></article><article class="card"><div class="card-head">${t('tips')}</div><div class="card-body"><ul class="bullet-list">${(h.tips||[]).map(tip=>`<li>${esc(loc(tip))}</li>`).join('')}</ul></div></article></section><div id="buildSection"></div>`; renderBuildSection(h); bindFloatingTriggers(); }
+let cachedFourBuilds = null;
 
+function renderFourRandomBuildsHtml() {
+  if (!cachedFourBuilds) {
+    const activeHeroes = HEROES.filter(h => h.enabled !== false && h.builds && h.builds.length > 0);
+    let pool = [];
+    if (activeHeroes.length > 0) {
+      activeHeroes.forEach(hero => {
+        hero.builds.filter(b => b.enabled !== false).forEach((build, bIdx) => {
+          pool.push({ hero, build, bIdx });
+        });
+      });
+      // Mélange aléatoire (shuffle) de tous les builds existants
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+    }
+    // On garde les 4 premiers
+    cachedFourBuilds = pool.slice(0, 4);
+  }
+
+  if (!cachedFourBuilds.length) return `<div class="empty-state">${t('emptySelection')}</div>`;
+
+  let html = `<div class="center-random-container">`;
+  html += `<h2 class="section-title" style="text-align: center; margin-bottom: 25px;">${t('randomBuildTitle')}</h2>`;
+  html += `<div class="center-random-grid">`;
+  
+  cachedFourBuilds.forEach(item => {
+    const { hero, build, bIdx } = item;
+    // On réutilise l'esthétique de ta carte aléatoire existante
+    html += `
+      <div class="random-card-body center-random-card">
+        <div class="random-hero-row">
+          <div class="portrait"><img src="${hero.portrait}" alt=""></div>
+          <div class="random-meta">
+            <div class="name" style="font-size: 1.1rem;">${esc(loc(hero.name))}</div>
+            <div class="role" style="font-size: 0.85rem; opacity: 0.8;">${esc(locRole(hero.role))}</div>
+          </div>
+        </div>
+        <div class="random-build-label" style="margin: 15px 0;">${esc(loc(build.label))}</div>
+        <div class="random-talents-strip" style="margin-bottom: 20px;">
+          ${(build.talents || []).slice(0, 7).map(td => ftHTML({
+            cls: 'talent-trigger floating-trigger',
+            title: td.name,
+            desc: td.description,
+            inner: `<div class="talent-icon"><img src="${td.icon || svgBadge(loc(td.name))}"></div>`
+          })).join('')}
+        </div>
+        <button class="btn-suggest" onclick="window.goToBuild('${hero.id}', ${bIdx})">
+          ${t('viewBuild')}
+        </button>
+      </div>
+    `;
+  });
+  
+  html += `</div></div>`;
+  return html;
+}
+
+function renderDetail() { 
+  hideFloatingTooltip(true); 
+  const h=currentHero(); 
+  
+  // NOUVEAUTÉ : Si aucun héros n'est sélectionné, on affiche les 4 builds !
+  if(!h){
+    els.detailView.innerHTML = renderFourRandomBuildsHtml();
+    bindFloatingTriggers(); // Très important pour que les infobulles marchent au centre
+    return;
+  } 
+  
+  clampBuildIndex(h); 
+  els.detailView.innerHTML=`<section class="hero-header"><div class="detail-portrait" data-fallback="${esc(initials(loc(h.name)))}"><img src="${h.portrait}" alt="${esc(loc(h.name))}" loading="lazy" onerror="this.parentNode.classList.add('fallback');this.remove();" /></div><div><h2 class="detail-title">${esc(loc(h.name))}</h2><div class="role-badge">${esc(locRole(h.role))}</div><p class="detail-headline">${esc(loc(h.headline))}</p></div></section><section class="meta-grid"><article class="card"><div class="card-head">${t('gameplay')}</div><div class="card-body"><p>${esc(loc(h.gameplay))}</p>${renderSpells(h.spells)}</div></article><article class="card"><div class="card-head">${t('tips')}</div><div class="card-body"><ul class="bullet-list">${(h.tips||[]).map(tip=>`<li>${esc(loc(tip))}</li>`).join('')}</ul></div></article></section><div id="buildSection"></div>`; 
+  renderBuildSection(h); 
+  bindFloatingTriggers(); 
+}
     function renderAll() { updateStaticLang(); ensureSelection(); renderHeader(); renderFilters(); renderHeroList(); renderDetail(); updateHash(); }
     function updateHash() { const h=currentHero(); clampBuildIndex(h); h?history.replaceState(null,'',`#hero=${encodeURIComponent(state.heroId)}&build=${state.buildIndex}`):history.replaceState(null,'',location.pathname); }
     function restoreFromHash() { const p=new URLSearchParams(location.hash.replace(/^#/,'')); const id=p.get('hero'); if(id&&HEROES.some(h=>h.id===id&&h.enabled!==false)){state.heroId=id;state.buildIndex=Number(p.get('build')||'0');} }
@@ -442,54 +469,6 @@ function bindFloatingTriggers(root = document) {
       return { hero: randomHero, build: availableBuilds[randomIndex], index: randomIndex };
     }
 
-    // Afficher le build aléatoire dans la carte
-function renderRandomBuildCard() {
-  if (!window.currentRandomHero) {
-    const activeHeroes = HEROES.filter(h => h.enabled !== false && h.builds && h.builds.length > 0);
-    if (!activeHeroes.length) return;
-
-    window.currentRandomHero = activeHeroes[Math.floor(Math.random() * activeHeroes.length)];
-    window.currentRandomBuildIdx = Math.floor(Math.random() * window.currentRandomHero.builds.length);
-  }
-
-  const hero = window.currentRandomHero;
-  const bIdx = window.currentRandomBuildIdx;
-  const build = hero.builds[bIdx];
-
-const markup = `
-    <div class="random-card-head">
-      <span>${t('randomBuildTitle')}</span>
-    </div>
-    <div class="random-card-body">
-      <div class="random-hero-row">
-        <div class="portrait"><img src="${hero.portrait}" alt=""></div>
-        <div class="random-meta">
-          <div class="name">${esc(loc(hero.name))}</div>
-          <div class="role">${esc(locRole(hero.role))}</div>
-        </div>
-      </div>
-      <div class="random-build-label">${esc(loc(build.label))}</div>
-      <div class="random-talents-strip">
-        ${(build.talents || []).slice(0, 7).map(td => ftHTML({
-          cls: 'talent-trigger floating-trigger',
-          title: td.name,
-          desc: td.description,
-          inner: `<div class="talent-icon"><img src="${td.icon || svgBadge(loc(td.name))}"></div>`
-        })).join('')}
-      </div>
-      <button class="btn-suggest" onclick="window.goToBuild('${hero.id}', ${bIdx})">
-        ${t('viewBuild')}
-      </button>
-    </div>
-  `;
-
-  ['randomBuildCard', 'mobileRandomBuildCard'].forEach(id => {
-    const el = $(id);
-    if (el) el.innerHTML = markup;
-  });
-
-  bindFloatingTriggers();
-}
 function resetHeroNavigationFilters() {
   if (typeof searchTimeout !== 'undefined') {
     clearTimeout(searchTimeout);
@@ -637,7 +616,6 @@ els.detailView.addEventListener('mousedown', (e) => {
     openLightbox(yt.dataset.youtubeId);
   }
 });
-    els.toggleTwitch.addEventListener('click',()=>{state.twitchOpen=!state.twitchOpen;syncTwitchUI();});
     els.videoOverlay.addEventListener('click',e=>{if(e.target===els.videoOverlay||e.target===els.closeOverlayBtn) closeLightbox();});
 els.langSwitcher.addEventListener('click', (e) => {
   const btn = e.target.closest('.lang-btn');
@@ -660,7 +638,7 @@ els.langSwitcher.addEventListener('click', (e) => {
     window.addEventListener('resize',()=>{queueTooltipPosition();queueLayoutSync();});
     window.addEventListener('scroll', queueTooltipPosition, { passive: true, capture: true });
 
-restoreFromHash(); mountTwitch(); syncTwitchUI(); renderRandomBuildCard(); renderAll();
+restoreFromHash(); renderAll();
 
     // --- NOUVEAU : Auto-scroll au chargement si on arrive via un lien de partage ---
 if (location.hash.includes('hero=')) {
@@ -675,3 +653,10 @@ if (location.hash.includes('hero=')) {
         }
     }, 150); 
 };
+document.addEventListener('click', function(e) {
+    const socials = document.getElementById('socials');
+    // Si on clique en dehors des réseaux, on les referme ou on les bascule
+    if (!socials.contains(e.target)) {
+        socials.classList.remove('active');
+    }
+});
