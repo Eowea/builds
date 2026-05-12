@@ -660,3 +660,34 @@ document.addEventListener('click', function(e) {
         socials.classList.remove('active');
     }
 });
+const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+// 1. GESTION DE L'APPARITION DU BOUTON
+window.addEventListener("scroll", () => {
+    // Si on a scrollé de plus de 300px
+    if (window.scrollY > 300) {
+        scrollToTopBtn.style.display = "block";
+    } else {
+        scrollToTopBtn.style.display = "none";
+    }
+});
+
+// 2. RETOUR EN HAUT FLUIDE
+scrollToTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+});
+
+// 3. GESTION DU BILINGUISME (Français / Anglais)
+// À appeler dans ta fonction existante qui change la langue du site
+function updateScrollToTopLanguage(isEnglish) {
+    if (isEnglish) {
+        scrollToTopBtn.title = "Scroll to top";
+        scrollToTopBtn.setAttribute("aria-label", "Scroll to top");
+    } else {
+        scrollToTopBtn.title = "Remonter";
+        scrollToTopBtn.setAttribute("aria-label", "Remonter");
+    }
+}
