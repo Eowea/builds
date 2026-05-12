@@ -660,34 +660,28 @@ document.addEventListener('click', function(e) {
         socials.classList.remove('active');
     }
 });
+
 const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
-// 1. GESTION DE L'APPARITION DU BOUTON
-window.addEventListener("scroll", () => {
-    // Si on a scrollé de plus de 300px
-    if (window.scrollY > 300) {
+// Sur ton site, le défilement se fait peut-être dans .page ou body au lieu de window
+const scrollContainer = document.querySelector(".page") || window;
+
+scrollContainer.addEventListener("scroll", (e) => {
+    // Si c'est "window", on utilise scrollY. Si c'est une div, on utilise scrollTop.
+    const scrollAmount = window.scrollY || (e.target && e.target.scrollTop) || 0;
+    
+    if (scrollAmount > 300) {
         scrollToTopBtn.style.display = "block";
     } else {
         scrollToTopBtn.style.display = "none";
     }
 });
 
-// 2. RETOUR EN HAUT FLUIDE
 scrollToTopBtn.addEventListener("click", () => {
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-});
-
-// 3. GESTION DU BILINGUISME (Français / Anglais)
-// À appeler dans ta fonction existante qui change la langue du site
-function updateScrollToTopLanguage(isEnglish) {
-    if (isEnglish) {
-        scrollToTopBtn.title = "Scroll to top";
-        scrollToTopBtn.setAttribute("aria-label", "Scroll to top");
+    // On remonte l'élément qui possède la barre de défilement
+    if (typeof scrollContainer.scrollTo === 'function') {
+        scrollContainer.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-        scrollToTopBtn.title = "Remonter";
-        scrollToTopBtn.setAttribute("aria-label", "Remonter");
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }
-}
+});
