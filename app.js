@@ -661,27 +661,34 @@ document.addEventListener('click', function(e) {
     }
 });
 
+// ==========================================
+// BOUTON REMONTER EN HAUT (Correction)
+// ==========================================
 const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+let lastScrolledElement = window;
 
-// Sur ton site, le défilement se fait peut-être dans .page ou body au lieu de window
-const scrollContainer = document.querySelector(".page") || window;
-
-scrollContainer.addEventListener("scroll", (e) => {
-    // Si c'est "window", on utilise scrollY. Si c'est une div, on utilise scrollTop.
-    const scrollAmount = window.scrollY || (e.target && e.target.scrollTop) || 0;
+// Le 'true' à la fin est LA solution : il permet de capturer le défilement des panneaux internes (ex: #detailViewWrap)
+window.addEventListener("scroll", (e) => {
+    const target = e.target;
     
-    if (scrollAmount > 300) {
+    // On récupère la position du défilement (selon si c'est la fenêtre entière ou une <div> qui défile)
+    const scrollTop = target === document ? window.scrollY : target.scrollTop;
+
+    // Si on descend de plus de 300px, on affiche le bouton
+    if (scrollTop > 300) {
         scrollToTopBtn.style.display = "block";
+        // On mémorise quel panneau est en train de défiler
+        lastScrolledElement = target === document ? window : target;
     } else {
         scrollToTopBtn.style.display = "none";
     }
-});
+}, true); // <-- CE 'true' CHANGE TOUT !
 
+// Quand on clique sur le bouton
 scrollToTopBtn.addEventListener("click", () => {
-    // On remonte l'élément qui possède la barre de défilement
-    if (typeof scrollContainer.scrollTo === 'function') {
-        scrollContainer.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    }
+    // On fait remonter de manière fluide le panneau spécifique qui avait défilé
+    lastScrolledElement.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 });
