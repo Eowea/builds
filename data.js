@@ -951,7 +951,11 @@
         portrait: 'https://static.icy-veins.com/images/heroes/hero-portraits/stukov.jpg',
         headline: { fr: 'Contrôle de zone énorme et soins propagatifs.', en: 'Massive zone control and spreading heals.' },
         gameplay: { fr: 'Stukov propage des virus soignants sur son équipe et des pustules sur l\'ennemi, avant de tout faire exploser avec son Trait.', en: 'Stukov spreads healing viruses to his team and pustules to enemies, then detonates them all with his Trait.' },
-        guideVideo: null,
+        guideVideo: {
+          title: { fr: 'Guide express: Stukov', en: 'Express Guide: Stukov' },
+          youtubeId: 'VufmXqAOcAM',
+          desc: { fr: 'Guide rapide pour apprendre les mécaniques de base et quelques astuces', en: 'Quick guide to learn basic mechanics and some tips. In French, with English subtitles.' },
+        },
         spells:[
           { key: 'Trait', name: { fr: 'Éruption éruptive', en: 'Bio-Kill Switch' }, icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_bio-killswitch.jpg', description: { fr: 'Fait exploser ses virus : soigne grandement les alliés ou ralentit/blesse les ennemis.', en: 'Detonates viruses: greatly heals allies or slows/damages enemies.' }, demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/stukov_trait.mp4' },
           { key: 'A', name: { fr: 'Virus régénérateur', en: 'Healing Pathogen' }, icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_healingpathogen.jpg', description: { fr: 'Un soin qui se propage d\'allié en allié.', en: 'A heal that spreads from ally to ally.' }, demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/stukov_a.mp4' },
