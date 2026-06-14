@@ -46,6 +46,7 @@
       copyError: { fr: "Copie impossible", en: "Copy failed" },
       copyHint: { fr: "Clique pour copier", en: "Click to copy" },
       optionalTalents: { fr: "Options", en: "Options" },
+      newBadge: { fr: "Nouveau", en: "New" },
     };
 
     /* =========================================================================
@@ -77,6 +78,18 @@ const getInitialLang = () => {
     /* ── Utilities ── */
     const loc = (val) => (val && typeof val === 'object' && !Array.isArray(val)) ? (val[state.lang] !== undefined ? val[state.lang] : (val['fr'] || '')) : (val || '');
 
+function hasSeenHero(heroId) {
+  const seenHeroes = JSON.parse(localStorage.getItem('seenHeroes') || '[]');
+  return seenHeroes.includes(heroId);
+}
+
+function markHeroAsSeen(heroId) {
+  const seenHeroes = JSON.parse(localStorage.getItem('seenHeroes') || '[]');
+  if (!seenHeroes.includes(heroId)) {
+      seenHeroes.push(heroId);
+      localStorage.setItem('seenHeroes', JSON.stringify(seenHeroes));
+  }
+}
     // Conversion dynamique FR (AZERTY) <-> EN (QWERTY)
     function uiSpellKey(keyRaw) {
       if (keyRaw && typeof keyRaw === 'object' && keyRaw[state.lang]) {
@@ -162,11 +175,14 @@ const getInitialLang = () => {
         
         return `
         <button class="hero-link${h.id===state.heroId?' active':''}" type="button" data-hero-id="${h.id}">
-          <div class="portrait" data-fallback="${esc(initials(loc(h.name)))}">
-            <img src="${h.portrait}" alt="${esc(loc(h.name))}" loading="lazy" onerror="this.parentNode.classList.add('fallback');this.remove();" />
+<div class="portrait-wrapper" style="position: relative; flex-shrink: 0; display: flex;">
+            <div class="portrait" data-fallback="${esc(initials(loc(h.name)))}">
+              <img src="${h.portrait}" alt="${esc(loc(h.name))}" loading="lazy" onerror="this.parentNode.classList.add('fallback');this.remove();" />
+            </div>
+            ${h.isNew && !hasSeenHero(h.id) ? `<span class="new-badge">${t('newBadge')}</span>` : ''}
           </div>
           <div class="hero-meta">
-            <div class="hero-name-row">
+<div class="hero-name-row">
               <div class="hero-name">${esc(loc(h.name))}</div>
               ${bCount > 0 ? `<span class="build-count-badge">${bCount} Build${bCount > 1 ? 's' : ''}</span>` : ''}
             </div>
@@ -536,9 +552,13 @@ els.heroList.addEventListener('click', (e) => {
   const btn = e.target.closest('[data-hero-id]');
   if (!btn) return;
 
+  // --- NOUVEAU : On sauvegarde que ce héros a été vu ---
+  markHeroAsSeen(btn.dataset.heroId);
+  // ------------------------------------------------------
+
   state.heroId = btn.dataset.heroId;
   state.buildIndex = 0;
-  renderAll();
+  renderAll(); //
 
   setTimeout(() => {
     const detailEl = document.getElementById('detailViewWrap');
@@ -659,36 +679,4 @@ document.addEventListener('click', function(e) {
     if (!socials.contains(e.target)) {
         socials.classList.remove('active');
     }
-});
-
-// ==========================================
-// BOUTON REMONTER EN HAUT (Correction)
-// ==========================================
-const scrollToTopBtn = document.getElementById("scrollToTopBtn");
-let lastScrolledElement = window;
-
-// Le 'true' à la fin est LA solution : il permet de capturer le défilement des panneaux internes (ex: #detailViewWrap)
-window.addEventListener("scroll", (e) => {
-    const target = e.target;
-    
-    // On récupère la position du défilement (selon si c'est la fenêtre entière ou une <div> qui défile)
-    const scrollTop = target === document ? window.scrollY : target.scrollTop;
-
-    // Si on descend de plus de 300px, on affiche le bouton
-    if (scrollTop > 300) {
-        scrollToTopBtn.style.display = "block";
-        // On mémorise quel panneau est en train de défiler
-        lastScrolledElement = target === document ? window : target;
-    } else {
-        scrollToTopBtn.style.display = "none";
-    }
-}, true); // <-- CE 'true' CHANGE TOUT !
-
-// Quand on clique sur le bouton
-scrollToTopBtn.addEventListener("click", () => {
-    // On fait remonter de manière fluide le panneau spécifique qui avait défilé
-    lastScrolledElement.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
 });
