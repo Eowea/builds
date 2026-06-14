@@ -2227,13 +2227,13 @@ const HEROES = [
             name: { fr: 'Poussée éruptive', en: 'Massive Shove' },
             icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_massiveshove.jpg',
             description: { fr: "Pousse un ennemi jusqu'à ce qu'il percute un obstacle.", en: 'Pushes an enemy until they hit terrain.' },
-            demoYoutubeId: null,
+            demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/stukov_r1.mp4',
             alternatives: [
               {
                 name: { fr: 'Frappe chaotique', en: 'Flailing Swipe' },
                 icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_flailingswipe.jpg',
                 description: { fr: 'Balaye les ennemis en face de lui plusieurs fois.', en: 'Swipes enemies in front of him multiple times.' },
-                demoYoutubeId: null
+                demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/stukov_r2.mp4'
               }
             ]
           },
