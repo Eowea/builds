@@ -2036,7 +2036,7 @@ const HEROES = [
             name: { fr: 'Tranquilité', en: 'Tranquility' },
             icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_malfurion_tranquility.jpg',
             description: { fr: 'Rend continuellement des points de vie aux héros alliés et proches, et donne de l\'armure lorsque les alliés sont sous Rétablissement.', en: 'Continually restores health to nearby allied Heroes, and grants Armor to allies affected by Regrowth.' },
-            demoYoutubeId: null
+            demoYoutubeId: 'assets/heroes/base_spells/malfurion/videos/malfurion_r1.mp4'
           },
           {
             level: 13,
