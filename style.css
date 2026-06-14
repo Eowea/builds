@@ -1615,7 +1615,7 @@
     bottom: -6px; /* Fait dépasser le badge légèrement en bas du portrait */
     left: 50%;
     transform: translateX(-50%); /* Permet de centrer parfaitement le badge */
-    background-color: #179639;
+    background-color: #1c7534;
     color: white;
     font-size: 0.6rem;
     font-weight: 800;
