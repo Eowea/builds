@@ -1949,7 +1949,11 @@ const HEROES = [
       fr: 'Malfurion pose des soins sur la durée sur ses alliés, puis frappe les ennemis avec Éclat lunaire pour déclencher des soins instantanés.',
       en: 'Malfurion applies heals over time on his allies, then hits enemies with Moonfire to trigger instant burst heals.'
     },
-    guideVideo: 'auMuOt9X1FQ',
+    guideVideo: {
+      title: { fr: 'Guide express: Malfurion', en: 'Express Guide: Malfurion' },
+      youtubeId: 'auMuOt9X1FQ',
+      desc: { fr: 'Guide rapide pour apprendre les mécaniques de base et quelques astuces.', en: 'Quick guide to learn basic mechanics and some tips. In French, with English subtitles and English AI voice.' }
+    },
     spells: [
       {
         key: 'Trait',
