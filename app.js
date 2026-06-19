@@ -47,6 +47,7 @@
       copyHint: { fr: "Clique pour copier", en: "Click to copy" },
       optionalTalents: { fr: "Options", en: "Options" },
       newBadge: { fr: "Nouveau", en: "New" },
+      updatedBadge: { fr: "Mis à jour", en: "Updated" },
     };
 
     /* =========================================================================
@@ -78,17 +79,41 @@ const getInitialLang = () => {
     /* ── Utilities ── */
     const loc = (val) => (val && typeof val === 'object' && !Array.isArray(val)) ? (val[state.lang] !== undefined ? val[state.lang] : (val['fr'] || '')) : (val || '');
 
-function hasSeenHero(heroId) {
-  const seenHeroes = JSON.parse(localStorage.getItem('seenHeroes') || '[]');
-  return seenHeroes.includes(heroId);
+function getHeroStateSignature(hero) {
+    const newBuildsCount = (hero.builds || []).filter(b => b.isNew).length;
+    // Si isNew est true pour le héros, la signature inclut 'h1', sinon 'h0'
+    return `${hero.id}_h${hero.isNew ? 1 : 0}_b${newBuildsCount}`;
 }
 
-function markHeroAsSeen(heroId) {
-  const seenHeroes = JSON.parse(localStorage.getItem('seenHeroes') || '[]');
-  if (!seenHeroes.includes(heroId)) {
-      seenHeroes.push(heroId);
-      localStorage.setItem('seenHeroes', JSON.stringify(seenHeroes));
-  }
+function hasSeenHeroEntity(heroId) {
+    const seen = JSON.parse(localStorage.getItem('seenHeroesList') || '[]');
+    return seen.includes(heroId);
+}
+
+// Vérifie si la version actuelle des builds a été vue
+function hasSeenBuildUpdate(hero) {
+    const newBuildsCount = (hero.builds || []).filter(b => b.isNew).length;
+    const seenUpdates = JSON.parse(localStorage.getItem('seenBuildUpdates') || '[]');
+    return seenUpdates.includes(`${hero.id}_${newBuildsCount}`);
+}
+
+// Marque tout comme "vu" d'un coup
+function markEverythingAsSeen(hero) {
+    // 1. Marquer le héros comme vu
+    const seenHeroes = JSON.parse(localStorage.getItem('seenHeroesList') || '[]');
+    if (!seenHeroes.includes(hero.id)) {
+        seenHeroes.push(hero.id);
+        localStorage.setItem('seenHeroesList', JSON.stringify(seenHeroes));
+    }
+
+    // 2. Marquer cette version des builds comme vue
+    const seenUpdates = JSON.parse(localStorage.getItem('seenBuildUpdates') || '[]');
+    const newBuildsCount = (hero.builds || []).filter(b => b.isNew).length;
+    const sig = `${hero.id}_${newBuildsCount}`;
+    if (!seenUpdates.includes(sig)) {
+        seenUpdates.push(sig);
+        localStorage.setItem('seenBuildUpdates', JSON.stringify(seenUpdates));
+    }
 }
     // Conversion dynamique FR (AZERTY) <-> EN (QWERTY)
     function uiSpellKey(keyRaw) {
@@ -161,36 +186,51 @@ function markHeroAsSeen(heroId) {
     
     function renderFilters() { els.roleFilters.innerHTML=roles().map(r=>`<button class="filter-chip${state.role===r?' active':''}" type="button" data-role="${r}">${locRole(r)}</button>`).join(''); }
     function renderHeroList() {
-      const hList = filteredHeroes();
-      els.resultsCount.textContent = hList.length > 1 ? t('resultsCount', {n:hList.length}) : t('resultsCountSingular', {n:hList.length});
-      
-      if(!hList.length){
+    const hList = filteredHeroes();
+    els.resultsCount.textContent = hList.length > 1 ? t('resultsCount', {n:hList.length}) : t('resultsCountSingular', {n:hList.length});
+    
+    if(!hList.length){
         els.heroList.innerHTML=`<div class="empty-state">${t('emptyHeroList')}</div>`;
         return;
-      }
+    }
 
-      els.heroList.innerHTML = hList.map(h => {
-        // On compte uniquement les builds qui ne sont pas explicitement désactivés
-        const bCount = (h.builds ||[]).filter(b => b.enabled !== false).length;
+    els.heroList.innerHTML = hList.map(h => {
+        const bCount = (h.builds || []).filter(b => b.enabled !== false).length;
         
+        // --- LOGIQUE DE PRIORITÉ DES BADGES ---
+        let badgeHtml = '';
+        const hasNewBuilds = h.builds && h.builds.some(b => b.isNew);
+        const updateSeen = hasSeenBuildUpdate(h);
+        const heroSeen = hasSeenHeroEntity(h.id);
+
+        // Priorité 1 : Si un build est nouveau et que l'utilisateur ne l'a pas vu
+        if (hasNewBuilds && !updateSeen) {
+            badgeHtml = `<span class="updated-badge list-badge">${t('updatedBadge')}</span>`;
+        } 
+        // Priorité 2 : Si le héros est nouveau et que l'utilisateur ne l'a jamais ouvert
+        else if (h.isNew && !heroSeen) {
+            badgeHtml = `<span class="new-badge list-badge">${t('newBadge')}</span>`;
+        }
+        // ---------------------------------------
+
         return `
         <button class="hero-link${h.id===state.heroId?' active':''}" type="button" data-hero-id="${h.id}">
-<div class="portrait-wrapper" style="position: relative; flex-shrink: 0; display: flex;">
-            <div class="portrait" data-fallback="${esc(initials(loc(h.name)))}">
-              <img src="${h.portrait}" alt="${esc(loc(h.name))}" loading="lazy" onerror="this.parentNode.classList.add('fallback');this.remove();" />
+            <div class="portrait-wrapper" style="position: relative; flex-shrink: 0; display: flex;">
+                <div class="portrait" data-fallback="${esc(initials(loc(h.name)))}">
+                    <img src="${h.portrait}" alt="${esc(loc(h.name))}" loading="lazy" onerror="this.parentNode.classList.add('fallback');this.remove();" />
+                </div>
+                ${badgeHtml} 
             </div>
-            ${h.isNew && !hasSeenHero(h.id) ? `<span class="new-badge">${t('newBadge')}</span>` : ''}
-          </div>
-          <div class="hero-meta">
-<div class="hero-name-row">
-              <div class="hero-name">${esc(loc(h.name))}</div>
-              ${bCount > 0 ? `<span class="build-count-badge">${bCount} Build${bCount > 1 ? 's' : ''}</span>` : ''}
+            <div class="hero-meta">
+                <div class="hero-name-row">
+                    <div class="hero-name">${esc(loc(h.name))}</div>
+                    ${bCount > 0 ? `<span class="build-count-badge">${bCount} Build${bCount > 1 ? 's' : ''}</span>` : ''}
+                </div>
+                <div class="hero-role">${esc(locRole(h.role))}</div>
             </div>
-            <div class="hero-role">${esc(locRole(h.role))}</div>
-          </div>
         </button>`;
-      }).join('');
-    }
+    }).join('');
+}
 
 function ftHTML({cls,title,desc,demoId,inner}) { 
   const dStr = String(demoId||'').toLowerCase();
@@ -317,7 +357,7 @@ function renderGuide(g) {
     function renderVideoCards(vs) { if(!vs?.length) return ''; return `<section class="video-group combo-video-section"><div class="combo-grid">${vs.map(v=>{const id=parseYouTubeId(v.youtubeId||v.youtubeUrl||v.url||'');const th=id?ytThumb(id):''; return `<button class="youtube-card" type="button" data-youtube-id="${id}"><div class="youtube-thumb">${th?`<img src="${th}" alt="${esc(loc(v.title))}" loading="lazy" />`:''}<div class="youtube-preview" data-preview></div><span class="youtube-badge">combo</span>${id?'<span class="youtube-play"></span>':`<div class="youtube-unavailable">${t('videoUnavailable')}</div>`}</div><div class="combo-info"><div class="combo-title">${esc(loc(v.title))}</div><div class="combo-desc">${esc(loc(v.desc))}</div></div></button>`;}).join('')}</div></section>`; }
     function renderBuildVideos(h,b) { const wg=hasGuide(h?.guideVideo); return `<section class="videos-layout${wg?' with-guide':''}">${wg?renderGuide(h.guideVideo):''}${renderVideoCards(b.videos)}</section>`; }
 
-    function renderBuildSection(hero) { 
+function renderBuildSection(hero) { 
   const el = $('buildSection'); 
   if (!el) return; 
   
@@ -328,14 +368,29 @@ function renderGuide(g) {
   
   const b = hero.builds[clampBuildIndex(hero)] || hero.builds[0]; 
   
-  // NOUVEAU : On prépare le code HTML de la date (avec une petite icône calendrier)
+  // --- MODIFICATION ICI ---
+  // On ajoute une vérification "x.isNew" sur chaque build dans le .map()
+const tabsHtml = hero.builds.map((x, i) => {
+    const newBadge = x.isNew ? `<span class="new-badge">${t('newBadge')}</span>` : '';
+    
+    // On entoure le bouton d'un "wrapper" pour que le badge ne soit pas coupé par le clip-path du bouton
+    return `
+      <div class="build-tab-wrapper">
+        <button class="build-tab${i === state.buildIndex ? ' active' : ''}" type="button" data-build-index="${i}">
+          ${esc(loc(x.label))}
+        </button>
+        ${newBadge}
+      </div>`;
+}).join('');
+  // -------------------------
+
   const dateHtml = b.updatedAt 
     ? `<div class="build-date"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> ${t('lastUpdate')} ${esc(loc(b.updatedAt))}</div>` 
     : '';
   
-  el.innerHTML=`<div class="build-tabs">${hero.builds.map((x,i)=>`<button class="build-tab${i===state.buildIndex?' active':''}" type="button" data-build-index="${i}">${esc(loc(x.label))}</button>`).join('')}</div>${dateHtml}<div class="build-summary">${esc(loc(b.summary))}</div>${renderTalentBoard(b.talents)}${renderBuildCode(b)}${renderBuildVideos(hero,b)}`;
-     bindFloatingTriggers(); 
-    }
+  el.innerHTML=`<div class="build-tabs">${tabsHtml}</div>${dateHtml}<div class="build-summary">${esc(loc(b.summary))}</div>${renderTalentBoard(b.talents)}${renderBuildCode(b)}${renderBuildVideos(hero,b)}`;
+  bindFloatingTriggers(); 
+}
 
 let cachedFourBuilds = null;
 
@@ -570,16 +625,19 @@ window.goToBuild = (heroId, buildIndex) => {
 });
 
 els.heroList.addEventListener('click', (e) => {
-  const btn = e.target.closest('[data-hero-id]');
-  if (!btn) return;
+    const btn = e.target.closest('[data-hero-id]');
+    if (!btn) return;
 
-  // --- NOUVEAU : On sauvegarde que ce héros a été vu ---
-  markHeroAsSeen(btn.dataset.heroId);
-  // ------------------------------------------------------
+    const heroId = btn.dataset.heroId;
+    const heroObj = HEROES.find(h => h.id === heroId);
 
-  state.heroId = btn.dataset.heroId;
-  state.buildIndex = 0;
-  renderAll(); //
+    if (heroObj) {
+        markEverythingAsSeen(heroObj); // On valide tout d'un coup au clic
+    }
+
+    state.heroId = heroId;
+    state.buildIndex = 0;
+    renderAll(); //
 
   setTimeout(() => {
     const detailEl = document.getElementById('detailViewWrap');
@@ -652,10 +710,27 @@ els.detailView.addEventListener('mousedown', (e) => {
     return;
   }
 
-  const yt = e.target.closest('[data-youtube-id]');
-  if (yt) {
-    openLightbox(yt.dataset.youtubeId);
+const yt = e.target.closest('[data-youtube-id]');
+if (yt) {
+  const videoId = yt.dataset.youtubeId;
+  
+  // Détection si l'utilisateur est sur un appareil mobile
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  if (isMobile) {
+    // On construit l'URL de telle sorte que le téléphone propose l'application
+    // On utilise une petite astuce de délai pour essayer d'ouvrir l'app puis le navigateur si ça échoue
+    const webUrl = `https://www.youtube.com/watch?v=${videoId}`;
+    
+    // Pour iOS/Android, l'URL standard HTTPS suffit généralement à déclencher l'app
+    // si l'utilisateur l'a installée.
+    window.location.assign(webUrl);
+  } else {
+    // Sur PC, on garde votre lightbox personnalisée
+    openLightbox(videoId);
   }
+  return;
+}
 });
     els.videoOverlay.addEventListener('click',e=>{if(e.target===els.videoOverlay||e.target===els.closeOverlayBtn) closeLightbox();});
 els.langSwitcher.addEventListener('click', (e) => {

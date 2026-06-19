@@ -703,6 +703,8 @@
     .build-tabs { display: flex; gap: 4px; flex-wrap: wrap; margin-bottom: 16px; }
 
     .build-tab {
+      position: relative;
+      overflow: visible; 
       display: inline-flex;
       align-items: center;
       height: 40px;
@@ -717,6 +719,14 @@
       cursor: pointer;
       transition: all var(--t);
     }
+/* Ajustement spécifique pour le badge Nouveau quand il est dans un onglet */
+.build-tab .new-badge {
+    bottom: -8px;       /* Positionné légèrement en dessous de la bordure basse */
+    font-size: 9px;     /* Légèrement plus petit pour l'onglet */
+    padding: 1px 5px;
+    white-space: nowrap;
+    z-index: 10;        /* Passe au dessus de tout */
+}
     .build-tab:hover { background: rgba(0, 229, 255, 0.2); border-bottom-color: var(--blue-bright); color: var(--text-bright); }
     .build-tab.active {
       background: linear-gradient(180deg, rgba(248, 183, 0, 0.1), rgba(248, 183, 0, 0.25));
@@ -1668,4 +1678,49 @@
     border-color: var(--blue-bright);
     box-shadow: 0 0 15px var(--blue-glow);
     transform: translateY(-3px);
+}
+/* Nouveau conteneur pour permettre au badge de dépasser */
+.build-tab-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+/* On s'assure que le badge sur l'onglet est bien au-dessus */
+.build-tab-wrapper .new-badge {
+    bottom: -10px; /* Ajustez cette valeur pour le descendre plus ou moins */
+    z-index: 10;
+    pointer-events: none; /* Évite de gêner le clic sur l'onglet */
+}
+
+/* Optionnel : ajuster légèrement la taille si besoin */
+.build-tab-wrapper .new-badge {
+    font-size: 0.55rem;
+    padding: 2px 5px;
+}
+/* On crée une base commune pour les badges de liste */
+.list-badge {
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    z-index: 5;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+/* Le badge Nouveau reste vert */
+.new-badge {
+    background-color: #1c7534;
+}
+
+/* Le badge Mis à jour sera bleu cyan pour le différencier */
+.updated-badge {
+    background-color: #0076a3; /* Un bleu sombre qui ressort bien */
 }
