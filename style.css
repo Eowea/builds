@@ -1262,19 +1262,41 @@
       align-items: center;
     }
 
-    .random-hero-row .portrait {
-      width: 48px;
-      height: 48px;
-      flex-shrink: 0;
-      background: var(--gold-bright);
-      clip-path: var(--hex-clip);
-      padding: 2px;
-    }
-    .random-hero-row .portrait img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      clip-path: var(--hex-clip);
-    }
+/* --- PORTRAIT DANS LA LIGNE DU BUILD ALÉATOIRE --- */
+.random-hero-row .portrait {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  
+  /* 1. On utilise une couleur de bordure plus discrète (semi-transparente) */
+  background: var(--gold-bright) !important; 
+  
+  clip-path: var(--hex-clip);
+  
+  /* 2. Bordure */
+  padding: 2px !important; 
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none !important; /* Sécurité pour enlever toute bordure navigateur */
+}
+
+.random-hero-row .portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: var(--hex-clip);
+  
+  /* 3. LE FIX : On force un fond sombre sur l'image pour masquer le jaune du dessous */
+  background: #0d131f !important; 
+  
+  display: block;
+  
+  /* Optimisation netteté */
+  transform: translateZ(0);
+  image-rendering: auto;
+}
 
     .random-meta .name {
       font-family: 'Rajdhani', sans-serif;
