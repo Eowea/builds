@@ -19,7 +19,7 @@ const HEROES = [
   /*DPS range*/
   {
     id: 'kaelthas',
-    enabled: true,
+    enabled: false,
     name: { fr: 'Kael\'thas', en: 'Kael\'thas' },
     role: 'AssassinDistance',
     portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_kaelthas.png',
