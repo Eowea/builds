@@ -448,26 +448,88 @@
       box-shadow: inset 0 0 15px rgba(248, 183, 0, 0.05);
     }
 
-    .hero-link .portrait {
-      width: 48px;
-      height: 48px;
-      flex-shrink: 0;
-      background: var(--blue-border);
-      clip-path: var(--hex-clip);
-      padding: 2px;
-      display: grid;
-      place-items: center;
-      transition: all var(--t);
-    }
+   /* --- LE PORTRAIT (Le conteneur qui sert de bordure) --- */
+.hero-link .portrait {
+  width: 64px !important;  /* Taille légèrement augmentée pour la lisibilité */
+  height: 64px !important;
+  flex-shrink: 0;
+  background: var(--blue-border); /* Couleur bordure par défaut (bleu) */
+  clip-path: var(--hex-clip);
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--t);
+  padding: 0 !important; /* On enlève le padding qui casse l'angle */
+  position: relative;
+}
+
+/* --- L'IMAGE À L'INTÉRIEUR --- */
+/* --- LE PORTRAIT (Le conteneur) --- */
+.hero-link .portrait {
+  width: 64px !important;
+  height: 64px !important;
+  flex-shrink: 0;
+  background: var(--blue-border);
+  clip-path: var(--hex-clip);
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--t);
+  position: relative;
+
+  /* FIX ALIASING & BLUR : Force le rendu haute qualité en permanence */
+  transform: translateZ(0); 
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* --- L'IMAGE (L'intérieur) --- */
+.hero-link .portrait img {
+  width: calc(100% - 4px); 
+  height: calc(100% - 4px);
+  object-fit: cover;
+  clip-path: var(--hex-clip);
+  background: var(--bg-deep);
+  display: block;
+
+  /* FIX ALIASING : Empêche l'effet escalier */
+  image-rendering: -webkit-optimize-contrast; /* Pour la netteté */
+  image-rendering: auto;
+  
+  /* FIX BLUR : Pour que l'image reste nette lors des scale(1.05) */
+  transform: scale(1.001); /* Un micro-zoom force le moteur de rendu à rester en mode "précis" */
+}
+
+/* --- ÉTAT ACTIF (Rehgar sélectionné) --- */
+.hero-link.active .portrait {
+  background: var(--gold-bright) !important;
+  filter: drop-shadow(0 0 8px var(--gold-glow));
+  
+  /* Utilisation d'un scale entier ou très proche pour éviter le flou */
+  transform: scale(1.05) translateZ(0); 
+}
     
-    .hero-link .portrait img { 
-      width: 100%; 
-      height: 100%; 
-      object-fit: cover; 
-      clip-path: var(--hex-clip);
-    }
-    
-    .hero-link.active .portrait { background: var(--gold-bright); filter: drop-shadow(0 0 6px var(--gold-glow)); }
+/* --- ÉTAT ACTIF (Rehgar sélectionné) --- */
+.hero-link.active .portrait {
+  background: var(--gold-bright) !important; /* Bordure dorée */
+  filter: drop-shadow(0 0 8px var(--gold-glow));
+  transform: scale(1.05);
+}
+
+/* --- AJUSTEMENT VUE GRILLE (Pour ton test) --- */
+.hero-list .hero-link {
+  display: flex !important;
+  flex-direction: column-reverse !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.hero-list .hero-name {
+  margin-top: 4px;
+  font-size: 12px !important;
+  color: var(--text-bright);
+}
 
     .portrait.fallback::after, .detail-portrait.fallback::after, .talent-icon.fallback::after, .spell-icon.fallback::after {
       content: attr(data-fallback);
@@ -508,24 +570,32 @@
       margin-bottom: 20px;
     }
 
-    .detail-portrait {
-      width: 120px; 
-      height: 120px; 
-      background: linear-gradient(135deg, var(--gold-bright), var(--gold-dim));
-      clip-path: var(--hex-clip);
-      padding: 3px;
-      display: grid;
-      place-items: center;
-      filter: drop-shadow(0 0 15px var(--gold-glow));
-    }
-    
-    .detail-portrait img { 
-      width: 100%; 
-      height: 100%; 
-      object-fit: cover; 
-      clip-path: var(--hex-clip);
-    }
+/* --- GRAND PORTRAIT (L'encadré doré) --- */
+.detail-portrait {
+  width: 120px; 
+  height: 120px; 
+  /* Dégradé métallique HotS */
+  background: linear-gradient(135deg, var(--gold-bright), var(--gold-dim));
+  clip-path: var(--hex-clip);
+  
+  /* On remplace le padding par un alignement flex */
+  padding: 0 !important; 
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  
+  filter: drop-shadow(0 0 15px var(--gold-glow));
+}
 
+/* --- L'IMAGE DÉTAIL --- */
+.detail-portrait img { 
+  /* Pour une bordure de 3px de chaque côté : 100% - 6px */
+  width: calc(100% - 6px); 
+  height: calc(100% - 6px); 
+  object-fit: cover; 
+  clip-path: var(--hex-clip);
+  background: var(--bg-deep); /* Fond pour éviter les fuites de pixels */
+}
     .detail-title {
       font-family: 'Rajdhani', serif;
       font-size: clamp(28px, 5vw, 48px);

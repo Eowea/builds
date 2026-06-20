@@ -16,12 +16,201 @@
     };
 
 const HEROES = [
+  /*DPS range*/
+  {
+    id: 'kaelthas',
+    enabled: true,
+    name: { fr: 'Kael\'thas', en: 'Kael\'thas' },
+    role: 'AssassinDistance',
+    portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_kaelthas.png',
+    headline: {
+      fr: 'Dégâts de zone massifs, punition des regroupements et contrôle puissant.',
+      en: 'Massive AoE damage, group punishment, and strong crowd control.'
+    },
+    gameplay: {
+      fr: 'Kael\'thas est le maître du zonage. En utilisant ses Sphères verdoyantes (Trait), il peut booster ses sorts pour infliger plus de dégâts, étendre ses zones d\'effet ou étourdir plusieurs cibles.',
+      en: 'Kael\'thas is the master of zoning. By using Verdant Spheres (Trait), he can empower his spells to deal more damage, increase area of effect, or stun multiple targets.'
+    },
+    guideVideo: null,
+    spells: [
+      {
+        key: 'Trait',
+        name: { fr: 'Sphères verdoyantes', en: 'Verdant Spheres' },
+        icon: 'assets/heroes/base_spells/kaelthas/images/spells/storm_ui_icon_kaelthas_verdantspheres.png',
+        description: { fr: 'Activez pour que votre prochain sort de base soit plus puissant.', en: 'Activate to empower your next basic spell.' },
+        demoYoutubeId: ''
+      },
+      {
+        key: 'A',
+        name: { fr: 'Choc de flammes', en: 'Flamestrike' },
+        icon: 'assets/heroes/base_spells/kaelthas/images/spells/storm_ui_icon_kaelthas_flamestrike.png',
+        description: { fr: 'Explosion de zone après un court délai.', en: 'AoE explosion after a short delay.' },
+        demoYoutubeId: ''
+      },
+      {
+        key: 'Z',
+        name: { fr: 'Bombe vivante', en: 'Living Bomb' },
+        icon: 'assets/heroes/base_spells/kaelthas/images/spells/storm_ui_icon_kaelthas_livingbomb.png',
+        description: { fr: 'Dégâts sur la durée qui explosent et se propagent aux ennemis proches.', en: 'DoT that explodes and spreads to nearby enemies.' },
+        demoYoutubeId: ''
+      },
+      {
+        key: 'E',
+        name: { fr: 'Distorsion gravitationnelle', en: 'Gravity Lapse' },
+        icon: 'assets/heroes/base_spells/kaelthas/images/spells/storm_ui_icon_kaelthas_gravitylapse.png',
+        description: { fr: 'Étourdit le premier ennemi touché (jusqu\'à 3 avec le Trait).', en: 'Stuns the first enemy hit (up to 3 with Trait).' },
+        demoYoutubeId: ''
+      },
+      {
+        key: 'R1',
+        name: { fr: 'Phénix', en: 'Phoenix' },
+        icon: 'assets/heroes/base_spells/kaelthas/images/spells/storm_ui_icon_kaelthas_phoenix.png',
+        description: { fr: 'Invoque un phénix qui inflige des dégâts de zone constants.', en: 'Summons a phoenix that deals constant AoE damage.' },
+        demoYoutubeId: ''
+      },
+      {
+        key: 'R2',
+        name: { fr: 'Explosion pyrotechnique', en: 'Pyroblast' },
+        icon: 'assets/heroes/base_spells/kaelthas/images/spells/storm_ui_icon_kaelthas_pyroblast.png',
+        description: { fr: 'Lance une énorme boule de feu lente mais dévastatrice.', en: 'Casts a massive, slow, but devastating fireball.' },
+        demoYoutubeId: ''
+      }
+    ],
+    tips: [
+      { fr: 'Utilise ton Trait (D) avant Choc de flammes (A) pour augmenter radicalement la zone d\'effet.', en: 'Use your Trait (D) before Flamestrike (A) to drastically increase the area of effect.' },
+      { fr: 'Ne lance pas Bombe vivante (Z) sur une cible déjà affectée, attends qu\'elle explose pour la propager.', en: 'Don\'t cast Living Bomb (Z) on a target already affected; wait for it to explode to spread it.' },
+      { fr: 'La Distorsion (E) boostée par le Trait est vitale pour stopper un plongeon (dive) de plusieurs ennemis.', en: 'Trait-empowered Gravity Lapse (E) is vital for stopping a multi-enemy dive.' }
+    ],
+    builds: [
+      {
+        enabled: true,
+        order: 1,
+        label: { fr: 'Build Flamestrike (Poke)', en: 'Flamestrike Build (Poke)' },
+        summary: { fr: 'Maximise les dégâts à distance et la zone de Choc de flammes.', en: 'Maximizes long-range damage and Flamestrike area.' },
+        buildCodeTitle: { fr: "A COLLER", en: "PASTE" },
+        buildCode: "[T1311211,Kaelthas]",
+        videos: [],
+        talents: [
+          {
+            level: 1,
+            name: { fr: 'Convection', en: 'Convection' },
+            icon: 'https://static.icy-veins.com/images/heroes/talents/kaelthas_convection.png',
+            description: { fr: 'Quête : Toucher des héros avec Choc de flammes augmente ses dégâts.', en: 'Quest: Hitting heroes with Flamestrike increases its damage.' },
+            demoYoutubeId: null
+          },
+          {
+            level: 4,
+            name: { fr: 'Accro à la mana', en: 'Mana Addict' },
+            icon: 'https://static.icy-veins.com/images/heroes/talents/kaelthas_mana_addict.png',
+            description: { fr: 'Récolter des globes augmente la mana et offre un bouclier actif.', en: 'Collecting globes increases mana and grants an active shield.' },
+            demoYoutubeId: null
+          },
+          {
+            level: 7,
+            name: { fr: 'Chair brûlée', en: 'Burned Flesh' },
+            icon: 'https://static.icy-veins.com/images/heroes/talents/kaelthas_burned_flesh.png',
+            description: { fr: 'Choc de flammes inflige des dégâts bonus si 2 héros ou plus sont touchés.', en: 'Flamestrike deals bonus damage if 2 or more heroes are hit.' },
+            demoYoutubeId: null
+          },
+          {
+            level: 10,
+            name: { fr: 'Phénix', en: 'Phoenix' },
+            icon: 'https://static.icy-veins.com/images/heroes/skills/kaelthas_phoenix.png',
+            description: { fr: 'Idéal pour le contrôle de zone et les objectifs.', en: 'Ideal for zone control and objectives.' },
+            demoYoutubeId: null
+          },
+          {
+            level: 13,
+            name: { fr: 'Fureur du Puits de soleil', en: 'Fury of the Sunwell' },
+            icon: 'https://static.icy-veins.com/images/heroes/talents/kaelthas_fury_of_the_sunwell.png',
+            description: { fr: 'Choc de flammes explose une seconde fois après un court délai.', en: 'Flamestrike explodes a second time after a short delay.' },
+            demoYoutubeId: null
+          },
+          {
+            level: 16,
+            name: { fr: 'Inflammation', en: 'Ignite' },
+            icon: 'https://static.icy-veins.com/images/heroes/talents/kaelthas_ignite.png',
+            description: { fr: 'Choc de flammes applique aussi Bombe vivante aux héros touchés.', en: 'Flamestrike also applies Living Bomb to heroes hit.' },
+            demoYoutubeId: null
+          },
+          {
+            level: 20,
+            name: { fr: 'Renaissance', en: 'Rebirth' },
+            icon: 'https://static.icy-veins.com/images/heroes/talents/kaelthas_rebirth.png',
+            description: { fr: 'Augmente la durée du Phénix et permet de le repositionner.', en: 'Increases Phoenix duration and allows repositioning.' },
+            demoYoutubeId: null
+          }
+        ]
+      },
+      {
+        enabled: true,
+        order: 2,
+        label: { fr: 'Build Bombe Vivante (Anti-Mêlée)', en: 'Living Bomb Build (Anti-Melee)' },
+        summary: { fr: 'Dévastateur contre les compositions avec beaucoup de corps à corps.', en: 'Devastating against melee-heavy compositions.' },
+        buildCodeTitle: { fr: "A COLLER", en: "PASTE" },
+        buildCode: "[T2322131,Kaelthas]",
+        videos: [],
+        talents: [
+          {
+            level: 1,
+            name: { fr: 'Infusion gangrenée', en: 'Fel Infusion' },
+            icon: 'https://static.icy-veins.com/images/heroes/talents/kaelthas_fel_infusion.png',
+            description: { fr: 'Augmente la puissance de sort et soigne lors de l\'utilisation du Trait.', en: 'Increases spell power and heals when using Trait.' },
+            demoYoutubeId: null
+          },
+          {
+            level: 4,
+            name: { fr: 'Accro à la mana', en: 'Mana Addict' },
+            icon: 'https://static.icy-veins.com/images/heroes/talents/kaelthas_mana_addict.png',
+            description: { fr: 'Indispensable pour la survie tard dans la partie.', en: 'Essential for late-game survival.' },
+            demoYoutubeId: null
+          },
+          {
+            level: 7,
+            name: { fr: 'Enchantement du Feu solaire', en: 'Sunfire Enchantment' },
+            icon: 'https://static.icy-veins.com/images/heroes/talents/kaelthas_sunfire_enchantment.png',
+            description: { fr: 'Activer le Trait booste vos prochaines attaques de base.', en: 'Activating Trait empowers your next basic attacks.' },
+            demoYoutubeId: null
+          },
+          {
+            level: 10,
+            name: { fr: 'Explosion pyrotechnique', en: 'Pyroblast' },
+            icon: 'https://static.icy-veins.com/images/heroes/skills/kaelthas_pyroblast.png',
+            description: { fr: 'Pour punir une cible fragile hors de position.', en: 'To punish a fragile target out of position.' },
+            demoYoutubeId: null
+          },
+          {
+            level: 13,
+            name: { fr: 'Pyromane', en: 'Pyromaniac' },
+            icon: 'https://static.icy-veins.com/images/heroes/talents/kaelthas_pyromaniac.png',
+            description: { fr: 'Les dégâts de Bombe vivante réduisent vos temps de recharge.', en: 'Living Bomb damage reduces your cooldowns.' },
+            demoYoutubeId: null
+          },
+          {
+            level: 16,
+            name: { fr: 'Fureur du Roi-Soleil', en: 'Sun King\'s Fury' },
+            icon: 'https://static.icy-veins.com/images/heroes/talents/kaelthas_sun_kings_fury.png',
+            description: { fr: 'Augmente considérablement les dégâts de Bombe vivante sur les cibles principales.', en: 'Greatly increases Living Bomb damage on primary targets.' },
+            demoYoutubeId: null
+          },
+          {
+            level: 20,
+            name: { fr: 'Présence d\'esprit', en: 'Presence of Mind' },
+            icon: 'https://static.icy-veins.com/images/heroes/talents/kaelthas_presence_of_mind.png',
+            description: { fr: 'Réduit le temps de recharge de l\'Explosion pyrotechnique.', en: 'Reduces Pyroblast cooldown.' },
+            demoYoutubeId: null
+          }
+        ]
+      }
+    ]
+  },
+  /*Healers*/
   {
     id: 'anduin',
     enabled: false,
     name: { fr: 'Anduin', en: 'Anduin' },
     role: 'Healer',
-    portrait: 'https://static.icy-veins.com/images/heroes/hero-portraits/anduin.jpg',
+    portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_anduin.jpg',
     headline: {
       fr: 'Soins fiables, sauvetage cible et backline stable.',
       en: 'Reliable healing, targeted rescue, and stable backline.'
@@ -208,7 +397,7 @@ const HEROES = [
     enabled: true,
     name: { fr: 'Rehgar', en: 'Rehgar' },
     role: 'Healer',
-    portrait: 'https://static.icy-veins.com/images/heroes/hero-portraits/rehgar.jpg',
+    portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_rehgar.png',
     headline: {
       fr: 'Waveclear, soins multi comme monocible, aggressif',
       en: 'Waveclear, multi and single-target healing, aggressive'
@@ -228,49 +417,49 @@ const HEROES = [
         name: { fr: 'Purge', en: 'Purge' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_purge.jpg',
         description: { fr: 'Utiliser sur un allié le rend Insensible, sur un ennemi le ralenti.', en: 'Targeting an ally grants Unstoppable, targeting an enemy slows them.' },
-        demoYoutubeId: 'assets/heroes/base_spells/rehgar/videos/rehgar_purge.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/rehgar/videos/spells/rehgar_purge.mp4'
       },
       {
         key: 'A',
         name: { fr: 'Salve de guérison', en: 'Chain Heal' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_chainheal.jpg',
         description: { fr: 'Soin qui rebondit sur les alliés autour de la cible.', en: 'Heal that bounces to allies near the target.' },
-        demoYoutubeId: 'assets/heroes/base_spells/rehgar/videos/rehgar_a.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/rehgar/videos/spells/rehgar_a.mp4'
       },
       {
         key: 'Z',
         name: { fr: 'Bouclier de foudre', en: 'Lightning Shield' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_lightningshield.jpg',
         description: { fr: 'Place un bouclier de foudre qui inflige des dégâts et rend du mana.', en: 'Places a lightning shield that deals damage and restores mana.' },
-        demoYoutubeId: 'assets/heroes/base_spells/rehgar/videos/rehgar_z.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/rehgar/videos/spells/rehgar_z.mp4'
       },
       {
         key: 'E',
         name: { fr: 'Totem de liens terrestres', en: 'Earthbind Totem' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_earthbindtotem.jpg',
         description: { fr: 'Pose un totem qui ralentit autour.', en: 'Spawns a totem that slows nearby enemies.' },
-        demoYoutubeId: 'assets/heroes/base_spells/rehgar/videos/rehgar_e.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/rehgar/videos/spells/rehgar_e.mp4'
       },
       {
         key: 'R1',
         name: { fr: 'Guérison ancestrale', en: 'Ancestral Healing' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_ancestralhealing.jpg',
         description: { fr: 'Gros soin qui permet de sauver.', en: 'Massive burst heal that saves lives.' },
-        demoYoutubeId: 'assets/heroes/base_spells/rehgar/videos/rehgar_ancestral.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/rehgar/videos/spells/rehgar_ancestral.mp4'
       },
       {
         key: 'R2',
         name: { fr: 'Furie sanguinaire', en: 'Bloodlust' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_bloodlust.jpg',
         description: { fr: "Augmente la vitesse de déplacement et d'attaque, les attaques de base soignent.", en: 'Increases movement & attack speed, basic attacks heal.' },
-        demoYoutubeId: 'assets/heroes/base_spells/rehgar/videos/rehgar_bloodlust.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/rehgar/videos/spells/rehgar_bloodlust.mp4'
       },
       {
         key: 'W',
         name: { fr: 'Loup fantôme', en: 'Ghost Wolf' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_ghostwolf.jpg',
         description: { fr: 'Augmente la vitesse de déplacement, la prochaine auto-attaque est plus forte.', en: 'Increases movement speed; next basic attack deals bonus damage.' },
-        demoYoutubeId: 'assets/heroes/base_spells/rehgar/videos/rehgar_mount.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/rehgar/videos/spells/rehgar_mount.mp4'
       }
     ],
     tips: [
@@ -408,7 +597,7 @@ const HEROES = [
     enabled: true,
     name: { fr: 'Luisaile', en: 'Brightwing' },
     role: 'Healer',
-    portrait: 'https://static.icy-veins.com/images/heroes/hero-portraits/brightwing.jpg',
+    portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_brightwing.png',
     headline: {
       fr: "Global, beaucoup d'utilitaire, et control en point and click",
       en: 'Global presence, high utility, point-and-click control'
@@ -615,7 +804,7 @@ const HEROES = [
     enabled: true,
     name: { fr: 'Deckard Cain', en: 'Deckard Cain' },
     role: 'Healer',
-    portrait: 'https://static.icy-veins.com/images/heroes/hero-portraits/deckard.jpg',
+    portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_deckard.png',
     headline: {
       fr: 'Contrôles de zone et soins de préparation.',
       en: 'Heavy crowd control, AoE healing and setup potions.'
@@ -635,42 +824,42 @@ const HEROES = [
         name: { fr: 'Fidèle auditoire', en: 'Fortitude of the Faithful' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_protectors_of_cain.jpg',
         description: { fr: "Lorsqu'au moins un allié est proche de Deckard Cain, il obtient de l'armure et ses temps de recharge se rechargent plus vite.", en: 'When at least one allied Hero is nearby, Deckard gains Armor and his Basic Abilities recharge faster.' },
-        demoYoutubeId: 'assets/heroes/base_spells/deckard/videos/deckard_trait.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/deckard/videos/spells/deckard_trait.mp4'
       },
       {
         key: 'A',
         name: { fr: 'Potion de soin', en: 'Healing Potion' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_healing_potion.jpg',
         description: { fr: 'Lance une potion qui peut rester au sol et être consommée par les alliés pour se soigner.', en: 'Throws a potion that heals the first allied Hero to touch it.' },
-        demoYoutubeId: 'assets/heroes/base_spells/deckard/videos/deckard_a.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/deckard/videos/spells/deckard_a.mp4'
       },
       {
         key: 'Z',
         name: { fr: 'Cube horadrique', en: 'Horadric Cube' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_horadric_cube.jpg',
         description: { fr: 'Cube qui inflige des dégâts et ralentit en zone.', en: 'Throws a cube that deals damage and slows enemies in an area.' },
-        demoYoutubeId: 'assets/heroes/base_spells/deckard/videos/deckard_z.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/deckard/videos/spells/deckard_z.mp4'
       },
       {
         key: 'E',
         name: { fr: 'Parchemin de confinement', en: 'Scroll of Sealing' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_scroll_of_sealing.jpg',
         description: { fr: 'Triangle qui immobilise et inflige des dégâts.', en: 'Unfurls a scroll that roots and damages enemies inside.' },
-        demoYoutubeId: 'assets/heroes/base_spells/deckard/videos/deckard_e.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/deckard/videos/spells/deckard_e.mp4'
       },
       {
         key: 'R1',
         name: { fr: 'Restez un instant et écoutez', en: 'Stay Awhile and Listen' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_stay_awhile_and_listen.jpg',
         description: { fr: 'Canalise un cône devant lui qui endort les ennemis.', en: 'Channels a large cone that puts enemies to sleep.' },
-        demoYoutubeId: 'assets/heroes/base_spells/deckard/videos/deckard_r1.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/deckard/videos/spells/deckard_r1.mp4'
       },
       {
         key: 'R2',
         name: { fr: 'Vous avez lu mon livre ?', en: 'Lorenado' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_lorenado.jpg',
         description: { fr: 'Crée une tornade qui repousse les ennemis sur son passage.', en: 'Creates a swirling tornado that knocks away enemies.' },
-        demoYoutubeId: 'assets/heroes/base_spells/deckard/videos/deckard_r2.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/deckard/videos/spells/deckard_r2.mp4'
       }
     ],
     tips: [
@@ -808,7 +997,7 @@ const HEROES = [
     enabled: false,
     name: { fr: 'Alexstrasza', en: 'Alexstrasza' },
     role: 'Healer',
-    portrait: 'https://static.icy-veins.com/images/heroes/hero-portraits/alexstrasza.jpg',
+    portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_alexstrasza.png',
     headline: {
       fr: 'Soins en zone massifs et forme de dragon.',
       en: 'Massive AoE healing and dragon form.'
@@ -994,7 +1183,7 @@ const HEROES = [
     enabled: false,
     name: { fr: 'Ana', en: 'Ana' },
     role: 'Healer',
-    portrait: 'https://static.icy-veins.com/images/heroes/hero-portraits/ana.jpg',
+    portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_ana.png',
     headline: {
       fr: 'Sniper de soins avec un anti-soin puissant.',
       en: 'Healing sniper with powerful anti-heal.'
@@ -1180,7 +1369,7 @@ const HEROES = [
     enabled: true,
     name: { fr: 'Auriel', en: 'Auriel' },
     role: 'Healer',
-    portrait: 'https://static.icy-veins.com/images/heroes/hero-portraits/auriel.jpg',
+    portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_auriel.png',
     headline: {
       fr: "Soigne grâce à de l'énergie procurés par ses alliés.",
       en: 'Healing fueled by Energy provided by her allies.'
@@ -1198,44 +1387,44 @@ const HEROES = [
       {
         key: 'Trait',
         name: { fr: "Don d'espoir", en: 'Bestow Hope' },
-        icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_bestowhope.jpg',
+        icon: 'assets/heroes/base_spells/auriel/images/spells/storm_ui_icon_auriel_bestowhope.png',
         description: { fr: "Place une couronne sur un allié pour récupérer de l'énergie selon ses dégâts.", en: 'Places a crown on an ally to gain Energy based on the damage they deal.' },
-        demoYoutubeId: 'assets/heroes/base_spells/auriel/videos/auriel_trait.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/auriel/videos/spells/auriel_trait.mp4'
       },
       {
         key: 'A',
         name: { fr: 'Arc vertueux', en: 'Sacred Sweep' },
-        icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_angelicsweep.jpg',
+        icon: 'assets/heroes/base_spells/auriel/images/spells/storm_ui_icon_auriel_angelicsweep.png',
         description: { fr: 'Inflige des dégâts en arc de cercle. Dégâts augmentés au centre.', en: 'Deals damage in an arc. Damage is increased in the center.' },
-        demoYoutubeId: 'assets/heroes/base_spells/auriel/videos/auriel_a.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/auriel/videos/spells/auriel_a.mp4'
       },
       {
         key: 'Z',
         name: { fr: 'Rayon des Cieux', en: 'Ray of Heaven' },
-        icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_rayofheaven.jpg',
+        icon: 'assets/heroes/base_spells/auriel/images/spells/storm_ui_icon_auriel_rayofheaven.png',
         description: { fr: "Consomme l'énergie pour soigner en zone.", en: 'Consumes Energy to heal in an area.' },
-        demoYoutubeId: 'assets/heroes/base_spells/auriel/videos/auriel_z.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/auriel/videos/spells/auriel_z.mp4'
       },
       {
         key: 'E',
         name: { fr: 'Entrave', en: 'Detainment Strike' },
-        icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_restrainingblow.jpg',
+        icon: 'assets/heroes/base_spells/auriel/images/spells/storm_ui_icon_auriel_restrainingblow.png',
         description: { fr: 'Repousse un ennemi (étourdit si contre un mur).', en: 'Knocks an enemy back. If they collide with terrain, they are Stunned.' },
-        demoYoutubeId: 'assets/heroes/base_spells/auriel/videos/auriel_e.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/auriel/videos/spells/auriel_e.mp4'
       },
       {
         key: 'R1',
         name: { fr: 'Égide de cristal', en: 'Crystal Aegis' },
-        icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_ribboncocoon.jpg',
+        icon: 'assets/heroes/base_spells/auriel/images/spells/storm_ui_icon_auriel_ribboncocoon.png',
         description: { fr: 'Place un allié en Stase puis inflige des dégâts autour.', en: 'Places an ally in Stasis, then deals damage around them.' },
-        demoYoutubeId: 'assets/heroes/base_spells/auriel/videos/auriel_r1.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/auriel/videos/spells/auriel_r1.mp4'
       },
       {
         key: 'R2',
         name: { fr: 'Réssurection', en: 'Resurrect' },
-        icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_resurrect.jpg',
+        icon: 'assets/heroes/base_spells/auriel/images/spells/storm_ui_icon_auriel_resurrect.png',
         description: { fr: 'Ramène un allié mort à la vie. Peut être utiliser sur soi.', en: 'Brings a dead ally back to life. Can be used on yourself.' },
-        demoYoutubeId: 'assets/heroes/base_spells/auriel/videos/auriel_r2.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/auriel/videos/spells/auriel_r2.mp4'
       }
     ],
     tips: [
@@ -1257,49 +1446,49 @@ const HEROES = [
           {
             level: 1,
             name: { fr: 'Lumière ardente', en: 'Searing Light' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_rayofheaven.jpg',
+            icon: 'assets/heroes/base_spells/auriel/images/spells/storm_ui_icon_auriel_rayofheaven.png',
             description: { fr: 'Rayon des Cieux inflige des dégâts aux héros adverses présents dans la zone de soin.', en: 'Ray of Heaven deals damage to enemy Heroes in the healing area.' },
             demoYoutubeId: null
           },
           {
             level: 4,
             name: { fr: 'Sentence', en: 'Repeated Offense' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_restrainingblow_a.jpg',
+            icon: 'assets/heroes/base_spells/auriel/images/talents/storm_ui_icon_auriel_restrainingblow_a.png',
             description: { fr: "Augmente le repoussement d'Entrave. Quête: étourdir des héros augmente les dégats.", en: "Increases Detainment Strike's knockback distance. Quest: Stunning Heroes increases its damage." },
             demoYoutubeId: null
           },
           {
             level: 7,
             name: { fr: 'Corde sacrée', en: 'Energized Cord' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_bestowhope_a.jpg',
+            icon: 'assets/heroes/base_spells/auriel/images/talents/storm_ui_icon_auriel_bestowhope_a.png',
             description: { fr: "Augmente l'énergie conférée par les attaques de base d'Auriel aux héros et aux cibles non héroïques. Passif: augmente la portée des attaques de bases", en: "Increases the Energy gained from Auriel's Basic Attacks against Heroes and non-Heroic targets. Passive: increases Basic Attack range." },
             demoYoutubeId: null
           },
           {
             level: 10,
             name: { fr: 'Égide de Cristal', en: 'Crystal Aegis' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_ribboncocoon.jpg',
+            icon: 'assets/heroes/base_spells/auriel/images/spells/storm_ui_icon_auriel_ribboncocoon.png',
             description: { fr: 'Place un allié en Stase puis inflige des dégâts autour.', en: 'Places an ally in Stasis, then deals damage around them.' },
             demoYoutubeId: null
           },
           {
             level: 13,
             name: { fr: 'Fouet perforant', en: 'Piercing Lash' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_restrainingblow.jpg',
+            icon: 'assets/heroes/base_spells/auriel/images/talents/storm_ui_icon_auriel_restrainingblow_a.png',
             description: { fr: 'Entrave touche tous les héros adverses possibles, et son temps de recharge est réduit selon le nombre de héros touchés.', en: 'Detainment Strike pierces enemy Heroes, and its cooldown is reduced based on the number of Heroes hit.' },
             demoYoutubeId: null
           },
           {
             level: 16,
             name: { fr: 'Courroux des Cieux', en: 'Wrath of Heaven' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_bestowhope_a.jpg',
+            icon: 'assets/heroes/base_spells/auriel/images/talents/storm_ui_icon_auriel_bestowhope_a.png',
             description: { fr: "Augmente la puissance de capacité de l'allié affecté par Don d'espoir. Réduit l'armure anti-sort des héros adverses touchés par le centre d'Arc vertueux et par l'étourdissement d'Entrave.", en: "Increases the Spell Power of the ally affected by Bestow Hope. Reduces Spell Armor on enemy Heroes hit by the center of Sacred Sweep and by Detainment Strike's Stun." },
             demoYoutubeId: null
           },
           {
             level: 20,
             name: { fr: "Résolution d'airain", en: 'Diamond Resolve' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_ribboncocoon.jpg',
+            icon: 'assets/heroes/base_spells/auriel/images/spells/storm_ui_icon_auriel_ribboncocoon.png',
             description: { fr: 'Égide de Cristal confère de l\'armure à la sortie.', en: 'Crystal Aegis grants Armor when it ends.' },
             demoYoutubeId: null
           }
@@ -1318,27 +1507,27 @@ const HEROES = [
           {
             level: 1,
             name: { fr: 'Révélation céleste', en: 'Increasing Clarity' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_angelicsweep.jpg',
+            icon: 'assets/heroes/base_spells/auriel/images/spells/storm_ui_icon_auriel_angelicsweep.png',
             description: { fr: 'Quête : Augmente les dégâts de la zone centrale. Récompense : Augmente à nouveau les dégâts de la zone centrale.', en: 'More Energy.' },
             demoYoutubeId: null
           },
           {
             level: 4,
             name: { fr: 'Amplitude majestueuse', en: 'Increasing Clarity' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_angelicsweep.jpg',
+            icon: 'assets/heroes/base_spells/auriel/images/spells/storm_ui_icon_auriel_angelicsweep.png',
             description: { fr: 'Augmente le rayon de Arc vertueux.', en: 'More Energy.' },
             demoYoutubeId: null
           },
           {
             level: 7,
             name: { fr: "Lueur d'espoir", en: 'Energized Cord' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_rayofheaven.jpg',
+            icon: 'assets/heroes/base_spells/auriel/images/spells/storm_ui_icon_auriel_rayofheaven.png',
             description: { fr: 'Récolter un globe réduit le coût en énergie du prochain Rayon des Cieux', en: "Increases the Energy gained from Auriel's Basic Attacks against Heroes and non-Heroic targets. Passive: increases Basic Attack range." },
             demoYoutubeId: null,
             alternatives: [
               {
                 name: { fr: 'Corde sacrée', en: 'Energized Cord' },
-                icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_bestowhope_a.jpg',
+                icon: 'assets/heroes/base_spells/auriel/images/talents/storm_ui_icon_auriel_bestowhope_a.png',
                 description: { fr: "Augmente l'énergie conférée par les attaques de base d'Auriel aux héros et aux cibles non héroïques. Passif: augmente la portée des attaques de bases", en: "Increases the Energy gained from Auriel's Basic Attacks against Heroes and non-Heroic targets. Passive: increases Basic Attack range." },
                 demoYoutubeId: null
               }
@@ -1347,28 +1536,28 @@ const HEROES = [
           {
             level: 10,
             name: { fr: 'Égide de Cristal', en: 'Crystal Aegis' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_ribboncocoon.jpg',
+            icon: 'assets/heroes/base_spells/auriel/images/spells/storm_ui_icon_auriel_ribboncocoon.png',
             description: { fr: 'Place un allié en Stase puis inflige des dégâts autour.', en: 'Places an ally in Stasis, then deals damage around them.' },
             demoYoutubeId: null
           },
           {
             level: 13,
             name: { fr: 'Force convergente', en: 'Increasing Clarity' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_angelicsweep_b.jpg',
+            icon: 'assets/heroes/base_spells/auriel/images/talents/storm_ui_icon_auriel_angelicsweep_b.png',
             description: { fr: 'Les ennemis sont repoussés au centre.', en: 'More Energy.' },
             demoYoutubeId: null
           },
           {
             level: 16,
             name: { fr: 'Courroux des Cieux', en: 'Wrath of Heaven' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_bestowhope_a.jpg',
+            icon: 'assets/heroes/base_spells/auriel/images/talents/storm_ui_icon_auriel_bestowhope_a.png',
             description: { fr: "Augmente la puissance de capacité de l'allié affecté par Don d'espoir. Réduit l'armure anti-sort des héros adverses touchés par le centre d'Arc vertueux et par l'étourdissement d'Entrave.", en: "Increases the Spell Power of the ally affected by Bestow Hope. Reduces Spell Armor on enemy Heroes hit by the center of Sacred Sweep and by Detainment Strike's Stun." },
             demoYoutubeId: null
           },
           {
             level: 20,
             name: { fr: "Résolution d'airain", en: 'Diamond Resolve' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_auriel_ribboncocoon.jpg',
+            icon: 'assets/heroes/base_spells/auriel/images/spells/storm_ui_icon_auriel_ribboncocoon.png',
             description: { fr: "Égide de Cristal confère de l'armure à la sortie.", en: 'Crystal Aegis grants Armor when it ends.' },
             demoYoutubeId: null
           }
@@ -1381,7 +1570,7 @@ const HEROES = [
     enabled: false,
     name: { fr: 'Kharazim', en: 'Kharazim' },
     role: 'Healer',
-    portrait: 'https://static.icy-veins.com/images/heroes/hero-portraits/kharazim.jpg',
+    portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_kharazim.png',
     headline: {
       fr: 'Soigneur de mêlée ultra mobile.',
       en: 'Ultra mobile melee healer.'
@@ -1567,7 +1756,7 @@ const HEROES = [
     enabled: false,
     name: { fr: 'Li Li', en: 'Li Li' },
     role: 'Healer',
-    portrait: 'https://static.icy-veins.com/images/heroes/hero-portraits/lili.jpg',
+    portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_lili.png',
     headline: {
       fr: 'Soigneuse esquiveuse, aveugle les attaquants.',
       en: 'Slippery healer, blinds attackers.'
@@ -1753,7 +1942,7 @@ const HEROES = [
     enabled: false,
     name: { fr: 'Lt. Morales', en: 'Lt. Morales' },
     role: 'Healer',
-    portrait: 'https://static.icy-veins.com/images/heroes/hero-portraits/ltmorales.jpg',
+    portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_ltmorales.png',
     headline: {
       fr: "Soins monocibles ininterrompus et gestion d'énergie.",
       en: 'Uninterrupted single-target heals and energy management.'
@@ -1940,7 +2129,7 @@ const HEROES = [
     name: { fr: 'Malfurion', en: 'Malfurion' },
     isNew: true,
     role: 'Healer',
-    portrait: 'https://static.icy-veins.com/images/heroes/hero-portraits/malfurion.jpg',
+    portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_malfurion.png',
     headline: {
       fr: 'Soins sur la durée avec beaucoup de sorts utilitaires.',
       en: 'Heals over time with plenty of utility spells.'
@@ -1960,42 +2149,42 @@ const HEROES = [
         name: { fr: 'Innervation', en: 'Innervate' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_malfurion_innerrvate.jpg',
         description: { fr: 'Rend du mana à un allié et réduit ses temps de recharge.', en: 'Restores Mana to an ally and reduces their cooldowns.' },
-        demoYoutubeId: 'assets/heroes/base_spells/malfurion/videos/malfurion_trait.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/malfurion/videos/spells/malfurion_trait.mp4'
       },
       {
         key: 'A',
         name: { fr: 'Rétablissement', en: 'Regrowth' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_malfurion_regrowth.jpg',
         description: { fr: 'Soin sur la durée.', en: 'Heal over time.' },
-        demoYoutubeId: 'assets/heroes/base_spells/malfurion/videos/malfurion_a.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/malfurion/videos/spells/malfurion_a.mp4'
       },
       {
         key: 'Z',
         name: { fr: 'Éclat lunaire', en: 'Moonfire' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_malfurion_moonfire.jpg',
         description: { fr: 'Dégâts de zone rapides qui soignent tous les alliés sous A et révèle les ennemis.', en: 'Quick AoE damage that heals all allies with Q active and reveals enemies.' },
-        demoYoutubeId: 'assets/heroes/base_spells/malfurion/videos/malfurion_z.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/malfurion/videos/spells/malfurion_z.mp4'
       },
       {
         key: 'E',
         name: { fr: 'Sarments', en: 'Entangling Roots' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_malfurion_entanglingroots.jpg',
         description: { fr: 'Immobilise les ennemis dans une zone et inflige des dégâts.', en: 'Roots enemies in an area and deals damage.' },
-        demoYoutubeId: 'assets/heroes/base_spells/malfurion/videos/malfurion_e.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/malfurion/videos/spells/malfurion_e.mp4'
       },
       {
         key: 'R1',
         name: { fr: 'Tranquillité', en: 'Tranquility' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_malfurion_tranquility.jpg',
         description: { fr: 'Rend continuellement des points de vie aux héros alliés et proches, et donne de l\'armure lorsque les alliés sont sous Rétablissement.', en: 'Continually restores health to nearby allied Heroes, and grants Armor to allies affected by Regrowth.' },
-        demoYoutubeId: 'assets/heroes/base_spells/malfurion/videos/malfurion_r1.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/malfurion/videos/spells/malfurion_r1.mp4'
       },
       {
         key: 'R2',
         name: { fr: 'Rêve du crépuscule', en: 'Twilight Dream' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_malfurion_twilightdream.jpg',
         description: { fr: 'Silence tous les ennemis autour et inflige de gros dégâts.', en: 'Silences all nearby enemies and deals heavy damage.' },
-        demoYoutubeId: 'assets/heroes/base_spells/malfurion/videos/malfurion_r2.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/malfurion/videos/spells/malfurion_r2.mp4'
       }
     ],
     tips: [
@@ -2133,7 +2322,7 @@ const HEROES = [
     enabled: true,
     name: { fr: 'Stukov', en: 'Stukov' },
     role: 'Healer',
-    portrait: 'https://static.icy-veins.com/images/heroes/hero-portraits/stukov.jpg',
+    portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_stukov.png',
     headline: {
       fr: 'Contrôle de zone énorme et soins propagatifs.',
       en: 'Massive zone control and spreading heals.'
@@ -2153,42 +2342,42 @@ const HEROES = [
         name: { fr: 'Éruption éruptive', en: 'Bio-Kill Switch' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_bio-killswitch.jpg',
         description: { fr: 'Fait exploser ses virus : soigne grandement les alliés ou ralentit/blesse les ennemis.', en: 'Detonates viruses: greatly heals allies or slows/damages enemies.' },
-        demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/stukov_trait.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/spells/stukov_trait.mp4'
       },
       {
         key: 'A',
         name: { fr: 'Virus régénérateur', en: 'Healing Pathogen' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_healingpathogen.jpg',
         description: { fr: "Un soin qui se propage d'allié en allié.", en: 'A heal that spreads from ally to ally.' },
-        demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/stukov_a.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/spells/stukov_a.mp4'
       },
       {
         key: 'Z',
         name: { fr: 'Agent infectieux', en: 'Weighted Pustule' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_weightedpustule.jpg',
         description: { fr: 'Lance un projectile qui infecte et ralentit les ennemis.', en: 'Throws a projectile that infects and slows enemies.' },
-        demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/stukov_z.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/spells/stukov_z.mp4'
       },
       {
         key: 'E',
         name: { fr: 'Menace larvée', en: 'Lurking Arm' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_lurkingarm.jpg',
         description: { fr: 'Canalise une zone qui réduit au silence et inflige des dégâts.', en: 'Channels a zone that silences and damages enemies.' },
-        demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/stukov_e.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/spells/stukov_e.mp4'
       },
       {
         key: 'R1',
         name: { fr: 'Poussée éruptive', en: 'Massive Shove' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_massiveshove.jpg',
         description: { fr: "Pousse un ennemi jusqu'à ce qu'il percute un obstacle.", en: 'Pushes an enemy until they hit terrain.' },
-        demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/stukov_r1.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/spells/stukov_r1.mp4'
       },
       {
         key: 'R2',
         name: { fr: 'Frappe chaotique', en: 'Flailing Swipe' },
         icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_flailingswipe.jpg',
         description: { fr: 'Balaye les ennemis en face de lui plusieurs fois.', en: 'Swipes enemies in front of him multiple times.' },
-        demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/stukov_r2.mp4'
+        demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/spells/stukov_r2.mp4'
       }
     ],
     tips: [
@@ -2298,7 +2487,7 @@ const HEROES = [
     enabled: true,
     name: { fr: 'Tyrande', en: 'Tyrande' },
     role: 'Healer',
-    portrait: 'https://static.icy-veins.com/images/heroes/hero-portraits/tyrande.jpg',
+    portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_tyrande.png',
     headline: {
       fr: "Soigneur utilitaire, avec étourdissements et réduction d'armure.",
       en: 'Utility Healer with stuns and Armor reduction.'
@@ -2448,7 +2637,7 @@ const HEROES = [
     enabled: false,
     name: { fr: 'Uther', en: 'Uther' },
     role: 'Healer',
-    portrait: 'https://static.icy-veins.com/images/heroes/hero-portraits/uther.jpg',
+    portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_uther.png',
     headline: {
       fr: 'Soigneur tanky, armure et contrôle.',
       en: 'Tanky healer, armor and crowd control.'
@@ -2634,7 +2823,7 @@ const HEROES = [
     enabled: true,
     name: { fr: 'Blanchetête', en: 'Whitemane' },
     role: 'Healer',
-    portrait: 'https://static.icy-veins.com/images/heroes/hero-portraits/whitemane.jpg',
+    portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_whitemane.png',
     headline: {
       fr: 'Soigne en infligeant des dégâts, gestion du Zèle.',
       en: 'Heals by dealing damage, Zeal management.'
@@ -2652,49 +2841,49 @@ const HEROES = [
       {
         key: 'Trait',
         name: { fr: 'Zèle', en: 'Zeal' },
-        icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_whitemane_zeal.jpg',
+        icon: 'assets/heroes/base_spells/whitemane/images/spells/storm_ui_icon_whitemane_zeal.png',
         description: { fr: 'Les alliés avec Zèle sont soignés quand Blanchetête inflige des dégâts.', en: 'Allies with Zeal are healed when Whitemane deals damage.' },
         demoYoutubeId: ''
       },
       {
         key: '&',
         name: { fr: 'Mansuétude', en: 'Inquisition' },
-        icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_whitemane_clemency.jpg',
+        icon: 'assets/heroes/base_spells/whitemane/images/spells/storm_ui_icon_whitemane_inquisition.png',
         description: { fr: 'Canalise un laser de soin sur un allié. Retire du Désespoir.', en: 'Channels damage and slows an enemy.' },
         demoYoutubeId: ''
       },
       {
         key: 'A',
         name: { fr: 'Supplique', en: 'Desperate Plea' },
-        icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_whitemane_desperation.jpg',
+        icon: 'assets/heroes/base_spells/whitemane/images/spells/storm_ui_icon_whitemane_desperation.png',
         description: { fr: 'Soigne un allié et génère du Désespoir. Désespoir: Coûte de plus en plus de mana.', en: 'Heals an ally and grants Zeal. Costs increasingly more mana.' },
         demoYoutubeId: ''
       },
       {
         key: 'Z',
         name: { fr: 'Inquisition', en: 'Inquisition' },
-        icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_whitemane_inquisition.jpg',
+        icon: 'assets/heroes/base_spells/whitemane/images/spells/storm_ui_icon_whitemane_inquisition.png',
         description: { fr: 'Canalise des dégâts et ralentit un ennemi. Retire du Désespoir.', en: 'Channels damage and slows an enemy.' },
         demoYoutubeId: ''
       },
       {
         key: 'E',
         name: { fr: 'Flagellation', en: 'Searing Lash' },
-        icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_whitemane_lash.jpg',
+        icon: 'assets/heroes/base_spells/whitemane/images/spells/storm_ui_icon_whitemane_lash.png',
         description: { fr: 'Frappe en ligne, déclenche un second coup si un héros est touché.', en: 'Strikes in a line, strikes again if a hero is hit.' },
         demoYoutubeId: ''
       },
       {
         key: 'R1',
         name: { fr: 'Égide écarlate', en: 'Scarlet Aegis' },
-        icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_whitemane_aegis.jpg',
+        icon: 'assets/heroes/base_spells/whitemane/images/spells/storm_ui_icon_whitemane_aegis.png',
         description: { fr: "Donne de l'armure, soigne et applique Zèle en zone.", en: 'Grants armor and Zeal in an area.' },
         demoYoutubeId: ''
       },
       {
         key: 'R2',
         name: { fr: 'Sainte colère', en: 'Divine Reckoning' },
-        icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_whitemane_reckoning.jpg',
+        icon: 'assets/heroes/base_spells/whitemane/images/spells/storm_ui_icon_whitemane_reckoning.png',
         description: { fr: 'Zone de dégâts qui rend du mana quand des héros sont touchés.', en: 'Massive AoE damage (and thus massive healing).' },
         demoYoutubeId: ''
       }
@@ -2718,49 +2907,49 @@ const HEROES = [
           {
             level: 1,
             name: { fr: 'Compassion', en: 'Compassion' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_whitemane_inquisition_lash.jpg',
+            icon: 'assets/heroes/base_spells/whitemane/images/talents/storm_ui_icon_whitemane_inquisition_lash.png',
             description: { fr: "Flagellation réduit le temps de recharge d'Inquisition. Les points de vie rendus aux héros avec des points de vie faibles sont augmentés.", en: 'Searing Lash reduces the cooldown of Inquisition. Healing is increased against low Health Heroes.' },
             demoYoutubeId: null
           },
           {
             level: 4,
             name: { fr: 'Martyre', en: 'Martyrdom' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_whitemane_desperation_alt_1.jpg',
+            icon: 'assets/heroes/base_spells/whitemane/images/talents/storm_ui_icon_whitemane_desperation_alt_1.png',
             description: { fr: 'Les soins de Supplique sont augmentés. Chaque Zèle augmente davantage le soin de Supplique.', en: 'Desperate Plea heals for more. Each active Zeal increases its healing.' },
             demoYoutubeId: null
           },
           {
             level: 7,
             name: { fr: 'Intercession', en: 'Intercession' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_whitemane_intercession.jpg',
+            icon: 'assets/heroes/base_spells/whitemane/images/talents/storm_ui_icon_whitemane_intercession.png',
             description: { fr: 'Rend un allié Insensible.', en: 'Grant an ally Unstoppable.' },
             demoYoutubeId: null
           },
           {
             level: 10,
             name: { fr: 'Égide écarlate', en: 'Scarlet Aegis' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_whitemane_aegis.jpg',
+            icon: 'assets/heroes/base_spells/whitemane/images/spells/storm_ui_icon_whitemane_aegis.png',
             description: { fr: "Donne de l'armure, soigne et applique Zèle en zone.", en: 'Grant Armor to allies, heal them, and apply Zeal in an area.' },
             demoYoutubeId: null
           },
           {
             level: 13,
             name: { fr: 'Idolâtrie', en: 'Subjugation' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_whitemane_inquisition.jpg',
+            icon: 'assets/heroes/base_spells/whitemane/images/spells/storm_ui_icon_whitemane_inquisition.png',
             description: { fr: "Inquisition réduit les dégâts de l'adversaire.", en: 'Inquisition reduces the damage dealt by enemies.' },
             demoYoutubeId: null
           },
           {
             level: 16,
             name: { fr: 'Pénitence collective', en: 'Shared Punishment' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_whitemane_inquisition.jpg',
+            icon: 'assets/heroes/base_spells/whitemane/images/spells/storm_ui_icon_whitemane_inquisition.png',
             description: { fr: 'Inquisition se propage à un ennemi proche de la cible, puis réduit leurs armures.', en: 'Inquisition spreads to a nearby enemy and reduces their Armor.' },
             demoYoutubeId: null
           },
           {
             level: 20,
             name: { fr: 'Croisade écarlate', en: 'Scarlet Crusade' },
-            icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_whitemane_aegis.jpg',
+            icon: 'assets/heroes/base_spells/whitemane/images/spells/storm_ui_icon_whitemane_aegis.png',
             description: { fr: 'Augmente les soins procurés par Égide écarlate et rend les alliés Insensible.', en: 'Scarlet Aegis heals for more and grants Unstoppable to affected allies.' },
             demoYoutubeId: null
           }
@@ -2791,7 +2980,7 @@ const HEROES = [
     enabled: false,
     name: { fr: 'Lúcio', en: 'Lúcio' },
     role: 'Healer',
-    portrait: '',
+    portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_lucio.png',
     headline: { fr: 'En construction.', en: 'Under construction.' },
     gameplay: { fr: 'En construction.', en: 'Under construction.' },
     guideVideo: null,
