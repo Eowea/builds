@@ -504,7 +504,7 @@ const HEROES = [
             name: { fr: 'Guérison ancestrale', en: 'Ancestral Healing' },
             icon: 'https://psionic-storm.com/media/img/talents/rehgar_ancestralhealing.png',
             description: { fr: 'Gros soin monocible, utilisable sur soi.', en: 'Massive single-target heal, usable on self.' },
-            demoYoutubeId: null
+            demoYoutubeId: 'assets/heroes/base_spells/rehgar/videos/spells/rehgar_ancestral.mp4'
           },
           {
             level: 13,
@@ -904,7 +904,7 @@ const HEROES = [
             name: { fr: 'Restez un instant et écoutez', en: 'Stay Awhile and Listen' },
             icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_stay_awhile_and_listen.jpg',
             description: { fr: 'Endort les ennemis en face.', en: 'Channels to put enemies in front to sleep.' },
-            demoYoutubeId: null
+            demoYoutubeId: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_stay_awhile_and_listen.jpg'
           },
           {
             level: 13,
@@ -1469,7 +1469,7 @@ const HEROES = [
             name: { fr: 'Égide de Cristal', en: 'Crystal Aegis' },
             icon: 'assets/heroes/base_spells/auriel/images/spells/storm_ui_icon_auriel_ribboncocoon.png',
             description: { fr: 'Place un allié en Stase puis inflige des dégâts autour.', en: 'Places an ally in Stasis, then deals damage around them.' },
-            demoYoutubeId: null
+            demoYoutubeId: 'assets/heroes/base_spells/auriel/images/spells/storm_ui_icon_auriel_ribboncocoon.png'
           },
           {
             level: 13,
@@ -2230,7 +2230,7 @@ const HEROES = [
             name: { fr: 'Tranquilité', en: 'Tranquility' },
             icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_malfurion_tranquility.jpg',
             description: { fr: 'Rend continuellement des points de vie aux héros alliés et proches, et donne de l\'armure lorsque les alliés sont sous Rétablissement.', en: 'Continually restores health to nearby allied Heroes, and grants Armor to allies affected by Regrowth.' },
-            demoYoutubeId: 'assets/heroes/base_spells/malfurion/videos/malfurion_r1.mp4'
+            demoYoutubeId: 'assets/heroes/base_spells/malfurion/videos/spells/malfurion_r1.mp4'
           },
           {
             level: 13,
@@ -2421,13 +2421,13 @@ const HEROES = [
             name: { fr: 'Poussée éruptive', en: 'Massive Shove' },
             icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_massiveshove.jpg',
             description: { fr: "Pousse un ennemi jusqu'à ce qu'il percute un obstacle.", en: 'Pushes an enemy until they hit terrain.' },
-            demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/stukov_r1.mp4',
+            demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/spells/stukov_r1.mp4',
             alternatives: [
               {
                 name: { fr: 'Frappe chaotique', en: 'Flailing Swipe' },
                 icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_flailingswipe.jpg',
                 description: { fr: 'Balaye les ennemis en face de lui plusieurs fois.', en: 'Swipes enemies in front of him multiple times.' },
-                demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/stukov_r2.mp4'
+                demoYoutubeId: 'assets/heroes/base_spells/stukov/videos/spells/stukov_r2.mp4'
               }
             ]
           },
@@ -2930,7 +2930,7 @@ const HEROES = [
             name: { fr: 'Égide écarlate', en: 'Scarlet Aegis' },
             icon: 'assets/heroes/base_spells/whitemane/images/spells/storm_ui_icon_whitemane_aegis.png',
             description: { fr: "Donne de l'armure, soigne et applique Zèle en zone.", en: 'Grant Armor to allies, heal them, and apply Zeal in an area.' },
-            demoYoutubeId: null
+            demoYoutubeId: 'assets/heroes/base_spells/whitemane/images/spells/storm_ui_icon_whitemane_aegis.png'
           },
           {
             level: 13,
