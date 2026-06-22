@@ -2847,8 +2847,8 @@ const HEROES = [
       },
       {
         key: '&',
-        name: { fr: 'Mansuétude', en: 'Inquisition' },
-        icon: 'assets/heroes/base_spells/whitemane/images/spells/storm_ui_icon_whitemane_inquisition.png',
+        name: { fr: 'Mansuétude', en: 'Clemency' },
+        icon: 'assets/heroes/base_spells/whitemane/images/spells/storm_ui_icon_whitemane_clemency.png',
         description: { fr: 'Canalise un laser de soin sur un allié. Retire du Désespoir.', en: 'Channels damage and slows an enemy.' },
         demoYoutubeId: ''
       },
