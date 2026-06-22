@@ -904,7 +904,7 @@ const HEROES = [
             name: { fr: 'Restez un instant et écoutez', en: 'Stay Awhile and Listen' },
             icon: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_stay_awhile_and_listen.jpg',
             description: { fr: 'Endort les ennemis en face.', en: 'Channels to put enemies in front to sleep.' },
-            demoYoutubeId: 'https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_stay_awhile_and_listen.jpg'
+            demoYoutubeId: 'assets/heroes/base_spells/deckard/videos/spells/deckard_r1.mp4'
           },
           {
             level: 13,
@@ -1469,7 +1469,7 @@ const HEROES = [
             name: { fr: 'Égide de Cristal', en: 'Crystal Aegis' },
             icon: 'assets/heroes/base_spells/auriel/images/spells/storm_ui_icon_auriel_ribboncocoon.png',
             description: { fr: 'Place un allié en Stase puis inflige des dégâts autour.', en: 'Places an ally in Stasis, then deals damage around them.' },
-            demoYoutubeId: 'assets/heroes/base_spells/auriel/images/spells/storm_ui_icon_auriel_ribboncocoon.png'
+            demoYoutubeId: 'assets/heroes/base_spells/auriel/videos/spells/auriel_r1.mp4'
           },
           {
             level: 13,
