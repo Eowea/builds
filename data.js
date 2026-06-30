@@ -23,6 +23,7 @@ const HEROES = [
     enabled: true,
     name: { fr: 'Kael\'thas', en: 'Kael\'thas' },
     role: 'AssassinDistance',
+    isNew: true,
     portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_kaelthas.png',
     headline: {
       fr: 'Dégâts de zone massifs, punition des regroupements et contrôle puissant.',
@@ -2128,7 +2129,7 @@ const HEROES = [
     id: 'malfurion',
     enabled: true,
     name: { fr: 'Malfurion', en: 'Malfurion' },
-    isNew: true,
+    isNew: false,
     role: 'Healer',
     portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_malfurion.png',
     headline: {
