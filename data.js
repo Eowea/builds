@@ -2129,7 +2129,6 @@ const HEROES = [
     id: 'malfurion',
     enabled: true,
     name: { fr: 'Malfurion', en: 'Malfurion' },
-    isNew: false,
     role: 'Healer',
     portrait: 'assets/heroes/portraits/storm_ui_glues_draft_portrait_malfurion.png',
     headline: {
