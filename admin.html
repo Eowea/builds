@@ -798,9 +798,12 @@ function renderOneBuild(hero, b, i){
         <div class="field"><label>Description (EN)</label><input value="${escapeHtml(v.desc?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}].videos[${vi}],'desc.en',this.value)" /></div>
       </div>
       <div class="field">
-        <label>Lien ou ID YouTube</label>
-        <input value="${escapeHtml(v.youtubeId)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}].videos[${vi}],'youtubeId',this.value)" />
-        <small class="help">Colle l'URL complète (ex: https://youtube.com/watch?v=XXXXXXXXXXX) ou juste l'ID à 11 caractères. Uniquement YouTube ici — les fichiers .mp4 de assets/ ne sont pas supportés pour les vidéos de build.</small>
+        <label>Vidéo (lien/ID YouTube ou fichier assets)</label>
+        <div class="thumb-picker">
+          <input value="${escapeHtml(v.youtubeId)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}].videos[${vi}],'youtubeId',this.value)" />
+          <button onclick="openAssetPicker('video', (p)=>{ setNested(HEROES[${currentHeroIndex}].builds[${i}].videos[${vi}],'youtubeId',p); renderHeroPanel(); })">Choisir un fichier</button>
+        </div>
+        <small class="help">Colle un lien/ID YouTube (ex: https://youtube.com/watch?v=XXXXXXXXXXX), ou choisis un fichier .mp4/.webm/.gif/.webp du dossier assets/ avec le bouton.</small>
       </div>
     </div>
   `).join('');
