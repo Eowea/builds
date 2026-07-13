@@ -57,7 +57,7 @@ const HEROES = [
       "en": "Massive AoE damage, group punishment, and strong crowd control."
     },
     "gameplay": {
-      "fr": "Kael'thas est le maître du zonage. En utilisant ses Sphères verdoyantes (Trait), il peut booster ses sorts pour infliger plus de dégâts, étendre ses zones d'effet ou étourdir plusieurs cibles.",
+      "fr": "Kael'thas est le maître du zoning. En utilisant ses Sphères verdoyantes (Trait), il peut booster ses sorts pour infliger plus de dégâts, étendre ses zones d'effet ou étourdir plusieurs cibles.",
       "en": "Kael'thas is the master of zoning. By using Verdant Spheres (Trait), he can empower his spells to deal more damage, increase area of effect, or stun multiple targets."
     },
     "guideVideo": null,
