@@ -458,6 +458,24 @@ async function bootApp(){
   await reloadFromGitHub();
 }
 
+function normalizeLoadedData(){
+  // Corrige/complète les anciennes entrées "videos" de build qui seraient de simples
+  // chaines de texte au lieu de l'objet {title, desc, youtubeId} attendu par app.js.
+  HEROES.forEach(h => {
+    (h.builds||[]).forEach(b => {
+      b.videos = (b.videos||[]).map(v => {
+        if (typeof v === 'string'){
+          return { title:{fr:'',en:''}, desc:{fr:'',en:''}, youtubeId: v };
+        }
+        v.title = v.title || {fr:'',en:''};
+        v.desc = v.desc || {fr:'',en:''};
+        if (v.youtubeId === undefined) v.youtubeId = v.youtubeUrl || v.url || '';
+        return v;
+      });
+    });
+  });
+}
+
 async function reloadFromGitHub(){
   try{
     const file = await getFile('data.js');
@@ -465,6 +483,7 @@ async function reloadFromGitHub(){
     APP_CONFIG = parsed.APP_CONFIG;
     STREAMER_CONFIG = parsed.STREAMER_CONFIG;
     HEROES = parsed.HEROES;
+    normalizeLoadedData();
     dataFileSha = file.sha;
     currentHeroIndex = null;
     markSaved();
@@ -768,9 +787,21 @@ function renderBuildsTab(hero){
 function renderOneBuild(hero, b, i){
   const talentsHtml = (b.talents||[]).map((t, ti) => renderTalent(i, ti, t)).join('');
   const videosHtml = (b.videos||[]).map((v, vi) => `
-    <div class="row" style="margin-bottom:6px;">
-      <input value="${escapeHtml(v)}" oninput="HEROES[${currentHeroIndex}].builds[${i}].videos[${vi}]=this.value; markDirty();" />
-      <button class="ghost" onclick="HEROES[${currentHeroIndex}].builds[${i}].videos.splice(${vi},1); markDirty(); renderHeroPanel();">✕</button>
+    <div class="subitem">
+      <button class="ghost remove-btn" onclick="HEROES[${currentHeroIndex}].builds[${i}].videos.splice(${vi},1); markDirty(); renderHeroPanel();">✕</button>
+      <div class="row">
+        <div class="field"><label>Titre (FR)</label><input value="${escapeHtml(v.title?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}].videos[${vi}],'title.fr',this.value)" /></div>
+        <div class="field"><label>Titre (EN)</label><input value="${escapeHtml(v.title?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}].videos[${vi}],'title.en',this.value)" /></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Description (FR)</label><input value="${escapeHtml(v.desc?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}].videos[${vi}],'desc.fr',this.value)" /></div>
+        <div class="field"><label>Description (EN)</label><input value="${escapeHtml(v.desc?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}].videos[${vi}],'desc.en',this.value)" /></div>
+      </div>
+      <div class="field">
+        <label>Lien ou ID YouTube</label>
+        <input value="${escapeHtml(v.youtubeId)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}].videos[${vi}],'youtubeId',this.value)" />
+        <small class="help">Colle l'URL complète (ex: https://youtube.com/watch?v=XXXXXXXXXXX) ou juste l'ID à 11 caractères. Uniquement YouTube ici — les fichiers .mp4 de assets/ ne sont pas supportés pour les vidéos de build.</small>
+      </div>
     </div>
   `).join('');
   return `
@@ -799,9 +830,9 @@ function renderOneBuild(hero, b, i){
         <div class="field"><label>Date de mise à jour (FR)</label><input value="${escapeHtml(b.updatedAt?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}],'updatedAt.fr',this.value)" /></div>
         <div class="field"><label>Date de mise à jour (EN)</label><input value="${escapeHtml(b.updatedAt?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}],'updatedAt.en',this.value)" /></div>
       </div>
-      <div class="field"><label>Vidéos liées au build (URLs)</label>
+      <div class="field"><label>Vidéos liées au build (YouTube uniquement)</label>
         ${videosHtml}
-        <button onclick="HEROES[${currentHeroIndex}].builds[${i}].videos=(HEROES[${currentHeroIndex}].builds[${i}].videos||[]); HEROES[${currentHeroIndex}].builds[${i}].videos.push(''); markDirty(); renderHeroPanel();">+ Ajouter une vidéo</button>
+        <button onclick="HEROES[${currentHeroIndex}].builds[${i}].videos=(HEROES[${currentHeroIndex}].builds[${i}].videos||[]); HEROES[${currentHeroIndex}].builds[${i}].videos.push({title:{fr:'',en:''},desc:{fr:'',en:''},youtubeId:''}); markDirty(); renderHeroPanel();">+ Ajouter une vidéo</button>
       </div>
       <h3 style="margin-top:16px;">Talents</h3>
       ${talentsHtml}
