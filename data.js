@@ -1606,9 +1606,7 @@ const HEROES = [
           "en": "PASTE IN TALENT TREE"
         },
         "buildCode": "[T3121331,Deckard]",
-        "videos": [
-          "Nfp1w2JU-DQ"
-        ],
+        "videos": [],
         "talents": [
           {
             "level": 1,
