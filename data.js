@@ -1616,7 +1616,7 @@ const HEROES = [
               "fr": "test",
               "en": "test"
             },
-            "youtubeId": "assets/heroes/base_spells/deckard/videos/spells/deckard_a.mp4"
+            "youtubeId": ""
           }
         ],
         "talents": [
