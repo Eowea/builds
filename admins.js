@@ -23,6 +23,5 @@
 */
 
 const ADMINS = [
-  // Exemple (à supprimer / remplacer) :
-  // { username: "eowea", salt: "3f7a1c9e2b6d4f80", hash: "d2a84f4b8b650937ec8f73cd8be2c74add5a911ba64df27458ed8229da804a26" }
+  { username: "Eowea", salt: "1dfd8a6ea94668025c3b6148a5374a8d", hash: "fd6ad9dfe29789327bacc0c54cab32bfbdb82065ddd261f3dbb8b23a03ab436f" }
 ];
