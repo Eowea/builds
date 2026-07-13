@@ -1607,7 +1607,7 @@ const HEROES = [
         },
         "buildCode": "[T3121331,Deckard]",
         "videos": [
-          "https://youtu.be/Nfp1w2JU-DQ"
+          "Nfp1w2JU-DQ"
         ],
         "talents": [
           {
