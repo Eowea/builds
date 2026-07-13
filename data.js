@@ -752,7 +752,7 @@ const HEROES = [
           "fr": "Purge",
           "en": "Purge"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_purge.jpg",
+        "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_purge.png",
         "description": {
           "fr": "Utiliser sur un allié le rend Insensible, sur un ennemi le ralenti.",
           "en": "Targeting an ally grants Unstoppable, targeting an enemy slows them."
@@ -765,7 +765,7 @@ const HEROES = [
           "fr": "Salve de guérison",
           "en": "Chain Heal"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_chainheal.jpg",
+        "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_chainheal.png",
         "description": {
           "fr": "Soin qui rebondit sur les alliés autour de la cible.",
           "en": "Heal that bounces to allies near the target."
@@ -778,7 +778,7 @@ const HEROES = [
           "fr": "Bouclier de foudre",
           "en": "Lightning Shield"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_lightningshield.jpg",
+        "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_lightningshield.png",
         "description": {
           "fr": "Place un bouclier de foudre qui inflige des dégâts et rend du mana.",
           "en": "Places a lightning shield that deals damage and restores mana."
@@ -791,7 +791,7 @@ const HEROES = [
           "fr": "Totem de liens terrestres",
           "en": "Earthbind Totem"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_earthbindtotem.jpg",
+        "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_earthbindtotem.png",
         "description": {
           "fr": "Pose un totem qui ralentit autour.",
           "en": "Spawns a totem that slows nearby enemies."
@@ -804,7 +804,7 @@ const HEROES = [
           "fr": "Guérison ancestrale",
           "en": "Ancestral Healing"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_ancestralhealing.jpg",
+        "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_ancestralhealing.png",
         "description": {
           "fr": "Gros soin qui permet de sauver.",
           "en": "Massive burst heal that saves lives."
@@ -817,7 +817,7 @@ const HEROES = [
           "fr": "Furie sanguinaire",
           "en": "Bloodlust"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_bloodlust.jpg",
+        "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_bloodlust.png",
         "description": {
           "fr": "Augmente la vitesse de déplacement et d'attaque, les attaques de base soignent.",
           "en": "Increases movement & attack speed, basic attacks heal."
@@ -830,7 +830,7 @@ const HEROES = [
           "fr": "Loup fantôme",
           "en": "Ghost Wolf"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_ghostwolf.jpg",
+        "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_ghostwolf.png",
         "description": {
           "fr": "Augmente la vitesse de déplacement, la prochaine auto-attaque est plus forte.",
           "en": "Increases movement speed; next basic attack deals bonus damage."
@@ -881,7 +881,7 @@ const HEROES = [
               "fr": "Totem Colossal",
               "en": "Colossal Totem"
             },
-            "icon": "https://psionic-storm.com/media/img/talents/rehgar_earthbindtotem.png",
+            "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_earthbindtotem.png",
             "description": {
               "fr": "Augmente les points de vie, le rayon et la durée du totem. Permet de le repositionner une nouvelle fois.",
               "en": "Increases health, radius, and duration of the totem. Can be repositioned once."
@@ -894,7 +894,7 @@ const HEROES = [
               "fr": "Viveterre",
               "en": "Earthliving Enchant"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_chainheal.jpg",
+            "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_chainheal.png",
             "description": {
               "fr": "Renforce Salve de guerison pour les héros dont les points de vie sont bas.",
               "en": "Empowers Chain Heal for heroes at low health."
@@ -907,7 +907,7 @@ const HEROES = [
               "fr": "Totem lié à la terre",
               "en": "Grounded Totem"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_earthbindtotem.jpg",
+            "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_earthbindtotem.png",
             "description": {
               "fr": "Réduis la vitesse d'attaque et la puissance de capacité, augmente la portée du totem.",
               "en": "Reduces attack and spell power of enemies in range."
@@ -920,7 +920,7 @@ const HEROES = [
               "fr": "Guérison ancestrale",
               "en": "Ancestral Healing"
             },
-            "icon": "https://psionic-storm.com/media/img/talents/rehgar_ancestralhealing.png",
+            "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_ancestralhealing.png",
             "description": {
               "fr": "Gros soin monocible, utilisable sur soi.",
               "en": "Massive single-target heal, usable on self."
@@ -933,7 +933,7 @@ const HEROES = [
               "fr": "Raz-de-marée",
               "en": "Tidal Waves"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_chainheal.jpg",
+            "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_chainheal.png",
             "description": {
               "fr": "Réduit le temps de recharge de Salve de guérison et son coût en mana.",
               "en": "Reduces Chain Heal cooldown and mana cost."
@@ -946,7 +946,7 @@ const HEROES = [
               "fr": "Totem d’emprise de la terre",
               "en": "Earthgrasp Totem"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_earthbindtotem.jpg",
+            "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_earthbindtotem.png",
             "description": {
               "fr": "Quand le totem est posé pour la première fois, il inflige des dégâts en zone et ralentit fortement.",
               "en": "When first spawned, the totem deals AoE damage and heavily slows."
@@ -959,7 +959,7 @@ const HEROES = [
               "fr": "Bénédiction du long-voyant",
               "en": "Farseer's Blessing"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_ancestralhealing.jpg",
+            "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_ancestralhealing.png",
             "description": {
               "fr": "Une deuxième Guérison Ancestrale apparait, et soigne en zone autour de la cible.",
               "en": "A second Ancestral Healing triggers and heals in an AoE."
@@ -996,7 +996,7 @@ const HEROES = [
               "fr": "Cœur farouche",
               "en": "Feral Heart"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_ghostwolf.jpg",
+            "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_ghostwolf.png",
             "description": {
               "fr": "Augmente la vitesse de déplacement de Loup fantôme et confère de l'armure.",
               "en": "Increases Ghost Wolf movement speed and grants armor."
@@ -1009,7 +1009,7 @@ const HEROES = [
               "fr": "Viveterre",
               "en": "Earthliving Enchant"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_chainheal.jpg",
+            "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_chainheal.png",
             "description": {
               "fr": "Renforce Salve de guerison pour les héros dont les points de vie sont bas.",
               "en": "Empowers Chain Heal for heroes at low health."
@@ -1022,7 +1022,7 @@ const HEROES = [
               "fr": "Sang et tonnerre",
               "en": "Blood and Thunder"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_ghostwolf.jpg",
+            "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_ghostwolf.png",
             "description": {
               "fr": "Les attaques faites en Loup fantôme réduisent les temps de recharge des capacités de base et rend du mana.",
               "en": "Attacks in Ghost Wolf form reduce basic ability cooldowns and restore mana."
@@ -1035,7 +1035,7 @@ const HEROES = [
               "fr": "Guérison ancestrale",
               "en": "Ancestral Healing"
             },
-            "icon": "https://psionic-storm.com/media/img/talents/rehgar_ancestralhealing.png",
+            "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_ancestralhealing.png",
             "description": {
               "fr": "Gros soin monocible, utilisable sur soi.",
               "en": "Massive single-target heal, usable on self."
@@ -1048,7 +1048,7 @@ const HEROES = [
               "fr": "Bouclier de terre",
               "en": "Earth Shield"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_lightningshield.jpg",
+            "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_lightningshield.png",
             "description": {
               "fr": "Applique un bouclier à son porteur en %pv.",
               "en": "Applies a shield to its target based on % max health."
@@ -1061,7 +1061,7 @@ const HEROES = [
               "fr": "Faim de loup",
               "en": "Hunger of the Wolf"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_ghostwolf.jpg",
+            "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_ghostwolf.png",
             "description": {
               "fr": "Les attaques sous forme de Loup fantôme infligent des dégâts en %pv et rendent des points de vie",
               "en": "Attacks in Ghost Wolf form deal % health damage and restore health."
@@ -1074,7 +1074,7 @@ const HEROES = [
               "fr": "Bénédiction du long-voyant",
               "en": "Farseer's Blessing"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_ancestralhealing.jpg",
+            "icon": "assets/heroes/base_spells/rehgar/images/spells/storm_ui_icon_rehgar_ancestralhealing.png",
             "description": {
               "fr": "Une deuxième Guérison Ancestrale apparait, et soigne en zone autour de la cible.",
               "en": "A second Ancestral Healing triggers and heals in an AoE."
