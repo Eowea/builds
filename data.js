@@ -2862,7 +2862,7 @@ const HEROES = [
       "en": "Kharazim"
     },
     "role": "Healer",
-    "portrait": "assets/heroes/portraits/storm_ui_glues_draft_portrait_kharazim.png",
+    "portrait": "assets/heroes/portraits/storm_ui_glues_draft_portrait_monk.png",
     "headline": {
       "fr": "Soigneur de mêlée ultra mobile.",
       "en": "Ultra mobile melee healer."
@@ -3528,7 +3528,7 @@ const HEROES = [
       "en": "Lt. Morales"
     },
     "role": "Healer",
-    "portrait": "assets/heroes/portraits/storm_ui_glues_draft_portrait_ltmorales.png",
+    "portrait": "assets/heroes/portraits/storm_ui_glues_draft_portrait_medic.png",
     "headline": {
       "fr": "Soins monocibles ininterrompus et gestion d'énergie.",
       "en": "Uninterrupted single-target heals and energy management."
