@@ -1606,7 +1606,19 @@ const HEROES = [
           "en": "PASTE IN TALENT TREE"
         },
         "buildCode": "[T3121331,Deckard]",
-        "videos": [],
+        "videos": [
+          {
+            "title": {
+              "fr": "test",
+              "en": "test"
+            },
+            "desc": {
+              "fr": "test",
+              "en": "test"
+            },
+            "youtubeId": "assets/heroes/base_spells/deckard/videos/spells/deckard_a.mp4"
+          }
+        ],
         "talents": [
           {
             "level": 1,
