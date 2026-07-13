@@ -388,7 +388,7 @@ const HEROES = [
       "en": "Anduin"
     },
     "role": "Healer",
-    "portrait": "assets/heroes/portraits/storm_ui_glues_draft_portrait_anduin.jpg",
+    "portrait": "assets/heroes/portraits/storm_ui_glues_draft_portrait_anduin.png",
     "headline": {
       "fr": "Soins fiables, sauvetage cible et backline stable.",
       "en": "Reliable healing, targeted rescue, and stable backline."
@@ -1619,7 +1619,8 @@ const HEROES = [
               "fr": "Augmente le ralentissement du Cube horadrique.",
               "en": "Increases Horadric Cube slow."
             },
-            "demoYoutubeId": null
+            "demoYoutubeId": null,
+            "alternatives": []
           },
           {
             "level": 4,
