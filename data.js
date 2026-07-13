@@ -382,7 +382,7 @@ const HEROES = [
   },
   {
     "id": "anduin",
-    "enabled": true,
+    "enabled": false,
     "name": {
       "fr": "Anduin",
       "en": "Anduin"
