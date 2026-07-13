@@ -1498,7 +1498,7 @@ const HEROES = [
           "fr": "Fidèle auditoire",
           "en": "Fortitude of the Faithful"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_protectors_of_cain.jpg",
+        "icon": "assets/heroes/base_spells/deckard/images/spells/storm_ui_icon_deckard_protectors_of_cain.png",
         "description": {
           "fr": "Lorsqu'au moins un allié est proche de Deckard Cain, il obtient de l'armure et ses temps de recharge se rechargent plus vite.",
           "en": "When at least one allied Hero is nearby, Deckard gains Armor and his Basic Abilities recharge faster."
@@ -1511,7 +1511,7 @@ const HEROES = [
           "fr": "Potion de soin",
           "en": "Healing Potion"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_healing_potion.jpg",
+        "icon": "assets/heroes/base_spells/deckard/images/spells/storm_ui_icon_deckard_healing_potion.png",
         "description": {
           "fr": "Lance une potion qui peut rester au sol et être consommée par les alliés pour se soigner.",
           "en": "Throws a potion that heals the first allied Hero to touch it."
@@ -1524,7 +1524,7 @@ const HEROES = [
           "fr": "Cube horadrique",
           "en": "Horadric Cube"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_horadric_cube.jpg",
+        "icon": "assets/heroes/base_spells/deckard/images/spells/storm_ui_icon_deckard_horadric_cube.png",
         "description": {
           "fr": "Cube qui inflige des dégâts et ralentit en zone.",
           "en": "Throws a cube that deals damage and slows enemies in an area."
@@ -1537,7 +1537,7 @@ const HEROES = [
           "fr": "Parchemin de confinement",
           "en": "Scroll of Sealing"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_scroll_of_sealing.jpg",
+        "icon": "assets/heroes/base_spells/deckard/images/spells/storm_ui_icon_deckard_scroll_of_sealing.png",
         "description": {
           "fr": "Triangle qui immobilise et inflige des dégâts.",
           "en": "Unfurls a scroll that roots and damages enemies inside."
@@ -1550,7 +1550,7 @@ const HEROES = [
           "fr": "Restez un instant et écoutez",
           "en": "Stay Awhile and Listen"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_stay_awhile_and_listen.jpg",
+        "icon": "assets/heroes/base_spells/deckard/images/spells/storm_ui_icon_deckard_stay_awhile_and_listen.png",
         "description": {
           "fr": "Canalise un cône devant lui qui endort les ennemis.",
           "en": "Channels a large cone that puts enemies to sleep."
@@ -1563,7 +1563,7 @@ const HEROES = [
           "fr": "Vous avez lu mon livre ?",
           "en": "Lorenado"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_lorenado.jpg",
+        "icon": "assets/heroes/base_spells/deckard/images/spells/storm_ui_icon_deckard_lorenado.png",
         "description": {
           "fr": "Crée une tornade qui repousse les ennemis sur son passage.",
           "en": "Creates a swirling tornado that knocks away enemies."
@@ -1614,7 +1614,7 @@ const HEROES = [
               "fr": "Saphir",
               "en": "Sapphire"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_sapphire.jpg",
+            "icon": "assets/heroes/base_spells/deckard/images/talents/storm_ui_icon_deckard_sapphire.png",
             "description": {
               "fr": "Augmente le ralentissement du Cube horadrique.",
               "en": "Increases Horadric Cube slow."
@@ -1627,7 +1627,7 @@ const HEROES = [
               "fr": "Potion de bouclier",
               "en": "Shielding Potion"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_healing_potion.jpg",
+            "icon": "assets/heroes/base_spells/deckard/images/spells/storm_ui_icon_deckard_healing_potion.png",
             "description": {
               "fr": "Les potions confèrent un bouclier.",
               "en": "Potions grant a shield upon healing."
@@ -1640,7 +1640,7 @@ const HEROES = [
               "fr": "Cube de Kanai",
               "en": "Kanai's Cube"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_kanais_cube.jpg",
+            "icon": "assets/heroes/base_spells/deckard/images/talents/storm_ui_icon_deckard_kanais_cube.png",
             "description": {
               "fr": "Le Cube horadrique réduit les dégâts infligés par les ennemis.",
               "en": "Horadric Cube reduces damage dealt by enemies."
@@ -1653,7 +1653,7 @@ const HEROES = [
               "fr": "Restez un instant et écoutez",
               "en": "Stay Awhile and Listen"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_stay_awhile_and_listen.jpg",
+            "icon": "assets/heroes/base_spells/deckard/images/spells/storm_ui_icon_deckard_stay_awhile_and_listen.png",
             "description": {
               "fr": "Endort les ennemis en face.",
               "en": "Channels to put enemies in front to sleep."
@@ -1666,7 +1666,7 @@ const HEROES = [
               "fr": "Bénédiction antique",
               "en": "Ancient Blessings"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_angelic_conduit.jpg",
+            "icon": "assets/heroes/base_spells/deckard/images/talents/storm_ui_icon_deckard_angelic_conduit.png",
             "description": {
               "fr": "Renforce les attaques de base de tous les alliés à proximité et les soigne.",
               "en": "Empowers nearby allies' basic attacks and heals them."
@@ -1679,7 +1679,7 @@ const HEROES = [
               "fr": "Bâton horadrique",
               "en": "Horadric Staff"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_horadric_staff.jpg",
+            "icon": "assets/heroes/base_spells/deckard/images/talents/storm_ui_icon_deckard_horadric_staff.png",
             "description": {
               "fr": "Les attaques de base étourdissent.",
               "en": "Basic attacks stun."
@@ -1692,7 +1692,7 @@ const HEROES = [
               "fr": "Respectez vos aînés",
               "en": "Respect the Elderly"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_stay_awhile_and_listen.jpg",
+            "icon": "assets/heroes/base_spells/deckard/images/spells/storm_ui_icon_deckard_stay_awhile_and_listen.png",
             "description": {
               "fr": "Restez un instant et écoutez rend les ennemis Silence et Aveugle au réveil.",
               "en": "Stay Awhile and listen silences and blinds enemies upon waking up."
@@ -1729,7 +1729,7 @@ const HEROES = [
               "fr": "Parchemin d'identification",
               "en": "Scroll of Identify"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_scroll_of_sealing.jpg",
+            "icon": "assets/heroes/base_spells/deckard/images/spells/storm_ui_icon_deckard_scroll_of_sealing.png",
             "description": {
               "fr": "Quête: augmente les dégâts de Parchemin de confinement et réduit l'armure une fois les paliers atteints.",
               "en": "Quest: increases Scroll of Sealing's damage and reduces Armor once the rewards are unlocked."
@@ -1742,7 +1742,7 @@ const HEROES = [
               "fr": "Rubis",
               "en": "Ruby"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_ruby.jpg",
+            "icon": "assets/heroes/base_spells/deckard/images/talents/storm_ui_icon_deckard_ruby.png",
             "description": {
               "fr": "Le proche Cube horadrique génère des petites potions de soin.",
               "en": "The next Horadric Cube spawns Lesser Healing Potions."
@@ -1755,7 +1755,7 @@ const HEROES = [
               "fr": "Cube de Kanai",
               "en": "Kanai's Cube"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_kanais_cube.jpg",
+            "icon": "assets/heroes/base_spells/deckard/images/talents/storm_ui_icon_deckard_kanais_cube.png",
             "description": {
               "fr": "Le Cube horadrique réduit les dégâts infligés par les ennemis.",
               "en": "Horadric Cube reduces the damage dealt by enemies."
@@ -1768,7 +1768,7 @@ const HEROES = [
               "fr": "Restez un instant et écoutez",
               "en": "Stay Awhile and Listen"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_stay_awhile_and_listen.jpg",
+            "icon": "assets/heroes/base_spells/deckard/images/spells/storm_ui_icon_deckard_stay_awhile_and_listen.png",
             "description": {
               "fr": "Endort les ennemis en face.",
               "en": "Puts enemies in front of Deckard to Sleep."
@@ -1781,7 +1781,7 @@ const HEROES = [
               "fr": "Bénédiction antique",
               "en": "Ancient Blessings"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_angelic_conduit.jpg",
+            "icon": "assets/heroes/base_spells/deckard/images/talents/storm_ui_icon_deckard_angelic_conduit.png",
             "description": {
               "fr": "Renforce les attaques de base de tous les alliés à proximité et les soigne.",
               "en": "Empowers nearby allies' Basic Attacks and heals them."
@@ -1794,7 +1794,7 @@ const HEROES = [
               "fr": "Parchemin de pétrification",
               "en": "Scroll of Stone Curse"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_scroll_of_sealing.jpg",
+            "icon": "assets/heroes/base_spells/deckard/images/spells/storm_ui_icon_deckard_scroll_of_sealing.png",
             "description": {
               "fr": "Parchemin de confinement inflige plus de dégâts lorsque plusieurs héros sont touchés.",
               "en": "Scroll of Sealing deals much more damage when it hits multiple Heroes."
@@ -1807,7 +1807,7 @@ const HEROES = [
               "fr": "Gemmes sans défaut",
               "en": "Perfect Gems"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_deckard_perfect_gems.jpg",
+            "icon": "assets/heroes/base_spells/deckard/images/talents/storm_ui_icon_deckard_perfect_gems.png",
             "description": {
               "fr": "Réduit le temps de recharge des gemmes et de Cube horadique.",
               "en": "Reduces the cooldown of Gems and Horadric Cube."
