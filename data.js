@@ -265,7 +265,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "14 Juillet 2026",
+          "en": "July 14, 2026"
+        }
       },
       {
         "enabled": false,
@@ -376,7 +380,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       }
     ]
   },
@@ -602,7 +610,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       },
       {
         "enabled": true,
@@ -713,7 +725,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       }
     ]
   },
@@ -1330,7 +1346,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       },
       {
         "enabled": true,
@@ -1606,7 +1626,52 @@ const HEROES = [
           "en": "PASTE IN TALENT TREE"
         },
         "buildCode": "[T3121331,Deckard]",
-        "videos": [],
+        "videos": [
+          {
+            "title": {
+              "fr": "test",
+              "en": "test"
+            },
+            "desc": {
+              "fr": "test",
+              "en": "test"
+            },
+            "youtubeId": "assets/heroes/base_spells/auriel/videos/spells/auriel_a.mp4"
+          },
+          {
+            "title": {
+              "fr": "xd",
+              "en": "xd"
+            },
+            "desc": {
+              "fr": "",
+              "en": ""
+            },
+            "youtubeId": "assets/heroes/base_spells/auriel/videos/spells/auriel_e.mp4"
+          },
+          {
+            "title": {
+              "fr": "dd",
+              "en": "dd"
+            },
+            "desc": {
+              "fr": "",
+              "en": ""
+            },
+            "youtubeId": "assets/heroes/base_spells/malfurion/videos/spells/malfurion_r2.mp4"
+          },
+          {
+            "title": {
+              "fr": "dx",
+              "en": "dx"
+            },
+            "desc": {
+              "fr": "",
+              "en": ""
+            },
+            "youtubeId": "assets/heroes/base_spells/deckard/videos/spells/deckard_r2.mp4"
+          }
+        ],
         "talents": [
           {
             "level": 1,
@@ -2037,7 +2102,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       },
       {
         "enabled": true,
@@ -2148,7 +2217,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       }
     ]
   },
@@ -2370,7 +2443,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       },
       {
         "enabled": true,
@@ -2481,7 +2558,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       }
     ]
   },
@@ -3072,7 +3153,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       },
       {
         "enabled": true,
@@ -3183,7 +3268,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       }
     ]
   },
@@ -3405,7 +3494,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       },
       {
         "enabled": true,
@@ -3516,7 +3609,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       }
     ]
   },
@@ -3738,7 +3835,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       },
       {
         "enabled": true,
@@ -3849,7 +3950,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       }
     ]
   },
@@ -4201,7 +4306,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       }
     ]
   },
@@ -4498,7 +4607,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       }
     ]
   },
@@ -4771,7 +4884,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       }
     ]
   },
@@ -4993,7 +5110,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       },
       {
         "enabled": true,
@@ -5104,7 +5225,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       }
     ]
   },
@@ -5390,7 +5515,11 @@ const HEROES = [
             },
             "demoYoutubeId": null
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       }
     ]
   },
@@ -5661,7 +5790,11 @@ const HEROES = [
             },
             "demoYoutubeId": "ScMzIvxBSi4"
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       },
       {
         "enabled": true,
@@ -5817,7 +5950,11 @@ const HEROES = [
             },
             "demoYoutubeId": "ScMzIvxBSi4"
           }
-        ]
+        ],
+        "updatedAt": {
+          "fr": "",
+          "en": ""
+        }
       }
     ]
   }
