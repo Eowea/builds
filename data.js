@@ -1120,7 +1120,7 @@ const HEROES = [
           "fr": "Brume apaisante",
           "en": "Soothing Mist"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_brightwing_soothingmist.jpg",
+        "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_soothingmist.png",
         "description": {
           "fr": "À l'activation, supprime les effets incapacitants sur les alliés proches et Luisaile. Passivement, envoie des vagues de soins.",
           "en": "On activation, removes disabling effects from nearby allies and Brightwing. Passively sends out healing waves."
@@ -1133,7 +1133,7 @@ const HEROES = [
           "fr": "Embrasement des Arcanes",
           "en": "Arcane Flare"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_brightwing_arcaneflare.jpg",
+        "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_arcaneflare.png",
         "description": {
           "fr": "Crache une zone au sol qui inflige des dégâts. Si la cible est au centre, déclenche un effet de soin de Brume Apaisante.",
           "en": "Spits a ground AoE that deals damage. If target is in the center, triggers a Soothing Mist heal."
@@ -1146,7 +1146,7 @@ const HEROES = [
           "fr": "Métamorphose",
           "en": "Polymorph"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_brightwing_polymorph.jpg",
+        "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_polymorph.png",
         "description": {
           "fr": "Neutralise un ennemi.",
           "en": "Neutralizes an enemy hero."
@@ -1159,7 +1159,7 @@ const HEROES = [
           "fr": "Poudre de perlimpinpin",
           "en": "Pixie Dust"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_brightwing_pixiedust.jpg",
+        "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_pixiedust.png",
         "description": {
           "fr": "Applique de l'armure anti-sort et augmente la vitesse de déplacement.",
           "en": "Applies spell armor and increases movement speed."
@@ -1172,7 +1172,7 @@ const HEROES = [
           "fr": "Papillonnage",
           "en": "Blink Heal"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_brightwing_blinkheal.jpg",
+        "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_blinkheal.png",
         "description": {
           "fr": "Se téléporte vers un allié et le soigne.",
           "en": "Teleports to an ally and heals them."
@@ -1185,7 +1185,7 @@ const HEROES = [
           "fr": "Vent d'émeraude",
           "en": "Emerald Wind"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_brightwing_emeraldwind.jpg",
+        "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_emeraldwind.png",
         "description": {
           "fr": "Créer une vague qui repousse et inflige des dégâts aux ennemis.",
           "en": "Creates an expanding wave that damages and pushes enemies away."
@@ -1198,7 +1198,7 @@ const HEROES = [
           "fr": "Déphasage",
           "en": "Phase Shift"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_brightwing_hypershift.jpg",
+        "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_hypershift.png",
         "description": {
           "fr": "Se téléporte sur un allié et le soigne en %pv.",
           "en": "Teleports to an ally and heals them based on % max health."
@@ -1245,7 +1245,7 @@ const HEROES = [
               "fr": "Hyperphase",
               "en": "Hyper Shift"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_brightwing_hypershift.jpg",
+            "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_hypershift.png",
             "description": {
               "fr": "Augmente le montant de soins de Déphasage et son temps de recharge est réduit pour chaque serviteur tué.",
               "en": "Increases Phase Shift healing amount and its cooldown is reduced for each minion killed."
@@ -1271,7 +1271,7 @@ const HEROES = [
               "fr": "Je te vois !",
               "en": "Peekaboo!"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_brightwing_hypershift.jpg",
+            "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_hypershift.png",
             "description": {
               "fr": "Déphasage confère un bouclier à Luisaile et sa cible, puis révèle la zone autour.",
               "en": "Phase Shift grants a shield to Brightwing and her target, then reveals the surrounding area."
@@ -1284,7 +1284,7 @@ const HEROES = [
               "fr": "Papillonnage",
               "en": "Blink Heal"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_brightwing_blinkheal.jpg",
+            "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_blinkheal.png",
             "description": {
               "fr": "Se téléporte vers un allié et le soigne.",
               "en": "Teleports to an ally and heals them."
@@ -1297,7 +1297,7 @@ const HEROES = [
               "fr": "Superlimpinpin",
               "en": "Pixie Power"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_brightwing_pixiedust_b.jpg",
+            "icon": "assets/heroes/base_spells/brightwing/images/talents/storm_ui_icon_brightwing_pixiedust_b.png",
             "description": {
               "fr": "Réduit le temps de recharge de Poudre de perlimpinpin et augmente l'armure anti-sort.",
               "en": "Reduces Pixie Dust cooldown and increases spell armor."
@@ -1310,7 +1310,7 @@ const HEROES = [
               "fr": "Bestiolifier",
               "en": "Critterize"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_brightwing_polymorph.jpg",
+            "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_polymorph.png",
             "description": {
               "fr": "Métamorphose réduit l'armure.",
               "en": "Polymorph reduces armor."
@@ -1323,7 +1323,7 @@ const HEROES = [
               "fr": "Dragon express",
               "en": "Speedy Dragon"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_brightwing_hypershift.jpg",
+            "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_hypershift.png",
             "description": {
               "fr": "Déphasage se canalise plus rapidement et augmente passivement la vitesse de déplacement.",
               "en": "Phase Shift channels faster and passively increases movement speed."
@@ -1360,7 +1360,7 @@ const HEROES = [
               "fr": "Hyperphase",
               "en": "Hyper Shift"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_brightwing_hypershift.jpg",
+            "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_hypershift.png",
             "description": {
               "fr": "Augmente le montant de soins de Déphasage et son temps de recharge est réduit pour chaque serviteur tué.",
               "en": "Increases Phase Shift healing amount and its cooldown is reduced for each minion killed."
@@ -1386,7 +1386,7 @@ const HEROES = [
               "fr": "Brume opportune",
               "en": "Critical Mist"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_brightwing_soothingmist.jpg",
+            "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_soothingmist.png",
             "description": {
               "fr": "À l'activation de Brume apaisante, la purge est plus efficace.",
               "en": "Activating Soothing Mist removes disabling effects more effectively."
@@ -1413,7 +1413,7 @@ const HEROES = [
               "fr": "Papillonnage",
               "en": "Blink Heal"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_brightwing_blinkheal.jpg",
+            "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_blinkheal.png",
             "description": {
               "fr": "Se téléporte vers un allié et le soigne.",
               "en": "Teleports to an ally and heals them."
@@ -1426,7 +1426,7 @@ const HEROES = [
               "fr": "Superlimpinpin",
               "en": "Pixie Power"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_brightwing_pixiedust_b.jpg",
+            "icon": "assets/heroes/base_spells/brightwing/images/talents/storm_ui_icon_brightwing_pixiedust_b.png",
             "description": {
               "fr": "Réduit le temps de recharge de Poudre de perlimpinpin et augmente l'armure anti-sort.",
               "en": "Reduces Pixie Dust cooldown and increases spell armor."
@@ -1439,7 +1439,7 @@ const HEROES = [
               "fr": "Bestiolifier",
               "en": "Critterize"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_brightwing_polymorph.jpg",
+            "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_polymorph.png",
             "description": {
               "fr": "Métamorphose réduit l'armure.",
               "en": "Polymorph reduces armor."
@@ -1452,7 +1452,7 @@ const HEROES = [
               "fr": "Dragon express",
               "en": "Speedy Dragon"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_brightwing_hypershift.jpg",
+            "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_hypershift.png",
             "description": {
               "fr": "Déphasage se canalise plus rapidement et augmente passivement la vitesse de déplacement.",
               "en": "Phase Shift channels faster and passively increases movement speed."
