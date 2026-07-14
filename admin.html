@@ -180,20 +180,29 @@
   <div class="token-card">
     <div class="eyebrow">Bonjour <span id="tokenGreetUser"></span></div>
     <h1>Connexion à GitHub</h1>
-    <p>Pour enregistrer tes modifications dans le dépôt, colle ici un <strong>token GitHub personnel</strong> ayant le droit d'écrire sur <code>Eowea/builds</code>. Il reste uniquement dans ton navigateur, il n'est jamais envoyé ailleurs qu'à l'API GitHub.</p>
+    <p>Pour enregistrer tes modifications dans le dépôt, colle ici un <strong>token GitHub personnel</strong> ayant le droit d'écrire sur le dépôt visé ci-dessous. Il reste uniquement dans ton navigateur, il n'est jamais envoyé ailleurs qu'à l'API GitHub.</p>
     <ol>
       <li>github.com → Settings → Developer settings → <em>Fine-grained tokens</em></li>
-      <li>Repository access → sélectionne uniquement <code>Eowea/builds</code></li>
+      <li>Repository access → sélectionne le(s) dépôt(s) concerné(s)</li>
       <li>Permissions → <em>Contents</em> : Read and write</li>
       <li>Génère puis colle le token ci-dessous</li>
     </ol>
     <div id="tokenError" class="login-error hidden"></div>
     <div class="field">
+      <label>Dépôt cible</label>
+      <select id="repoSelect" onchange="onRepoSelectChange()"></select>
+    </div>
+    <div id="customRepoFields" class="row hidden">
+      <div class="field"><label>Propriétaire (owner)</label><input id="repoOwnerInput" type="text" /></div>
+      <div class="field"><label>Dépôt</label><input id="repoNameInput" type="text" /></div>
+    </div>
+    <div class="field">
       <label>Token GitHub</label>
       <input id="tokenInput" type="password" placeholder="github_pat_..." />
+      <small class="help">Laisse ce champ vide pour réutiliser le token déjà utilisé lors de ta dernière connexion (si tu changes juste de dépôt, mais que ton token a accès aux deux).</small>
     </div>
     <div class="checkbox-row">
-      <input id="rememberToken" type="checkbox" />
+      <input id="rememberToken" type="checkbox" checked />
       <label style="margin:0;text-transform:none;font-size:12px;">Se souvenir du token sur cet appareil</label>
     </div>
     <button class="primary" style="width:100%" onclick="handleTokenSubmit()">Vérifier et continuer</button>
@@ -211,7 +220,9 @@
       </div>
     </div>
     <div class="topbar-right">
+      <select id="topbarRepoSelect" onchange="switchRepoFromTopbar()" style="width:auto;"></select>
       <button onclick="reloadFromGitHub()">↻ Recharger</button>
+      <button onclick="editTokenPrompt()">🔑 Modifier le token</button>
       <button class="primary" id="saveBtn" onclick="saveAll()">💾 Enregistrer sur GitHub</button>
       <button class="ghost" onclick="logout()">Déconnexion</button>
     </div>
@@ -243,8 +254,12 @@
 /* =========================================================================
    CONFIGURATION DU DEPOT
    ========================================================================= */
-const REPO_OWNER = 'Eowea';
-const REPO_NAME  = 'builds';
+const REPO_OPTIONS = [
+  { owner:'Eowea', name:'buildtest', label:'Eowea/buildtest (test)' },
+  { owner:'Eowea', name:'builds',    label:'Eowea/builds (production)' },
+];
+let REPO_OWNER = localStorage.getItem('eowea_admin_repo_owner') || 'Eowea';
+let REPO_NAME  = localStorage.getItem('eowea_admin_repo_name') || 'buildtest';
 const BRANCH     = 'main';
 const GITHUB_API = 'https://api.github.com';
 
@@ -351,6 +366,35 @@ async function handleLogin(){
     }
   }
   document.getElementById('tokenScreen').classList.remove('hidden');
+  populateRepoSelect();
+}
+
+function populateRepoSelect(){
+  const sel = document.getElementById('repoSelect');
+  sel.innerHTML = REPO_OPTIONS.map(o => `<option value="${o.owner}/${o.name}">${escapeHtml(o.label)}</option>`).join('')
+    + '<option value="__custom__">Autre (saisie manuelle)</option>';
+  const current = REPO_OPTIONS.find(o => o.owner === REPO_OWNER && o.name === REPO_NAME);
+  if (current){
+    sel.value = `${current.owner}/${current.name}`;
+    document.getElementById('customRepoFields').classList.add('hidden');
+  } else {
+    sel.value = '__custom__';
+    document.getElementById('customRepoFields').classList.remove('hidden');
+  }
+  document.getElementById('repoOwnerInput').value = REPO_OWNER;
+  document.getElementById('repoNameInput').value = REPO_NAME;
+}
+function onRepoSelectChange(){
+  const sel = document.getElementById('repoSelect');
+  const customFields = document.getElementById('customRepoFields');
+  if (sel.value === '__custom__'){
+    customFields.classList.remove('hidden');
+  } else {
+    customFields.classList.add('hidden');
+    const [owner, name] = sel.value.split('/');
+    document.getElementById('repoOwnerInput').value = owner;
+    document.getElementById('repoNameInput').value = name;
+  }
 }
 
 async function generateAccountSnippet(){
@@ -369,20 +413,83 @@ async function generateAccountSnippet(){
    ECRAN 2 : TOKEN GITHUB
    ========================================================================= */
 async function handleTokenSubmit(){
-  const token = document.getElementById('tokenInput').value.trim();
+  const typedToken = document.getElementById('tokenInput').value.trim();
   const remember = document.getElementById('rememberToken').checked;
   const errEl = document.getElementById('tokenError');
   errEl.classList.add('hidden');
-  if (!token){ return; }
-  githubToken = token;
+
+  const owner = document.getElementById('repoOwnerInput').value.trim() || REPO_OWNER;
+  const name  = document.getElementById('repoNameInput').value.trim() || REPO_NAME;
+  const tokenToUse = typedToken || githubToken;
+  if (!tokenToUse){ errEl.textContent = 'Merci de coller un token GitHub.'; errEl.classList.remove('hidden'); return; }
+
+  const prevOwner = REPO_OWNER, prevName = REPO_NAME, prevToken = githubToken;
+  REPO_OWNER = owner; REPO_NAME = name; githubToken = tokenToUse;
   try{
     await checkTokenAccess();
-    if (remember) localStorage.setItem('eowea_admin_token', token);
+    localStorage.setItem('eowea_admin_repo_owner', REPO_OWNER);
+    localStorage.setItem('eowea_admin_repo_name', REPO_NAME);
+    if (remember) localStorage.setItem('eowea_admin_token', tokenToUse);
     await bootApp();
   }catch(e){
+    REPO_OWNER = prevOwner; REPO_NAME = prevName; githubToken = prevToken;
     errEl.textContent = e.message;
     errEl.classList.remove('hidden');
-    githubToken = null;
+  }
+}
+
+function populateTopbarRepoSelect(){
+  const sel = document.getElementById('topbarRepoSelect');
+  const known = REPO_OPTIONS.some(o => o.owner === REPO_OWNER && o.name === REPO_NAME);
+  let options = REPO_OPTIONS.map(o => `<option value="${o.owner}/${o.name}">${escapeHtml(o.label)}</option>`).join('');
+  if (!known) options += `<option value="${REPO_OWNER}/${REPO_NAME}">${escapeHtml(REPO_OWNER + '/' + REPO_NAME)}</option>`;
+  options += '<option value="__custom__">Autre...</option>';
+  sel.innerHTML = options;
+  sel.value = `${REPO_OWNER}/${REPO_NAME}`;
+}
+
+async function switchRepoFromTopbar(){
+  const sel = document.getElementById('topbarRepoSelect');
+  const val = sel.value;
+  const prevOwner = REPO_OWNER, prevName = REPO_NAME;
+  let owner, name;
+
+  if (val === '__custom__'){
+    const input = prompt('Dépôt personnalisé (format proprietaire/nom) :', `${REPO_OWNER}/${REPO_NAME}`);
+    if (!input || !input.includes('/')){ populateTopbarRepoSelect(); return; }
+    [owner, name] = input.split('/').map(s => s.trim());
+  } else {
+    [owner, name] = val.split('/');
+  }
+
+  if (owner === REPO_OWNER && name === REPO_NAME){ populateTopbarRepoSelect(); return; }
+
+  REPO_OWNER = owner; REPO_NAME = name;
+  try{
+    await checkTokenAccess();
+    localStorage.setItem('eowea_admin_repo_owner', REPO_OWNER);
+    localStorage.setItem('eowea_admin_repo_name', REPO_NAME);
+    toast(`Dépôt changé : ${REPO_OWNER}/${REPO_NAME}`, 'success');
+    await reloadFromGitHub();
+  }catch(e){
+    REPO_OWNER = prevOwner; REPO_NAME = prevName;
+    toast("Impossible de passer sur ce dépôt : " + e.message, 'error');
+  }
+  populateTopbarRepoSelect();
+}
+
+async function editTokenPrompt(){
+  const newToken = prompt('Colle un nouveau token GitHub (laisse vide pour annuler) :');
+  if (!newToken) return;
+  const prevToken = githubToken;
+  githubToken = newToken.trim();
+  try{
+    await checkTokenAccess();
+    localStorage.setItem('eowea_admin_token', githubToken);
+    toast('Token mis à jour ✔', 'success');
+  }catch(e){
+    githubToken = prevToken;
+    toast('Token invalide : ' + e.message, 'error');
   }
 }
 
@@ -455,6 +562,7 @@ function serializeDataFile(){
 async function bootApp(){
   document.getElementById('tokenScreen').classList.add('hidden');
   document.getElementById('appScreen').style.display = 'flex';
+  populateTopbarRepoSelect();
   await reloadFromGitHub();
 }
 
@@ -463,6 +571,7 @@ function normalizeLoadedData(){
   // chaines de texte au lieu de l'objet {title, desc, youtubeId} attendu par app.js.
   HEROES.forEach(h => {
     (h.builds||[]).forEach(b => {
+      b.updatedAt = b.updatedAt || {fr:'',en:''};
       b.videos = (b.videos||[]).map(v => {
         if (typeof v === 'string'){
           return { title:{fr:'',en:''}, desc:{fr:'',en:''}, youtubeId: v };
@@ -527,7 +636,10 @@ function logout(){
 function setNested(obj, path, value){
   const parts = path.split('.');
   let cur = obj;
-  for (let i=0;i<parts.length-1;i++) cur = cur[parts[i]];
+  for (let i=0;i<parts.length-1;i++){
+    if (cur[parts[i]] == null) cur[parts[i]] = {};
+    cur = cur[parts[i]];
+  }
   cur[parts[parts.length-1]] = value;
   markDirty();
 }
@@ -793,17 +905,14 @@ function renderOneBuild(hero, b, i){
         <div class="field"><label>Titre (FR)</label><input value="${escapeHtml(v.title?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}].videos[${vi}],'title.fr',this.value)" /></div>
         <div class="field"><label>Titre (EN)</label><input value="${escapeHtml(v.title?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}].videos[${vi}],'title.en',this.value)" /></div>
       </div>
-      <div class="row">
-        <div class="field"><label>Description (FR)</label><input value="${escapeHtml(v.desc?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}].videos[${vi}],'desc.fr',this.value)" /></div>
-        <div class="field"><label>Description (EN)</label><input value="${escapeHtml(v.desc?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}].videos[${vi}],'desc.en',this.value)" /></div>
-      </div>
+      <small class="help">Ce titre s'affiche en jaune au-dessus de la vidéo sur le site (plus de description affichée).</small>
       <div class="field">
         <label>Vidéo (lien/ID YouTube ou fichier assets)</label>
         <div class="thumb-picker">
           <input value="${escapeHtml(v.youtubeId)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}].videos[${vi}],'youtubeId',this.value)" />
           <button onclick="openAssetPicker('video', (p)=>{ setNested(HEROES[${currentHeroIndex}].builds[${i}].videos[${vi}],'youtubeId',p); renderHeroPanel(); })">Choisir un fichier</button>
         </div>
-        <small class="help">Colle un lien/ID YouTube (ex: https://youtube.com/watch?v=XXXXXXXXXXX), ou choisis un fichier .mp4/.webm/.gif/.webp du dossier assets/ avec le bouton.</small>
+        <small class="help">Colle un lien/ID YouTube (ex: https://youtube.com/watch?v=XXXXXXXXXXX), ou choisis un fichier .mp4/.webm/.gif/.webp du dossier assets/ avec le bouton. Survole la vidéo (ou appuie dessus sur mobile) pour la lire — plusieurs vidéos s'affichent en carrousel avec des flèches.</small>
       </div>
     </div>
   `).join('');
@@ -817,6 +926,11 @@ function renderOneBuild(hero, b, i){
         <input type="checkbox" ${b.enabled?'checked':''} onchange="setNested(HEROES[${currentHeroIndex}].builds[${i}],'enabled',this.checked)" />
         <label style="margin:0;text-transform:none;">Build activé</label>
       </div>
+      <div class="checkbox-row">
+        <input type="checkbox" ${b.isNew?'checked':''} onchange="setNested(HEROES[${currentHeroIndex}].builds[${i}],'isNew',this.checked)" />
+        <label style="margin:0;text-transform:none;">Marquer comme mis à jour / nouveau</label>
+      </div>
+      <small class="help" style="margin-top:-8px;margin-bottom:12px;">Affiche un badge "Nouveau" sur l'onglet de ce build, et un badge "Mis à jour" à côté du héros dans la liste (tant que le visiteur ne l'a pas encore vu). Pense à le décocher une fois que la mise à jour n'est plus "fraîche".</small>
       <div class="row">
         <div class="field"><label>Ordre d'affichage</label><input type="number" value="${b.order ?? 0}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}],'order',parseInt(this.value||'0'))" /></div>
         <div class="field"><label>Code du build (talents)</label><input value="${escapeHtml(b.buildCode)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}],'buildCode',this.value)" /></div>
@@ -851,7 +965,23 @@ function renderTalent(buildIdx, ti, t){
         <div class="field"><label>Alternative — Nom (FR)</label><input value="${escapeHtml(a.name?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'name.fr',this.value)" /></div>
         <div class="field"><label>Alternative — Nom (EN)</label><input value="${escapeHtml(a.name?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'name.en',this.value)" /></div>
       </div>
+      <div class="field">
+        <label>Icône</label>
+        <div class="thumb-picker">
+          <img src="${assetRawUrl(a.icon)}" onerror="this.style.visibility='hidden'" />
+          <div class="path">${escapeHtml(a.icon||'(aucune)')}</div>
+          <button onclick="openAssetPicker('image', (p)=>{ setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'icon',p); renderHeroPanel(); })">Choisir</button>
+        </div>
+      </div>
       <div class="field"><label>Description (FR)</label><textarea oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'description.fr',this.value)">${escapeHtml(a.description?.fr)}</textarea></div>
+      <div class="field"><label>Description (EN)</label><textarea oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'description.en',this.value)">${escapeHtml(a.description?.en)}</textarea></div>
+      <div class="field">
+        <label>Vidéo de démo (ID YouTube ou fichier .mp4)</label>
+        <div class="thumb-picker">
+          <input value="${escapeHtml(a.demoYoutubeId)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'demoYoutubeId',this.value)" />
+          <button onclick="openAssetPicker('video', (p)=>{ setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'demoYoutubeId',p); renderHeroPanel(); })">Choisir</button>
+        </div>
+      </div>
     </div>
   `).join('');
   return `
