@@ -1606,30 +1606,7 @@ const HEROES = [
           "en": "PASTE IN TALENT TREE"
         },
         "buildCode": "[T3121331,Deckard]",
-        "videos": [
-          {
-            "title": {
-              "fr": "test",
-              "en": "test"
-            },
-            "desc": {
-              "fr": "test",
-              "en": "test"
-            },
-            "youtubeId": "assets/heroes/base_spells/auriel/videos/spells/auriel_a.mp4"
-          },
-          {
-            "title": {
-              "fr": "test2",
-              "en": "yrdy"
-            },
-            "desc": {
-              "fr": "",
-              "en": ""
-            },
-            "youtubeId": "assets/heroes/base_spells/auriel/videos/spells/auriel_e.mp4"
-          }
-        ],
+        "videos": [],
         "talents": [
           {
             "level": 1,
