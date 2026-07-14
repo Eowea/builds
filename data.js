@@ -1616,7 +1616,18 @@ const HEROES = [
               "fr": "test",
               "en": "test"
             },
-            "youtubeId": ""
+            "youtubeId": "assets/heroes/base_spells/auriel/videos/spells/auriel_a.mp4"
+          },
+          {
+            "title": {
+              "fr": "test2",
+              "en": "yrdy"
+            },
+            "desc": {
+              "fr": "",
+              "en": ""
+            },
+            "youtubeId": "assets/heroes/base_spells/auriel/videos/spells/auriel_e.mp4"
           }
         ],
         "talents": [
