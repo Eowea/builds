@@ -405,7 +405,7 @@ const HEROES = [
           "fr": "Foi désespérée",
           "en": "Leap of Faith"
         },
-        "icon": "",
+        "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_leap_of_faith.png",
         "description": {
           "fr": "Repositionne un allié en danger.",
           "en": "Reposition an ally in danger."
