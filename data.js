@@ -4252,7 +4252,7 @@ const HEROES = [
           "fr": "Éruption éruptive",
           "en": "Bio-Kill Switch"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_bio-killswitch.jpg",
+        "icon": "assets/heroes/base_spells/stukov/images/spells/storm_ui_icon_stukov_bio-killswitch.png",
         "description": {
           "fr": "Fait exploser ses virus : soigne grandement les alliés ou ralentit/blesse les ennemis.",
           "en": "Detonates viruses: greatly heals allies or slows/damages enemies."
@@ -4265,7 +4265,7 @@ const HEROES = [
           "fr": "Virus régénérateur",
           "en": "Healing Pathogen"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_healingpathogen.jpg",
+        "icon": "assets/heroes/base_spells/stukov/images/spells/storm_ui_icon_stukov_healingpathogen.png",
         "description": {
           "fr": "Un soin qui se propage d'allié en allié.",
           "en": "A heal that spreads from ally to ally."
@@ -4278,7 +4278,7 @@ const HEROES = [
           "fr": "Agent infectieux",
           "en": "Weighted Pustule"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_weightedpustule.jpg",
+        "icon": "assets/heroes/base_spells/stukov/images/spells/storm_ui_icon_stukov_weightedpustule.png",
         "description": {
           "fr": "Lance un projectile qui infecte et ralentit les ennemis.",
           "en": "Throws a projectile that infects and slows enemies."
@@ -4291,7 +4291,7 @@ const HEROES = [
           "fr": "Menace larvée",
           "en": "Lurking Arm"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_lurkingarm.jpg",
+        "icon": "assets/heroes/base_spells/stukov/images/spells/storm_ui_icon_stukov_lurkingarm.png",
         "description": {
           "fr": "Canalise une zone qui réduit au silence et inflige des dégâts.",
           "en": "Channels a zone that silences and damages enemies."
@@ -4304,7 +4304,7 @@ const HEROES = [
           "fr": "Poussée éruptive",
           "en": "Massive Shove"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_massiveshove.jpg",
+        "icon": "assets/heroes/base_spells/stukov/images/spells/storm_ui_icon_stukov_massiveshove.png",
         "description": {
           "fr": "Pousse un ennemi jusqu'à ce qu'il percute un obstacle.",
           "en": "Pushes an enemy until they hit terrain."
@@ -4317,7 +4317,7 @@ const HEROES = [
           "fr": "Frappe chaotique",
           "en": "Flailing Swipe"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_flailingswipe.jpg",
+        "icon": "assets/heroes/base_spells/stukov/images/spells/storm_ui_icon_stukov_flailingswipe.png",
         "description": {
           "fr": "Balaye les ennemis en face de lui plusieurs fois.",
           "en": "Swipes enemies in front of him multiple times."
@@ -4364,7 +4364,7 @@ const HEROES = [
               "fr": "Ballistospores réactives",
               "en": "Reactive Ballistospores"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_bio-killswitch.jpg",
+            "icon": "assets/heroes/base_spells/stukov/images/spells/storm_ui_icon_stukov_bio-killswitch.png",
             "description": {
               "fr": "Actif : Propage Agent infectieux autour de Stukov à ses ennemis et annule le temps de recharge d'Éruption éruptive. Passif : Quand les points de vie de Stukov sont bas, le temps de recharge d'Éruption éruptive est plus rapide.",
               "en": "Active: Spreads Weighted Pustule to nearby enemies and resets Bio-Kill Switch's cooldown. Passive: When Stukov's Health is low, Bio-Kill Switch recharges faster."
@@ -4377,7 +4377,7 @@ const HEROES = [
               "fr": "Régénération virale",
               "en": "Vigorous Reuptake"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_bio-killswitch.jpg",
+            "icon": "assets/heroes/base_spells/stukov/images/spells/storm_ui_icon_stukov_bio-killswitch.png",
             "description": {
               "fr": "Augmente les points de vie rendus par Éruption virale si un certain nombre d'alliés sont sous Virus régénérateur.",
               "en": "Increases the healing provided by Bio-Kill Switch if a certain number of allies are affected by Healing Pathogen."
@@ -4390,7 +4390,7 @@ const HEROES = [
               "fr": "Contamination de masse",
               "en": "Growing Infestation"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_lurkingarm.jpg",
+            "icon": "assets/heroes/base_spells/stukov/images/spells/storm_ui_icon_stukov_lurkingarm.png",
             "description": {
               "fr": "Augmente la zone d'effet de Menace larvée sur la durée, mais sa durée devient limité.",
               "en": "Increases the area of effect of Lurking Arm over time, but its duration becomes limited."
@@ -4403,7 +4403,7 @@ const HEROES = [
               "fr": "Poussée éruptive",
               "en": "Massive Shove"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_massiveshove.jpg",
+            "icon": "assets/heroes/base_spells/stukov/images/spells/storm_ui_icon_stukov_massiveshove.png",
             "description": {
               "fr": "Pousse un ennemi jusqu'à ce qu'il percute un obstacle.",
               "en": "Pushes an enemy until they hit terrain."
@@ -4430,7 +4430,7 @@ const HEROES = [
               "fr": "Réaction infectieuse",
               "en": "Virulent Reaction"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_lurkingarm_a.jpg",
+            "icon": "assets/heroes/base_spells/stukov/images/talents/storm_ui_icon_stukov_lurkingarm_a.png",
             "description": {
               "fr": "Exploser les Agents infectieux sur les ennemis dans Menace larvée les immobilise.",
               "en": "Detonating Weighted Pustules on enemies inside Lurking Arm Roots them."
@@ -4443,7 +4443,7 @@ const HEROES = [
               "fr": "Souche résistante",
               "en": "Superstrain"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_healingpathogen.jpg",
+            "icon": "assets/heroes/base_spells/stukov/images/spells/storm_ui_icon_stukov_healingpathogen.png",
             "description": {
               "fr": "Virus régénérateur rend des points de vie supplémentaires en cas d'étourdissement ou d'immobilisation",
               "en": "Healing Pathogen heals for an additional amount when the target is Stunned or Rooted."
@@ -4456,7 +4456,7 @@ const HEROES = [
               "fr": "Force de propulsion",
               "en": "Push Comes To Shove"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_stukov_massiveshove.jpg",
+            "icon": "assets/heroes/base_spells/stukov/images/spells/storm_ui_icon_stukov_massiveshove.png",
             "description": {
               "fr": "Poussée éruptive ralentit lorsque la cible percute un obstacle et peut voir son temps de recharge réduit.",
               "en": "Massive Shove slows the target when they hit terrain, and can have its cooldown reduced."
@@ -4549,7 +4549,7 @@ const HEROES = [
           "fr": "Marque du chasseur",
           "en": "Hunter's Mark"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_tyrande_huntersmark.jpg",
+        "icon": "assets/heroes/base_spells/tyrande/images/spells/storm_ui_icon_tyrande_huntersmark.png",
         "description": {
           "fr": "Actif: Révèle et réduit l'armure d'un ennemi. Passif: les attaques de base de Tyrande lui rendent des points de vie, montant augmenté si la cible est marquée.",
           "en": "Active: Reveals an enemy and reduces their Armor. Passive: Tyrande's Basic Attacks heal her, with increased healing against marked targets."
@@ -4562,7 +4562,7 @@ const HEROES = [
           "fr": "Lumière d'Élune",
           "en": "Light of Elune"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_tyrande_lightofelune.jpg",
+        "icon": "assets/heroes/base_spells/tyrande/images/spells/storm_ui_icon_tyrande_elunesgrace.png",
         "description": {
           "fr": "Soigne un allié. Les attaques de base réduisent le CD.",
           "en": "Heals an ally. Basic Attacks reduce its cooldown."
@@ -4575,7 +4575,7 @@ const HEROES = [
           "fr": "Sentinelle",
           "en": "Sentinel"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_tyrande_sentinel.jpg",
+        "icon": "assets/heroes/base_spells/tyrande/images/spells/storm_ui_icon_tyrande_sentinel.png",
         "description": {
           "fr": "Chouette qui scout et inflige des dégâts globaux.",
           "en": "Sends an Owl that scouts and deals global damage."
@@ -4588,7 +4588,7 @@ const HEROES = [
           "fr": "Éclat de lune",
           "en": "Lunar Flare"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_tyrande_lunarflare.jpg",
+        "icon": "assets/heroes/base_spells/tyrande/images/spells/storm_ui_icon_tyrande_lunarflare.png",
         "description": {
           "fr": "Étourdit les ennemis dans une petite zone.",
           "en": "Stuns enemies in a small area."
@@ -4601,7 +4601,7 @@ const HEROES = [
           "fr": "Éclipse d'Élune",
           "en": "Shadowstalk"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_tyrande_shadowstalk.jpg",
+        "icon": "assets/heroes/base_spells/tyrande/images/spells/storm_ui_icon_tyrande_shadowstalk.png",
         "description": {
           "fr": "Camoufle et soigne tous les alliés.",
           "en": "Stealths and heals all allied Heroes."
@@ -4614,7 +4614,7 @@ const HEROES = [
           "fr": "Météores",
           "en": "Starfall"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_tyrande_starfall.jpg",
+        "icon": "assets/heroes/base_spells/tyrande/images/spells/storm_ui_icon_tyrande_starfall.png",
         "description": {
           "fr": "Dégâts de zone et ralentissement.",
           "en": "Deals area damage and Slows enemies."
@@ -4665,7 +4665,7 @@ const HEROES = [
               "fr": "Flèche lunaires",
               "en": "Moonlit Arrows"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_tyrande_lightofelune.jpg",
+            "icon": "assets/heroes/base_spells/tyrande/images/spells/storm_ui_icon_tyrande_elunesgrace.png",
             "description": {
               "fr": "Les attaques de base réduisent davantage le temps de recharge du Lumière d'Élune.",
               "en": "Basic Attacks further reduce Light of Elune's cooldown."
@@ -4691,7 +4691,7 @@ const HEROES = [
               "fr": "Fureur de la chasseresse",
               "en": "Huntress' Fury"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_tyrande_huntersmark.jpg",
+            "icon": "assets/heroes/base_spells/tyrande/images/spells/storm_ui_icon_tyrande_huntersmark.png",
             "description": {
               "fr": "Les attaques de base de Tyrande sur une cible sous Marque du chasseur rebondissent sur les héros adverses proches. Passif: Augmente la durée et la portée de Marque du chasseur.",
               "en": "Tyrande's Basic Attacks against targets with Hunter's Mark bounce to nearby enemy Heroes. Passive: increases Hunter's Mark duration and cast range."
@@ -4704,7 +4704,7 @@ const HEROES = [
               "fr": "Météores",
               "en": "Starfall"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_tyrande_starfall.jpg",
+            "icon": "assets/heroes/base_spells/tyrande/images/spells/storm_ui_icon_tyrande_starfall.png",
             "description": {
               "fr": "Zone de dégâts qui ralentit.",
               "en": "Creates a damaging area that Slows enemies."
@@ -4717,7 +4717,7 @@ const HEROES = [
               "fr": "Marque du forestier",
               "en": "Ranger's Mark"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_tyrande_huntersmark.jpg",
+            "icon": "assets/heroes/base_spells/tyrande/images/spells/storm_ui_icon_tyrande_huntersmark.png",
             "description": {
               "fr": "Les attaques de base réduisent le temps de recharge de Marque du chasseur. Les attaques de base portées à une cible marquée réduisent le temps de recharge d'Éclat d'Élune.",
               "en": "Basic Attacks reduce Hunter's Mark's cooldown. Basic Attacks against marked targets reduce Lunar Flare's cooldown."
@@ -4730,7 +4730,7 @@ const HEROES = [
               "fr": "Harmonisation céleste",
               "en": "Celestial Attunement"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_tyrande_lightofelune.jpg",
+            "icon": "assets/heroes/base_spells/tyrande/images/spells/storm_ui_icon_tyrande_elunesgrace.png",
             "description": {
               "fr": "Lumière d'Élune supprime les étourdissements, les silences et les ralentissements.",
               "en": "Light of Elune removes Stuns, Silences, and Slows from its target."
@@ -4743,7 +4743,7 @@ const HEROES = [
               "fr": "Courroux céleste",
               "en": "Celestial Wrath"
             },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_tyrande_starfall.jpg",
+            "icon": "assets/heroes/base_spells/tyrande/images/spells/storm_ui_icon_tyrande_starfall.png",
             "description": {
               "fr": "Météores applique Marque du chasseur et ralentit davantage.",
               "en": "Starfall applies Hunter's Mark and increases its Slow."
