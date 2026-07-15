@@ -166,6 +166,12 @@ function markEverythingAsSeen(hero) {
     function filteredHeroes() { const q=normalize(state.search); return visibleHeroes().filter(h=>(state.role==='all'||h.role===state.role)&&(!q||normalize(loc(h.name)).includes(q))).sort((a,b)=>loc(a.name).localeCompare(loc(b.name),state.lang,{sensitivity:'base'})); }
     const currentHero = () => HEROES.find(h=>h.id===state.heroId&&h.enabled!==false)||null;
     function clampBuildIndex(h) { if(!h?.builds?.length){state.buildIndex=0;return 0;} state.buildIndex=Math.min(h.builds.length-1,Math.max(0,Number(state.buildIndex)||0)); return state.buildIndex; }
+    function firstBuildIndex(h) {
+      if (!h?.builds?.length) return 0;
+      let bestIdx = 0, bestOrder = Infinity;
+      h.builds.forEach((b, i) => { const o = b.order ?? 0; if (o < bestOrder) { bestOrder = o; bestIdx = i; } });
+      return bestIdx;
+    }
     function ensureSelection() { const l=filteredHeroes(); if(state.heroId&&(!currentHero()||!l.some(h=>h.id===state.heroId))){state.heroId=null;state.buildIndex=0;} clampBuildIndex(currentHero()); }
 
     function twitchFrame() { if(!STREAMER_CONFIG.twitchChannel) return ''; return `<iframe src="https://player.twitch.tv/?channel=${encodeURIComponent(STREAMER_CONFIG.twitchChannel)}&parent=${encodeURIComponent(location.hostname||'localhost')}&muted=true" allowfullscreen loading="lazy"></iframe>`; }
@@ -333,30 +339,35 @@ function renderBuildCode(b) {
   }
 }
     
-    function hasGuide(g) { return !!parseYouTubeId(g?.youtubeId||g?.youtubeUrl||g?.url||''); }
-function renderGuide(g) {
-  const id = parseYouTubeId(g?.youtubeId || g?.youtubeUrl || g?.url || '');
-  if (!id) return '';
+    function getGuideVideos(h) {
+      if (Array.isArray(h?.guideVideos) && h.guideVideos.length) return h.guideVideos;
+      if (h?.guideVideo) return [h.guideVideo]; // compatibilité avec l'ancien format (un seul objet)
+      return [];
+    }
+    function hasGuide(h) { return getGuideVideos(h).some(g => parseYouTubeId(g?.youtubeId||g?.youtubeUrl||g?.url||'')); }
+function renderGuide(h) {
+  const slides = getGuideVideos(h)
+    .map(g => ({ g, id: parseYouTubeId(g?.youtubeId||g?.youtubeUrl||g?.url||'') }))
+    .filter(x => x.id);
+  if (!slides.length) return '';
 
-  // On utilise un lien <a> au lieu d'un <button>
-  // On retire data-youtube-id pour que la lightbox ne s'ouvre pas
-  return `
-    <section class="video-group">
-      <a class="guide-video-card" href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: flex;">
-        <div class="guide-video-media">
-          <img src="${ytThumb(id)}" alt="${esc(loc(g.title))}" loading="lazy" />
-          ${APP_CONFIG.showGuideBadge ? '<span class="youtube-badge">guide</span>' : ''}
-          <span class="youtube-play"></span>
-        </div>
-        <div class="guide-video-content">
-          <div class="guide-video-kicker">${t('mainVideo')}</div>
-          <div class="guide-video-title">${esc(loc(g.title) || 'Guide')}</div>
-          <div class="guide-video-desc">${esc(loc(g.desc) || '')}</div>
-          <div class="guide-video-cta">${t('seeGuide')}</div>
-        </div>
+  const slidesHtml = slides.map((x, idx) => `
+    <div class="combo-slide${idx===0?' is-active':''}" data-index="${idx}">
+      <div class="combo-slide-title">${esc(loc(x.g.title) || 'Guide')}</div>
+      <a class="combo-stage guide-stage-link" href="https://www.youtube.com/watch?v=${x.id}" target="_blank" rel="noopener noreferrer">
+        <img class="combo-poster" src="${ytThumb(x.id)}" alt="${esc(loc(x.g.title))}" loading="lazy" />
+        ${APP_CONFIG.showGuideBadge ? '<span class="youtube-badge">guide</span>' : ''}
+        <span class="youtube-play"></span>
       </a>
-    </section>`;
-}    
+    </div>
+  `).join('');
+  const navHtml = slides.length > 1 ? `
+    <button class="combo-nav prev" type="button" aria-label="${t('prevVideo')}">&#10094;</button>
+    <button class="combo-nav next" type="button" aria-label="${t('nextVideo')}">&#10095;</button>
+    <div class="combo-dots">${slides.map((_,idx)=>`<span class="combo-dot${idx===0?' is-active':''}" data-dot="${idx}"></span>`).join('')}</div>
+  ` : '';
+  return `<section class="video-group guide-video-section"><div class="combo-carousel">${slidesHtml}${navHtml}</div></section>`;
+}
     function renderVideoCards(vs) {
       if(!vs?.length) return '';
       const slides = vs.map((v,idx) => {
@@ -366,7 +377,7 @@ function renderGuide(g) {
         const hasSomething = isMedia || !!id;
         let stageInner;
         if (isMedia) {
-          stageInner = `<video class="combo-media" src="${esc(raw)}" muted loop playsinline preload="metadata" data-video-el></video>`;
+          stageInner = `<video class="combo-media" src="${esc(raw)}" muted loop playsinline preload="auto" data-video-el></video>`;
         } else if (id) {
           stageInner = `<img class="combo-poster" src="${ytThumb(id)}" alt="${esc(loc(v.title))}" loading="lazy" data-poster /><div class="combo-frame" data-frame></div>`;
         } else {
@@ -384,7 +395,7 @@ function renderGuide(g) {
       ` : '';
       return `<section class="video-group combo-video-section"><div class="combo-carousel">${slides}${navHtml}</div></section>`;
     }
-    function renderBuildVideos(h,b) { const wg=hasGuide(h?.guideVideo); return `<section class="videos-layout${wg?' with-guide':''}">${wg?renderGuide(h.guideVideo):''}${renderVideoCards(b.videos)}</section>`; }
+    function renderBuildVideos(h,b) { const wg=hasGuide(h); return `<section class="videos-layout${wg?' with-guide':''}">${wg?renderGuide(h):''}${renderVideoCards(b.videos)}</section>`; }
 
 function renderBuildSection(hero) { 
   const el = $('buildSection'); 
@@ -399,7 +410,9 @@ function renderBuildSection(hero) {
   
   // --- MODIFICATION ICI ---
   // On ajoute une vérification "x.isNew" sur chaque build dans le .map()
-const tabsHtml = hero.builds.map((x, i) => {
+const sortedBuildIndices = hero.builds.map((_, i) => i).sort((a, b) => (hero.builds[a].order ?? 0) - (hero.builds[b].order ?? 0));
+const tabsHtml = sortedBuildIndices.map(i => {
+    const x = hero.builds[i];
     const newBadge = x.isNew ? `<span class="new-badge">${t('newBadge')}</span>` : '';
     
     // On entoure le bouton d'un "wrapper" pour que le badge ne soit pas coupé par le clip-path du bouton
@@ -420,6 +433,7 @@ const tabsHtml = hero.builds.map((x, i) => {
   el.innerHTML=`<div class="build-tabs">${tabsHtml}</div>${dateHtml}<div class="build-summary">${esc(loc(b.summary))}</div>${renderTalentBoard(b.talents)}${renderBuildCode(b)}${renderBuildVideos(hero,b)}`;
   bindFloatingTriggers();
   bindComboCarousel();
+  queueLayoutSync();
 }
 
 let cachedFourBuilds = null;
@@ -499,8 +513,49 @@ function renderDetail() {
   bindFloatingTriggers(); 
 }
     function renderAll() { updateStaticLang(); ensureSelection(); renderHeader(); renderFilters(); renderHeroList(); renderDetail(); updateHash(); }
-    function updateHash() { const h=currentHero(); clampBuildIndex(h); h?history.replaceState(null,'',`#hero=${encodeURIComponent(state.heroId)}&build=${state.buildIndex}`):history.replaceState(null,'',location.pathname); }
-    function restoreFromHash() { const p=new URLSearchParams(location.hash.replace(/^#/,'')); const id=p.get('hero'); if(id&&HEROES.some(h=>h.id===id&&h.enabled!==false)){state.heroId=id;state.buildIndex=Number(p.get('build')||'0');} }
+    // Encodage minimal : on n'échappe que ce qui casserait vraiment le fragment d'URL
+    // (espace, %, & et #). Le "/" du format compact heroId/code reste tel quel :
+    // encodeURIComponent triplerait inutilement la taille des caractères courants
+    // dans un code de talents (+, /, =, etc.), et un lien lisible ("whitemane/T1231121")
+    // est le but recherché ici. Le héros ne contenant jamais de "/", on peut découper
+    // sur le premier "/" trouvé sans ambiguïté, même si le code lui-même en contient.
+    function looseHashEncode(str) {
+      return String(str).replace(/[%&#\s]/g, c => encodeURIComponent(c));
+    }
+    function updateHash() {
+      const h = currentHero();
+      clampBuildIndex(h);
+      if (!h) { history.replaceState(null,'',location.pathname); return; }
+      const b = h.builds[state.buildIndex];
+      const heroPart = looseHashEncode(state.heroId);
+      if (b?.buildCode) {
+        history.replaceState(null,'',`#${heroPart}/${looseHashEncode(b.buildCode)}`);
+      } else {
+        history.replaceState(null,'',`#${heroPart}`);
+      }
+    }
+    function restoreFromHash() {
+      const raw = (location.hash || '').replace(/^#/, '');
+      if (!raw) return;
+      const slashIdx = raw.indexOf('/');
+      let heroId, code = '';
+      if (slashIdx >= 0) {
+        heroId = decodeURIComponent(raw.slice(0, slashIdx));
+        code = decodeURIComponent(raw.slice(slashIdx + 1));
+      } else {
+        heroId = decodeURIComponent(raw);
+      }
+      if (heroId && HEROES.some(h => h.id === heroId && h.enabled !== false)) {
+        const hero = HEROES.find(h => h.id === heroId);
+        state.heroId = heroId;
+        if (code) {
+          const bidx = hero.builds.findIndex(b => b.buildCode === code);
+          state.buildIndex = bidx >= 0 ? bidx : firstBuildIndex(hero);
+        } else {
+          state.buildIndex = firstBuildIndex(hero);
+        }
+      }
+    }
 
     function hideFloatingTooltip(imm=false) { clearTimeout(hideTooltipTimer); const r=()=>{els.tooltipPortal.innerHTML='';els.tooltipPortal.setAttribute('aria-hidden','true');activeFloatingTrigger=null;}; imm?r():(hideTooltipTimer=setTimeout(r,40)); }
     function positionTooltip(tr,tt) { if(!tr||!tt) return; const r=tr.getBoundingClientRect(),m=12,vw=innerWidth,vh=innerHeight; let l=r.left+r.width/2-tt.offsetWidth/2; l=Math.max(m,Math.min(l,vw-tt.offsetWidth-m)); let tPos=r.top-tt.offsetHeight-10,pl='top'; if(tPos<m){tPos=r.bottom+10;pl='bottom';} tPos=Math.max(m,Math.min(tPos,vh-tt.offsetHeight-m)); const a=Math.max(16,Math.min(r.left+r.width/2-l,tt.offsetWidth-16)); tt.style.left=l+'px'; tt.style.top=tPos+'px'; tt.dataset.placement=pl; tt.style.setProperty('--arrow-left',a+'px'); }
@@ -604,6 +659,24 @@ function bindFloatingTriggers(root = document) {
         stage.classList.add('is-playing');
       }
     }
+    function warmUpVideoFrame(slide) {
+      // Sur mobile (iOS Safari en particulier), une balise <video> reste noire tant
+      // qu'aucune lecture n'a été déclenchée, même avec preload="auto". On force donc
+      // un tout petit play()+pause() dès que la vidéo est prête, pour peindre la
+      // première image sans que l'utilisateur ait besoin de toucher l'écran.
+      if (!slide || slide.dataset.videoType !== 'media') return;
+      const v = slide.querySelector('[data-video-el]');
+      if (!v || v.dataset.warmed) return;
+      const doWarm = () => {
+        if (v.dataset.warmed) return;
+        v.dataset.warmed = '1';
+        const p = v.play();
+        if (p && typeof p.then === 'function') p.then(() => v.pause()).catch(() => {});
+        else v.pause();
+      };
+      if (v.readyState >= 2) doWarm();
+      else v.addEventListener('loadeddata', doWarm, { once: true });
+    }
     function bindComboCarousel() {
       els.detailView.querySelectorAll('.combo-carousel').forEach(carousel => {
         if (carousel.dataset.bound) return;
@@ -625,6 +698,7 @@ function bindFloatingTriggers(root = document) {
           active = idx;
           slides[active].classList.add('is-active');
           dots[active]?.classList.add('is-active');
+          warmUpVideoFrame(slides[active]);
         }
         prevBtn?.addEventListener('click', () => goTo(active - 1));
         nextBtn?.addEventListener('click', () => goTo(active + 1));
@@ -637,6 +711,8 @@ function bindFloatingTriggers(root = document) {
           slide.addEventListener('touchend', () => stopSlideMedia(slide));
           slide.addEventListener('touchcancel', () => stopSlideMedia(slide));
         });
+
+        warmUpVideoFrame(slides[active]);
       });
     }
 
@@ -739,7 +815,7 @@ window.goToBuild = (heroId, buildIndex) => {
 
   if (!matches.some(h => h.id === state.heroId)) {
     state.heroId = matches[0]?.id || null;
-    state.buildIndex = 0;
+    state.buildIndex = firstBuildIndex(matches[0]);
   }
 
   renderAll();
@@ -758,7 +834,7 @@ els.heroList.addEventListener('click', (e) => {
     }
 
     state.heroId = heroId;
-    state.buildIndex = 0;
+    state.buildIndex = firstBuildIndex(heroObj);
     renderAll(); //
 
   setTimeout(() => {
@@ -784,7 +860,7 @@ els.heroList.addEventListener('click', (e) => {
           // (sauf si le héros actuellement sélectionné correspond déjà à la recherche)
           if (!state.heroId || !matches.some(h => h.id === state.heroId)) {
             state.heroId = matches[0].id;
-            state.buildIndex = 0;
+            state.buildIndex = firstBuildIndex(matches[0]);
           }
         }
         

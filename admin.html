@@ -81,7 +81,9 @@
   .topbar .status.saved{color:var(--green);}
   .topbar-right{display:flex;align-items:center;gap:10px;}
 
-  .main{flex:1;display:flex;overflow:hidden;}
+  .main{flex:1;display:flex;overflow:hidden;position:relative;}
+  .mobile-menu-btn{display:none;}
+  .sidebar-backdrop{display:none;}
   .sidebar{
     width:280px;flex:0 0 auto;border-right:1px solid var(--border);background:var(--panel);
     display:flex;flex-direction:column;overflow:hidden;
@@ -142,7 +144,64 @@
   .list-add-btn{margin-top:6px;}
   .subitem{border:1px dashed var(--border);border-radius:6px;padding:12px;margin-bottom:10px;position:relative;}
   .subitem .remove-btn{position:absolute;top:8px;right:8px;}
+
+  details.collapsible{background:var(--panel-alt);border:1px solid var(--border);border-radius:8px;margin-bottom:10px;overflow:hidden;}
+  details.collapsible > summary{list-style:none;cursor:pointer;padding:10px 14px;display:flex;align-items:center;gap:10px;user-select:none;}
+  details.collapsible > summary::-webkit-details-marker{display:none;}
+  details.collapsible > summary .chevron{color:var(--gold);font-size:11px;transition:transform .15s;flex:0 0 auto;}
+  details.collapsible[open] > summary .chevron{transform:rotate(90deg);}
+  details.collapsible > summary .s-title{font-weight:600;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  details.collapsible > summary .s-sub{font-size:11px;color:var(--text-dim);margin-left:auto;flex:0 0 auto;display:flex;align-items:center;gap:8px;}
+  details.collapsible > summary .s-dot{width:7px;height:7px;border-radius:50%;flex:0 0 auto;}
+  details.collapsible > .body{padding:2px 14px 14px;border-top:1px solid var(--border);}
+  details.collapsible.nested{background:var(--panel);}
+  details.collapsible.nested > summary{padding:8px 10px;}
+
+  .role-group{margin-bottom:4px;}
+  .role-group > summary{list-style:none;cursor:pointer;padding:8px 10px;display:flex;align-items:center;gap:8px;border-radius:6px;color:var(--text-dim);font-size:11px;text-transform:uppercase;letter-spacing:.05em;font-weight:700;}
+  .role-group > summary:hover{background:var(--panel-alt);}
+  .role-group > summary::-webkit-details-marker{display:none;}
+  .role-group > summary .chevron{transition:transform .15s;}
+  .role-group[open] > summary .chevron{transform:rotate(90deg);}
+  .role-group > summary .count{margin-left:auto;color:var(--text-dim);}
   small.help{display:block;color:var(--text-dim);font-size:11px;margin-top:4px;}
+
+  /* ================= Mobile ================= */
+  @media (max-width: 860px){
+    .topbar{padding:8px 10px;gap:8px;height:auto;flex-wrap:wrap;}
+    .topbar .brand{gap:8px;}
+    .topbar .brand > div:last-child{display:none;} /* cache le sous-titre "Synchronisé" pour gagner de la place sur une seule ligne */
+    .mobile-menu-btn{
+      display:flex;align-items:center;justify-content:center;
+      width:34px;height:34px;padding:0;font-size:18px;flex:0 0 auto;
+    }
+    .topbar-right{gap:6px;flex-wrap:wrap;width:100%;justify-content:flex-start;}
+    .topbar-right select, .topbar-right button{font-size:11px;padding:6px 8px;}
+
+    .sidebar-backdrop{
+      display:block;position:fixed;inset:0;background:rgba(0,0,0,.55);
+      z-index:40;opacity:0;pointer-events:none;transition:opacity .2s;
+    }
+    .sidebar-backdrop.open{opacity:1;pointer-events:auto;}
+    .sidebar{
+      position:fixed;top:0;left:0;bottom:0;width:82vw;max-width:320px;z-index:50;
+      transform:translateX(-100%);transition:transform .2s ease;box-shadow:4px 0 18px rgba(0,0,0,.5);
+    }
+    .sidebar.open{transform:translateX(0);}
+
+    .content{padding:14px;}
+    .hero-header{flex-direction:column;gap:10px;}
+    .row{flex-direction:column;gap:0;}
+    .row > *{flex:1;}
+    .tabs{overflow-x:auto;flex-wrap:nowrap;}
+    .tab{flex:0 0 auto;white-space:nowrap;}
+
+    .modal-overlay{padding:0;}
+    .modal{max-width:100%;max-height:100%;height:100%;border-radius:0;}
+    .asset-grid{grid-template-columns:repeat(auto-fill,minmax(90px,1fr));}
+
+    .login-card, .token-card{width:100%;padding:22px;}
+  }
 </style>
 </head>
 <body>
@@ -213,6 +272,7 @@
 <div id="appScreen">
   <div class="topbar">
     <div class="brand">
+      <button class="ghost mobile-menu-btn" onclick="toggleSidebar()" aria-label="Menu">☰</button>
       <div class="badge"></div>
       <div>
         <div style="font-weight:700;">Eowea Builds — Admin</div>
@@ -229,7 +289,8 @@
   </div>
 
   <div class="main">
-    <div class="sidebar">
+    <div class="sidebar-backdrop" onclick="toggleSidebar(false)"></div>
+    <div class="sidebar" id="sidebarEl">
       <div class="sidebar-search">
         <input id="heroSearch" type="text" placeholder="Rechercher un héros..." oninput="renderHeroList()" />
       </div>
@@ -347,8 +408,12 @@ async function handleLogin(){
     errEl.classList.remove('hidden');
     return;
   }
-  currentUser = username;
   sessionStorage.setItem('eowea_admin_user', username);
+  await proceedAfterLogin(username);
+}
+
+async function proceedAfterLogin(username){
+  currentUser = username;
   document.getElementById('loginScreen').classList.add('hidden');
   document.getElementById('tokenGreetUser').textContent = username;
 
@@ -570,6 +635,10 @@ function normalizeLoadedData(){
   // Corrige/complète les anciennes entrées "videos" de build qui seraient de simples
   // chaines de texte au lieu de l'objet {title, desc, youtubeId} attendu par app.js.
   HEROES.forEach(h => {
+    if (!Array.isArray(h.guideVideos)){
+      h.guideVideos = h.guideVideo ? [h.guideVideo] : [];
+    }
+    delete h.guideVideo;
     (h.builds||[]).forEach(b => {
       b.updatedAt = b.updatedAt || {fr:'',en:''};
       b.videos = (b.videos||[]).map(v => {
@@ -623,6 +692,13 @@ async function saveAll(){
   }
 }
 
+function toggleSidebar(force){
+  const sidebar = document.getElementById('sidebarEl');
+  const open = typeof force === 'boolean' ? force : !sidebar.classList.contains('open');
+  sidebar.classList.toggle('open', open);
+  document.querySelector('.sidebar-backdrop').classList.toggle('open', open);
+}
+
 function logout(){
   githubToken = null;
   currentUser = null;
@@ -647,29 +723,67 @@ function setNested(obj, path, value){
 /* =========================================================================
    LISTE DES HEROS (SIDEBAR)
    ========================================================================= */
+let uidCounter = 0;
+function assignUid(obj){
+  if (!obj.__uid) {
+    Object.defineProperty(obj, '__uid', { value: 'u' + (++uidCounter), enumerable: false, configurable: true });
+  }
+  return obj.__uid;
+}
+let collapsibleState = {}; // uid -> bool (ouvert/fermé), persiste entre les re-rendus
+(function bindCollapsibleToggleTracking(){
+  const container = document.getElementById('contentEl');
+  container.addEventListener('toggle', (e) => {
+    const uid = e.target && e.target.dataset ? e.target.dataset.uid : undefined;
+    if (uid) collapsibleState[uid] = e.target.open;
+  }, true);
+})();
+
+let roleGroupState = {};
 function renderHeroList(){
   const el = document.getElementById('heroListEl');
   const q = (document.getElementById('heroSearch')?.value || '').toLowerCase();
-  el.innerHTML = '';
+
+  if (!el.dataset.toggleBound){
+    el.dataset.toggleBound = '1';
+    el.addEventListener('toggle', e => {
+      const role = e.target && e.target.dataset ? e.target.dataset.role : undefined;
+      if (role !== undefined) roleGroupState[role] = e.target.open;
+    }, true);
+  }
+
+  const groups = [];
+  const groupIndex = {};
   HEROES.forEach((h, idx) => {
     const name = (h.name?.fr || h.id || '').toLowerCase();
-    if (q && !name.includes(q) && !(h.role||'').toLowerCase().includes(q)) return;
-    const item = document.createElement('div');
-    item.className = 'hero-item' + (idx === currentHeroIndex ? ' active' : '');
-    item.onclick = () => selectHero(idx);
-    item.innerHTML = `
-      <img src="${assetRawUrl(h.portrait)}" onerror="this.style.visibility='hidden'" />
-      <div class="meta">
-        <div class="n">${escapeHtml(h.name?.fr || h.id)}</div>
-        <div class="r">${escapeHtml(h.role || '')}</div>
-      </div>
-      <div class="dot ${h.enabled ? 'on':'off'}" title="${h.enabled ? 'Activé':'Désactivé'}"></div>
-    `;
-    el.appendChild(item);
+    const matches = !q || name.includes(q) || (h.role||'').toLowerCase().includes(q);
+    if (!matches) return;
+    const role = h.role || 'Sans rôle';
+    if (!(role in groupIndex)){ groupIndex[role] = groups.length; groups.push({role, items:[]}); }
+    groups[groupIndex[role]].items.push({h, idx});
   });
-  if (!HEROES.length){
+
+  if (!groups.length){
     el.innerHTML = '<div class="empty-state" style="margin-top:20px;">Aucun héros</div>';
+    return;
   }
+
+  el.innerHTML = groups.map(g => {
+    const isOpen = q ? true : (roleGroupState[g.role] === true);
+    const itemsHtml = g.items.map(({h, idx}) => `
+      <div class="hero-item${idx===currentHeroIndex?' active':''}" onclick="selectHero(${idx})">
+        <img src="${assetRawUrl(h.portrait)}" onerror="this.style.visibility='hidden'" />
+        <div class="meta"><div class="n">${escapeHtml(h.name?.fr || h.id)}</div></div>
+        <div class="dot ${h.enabled ? 'on':'off'}" title="${h.enabled ? 'Activé':'Désactivé'}"></div>
+      </div>
+    `).join('');
+    return `
+      <details class="role-group" data-role="${escapeHtml(g.role)}"${isOpen?' open':''}>
+        <summary><span class="chevron">▸</span><span>${escapeHtml(g.role)}</span><span class="count">${g.items.length}</span></summary>
+        <div>${itemsHtml}</div>
+      </details>
+    `;
+  }).join('');
 }
 function assetRawUrl(path){
   if (!path) return '';
@@ -688,7 +802,7 @@ function addHero(){
     portrait: '',
     headline: { fr:'', en:'' },
     gameplay: { fr:'', en:'' },
-    guideVideo: null,
+    guideVideos: [],
     spells: [],
     tips: [],
     builds: []
@@ -724,6 +838,7 @@ function selectHero(idx){
   currentTab = 'infos';
   renderHeroList();
   renderHeroPanel();
+  if (window.matchMedia('(max-width: 860px)').matches) toggleSidebar(false);
 }
 function switchTab(tab){
   currentTab = tab;
@@ -795,71 +910,91 @@ function renderInfosTab(hero){
       <div class="field"><label>Description du gameplay (EN)</label><textarea oninput="setNested(HEROES[${currentHeroIndex}],'gameplay.en',this.value)">${escapeHtml(hero.gameplay?.en)}</textarea></div>
     </div>
     <div class="card">
-      <div class="card-head"><div class="title">Vidéo guide express</div>
-        <div>
-          ${hero.guideVideo
-            ? `<button class="danger" onclick="removeGuideVideo(${currentHeroIndex})">Retirer</button>`
-            : `<button onclick="addGuideVideo(${currentHeroIndex})">+ Ajouter</button>`}
-        </div>
-      </div>
-      ${hero.guideVideo ? `
-        <div class="row">
-          <div class="field"><label>Titre (FR)</label><input value="${escapeHtml(hero.guideVideo.title?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].guideVideo,'title.fr',this.value)" /></div>
-          <div class="field"><label>Titre (EN)</label><input value="${escapeHtml(hero.guideVideo.title?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].guideVideo,'title.en',this.value)" /></div>
-        </div>
-        <div class="field"><label>ID YouTube</label><input value="${escapeHtml(hero.guideVideo.youtubeId)}" oninput="setNested(HEROES[${currentHeroIndex}].guideVideo,'youtubeId',this.value)" />
-        <small class="help">L'identifiant après "v=" dans l'URL YouTube (ex: ESl4DLgmJVo)</small></div>
-        <div class="field"><label>Description (FR)</label><textarea oninput="setNested(HEROES[${currentHeroIndex}].guideVideo,'desc.fr',this.value)">${escapeHtml(hero.guideVideo.desc?.fr)}</textarea></div>
-        <div class="field"><label>Description (EN)</label><textarea oninput="setNested(HEROES[${currentHeroIndex}].guideVideo,'desc.en',this.value)">${escapeHtml(hero.guideVideo.desc?.en)}</textarea></div>
-      ` : `<p style="color:var(--text-dim);font-size:13px;">Aucune vidéo guide pour ce héros.</p>`}
+      <div class="card-head"><div class="title">Vidéos guide (mise en avant de créateurs)</div></div>
+      <small class="help" style="margin-top:-4px;margin-bottom:10px;">Ces vidéos s'affichent en carrousel sur la fiche du héros, avec le titre en jaune au-dessus — comme les vidéos de build, mais elles restent cliquables et ouvrent la chaîne YouTube du créateur dans un nouvel onglet.</small>
+      ${renderGuideVideosList(hero)}
+      <button onclick="addGuideVideo(${currentHeroIndex})">+ Ajouter une vidéo guide</button>
     </div>
   `;
 }
+function renderGuideVideosList(hero){
+  const list = hero.guideVideos || [];
+  return list.map((g, i) => { const uid = assignUid(g); return `
+    <details class="collapsible" data-uid="${uid}"${collapsibleState[uid]?' open':''}>
+      <summary>
+        <span class="chevron">▸</span>
+        <span class="s-title">${escapeHtml(g.title?.fr || 'Vidéo guide sans titre')}</span>
+      </summary>
+      <div class="body">
+        <div class="row">
+          <div class="field"><label>Titre (FR)</label><input value="${escapeHtml(g.title?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].guideVideos[${i}],'title.fr',this.value)" /></div>
+          <div class="field"><label>Titre (EN)</label><input value="${escapeHtml(g.title?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].guideVideos[${i}],'title.en',this.value)" /></div>
+        </div>
+        <div class="field"><label>ID ou lien YouTube</label><input value="${escapeHtml(g.youtubeId)}" oninput="setNested(HEROES[${currentHeroIndex}].guideVideos[${i}],'youtubeId',this.value)" />
+        <small class="help">L'identifiant après "v=" dans l'URL YouTube (ex: ESl4DLgmJVo), ou l'URL complète.</small></div>
+        <button class="danger" onclick="removeGuideVideo(${currentHeroIndex},${i})">🗑 Supprimer cette vidéo guide</button>
+      </div>
+    </details>
+  `; }).join('') || '<p style="color:var(--text-dim);font-size:13px;">Aucune vidéo guide pour ce héros.</p>';
+}
 function addGuideVideo(idx){
-  HEROES[idx].guideVideo = { title:{fr:'',en:''}, youtubeId:'', desc:{fr:'',en:''} };
+  HEROES[idx].guideVideos = HEROES[idx].guideVideos || [];
+  const g = { title:{fr:'',en:''}, youtubeId:'' };
+  collapsibleState[assignUid(g)] = true;
+  HEROES[idx].guideVideos.push(g);
   markDirty(); renderHeroPanel();
 }
-function removeGuideVideo(idx){
-  HEROES[idx].guideVideo = null;
+function removeGuideVideo(idx, gIdx){
+  HEROES[idx].guideVideos.splice(gIdx, 1);
   markDirty(); renderHeroPanel();
 }
 
 /* ---------- Onglet Sorts ---------- */
 function renderSpellsTab(hero){
-  let html = hero.spells.map((sp, i) => `
-    <div class="subitem">
-      <button class="ghost remove-btn" onclick="removeSpell(${currentHeroIndex},${i})">✕</button>
-      <div class="row">
-        <div class="field"><label>Touche</label><input value="${escapeHtml(sp.key)}" oninput="setNested(HEROES[${currentHeroIndex}].spells[${i}],'key',this.value)" /></div>
-        <div class="field"><label>Nom (FR)</label><input value="${escapeHtml(sp.name?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].spells[${i}],'name.fr',this.value)" /></div>
-        <div class="field"><label>Nom (EN)</label><input value="${escapeHtml(sp.name?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].spells[${i}],'name.en',this.value)" /></div>
-      </div>
-      <div class="field">
-        <label>Icône</label>
-        <div class="thumb-picker">
-          <img src="${assetRawUrl(sp.icon)}" onerror="this.style.visibility='hidden'" />
-          <div class="path">${escapeHtml(sp.icon||'(aucune)')}</div>
-          <button onclick="openAssetPicker('image', (p)=>{ setNested(HEROES[${currentHeroIndex}].spells[${i}],'icon',p); renderHeroPanel(); })">Choisir</button>
+  const list = hero.spells;
+  let html = list.map((sp, i) => { const uid = assignUid(sp); return `
+    <details class="collapsible" data-uid="${uid}"${collapsibleState[uid]?' open':''}>
+      <summary>
+        <span class="chevron">▸</span>
+        <span class="s-title">${escapeHtml(sp.name?.fr || sp.key || 'Sort sans nom')}</span>
+        <span class="s-sub">${escapeHtml(sp.key||'')}</span>
+      </summary>
+      <div class="body">
+        <div class="row">
+          <div class="field"><label>Touche</label><input value="${escapeHtml(sp.key)}" oninput="setNested(HEROES[${currentHeroIndex}].spells[${i}],'key',this.value)" /></div>
+          <div class="field"><label>Nom (FR)</label><input value="${escapeHtml(sp.name?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].spells[${i}],'name.fr',this.value)" /></div>
+          <div class="field"><label>Nom (EN)</label><input value="${escapeHtml(sp.name?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].spells[${i}],'name.en',this.value)" /></div>
         </div>
-      </div>
-      <div class="row">
-        <div class="field"><label>Description (FR)</label><textarea oninput="setNested(HEROES[${currentHeroIndex}].spells[${i}],'description.fr',this.value)">${escapeHtml(sp.description?.fr)}</textarea></div>
-        <div class="field"><label>Description (EN)</label><textarea oninput="setNested(HEROES[${currentHeroIndex}].spells[${i}],'description.en',this.value)">${escapeHtml(sp.description?.en)}</textarea></div>
-      </div>
-      <div class="field">
-        <label>Vidéo de démo (ID YouTube ou fichier .mp4 dans assets)</label>
-        <div class="thumb-picker">
-          <input value="${escapeHtml(sp.demoYoutubeId)}" oninput="setNested(HEROES[${currentHeroIndex}].spells[${i}],'demoYoutubeId',this.value)" />
-          <button onclick="openAssetPicker('video', (p)=>{ setNested(HEROES[${currentHeroIndex}].spells[${i}],'demoYoutubeId',p); renderHeroPanel(); })">Choisir un fichier</button>
+        <div class="field">
+          <label>Icône</label>
+          <div class="thumb-picker">
+            <img src="${assetRawUrl(sp.icon)}" onerror="this.style.visibility='hidden'" />
+            <div class="path">${escapeHtml(sp.icon||'(aucune)')}</div>
+            <button onclick="openAssetPicker('image', (p)=>{ setNested(HEROES[${currentHeroIndex}].spells[${i}],'icon',p); renderHeroPanel(); })">Choisir</button>
+          </div>
         </div>
+        <div class="row">
+          <div class="field"><label>Description (FR)</label><textarea oninput="setNested(HEROES[${currentHeroIndex}].spells[${i}],'description.fr',this.value)">${escapeHtml(sp.description?.fr)}</textarea></div>
+          <div class="field"><label>Description (EN)</label><textarea oninput="setNested(HEROES[${currentHeroIndex}].spells[${i}],'description.en',this.value)">${escapeHtml(sp.description?.en)}</textarea></div>
+        </div>
+        <div class="field">
+          <label>Vidéo de démo (ID YouTube ou fichier .mp4 dans assets)</label>
+          <div class="thumb-picker">
+            <input value="${escapeHtml(sp.demoYoutubeId)}" oninput="setNested(HEROES[${currentHeroIndex}].spells[${i}],'demoYoutubeId',this.value)" />
+            <button onclick="openAssetPicker('video', (p)=>{ setNested(HEROES[${currentHeroIndex}].spells[${i}],'demoYoutubeId',p); renderHeroPanel(); })">Choisir un fichier</button>
+          </div>
+        </div>
+        <button class="danger" onclick="removeSpell(${currentHeroIndex},${i})">🗑 Supprimer ce sort</button>
       </div>
-    </div>
-  `).join('');
+    </details>
+  `; }).join('');
   html += `<button class="list-add-btn" onclick="addSpell(${currentHeroIndex})">+ Ajouter un sort</button>`;
   return html;
 }
 function addSpell(idx){
-  HEROES[idx].spells.push({ key:'', name:{fr:'',en:''}, icon:'', description:{fr:'',en:''}, demoYoutubeId:'' });
+  const sp = { key:'', name:{fr:'',en:''}, icon:'', description:{fr:'',en:''}, demoYoutubeId:'' };
+  collapsibleState[assignUid(sp)] = true;
+  HEROES[idx].spells.push(sp);
   markDirty(); renderHeroPanel();
 }
 function removeSpell(idx, spIdx){
@@ -892,11 +1027,14 @@ function removeTip(idx, tIdx){
 
 /* ---------- Onglet Builds ---------- */
 function renderBuildsTab(hero){
-  let html = hero.builds.map((b,i) => renderOneBuild(hero, b, i)).join('');
+  const indices = hero.builds.map((_, i) => i);
+  indices.sort((a, b) => (hero.builds[a].order ?? 0) - (hero.builds[b].order ?? 0));
+  let html = indices.map(i => renderOneBuild(hero, hero.builds[i], i)).join('');
   html += `<button class="list-add-btn" onclick="addBuild(${currentHeroIndex})">+ Ajouter un build</button>`;
   return html;
 }
 function renderOneBuild(hero, b, i){
+  const buildUid = assignUid(b);
   const talentsHtml = (b.talents||[]).map((t, ti) => renderTalent(i, ti, t)).join('');
   const videosHtml = (b.videos||[]).map((v, vi) => `
     <div class="subitem">
@@ -917,11 +1055,17 @@ function renderOneBuild(hero, b, i){
     </div>
   `).join('');
   return `
-    <div class="card">
-      <div class="card-head">
-        <div class="title">${escapeHtml(b.label?.fr || 'Build sans nom')}</div>
-        <button class="danger" onclick="removeBuild(${currentHeroIndex},${i})">🗑 Supprimer ce build</button>
-      </div>
+    <details class="collapsible" data-uid="${buildUid}"${collapsibleState[buildUid]?' open':''}>
+      <summary>
+        <span class="chevron">▸</span>
+        <span class="s-title">${escapeHtml(b.label?.fr || 'Build sans nom')}</span>
+        <span class="s-sub">
+          ${b.isNew?'<span style="color:var(--gold);">● MàJ</span>':''}
+          <span class="s-dot ${b.enabled?'on':'off'}" style="background:${b.enabled?'var(--green)':'var(--red)'}"></span>
+          <span style="color:${b.enabled?'var(--green)':'var(--red)'};font-weight:700;">${b.enabled?'PUBLIÉ':'NON PUBLIÉ'}</span>
+        </span>
+      </summary>
+      <div class="body">
       <div class="checkbox-row">
         <input type="checkbox" ${b.enabled?'checked':''} onchange="setNested(HEROES[${currentHeroIndex}].builds[${i}],'enabled',this.checked)" />
         <label style="margin:0;text-transform:none;">Build activé</label>
@@ -947,81 +1091,98 @@ function renderOneBuild(hero, b, i){
         <div class="field"><label>Date de mise à jour (FR)</label><input value="${escapeHtml(b.updatedAt?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}],'updatedAt.fr',this.value)" /></div>
         <div class="field"><label>Date de mise à jour (EN)</label><input value="${escapeHtml(b.updatedAt?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}],'updatedAt.en',this.value)" /></div>
       </div>
-      <div class="field"><label>Vidéos liées au build (YouTube uniquement)</label>
+      <div class="field"><label>Vidéos liées au build (YouTube ou fichier assets)</label>
         ${videosHtml}
         <button onclick="HEROES[${currentHeroIndex}].builds[${i}].videos=(HEROES[${currentHeroIndex}].builds[${i}].videos||[]); HEROES[${currentHeroIndex}].builds[${i}].videos.push({title:{fr:'',en:''},desc:{fr:'',en:''},youtubeId:''}); markDirty(); renderHeroPanel();">+ Ajouter une vidéo</button>
       </div>
       <h3 style="margin-top:16px;">Talents</h3>
       ${talentsHtml}
       <button onclick="addTalent(${currentHeroIndex},${i})">+ Ajouter un talent</button>
-    </div>
+      <button class="danger" style="margin-top:14px;" onclick="removeBuild(${currentHeroIndex},${i})">🗑 Supprimer ce build</button>
+      </div>
+    </details>
   `;
 }
 function renderTalent(buildIdx, ti, t){
-  const altHtml = (t.alternatives||[]).map((a, ai) => `
-    <div class="subitem" style="border-color:var(--gold-dim);">
-      <button class="ghost remove-btn" onclick="HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives.splice(${ai},1); markDirty(); renderHeroPanel();">✕</button>
-      <div class="row">
-        <div class="field"><label>Alternative — Nom (FR)</label><input value="${escapeHtml(a.name?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'name.fr',this.value)" /></div>
-        <div class="field"><label>Alternative — Nom (EN)</label><input value="${escapeHtml(a.name?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'name.en',this.value)" /></div>
-      </div>
-      <div class="field">
-        <label>Icône</label>
-        <div class="thumb-picker">
-          <img src="${assetRawUrl(a.icon)}" onerror="this.style.visibility='hidden'" />
-          <div class="path">${escapeHtml(a.icon||'(aucune)')}</div>
-          <button onclick="openAssetPicker('image', (p)=>{ setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'icon',p); renderHeroPanel(); })">Choisir</button>
+  const talentUid = assignUid(t);
+  const altHtml = (t.alternatives||[]).map((a, ai) => { const altUid = assignUid(a); return `
+    <details class="collapsible nested" data-uid="${altUid}"${collapsibleState[altUid]?' open':''} style="border-color:var(--gold-dim);">
+      <summary>
+        <span class="chevron">▸</span>
+        <span class="s-title">${escapeHtml(a.name?.fr || 'Alternative sans nom')}</span>
+      </summary>
+      <div class="body">
+        <div class="row">
+          <div class="field"><label>Alternative — Nom (FR)</label><input value="${escapeHtml(a.name?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'name.fr',this.value)" /></div>
+          <div class="field"><label>Alternative — Nom (EN)</label><input value="${escapeHtml(a.name?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'name.en',this.value)" /></div>
         </div>
-      </div>
-      <div class="field"><label>Description (FR)</label><textarea oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'description.fr',this.value)">${escapeHtml(a.description?.fr)}</textarea></div>
-      <div class="field"><label>Description (EN)</label><textarea oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'description.en',this.value)">${escapeHtml(a.description?.en)}</textarea></div>
-      <div class="field">
-        <label>Vidéo de démo (ID YouTube ou fichier .mp4)</label>
-        <div class="thumb-picker">
-          <input value="${escapeHtml(a.demoYoutubeId)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'demoYoutubeId',this.value)" />
-          <button onclick="openAssetPicker('video', (p)=>{ setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'demoYoutubeId',p); renderHeroPanel(); })">Choisir</button>
+        <div class="field">
+          <label>Icône</label>
+          <div class="thumb-picker">
+            <img src="${assetRawUrl(a.icon)}" onerror="this.style.visibility='hidden'" />
+            <div class="path">${escapeHtml(a.icon||'(aucune)')}</div>
+            <button onclick="openAssetPicker('image', (p)=>{ setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'icon',p); renderHeroPanel(); })">Choisir</button>
+          </div>
         </div>
+        <div class="field"><label>Description (FR)</label><textarea oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'description.fr',this.value)">${escapeHtml(a.description?.fr)}</textarea></div>
+        <div class="field"><label>Description (EN)</label><textarea oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'description.en',this.value)">${escapeHtml(a.description?.en)}</textarea></div>
+        <div class="field">
+          <label>Vidéo de démo (ID YouTube ou fichier .mp4)</label>
+          <div class="thumb-picker">
+            <input value="${escapeHtml(a.demoYoutubeId)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'demoYoutubeId',this.value)" />
+            <button onclick="openAssetPicker('video', (p)=>{ setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives[${ai}],'demoYoutubeId',p); renderHeroPanel(); })">Choisir</button>
+          </div>
+        </div>
+        <button class="danger" onclick="HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}].alternatives.splice(${ai},1); markDirty(); renderHeroPanel();">🗑 Supprimer cette alternative</button>
       </div>
-    </div>
-  `).join('');
+    </details>
+  `; }).join('');
   return `
-    <div class="subitem">
-      <button class="ghost remove-btn" onclick="removeTalent(${currentHeroIndex},${buildIdx},${ti})">✕</button>
-      <div class="row">
-        <div class="field"><label>Niveau</label><input type="number" value="${t.level ?? ''}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}],'level',parseInt(this.value||'0'))" /></div>
-        <div class="field"><label>Nom (FR)</label><input value="${escapeHtml(t.name?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}],'name.fr',this.value)" /></div>
-        <div class="field"><label>Nom (EN)</label><input value="${escapeHtml(t.name?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}],'name.en',this.value)" /></div>
-      </div>
-      <div class="field">
-        <label>Icône</label>
-        <div class="thumb-picker">
-          <img src="${assetRawUrl(t.icon)}" onerror="this.style.visibility='hidden'" />
-          <div class="path">${escapeHtml(t.icon||'(aucune)')}</div>
-          <button onclick="openAssetPicker('image', (p)=>{ setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}],'icon',p); renderHeroPanel(); })">Choisir</button>
+    <details class="collapsible nested" data-uid="${talentUid}"${collapsibleState[talentUid]?' open':''}>
+      <summary>
+        <span class="chevron">▸</span>
+        <span class="s-title">Niv. ${escapeHtml(t.level ?? '?')} — ${escapeHtml(t.name?.fr || 'Talent sans nom')}</span>
+      </summary>
+      <div class="body">
+        <div class="row">
+          <div class="field"><label>Niveau</label><input type="number" value="${t.level ?? ''}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}],'level',parseInt(this.value||'0'))" /></div>
+          <div class="field"><label>Nom (FR)</label><input value="${escapeHtml(t.name?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}],'name.fr',this.value)" /></div>
+          <div class="field"><label>Nom (EN)</label><input value="${escapeHtml(t.name?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}],'name.en',this.value)" /></div>
         </div>
-      </div>
-      <div class="field"><label>Description (FR)</label><textarea oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}],'description.fr',this.value)">${escapeHtml(t.description?.fr)}</textarea></div>
-      <div class="field"><label>Description (EN)</label><textarea oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}],'description.en',this.value)">${escapeHtml(t.description?.en)}</textarea></div>
-      <div class="field">
-        <label>Vidéo de démo (ID YouTube ou fichier .mp4)</label>
-        <div class="thumb-picker">
-          <input value="${escapeHtml(t.demoYoutubeId)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}],'demoYoutubeId',this.value)" />
-          <button onclick="openAssetPicker('video', (p)=>{ setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}],'demoYoutubeId',p); renderHeroPanel(); })">Choisir</button>
+        <div class="field">
+          <label>Icône</label>
+          <div class="thumb-picker">
+            <img src="${assetRawUrl(t.icon)}" onerror="this.style.visibility='hidden'" />
+            <div class="path">${escapeHtml(t.icon||'(aucune)')}</div>
+            <button onclick="openAssetPicker('image', (p)=>{ setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}],'icon',p); renderHeroPanel(); })">Choisir</button>
+          </div>
         </div>
+        <div class="field"><label>Description (FR)</label><textarea oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}],'description.fr',this.value)">${escapeHtml(t.description?.fr)}</textarea></div>
+        <div class="field"><label>Description (EN)</label><textarea oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}],'description.en',this.value)">${escapeHtml(t.description?.en)}</textarea></div>
+        <div class="field">
+          <label>Vidéo de démo (ID YouTube ou fichier .mp4)</label>
+          <div class="thumb-picker">
+            <input value="${escapeHtml(t.demoYoutubeId)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}],'demoYoutubeId',this.value)" />
+            <button onclick="openAssetPicker('video', (p)=>{ setNested(HEROES[${currentHeroIndex}].builds[${buildIdx}].talents[${ti}],'demoYoutubeId',p); renderHeroPanel(); })">Choisir</button>
+          </div>
+        </div>
+        <h3 style="margin-top:10px;font-size:12px;color:var(--text-dim);">Talents alternatifs</h3>
+        ${altHtml}
+        <button class="ghost" onclick="addAlternative(${currentHeroIndex},${buildIdx},${ti})">+ Ajouter une alternative</button>
+        <button class="danger" style="margin-top:10px;" onclick="removeTalent(${currentHeroIndex},${buildIdx},${ti})">🗑 Supprimer ce talent</button>
       </div>
-      <h3 style="margin-top:10px;font-size:12px;color:var(--text-dim);">Talents alternatifs</h3>
-      ${altHtml}
-      <button class="ghost" onclick="addAlternative(${currentHeroIndex},${buildIdx},${ti})">+ Ajouter une alternative</button>
-    </div>
+    </details>
   `;
 }
 function addBuild(idx){
-  HEROES[idx].builds.push({
+  const b = {
     enabled: true, order: (HEROES[idx].builds.length+1),
     label:{fr:'Nouveau build',en:'New build'}, updatedAt:{fr:'',en:''},
     summary:{fr:'',en:''}, buildCodeTitle:{fr:"A COLLER DANS L'ARBRE DES TALENTS",en:"PASTE IN TALENT TREE"},
     buildCode:'', videos:[], talents:[]
-  });
+  };
+  collapsibleState[assignUid(b)] = true;
+  HEROES[idx].builds.push(b);
   markDirty(); renderHeroPanel();
 }
 function removeBuild(idx, bIdx){
@@ -1030,7 +1191,9 @@ function removeBuild(idx, bIdx){
   markDirty(); renderHeroPanel();
 }
 function addTalent(idx, bIdx){
-  HEROES[idx].builds[bIdx].talents.push({ level:1, name:{fr:'',en:''}, icon:'', description:{fr:'',en:''}, demoYoutubeId:null });
+  const t = { level:1, name:{fr:'',en:''}, icon:'', description:{fr:'',en:''}, demoYoutubeId:null };
+  collapsibleState[assignUid(t)] = true;
+  HEROES[idx].builds[bIdx].talents.push(t);
   markDirty(); renderHeroPanel();
 }
 function removeTalent(idx, bIdx, tIdx){
@@ -1040,7 +1203,9 @@ function removeTalent(idx, bIdx, tIdx){
 function addAlternative(idx, bIdx, tIdx){
   const t = HEROES[idx].builds[bIdx].talents[tIdx];
   t.alternatives = t.alternatives || [];
-  t.alternatives.push({ name:{fr:'',en:''}, icon:'', description:{fr:'',en:''}, demoYoutubeId:null });
+  const a = { name:{fr:'',en:''}, icon:'', description:{fr:'',en:''}, demoYoutubeId:null };
+  collapsibleState[assignUid(a)] = true;
+  t.alternatives.push(a);
   markDirty(); renderHeroPanel();
 }
 
@@ -1077,6 +1242,41 @@ function closeAssetPicker(){
 }
 const IMAGE_EXT = ['png','jpg','jpeg','gif','webp','svg'];
 const VIDEO_EXT = ['mp4','webm'];
+function normalizeForMatch(s){
+  return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]/g,'');
+}
+function classifyAssetPath(path){
+  const lower = path.toLowerCase();
+  const segments = path.split('/');
+  let heroMatch = null;
+  for (const seg of segments){
+    const segNorm = normalizeForMatch(seg);
+    if (!segNorm) continue;
+    const hero = HEROES.find(h => {
+      const candidates = [h.id, h.name?.fr, h.name?.en].map(normalizeForMatch).filter(Boolean);
+      return candidates.includes(segNorm);
+    });
+    if (hero){ heroMatch = hero; break; }
+  }
+  let sub = 'Autre';
+  if (lower.includes('portrait')) sub = 'Portraits';
+  else if (lower.includes('talent')) sub = 'Talents';
+  else if (lower.includes('spell') || lower.includes('sort')) sub = 'Sorts';
+  if (heroMatch) return { group: heroMatch.name?.fr || heroMatch.id, sub };
+  // Pas de héros reconnu dans le chemin : on range sous un dossier générique,
+  // avec le chemin d'origine comme sous-catégorie pour ne rien perdre de vue.
+  return { group: 'Autres fichiers', sub: segments.slice(0, -1).join('/').replace(/^assets\//, '') || '(racine)' };
+}
+function assetTileHtml(item, kind){
+  return `
+    <div class="asset-tile" onclick="pickAsset('${item.path.replace(/'/g,"\\'")}')">
+      ${kind === 'video'
+        ? `<div class="vidicon">🎬</div>`
+        : `<img loading="lazy" src="${assetRawUrl(item.path)}" />`}
+      <div class="fname">${escapeHtml(item.path.split('/').pop())}</div>
+    </div>
+  `;
+}
 function renderAssetGrid(kind){
   const q = (document.getElementById('assetSearch')?.value || '').toLowerCase();
   const exts = kind === 'video' ? VIDEO_EXT : IMAGE_EXT;
@@ -1085,17 +1285,52 @@ function renderAssetGrid(kind){
     if (!exts.includes(ext)) return false;
     if (q && !item.path.toLowerCase().includes(q)) return false;
     return true;
-  }).slice(0, 300);
+  }).slice(0, 500);
   const grid = document.getElementById('assetGrid');
   if (!items.length){ grid.innerHTML = '<div class="empty-state">Aucun fichier trouvé</div>'; return; }
-  grid.innerHTML = '<div class="asset-grid">' + items.map(item => `
-    <div class="asset-tile" onclick="pickAsset('${item.path.replace(/'/g,"\\'")}')">
-      ${kind === 'video'
-        ? `<div class="vidicon">🎬</div>`
-        : `<img loading="lazy" src="${assetRawUrl(item.path)}" />`}
-      <div class="fname">${escapeHtml(item.path.split('/').pop())}</div>
-    </div>
-  `).join('') + '</div>';
+
+  // Regroupement à deux niveaux : héros (reconnu via HEROES) puis Talents / Sorts / Autre,
+  // pour retrouver immédiatement les fichiers d'un héros précis.
+  const nested = {};
+  items.forEach(item => {
+    const { group, sub } = classifyAssetPath(item.path);
+    nested[group] = nested[group] || {};
+    (nested[group][sub] = nested[group][sub] || []).push(item);
+  });
+
+  const subOrder = ['Portraits', 'Talents', 'Sorts'];
+  const groupNames = Object.keys(nested).sort((a, b) => {
+    if (a === 'Autres fichiers') return 1;
+    if (b === 'Autres fichiers') return -1;
+    return a.localeCompare(b);
+  });
+
+  grid.innerHTML = groupNames.map(group => {
+    const subs = nested[group];
+    const subNames = Object.keys(subs).sort((a, b) => {
+      const ia = subOrder.indexOf(a), ib = subOrder.indexOf(b);
+      if (ia !== -1 && ib !== -1) return ia - ib;
+      if (ia !== -1) return -1;
+      if (ib !== -1) return 1;
+      return a.localeCompare(b);
+    });
+    const total = subNames.reduce((s, k) => s + subs[k].length, 0);
+    return `
+      <details class="collapsible">
+        <summary><span class="chevron">▸</span><span class="s-title">${escapeHtml(group)}</span><span class="s-sub">${total}</span></summary>
+        <div class="body">
+          ${subNames.map(sub => `
+            <details class="collapsible nested">
+              <summary><span class="chevron">▸</span><span class="s-title">${escapeHtml(sub)}</span><span class="s-sub">${subs[sub].length}</span></summary>
+              <div class="body">
+                <div class="asset-grid">${subs[sub].map(item => assetTileHtml(item, kind)).join('')}</div>
+              </div>
+            </details>
+          `).join('')}
+        </div>
+      </details>
+    `;
+  }).join('');
 }
 function pickAsset(path){
   if (assetPickerCallback) assetPickerCallback(path);
@@ -1108,6 +1343,7 @@ function pickAsset(path){
 function showConfigPanel(){
   currentHeroIndex = null;
   renderHeroList();
+  if (window.matchMedia('(max-width: 860px)').matches) toggleSidebar(false);
   const socialsHtml = STREAMER_CONFIG.socials.map((s,i) => `
     <div class="subitem">
       <button class="ghost remove-btn" onclick="STREAMER_CONFIG.socials.splice(${i},1); markDirty(); showConfigPanel();">✕</button>
@@ -1149,6 +1385,7 @@ function showConfigPanel(){
 function showAdminsPanel(){
   currentHeroIndex = null;
   renderHeroList();
+  if (window.matchMedia('(max-width: 860px)').matches) toggleSidebar(false);
   const list = (typeof ADMINS !== 'undefined') ? ADMINS : [];
   const rows = list.map((a,i) => `
     <div class="subitem">
@@ -1215,8 +1452,14 @@ async function commitAdminsFile(){
    DEMARRAGE
    ========================================================================= */
 (function init(){
-  // rien à faire ici : on attend l'action de l'utilisateur sur l'écran de login.
-  // (une reconnexion auto via sessionStorage pourrait être ajoutée ici si besoin)
+  // Si l'onglet a été rafraîchi (ou rouvert dans la même session de navigateur) et
+  // qu'un pseudo valide est déjà mémorisé, on saute l'écran de connexion pseudo/mdp
+  // et on tente directement la suite (token GitHub déjà mémorisé ou son écran).
+  const savedUser = sessionStorage.getItem('eowea_admin_user');
+  if (savedUser && typeof ADMINS !== 'undefined' && ADMINS.some(a => a.username === savedUser)){
+    document.getElementById('loginScreen').classList.add('hidden');
+    proceedAfterLogin(savedUser);
+  }
 })();
 </script>
 </body>

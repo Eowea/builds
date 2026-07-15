@@ -60,7 +60,6 @@ const HEROES = [
       "fr": "Kael'thas est le maître du zoning. En utilisant ses Sphères verdoyantes (Trait), il peut booster ses sorts pour infliger plus de dégâts, étendre ses zones d'effet ou étourdir plusieurs cibles.",
       "en": "Kael'thas is the master of zoning. By using Verdant Spheres (Trait), he can empower his spells to deal more damage, increase area of effect, or stun multiple targets."
     },
-    "guideVideo": null,
     "spells": [
       {
         "key": "Trait",
@@ -386,7 +385,8 @@ const HEROES = [
           "en": ""
         }
       }
-    ]
+    ],
+    "guideVideos": []
   },
   {
     "id": "anduin",
@@ -405,7 +405,6 @@ const HEROES = [
       "fr": "Anduin apporte un soin lisible, un gros bouton de sauvetage et une excellente reponse aux engages front to back.",
       "en": "Anduin provides straightforward healing, a massive rescue button, and an excellent response to front-to-back engages."
     },
-    "guideVideo": null,
     "spells": [
       {
         "key": "Trait",
@@ -731,7 +730,8 @@ const HEROES = [
           "en": ""
         }
       }
-    ]
+    ],
+    "guideVideos": []
   },
   {
     "id": "rehgar",
@@ -749,17 +749,6 @@ const HEROES = [
     "gameplay": {
       "fr": "Rehgar est un soigneur aggressif qui possede beaucoup de dégâts et plein d'utilitaire.",
       "en": "Rehgar is an aggressive healer boasting great damage and utility."
-    },
-    "guideVideo": {
-      "title": {
-        "fr": "Guide express: Rehgar",
-        "en": "Express Guide: Rehgar"
-      },
-      "youtubeId": "ESl4DLgmJVo",
-      "desc": {
-        "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces.",
-        "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles."
-      }
     },
     "spells": [
       {
@@ -1099,6 +1088,19 @@ const HEROES = [
           }
         ]
       }
+    ],
+    "guideVideos": [
+      {
+        "title": {
+          "fr": "Guide express: Rehgar",
+          "en": "Express Guide: Rehgar"
+        },
+        "youtubeId": "ESl4DLgmJVo",
+        "desc": {
+          "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces.",
+          "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles."
+        }
+      }
     ]
   },
   {
@@ -1117,17 +1119,6 @@ const HEROES = [
     "gameplay": {
       "fr": "Luisaile est une soigneuse avec un global et beaucoup de sorts utilitaires",
       "en": "Brightwing is a global healer armed with fantastic utility spells."
-    },
-    "guideVideo": {
-      "title": {
-        "fr": "Guide express: Luisaile",
-        "en": "Express Guide: Brightwing"
-      },
-      "youtubeId": "BGavE-q8NJY",
-      "desc": {
-        "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces",
-        "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles."
-      }
     },
     "spells": [
       {
@@ -1237,121 +1228,6 @@ const HEROES = [
       }
     ],
     "builds": [
-      {
-        "enabled": false,
-        "order": 2,
-        "label": {
-          "fr": "Build TP",
-          "en": "TP Build"
-        },
-        "summary": {
-          "fr": "Build le plus simple à jouer: empêche le oneshot sur votre allié",
-          "en": "Easiest build: prevents your ally from getting oneshot."
-        },
-        "buildCodeTitle": {
-          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
-          "en": "PASTE IN TALENT TREE"
-        },
-        "buildCode": "[T2321323,Brightwing]",
-        "videos": [],
-        "talents": [
-          {
-            "level": 1,
-            "name": {
-              "fr": "Hyperphase",
-              "en": "Hyper Shift"
-            },
-            "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_hypershift.png",
-            "description": {
-              "fr": "Augmente le montant de soins de Déphasage et son temps de recharge est réduit pour chaque serviteur tué.",
-              "en": "Increases Phase Shift healing amount and its cooldown is reduced for each minion killed."
-            },
-            "demoYoutubeId": null
-          },
-          {
-            "level": 4,
-            "name": {
-              "fr": "Crachat magique",
-              "en": "Magic Spit"
-            },
-            "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_talent_autoattack_cooldown.jpg",
-            "description": {
-              "fr": "Augmente la portée d'auto-attaque et ses auto-attaques réduisent le temps de recharge de Brume Apaisante.",
-              "en": "Increases basic attack range and basic attacks reduce Soothing Mist cooldown."
-            },
-            "demoYoutubeId": null
-          },
-          {
-            "level": 7,
-            "name": {
-              "fr": "Je te vois !",
-              "en": "Peekaboo!"
-            },
-            "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_hypershift.png",
-            "description": {
-              "fr": "Déphasage confère un bouclier à Luisaile et sa cible, puis révèle la zone autour.",
-              "en": "Phase Shift grants a shield to Brightwing and her target, then reveals the surrounding area."
-            },
-            "demoYoutubeId": null
-          },
-          {
-            "level": 10,
-            "name": {
-              "fr": "Papillonnage",
-              "en": "Blink Heal"
-            },
-            "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_blinkheal.png",
-            "description": {
-              "fr": "Se téléporte vers un allié et le soigne.",
-              "en": "Teleports to an ally and heals them."
-            },
-            "demoYoutubeId": null
-          },
-          {
-            "level": 13,
-            "name": {
-              "fr": "Superlimpinpin",
-              "en": "Pixie Power"
-            },
-            "icon": "assets/heroes/base_spells/brightwing/images/talents/storm_ui_icon_brightwing_pixiedust_b.png",
-            "description": {
-              "fr": "Réduit le temps de recharge de Poudre de perlimpinpin et augmente l'armure anti-sort.",
-              "en": "Reduces Pixie Dust cooldown and increases spell armor."
-            },
-            "demoYoutubeId": null
-          },
-          {
-            "level": 16,
-            "name": {
-              "fr": "Bestiolifier",
-              "en": "Critterize"
-            },
-            "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_polymorph.png",
-            "description": {
-              "fr": "Métamorphose réduit l'armure.",
-              "en": "Polymorph reduces armor."
-            },
-            "demoYoutubeId": null
-          },
-          {
-            "level": 20,
-            "name": {
-              "fr": "Dragon express",
-              "en": "Speedy Dragon"
-            },
-            "icon": "assets/heroes/base_spells/brightwing/images/spells/storm_ui_icon_brightwing_hypershift.png",
-            "description": {
-              "fr": "Déphasage se canalise plus rapidement et augmente passivement la vitesse de déplacement.",
-              "en": "Phase Shift channels faster and passively increases movement speed."
-            },
-            "demoYoutubeId": null
-          }
-        ],
-        "updatedAt": {
-          "fr": "",
-          "en": ""
-        }
-      },
       {
         "enabled": true,
         "order": 1,
@@ -1481,6 +1357,19 @@ const HEROES = [
           }
         ]
       }
+    ],
+    "guideVideos": [
+      {
+        "title": {
+          "fr": "Guide express: Luisaile",
+          "en": "Express Guide: Brightwing"
+        },
+        "youtubeId": "BGavE-q8NJY",
+        "desc": {
+          "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces",
+          "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles."
+        }
+      }
     ]
   },
   {
@@ -1499,17 +1388,6 @@ const HEROES = [
     "gameplay": {
       "fr": "Deckard jette des potions sur le sol pour préparer le combat et bloque l'ennemi avec ses puissants contrôles de zone.",
       "en": "Deckard throws potions on the ground to prepare the battlefield and locks down enemies with powerful AoE control."
-    },
-    "guideVideo": {
-      "title": {
-        "fr": "Guide express: Deckard Cain",
-        "en": "Express Guide: Deckard Cain"
-      },
-      "youtubeId": "onnCA8ibYQk",
-      "desc": {
-        "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces",
-        "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles."
-      }
     },
     "spells": [
       {
@@ -1882,6 +1760,26 @@ const HEROES = [
           }
         ]
       }
+    ],
+    "guideVideos": [
+      {
+        "title": {
+          "fr": "Guide express: Deckard Cain",
+          "en": "Express Guide: Deckard Cain"
+        },
+        "youtubeId": "onnCA8ibYQk",
+        "desc": {
+          "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces",
+          "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles."
+        }
+      },
+      {
+        "title": {
+          "fr": "Guide de Malganyr",
+          "en": "Malganyr's Guide, in French"
+        },
+        "youtubeId": "https://www.youtube.com/watch?v=Ovv6Dc7wzyU"
+      }
     ]
   },
   {
@@ -1901,7 +1799,6 @@ const HEROES = [
       "fr": "Elle sacrifie sa propre santé pour soigner ses alliés et se transforme en Reine-dragon pour dominer les combats d'équipe.",
       "en": "She sacrifices her own health to heal allies and transforms into the Dragonqueen to dominate teamfights."
     },
-    "guideVideo": null,
     "spells": [
       {
         "key": "Trait",
@@ -2223,7 +2120,8 @@ const HEROES = [
           "en": ""
         }
       }
-    ]
+    ],
+    "guideVideos": []
   },
   {
     "id": "ana",
@@ -2242,7 +2140,6 @@ const HEROES = [
       "fr": "Ana soigne ses alliés à très longue distance avec des tirs de précision et bloque les soins ennemis avec sa grenade.",
       "en": "Ana heals allies from extreme range with skillshots and blocks enemy healing with her grenade."
     },
-    "guideVideo": null,
     "spells": [
       {
         "key": "Trait",
@@ -2564,7 +2461,8 @@ const HEROES = [
           "en": ""
         }
       }
-    ]
+    ],
+    "guideVideos": []
   },
   {
     "id": "auriel",
@@ -2582,17 +2480,6 @@ const HEROES = [
     "gameplay": {
       "fr": "Auriel convertit les dégâts infligés par son équipe et les siens en énergie pour soigner massivement en zone.",
       "en": "Auriel converts the damage dealt by her team and by herself into Energy to provide massive area healing."
-    },
-    "guideVideo": {
-      "title": {
-        "fr": "Guide express: Auriel",
-        "en": "Express Guide: Auriel"
-      },
-      "youtubeId": "Sa04Z6PPmbg",
-      "desc": {
-        "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces",
-        "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles."
-      }
     },
     "spells": [
       {
@@ -2933,6 +2820,19 @@ const HEROES = [
           }
         ]
       }
+    ],
+    "guideVideos": [
+      {
+        "title": {
+          "fr": "Guide express: Auriel",
+          "en": "Express Guide: Auriel"
+        },
+        "youtubeId": "Sa04Z6PPmbg",
+        "desc": {
+          "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces",
+          "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles."
+        }
+      }
     ]
   },
   {
@@ -2952,7 +2852,6 @@ const HEROES = [
       "fr": "Kharazim bondit d'allié en ennemi, infligeant des dégâts de mêlée pour générer ses soins.",
       "en": "Kharazim dashes between allies and enemies, dealing melee damage to fuel his healing."
     },
-    "guideVideo": null,
     "spells": [
       {
         "key": "Trait",
@@ -3274,7 +3173,8 @@ const HEROES = [
           "en": ""
         }
       }
-    ]
+    ],
+    "guideVideos": []
   },
   {
     "id": "lili",
@@ -3293,7 +3193,6 @@ const HEROES = [
       "fr": "Li Li court vite quand elle prend des dégâts et distribue des soins automatiquement aux alliés proches.",
       "en": "Li Li runs fast when taking damage and automatically distributes heals to nearby allies."
     },
-    "guideVideo": null,
     "spells": [
       {
         "key": "Trait",
@@ -3615,7 +3514,8 @@ const HEROES = [
           "en": ""
         }
       }
-    ]
+    ],
+    "guideVideos": []
   },
   {
     "id": "ltmorales",
@@ -3634,7 +3534,6 @@ const HEROES = [
       "fr": "Morales maintient un allié en vie indéfiniment avec son rayon tant qu'elle a de l'énergie et se tient à bonne distance.",
       "en": "Morales keeps an ally alive indefinitely with her beam as long as she has energy and stays safely in the back."
     },
-    "guideVideo": null,
     "spells": [
       {
         "key": "Trait",
@@ -3956,7 +3855,8 @@ const HEROES = [
           "en": ""
         }
       }
-    ]
+    ],
+    "guideVideos": []
   },
   {
     "id": "malfurion",
@@ -3974,17 +3874,6 @@ const HEROES = [
     "gameplay": {
       "fr": "Malfurion pose des soins sur la durée sur ses alliés, puis frappe les ennemis avec Éclat lunaire pour déclencher des soins instantanés.",
       "en": "Malfurion applies heals over time on his allies, then hits enemies with Moonfire to trigger instant burst heals."
-    },
-    "guideVideo": {
-      "title": {
-        "fr": "Guide express: Malfurion",
-        "en": "Express Guide: Malfurion"
-      },
-      "youtubeId": "auMuOt9X1FQ",
-      "desc": {
-        "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces.",
-        "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles and English AI voice."
-      }
     },
     "spells": [
       {
@@ -4312,6 +4201,19 @@ const HEROES = [
           "en": ""
         }
       }
+    ],
+    "guideVideos": [
+      {
+        "title": {
+          "fr": "Guide express: Malfurion",
+          "en": "Express Guide: Malfurion"
+        },
+        "youtubeId": "auMuOt9X1FQ",
+        "desc": {
+          "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces.",
+          "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles and English AI voice."
+        }
+      }
     ]
   },
   {
@@ -4330,17 +4232,6 @@ const HEROES = [
     "gameplay": {
       "fr": "Stukov propage des virus soignants sur son équipe et des pustules sur l'ennemi, avant de tout faire exploser avec son Trait.",
       "en": "Stukov spreads healing viruses to his team and pustules to enemies, then detonates them all with his Trait."
-    },
-    "guideVideo": {
-      "title": {
-        "fr": "Guide express: Stukov",
-        "en": "Express Guide: Stukov"
-      },
-      "youtubeId": "VufmXqAOcAM",
-      "desc": {
-        "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces",
-        "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles."
-      }
     },
     "spells": [
       {
@@ -4613,6 +4504,19 @@ const HEROES = [
           "en": ""
         }
       }
+    ],
+    "guideVideos": [
+      {
+        "title": {
+          "fr": "Guide express: Stukov",
+          "en": "Express Guide: Stukov"
+        },
+        "youtubeId": "VufmXqAOcAM",
+        "desc": {
+          "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces",
+          "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles."
+        }
+      }
     ]
   },
   {
@@ -4631,17 +4535,6 @@ const HEROES = [
     "gameplay": {
       "fr": "Tyrande doit attaquer en permanence pour réduire les temps de recharge de ses soins et peut aider à burst une cible marquée.",
       "en": "Tyrande must keep attacking to reduce her healing cooldowns and help burst down marked targets."
-    },
-    "guideVideo": {
-      "title": {
-        "fr": "Guide express: Tyrande",
-        "en": "Express Guide: Tyrande"
-      },
-      "youtubeId": "UqAPjuoxI94",
-      "desc": {
-        "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces. Build non à jour dans la vidéo, mais le reste est toujours d'actualité.",
-        "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles. The build shown in the video is outdated, but the rest is still relevant."
-      }
     },
     "spells": [
       {
@@ -4890,6 +4783,19 @@ const HEROES = [
           "en": ""
         }
       }
+    ],
+    "guideVideos": [
+      {
+        "title": {
+          "fr": "Guide express: Tyrande",
+          "en": "Express Guide: Tyrande"
+        },
+        "youtubeId": "UqAPjuoxI94",
+        "desc": {
+          "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces. Build non à jour dans la vidéo, mais le reste est toujours d'actualité.",
+          "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles. The build shown in the video is outdated, but the rest is still relevant."
+        }
+      }
     ]
   },
   {
@@ -4909,7 +4815,6 @@ const HEROES = [
       "fr": "Uther joue en mêlée, encaisse les dégâts, étourdit les ennemis et confère une armure vitale avec ses soins.",
       "en": "Uther plays in melee, absorbs damage, stuns enemies, and grants vital armor with his heals."
     },
-    "guideVideo": null,
     "spells": [
       {
         "key": "Trait",
@@ -5231,7 +5136,8 @@ const HEROES = [
           "en": ""
         }
       }
-    ]
+    ],
+    "guideVideos": []
   },
   {
     "id": "whitemane",
@@ -5249,17 +5155,6 @@ const HEROES = [
     "gameplay": {
       "fr": "Blanchetête applique Zèle à ses alliés, puis inflige un maximum de dégâts aux ennemis pour les soigner proportionnellement.",
       "en": "Whitemane applies Zeal to allies, then deals maximum damage to enemies to heal them proportionally."
-    },
-    "guideVideo": {
-      "title": {
-        "fr": "Guide express: Blanchetête",
-        "en": "Express Guide: Whitemane"
-      },
-      "youtubeId": "anZnNHdEhKM",
-      "desc": {
-        "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces",
-        "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles."
-      }
     },
     "spells": [
       {
@@ -5521,6 +5416,19 @@ const HEROES = [
           "en": ""
         }
       }
+    ],
+    "guideVideos": [
+      {
+        "title": {
+          "fr": "Guide express: Blanchetête",
+          "en": "Express Guide: Whitemane"
+        },
+        "youtubeId": "anZnNHdEhKM",
+        "desc": {
+          "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces",
+          "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles."
+        }
+      }
     ]
   },
   {
@@ -5540,7 +5448,6 @@ const HEROES = [
       "fr": "En construction.",
       "en": "Under construction."
     },
-    "guideVideo": null,
     "spells": [
       {
         "key": "Trait",
@@ -5956,6 +5863,7 @@ const HEROES = [
           "en": ""
         }
       }
-    ]
+    ],
+    "guideVideos": []
   }
 ];
