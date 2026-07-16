@@ -386,7 +386,15 @@ const HEROES = [
         }
       }
     ],
-    "guideVideos": []
+    "guideVideos": [
+      {
+        "title": {
+          "fr": "Guide de Malganyr",
+          "en": "Malganyr's Guide"
+        },
+        "youtubeId": "https://www.youtube.com/watch?v=VTFz5fFd77A"
+      }
+    ]
   },
   {
     "id": "anduin",
@@ -1100,6 +1108,13 @@ const HEROES = [
           "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces.",
           "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles."
         }
+      },
+      {
+        "title": {
+          "fr": "Guide de Malganyr",
+          "en": "Malganyr's Guide"
+        },
+        "youtubeId": "https://www.youtube.com/watch?v=5nT8hJGclic"
       }
     ]
   },
@@ -1369,6 +1384,13 @@ const HEROES = [
           "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces",
           "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles."
         }
+      },
+      {
+        "title": {
+          "fr": "Guide de Malganyr",
+          "en": "Malganyr's Guide"
+        },
+        "youtubeId": "https://www.youtube.com/watch?v=xtlSafuiFOQ"
       }
     ]
   },
