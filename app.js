@@ -678,7 +678,7 @@ function bindFloatingTriggers(root = document) {
       if (v.readyState >= 2) doWarm();
       else v.addEventListener('loadeddata', doWarm, { once: true });
     }
-    function bindComboCarousel() {
+function bindComboCarousel() {
       els.detailView.querySelectorAll('.combo-carousel').forEach(carousel => {
         if (carousel.dataset.bound) return;
         carousel.dataset.bound = '1';
@@ -687,33 +687,103 @@ function bindFloatingTriggers(root = document) {
         const dots = [...carousel.querySelectorAll('.combo-dot')];
         const prevBtn = carousel.querySelector('.combo-nav.prev');
         const nextBtn = carousel.querySelector('.combo-nav.next');
+        
         let active = 0;
+        let autoPlayInterval = null;
+        const isGuideCarousel = carousel.closest('.guide-video-section');
 
         function goTo(idx) {
-          if (idx < 0) idx = slides.length - 1;
-          if (idx >= slides.length) idx = 0;
-          if (idx === active) return;
+          // Calcul du nouvel index avec bouclage
+          let newIdx = idx;
+          if (idx < 0) newIdx = slides.length - 1;
+          if (idx >= slides.length) newIdx = 0;
+          
+          // Si on est déjà sur la slide, on ne fait rien
+          if (newIdx === active && slides[active].classList.contains('is-active')) return;
+
+          // Arrêt du média sur l'ancienne slide
           stopSlideMedia(slides[active]);
           slides[active].classList.remove('is-active');
-          dots[active]?.classList.remove('is-active');
-          active = idx;
+          if (dots[active]) dots[active].classList.remove('is-active');
+
+          // Mise à jour de l'index global
+          active = newIdx;
+
+          // Activation de la nouvelle slide
           slides[active].classList.add('is-active');
-          dots[active]?.classList.add('is-active');
+          if (dots[active]) dots[active].classList.add('is-active');
+          
           warmUpVideoFrame(slides[active]);
         }
-        prevBtn?.addEventListener('click', () => goTo(active - 1));
-        nextBtn?.addEventListener('click', () => goTo(active + 1));
-        dots.forEach(d => d.addEventListener('click', () => goTo(Number(d.dataset.dot))));
 
-        slides.forEach(slide => {
-          slide.addEventListener('mouseenter', () => playSlideMedia(slide));
-          slide.addEventListener('mouseleave', () => stopSlideMedia(slide));
-          slide.addEventListener('touchstart', () => playSlideMedia(slide), {passive:true});
-          slide.addEventListener('touchend', () => stopSlideMedia(slide));
-          slide.addEventListener('touchcancel', () => stopSlideMedia(slide));
+        // --- GESTION DU DÉFILEMENT AUTO ---
+        function startAutoPlay() {
+          if (!isGuideCarousel || slides.length <= 1) return;
+          stopAutoPlay(); // Sécurité : on nettoie avant de lancer
+          autoPlayInterval = setInterval(() => {
+            goTo(active + 1);
+          }, 5000); 
+        }
+
+        function stopAutoPlay() {
+          if (autoPlayInterval) {
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = null;
+          }
+        }
+
+        // Relance le défilement après un délai (pour éviter les conflits)
+        function handleManualInteraction(direction) {
+          stopAutoPlay();
+          if (direction === 'next') goTo(active + 1);
+          else if (direction === 'prev') goTo(active - 1);
+          else if (typeof direction === 'number') goTo(direction);
+          
+          // On attend 2 secondes d'inactivité avant de reprendre le défilement auto
+          startAutoPlay();
+        }
+
+        // --- EVENTS ---
+        prevBtn?.addEventListener('click', (e) => {
+          e.preventDefault();
+          handleManualInteraction('prev');
         });
 
+        nextBtn?.addEventListener('click', (e) => {
+          e.preventDefault();
+          handleManualInteraction('next');
+        });
+
+        dots.forEach((d, i) => {
+          d.addEventListener('click', (e) => {
+            e.preventDefault();
+            handleManualInteraction(i);
+          });
+        });
+
+        slides.forEach(slide => {
+          slide.addEventListener('mouseenter', () => {
+            stopAutoPlay();
+            playSlideMedia(slide);
+          });
+          slide.addEventListener('mouseleave', () => {
+            stopSlideMedia(slide);
+            startAutoPlay();
+          });
+          // Mobile
+          slide.addEventListener('touchstart', () => {
+            stopAutoPlay();
+            playSlideMedia(slide);
+          }, {passive:true});
+          slide.addEventListener('touchend', () => {
+            startAutoPlay();
+            stopSlideMedia(slide);
+          });
+        });
+
+        // Initialisation
         warmUpVideoFrame(slides[active]);
+        if (isGuideCarousel) startAutoPlay();
       });
     }
 
