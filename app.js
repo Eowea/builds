@@ -358,6 +358,7 @@ function renderGuide(h) {
         <img class="combo-poster" src="${ytThumb(x.id)}" alt="${esc(loc(x.g.title))}" loading="lazy" />
         ${APP_CONFIG.showGuideBadge ? '<span class="youtube-badge">guide</span>' : ''}
         <span class="youtube-play"></span>
+        ${x.g.duration ? `<span class="video-duration-badge">${esc(x.g.duration)}</span>` : ''}
       </a>
     </div>
   `).join('');
@@ -716,8 +717,47 @@ function bindFloatingTriggers(root = document) {
       });
     }
 
-    function syncTalentBoards() { els.detailView.querySelectorAll('.talent-board-scroller').forEach(s=>{const t=s.querySelector('.talent-board-track'); if(!t) return; s.classList.remove('is-centered'); s.classList.toggle('is-centered',t.scrollWidth<=s.clientWidth+4); if(t.scrollWidth<=s.clientWidth+4) s.scrollLeft=0;}); }
-    function queueLayoutSync() { if(layoutRaf) return; layoutRaf=requestAnimationFrame(()=>{layoutRaf=0;syncTalentBoards();}); }
+    function syncTalentBoards() {
+      els.detailView.querySelectorAll('.talent-board-scroller').forEach(s => {
+        const t = s.querySelector('.talent-board-track');
+        if (!t) return;
+        // On neutralise temporairement "min-width: 100%" (règle de base du CSS) pour mesurer
+        // la vraie largeur du contenu — sinon, pour un build avec peu de talents, la mesure
+        // était artificiellement gonflée à la largeur du conteneur, et le JS croyait à tort
+        // que ça "remplissait" toute la largeur alors que le contenu réel était plus étroit
+        // et restait collé à gauche dedans.
+        t.style.width = '';
+        t.style.minWidth = '0';
+        t.style.marginInline = '';
+        const naturalWidth = t.scrollWidth;
+        const fits = naturalWidth <= s.clientWidth + 4;
+        s.classList.toggle('is-centered', fits);
+        if (fits) {
+          // Largeur fixée explicitement en pixels (mesurée par le JS, fiable),
+          // plutôt que "width: fit-content" recalculé par le CSS.
+          t.style.width = naturalWidth + 'px';
+          t.style.marginInline = 'auto';
+          s.scrollLeft = 0;
+        } else {
+          t.style.minWidth = ''; // revient au comportement par défaut : occupe toute la largeur, défilable
+        }
+      });
+    }
+    function queueLayoutSync() {
+      if (layoutRaf) return;
+      layoutRaf = requestAnimationFrame(() => {
+        layoutRaf = 0;
+        // Double rAF : on laisse le navigateur terminer un cycle complet de mise en page
+        // avant de mesurer (Firefox semble parfois mesurer avant d'avoir fini de stabiliser
+        // la largeur des cartes de talents).
+        requestAnimationFrame(syncTalentBoards);
+      });
+      // Filets de sécurité supplémentaires : si quelque chose (police web, icônes) fait
+      // encore bouger la mise en page un peu plus tard, on revérifie plusieurs fois.
+      setTimeout(syncTalentBoards, 150);
+      setTimeout(syncTalentBoards, 400);
+      setTimeout(syncTalentBoards, 900);
+    }
 
     function openLightbox(ref, type='youtube') {
       // Cas fichier local (assets/....mp4, .webm, .gif, .webp)
@@ -916,10 +956,6 @@ els.langSwitcher.addEventListener('click', (e) => {
   state.lang = btn.dataset.lang;
   localStorage.setItem('eowea_lang', state.lang);
   renderAll();
-
-  if ($('randomBuildCard').classList.contains('active')) {
-    renderRandomBuildCard();
-  }
 });
     document.addEventListener('keydown',e=>{if(e.key==='Escape'&&els.videoOverlay.classList.contains('active')) closeLightbox();});
     document.addEventListener('click', (e) => {
