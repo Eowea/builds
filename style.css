@@ -827,6 +827,7 @@
     .talent-board-wrap { margin-bottom: 24px; overflow: hidden; width: 100%; min-width: 0; }
 
     .talent-board-scroller {
+      position: relative;
       overflow-x: auto; overflow-y: visible;
       padding: 24px 4px 12px;
       scrollbar-width: none; -webkit-overflow-scrolling: touch;
@@ -835,12 +836,10 @@
     .talent-board-scroller::-webkit-scrollbar { display: none; }
     .talent-board-scroller.is-centered { overflow-x: hidden; }
 
-    .talent-board-track {
-      display: flex; gap: 12px; width: max-content; min-width: 100%; position: relative; align-items: flex-start; padding-inline: 4px;
-    }
-    .talent-board-scroller.is-centered .talent-board-track { width: fit-content; min-width: 0; margin-inline: auto; }
-    
-    .talent-board-track::before {
+    /* Ligne décorative : positionnée par rapport au scroller (largeur fixe, 100%) et
+       non plus par rapport au tableau lui-même (dont la largeur "fit-content" est calculée
+       en même temps) — évite une dépendance circulaire qui perturbait le calcul sur Firefox. */
+    .talent-board-scroller::before {
       content: ''; position: absolute;
       left: 60px; right: 60px; top: 76px; height: 3px;
       background: linear-gradient(90deg, transparent, var(--blue-bright), transparent);
@@ -848,8 +847,16 @@
       box-shadow: 0 0 10px var(--blue-glow);
     }
 
+    .talent-board-track {
+      display: flex; gap: 12px; width: max-content; min-width: 100%; position: relative; align-items: flex-start; padding-inline: 4px;
+    }
+    .talent-board-scroller.is-centered .talent-board-track { width: fit-content; min-width: 0; margin-inline: auto; }
+
 .talent-card {
-      flex: 0 0 clamp(100px, 12vw, 120px);
+      flex: 0 0 120px;
+      min-width: 0;
+      max-width: 120px;
+      overflow: hidden;
       border: 1px solid var(--blue-border);
       border-radius: 4px;
       background: linear-gradient(180deg, rgba(20, 28, 44, 0.95), rgba(12, 18, 28, 0.98));
@@ -996,7 +1003,7 @@
     }
     
     @media (min-width: 1061px) {
-      .videos-layout.with-guide { grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr); }
+      .videos-layout.with-guide { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
     }
     
     .video-group { min-width: 0; width: 100%; }
@@ -1094,6 +1101,11 @@
        contrairement aux vidéos de build (survol/appui uniquement, sans clic). */
     .combo-stage.guide-stage-link { pointer-events: auto; cursor: pointer; text-decoration: none; display: block; }
     .combo-stage.guide-stage-link:hover .combo-poster { transform: scale(1.05); }
+    .video-duration-badge {
+      position: absolute; bottom: 6px; right: 6px; z-index: 3;
+      background: rgba(8, 9, 12, 0.85); color: #fff; font-size: 12px; font-weight: 600;
+      padding: 2px 6px; border-radius: 4px; line-height: 1.4; font-family: 'Rajdhani', sans-serif;
+    }
 
     .combo-nav {
       position: absolute; top: 50%; transform: translateY(-50%);
@@ -1249,8 +1261,8 @@
       .build-tab { padding: 0 16px; font-size: 13px; height: 36px; }
       
       .talent-board-track { gap: 8px; }
-      .talent-card { flex-basis: 104px; padding: 10px 8px 12px; }
-      .talent-board-track::before { left: 52px; right: 52px; top: 68px; }
+      .talent-card { flex-basis: 104px; max-width: 104px; padding: 10px 8px 12px; }
+      .talent-board-scroller::before { left: 52px; right: 52px; top: 68px; }
       .talent-board-scroller { scrollbar-width: thin !important; padding-bottom: 20px; }
       .talent-board-scroller::-webkit-scrollbar { display: block !important; height: 4px; }
       .talent-board-scroller::-webkit-scrollbar-thumb { background: var(--blue-bright); border-radius: 4px; }

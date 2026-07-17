@@ -1100,21 +1100,14 @@ const HEROES = [
     "guideVideos": [
       {
         "title": {
-          "fr": "Guide express: Rehgar",
-          "en": "Express Guide: Rehgar"
+          "fr": "Guide express",
+          "en": "Express Guide"
         },
         "youtubeId": "ESl4DLgmJVo",
         "desc": {
           "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces.",
           "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles."
         }
-      },
-      {
-        "title": {
-          "fr": "Guide de Malganyr",
-          "en": "Malganyr's Guide"
-        },
-        "youtubeId": "https://www.youtube.com/watch?v=5nT8hJGclic"
       }
     ]
   },
@@ -1376,21 +1369,14 @@ const HEROES = [
     "guideVideos": [
       {
         "title": {
-          "fr": "Guide express: Luisaile",
-          "en": "Express Guide: Brightwing"
+          "fr": "Guide express",
+          "en": "Express Guide"
         },
         "youtubeId": "BGavE-q8NJY",
         "desc": {
           "fr": "Guide rapide pour apprendre les mécaniques de base et quelques astuces",
           "en": "Quick guide to learn basic mechanics and some tips. In French, with English subtitles."
         }
-      },
-      {
-        "title": {
-          "fr": "Guide de Malganyr",
-          "en": "Malganyr's Guide"
-        },
-        "youtubeId": "https://www.youtube.com/watch?v=xtlSafuiFOQ"
       }
     ]
   },
@@ -1741,8 +1727,8 @@ const HEROES = [
     "guideVideos": [
       {
         "title": {
-          "fr": "Guide express: Deckard Cain",
-          "en": "Express Guide: Deckard Cain"
+          "fr": "Guide express",
+          "en": "Express Guide"
         },
         "youtubeId": "onnCA8ibYQk",
         "desc": {
@@ -2801,8 +2787,8 @@ const HEROES = [
     "guideVideos": [
       {
         "title": {
-          "fr": "Guide express: Auriel",
-          "en": "Express Guide: Auriel"
+          "fr": "Guide express",
+          "en": "Express Guide"
         },
         "youtubeId": "Sa04Z6PPmbg",
         "desc": {
@@ -4182,8 +4168,8 @@ const HEROES = [
     "guideVideos": [
       {
         "title": {
-          "fr": "Guide express: Malfurion",
-          "en": "Express Guide: Malfurion"
+          "fr": "Guide express",
+          "en": "Express Guide"
         },
         "youtubeId": "auMuOt9X1FQ",
         "desc": {
@@ -4485,8 +4471,8 @@ const HEROES = [
     "guideVideos": [
       {
         "title": {
-          "fr": "Guide express: Stukov",
-          "en": "Express Guide: Stukov"
+          "fr": "Guide express",
+          "en": "Express Guide"
         },
         "youtubeId": "VufmXqAOcAM",
         "desc": {
@@ -4764,8 +4750,8 @@ const HEROES = [
     "guideVideos": [
       {
         "title": {
-          "fr": "Guide express: Tyrande",
-          "en": "Express Guide: Tyrande"
+          "fr": "Guide express",
+          "en": "Express Guide"
         },
         "youtubeId": "UqAPjuoxI94",
         "desc": {
@@ -5397,8 +5383,8 @@ const HEROES = [
     "guideVideos": [
       {
         "title": {
-          "fr": "Guide express: Blanchetête",
-          "en": "Express Guide: Whitemane"
+          "fr": "Guide express",
+          "en": "Express Guide"
         },
         "youtubeId": "anZnNHdEhKM",
         "desc": {
@@ -5410,7 +5396,7 @@ const HEROES = [
   },
   {
     "id": "lucio",
-    "enabled": false,
+    "enabled": true,
     "name": {
       "fr": "Lúcio",
       "en": "Lúcio"
@@ -5429,80 +5415,93 @@ const HEROES = [
       {
         "key": "Trait",
         "name": {
-          "fr": "En construction.",
-          "en": "Under construction."
+          "fr": "Saute-Muraille",
+          "en": "Push Off"
         },
-        "icon": "",
+        "icon": "assets/heroes/base_spells/lucio/images/talents/storm_ui_icon_lucio_accelerando.png",
         "description": {
-          "fr": "En construction.",
-          "en": "Under construction."
+          "fr": "Activable utilisable pendant Wall Ride qui permet à Lúcio de se propulser. Inflige des dégâts aux ennemis et les ralentit.",
+          "en": "An ability that can be activated during Wall Ride, allowing Lúcio to propel himself forward. It deals damage to enemies and slows them down."
         },
-        "demoYoutubeId": "M7lc1UVf-VE"
+        "demoYoutubeId": ""
       },
       {
         "key": "A",
         "name": {
-          "fr": "En construction.",
-          "en": "Under construction."
+          "fr": "Onde sonore",
+          "en": "Soundwave"
         },
-        "icon": "",
+        "icon": "assets/heroes/base_spells/lucio/images/spells/storm_ui_icon_lucio_soundwave.png",
         "description": {
-          "fr": "En construction.",
-          "en": "Under construction."
+          "fr": "Repousse les ennemis et leur inflige des dégats.",
+          "en": "Pushes enemies back and deals damage to them."
         },
-        "demoYoutubeId": "ysz5S6PUM-U"
+        "demoYoutubeId": ""
       },
       {
         "key": "Z",
         "name": {
-          "fr": "En construction.",
-          "en": "Under construction."
+          "fr": "Crossfade",
+          "en": "Crossfade"
         },
-        "icon": "",
+        "icon": "assets/heroes/base_spells/lucio/images/spells/storm_ui_icon_lucio_crossfade_all.png",
         "description": {
-          "fr": "En construction.",
-          "en": "Under construction."
+          "fr": "Diffuse l'un des deux Beats. Beat de soin : Soigne sur la durée Lúcio et ses alliés. Beat de vitesse : Augmente la vitesse de déplacement de Lúcio et ses alliés. ",
+          "en": "Plays one of the two Beats. Healing Beat: Heals Lúcio and his allies over time. Speed Beat: Increases the movement speed of Lúcio and his allies. "
         },
-        "demoYoutubeId": "ScMzIvxBSi4"
+        "demoYoutubeId": ""
       },
       {
         "key": "E",
         "name": {
-          "fr": "En construction.",
-          "en": "Under construction."
+          "fr": "Volume max.",
+          "en": "Amp It Up"
         },
-        "icon": "",
+        "icon": "assets/heroes/base_spells/lucio/images/spells/storm_ui_icon_lucio_ampitup.png",
         "description": {
-          "fr": "En construction.",
-          "en": "Under construction."
+          "fr": "Augmente le soin procuré par Beat de soin ou augmente la vitesse de déplacement procuré par Beat de vitesse pendant une courte durée.",
+          "en": "Increases the healing provided by \"Healing Beat\" or increases the movement speed provided by \"Speed Beat\" for a short time."
         },
-        "demoYoutubeId": "aqz-KE-bpKQ"
+        "demoYoutubeId": ""
       },
       {
         "key": "R1",
         "name": {
-          "fr": "En construction.",
-          "en": "Under construction."
+          "fr": "Mur du son",
+          "en": "Sound Barrier"
         },
-        "icon": "",
+        "icon": "assets/heroes/base_spells/lucio/images/spells/storm_ui_icon_lucio_soundbarrier.png",
         "description": {
-          "fr": "En construction.",
-          "en": "Under construction."
+          "fr": "Après une courte canalisation, applique un bouclier à Lúcio et ses alliés qui se réduit sur le temps.",
+          "en": "After a brief channeling period, grants Lúcio and his allies a shield that gradually diminishes over time."
         },
-        "demoYoutubeId": "M7lc1UVf-VE"
+        "demoYoutubeId": ""
       },
       {
         "key": "R2",
         "name": {
-          "fr": "En construction.",
-          "en": "Under construction."
+          "fr": "Top là",
+          "en": "High Five"
         },
-        "icon": "",
+        "icon": "assets/heroes/base_spells/lucio/images/spells/storm_ui_icon_lucio_highfive.png",
         "description": {
-          "fr": "En construction.",
-          "en": "Under construction."
+          "fr": "Lúcio va vers un allié pour le rendre Insensible et le soigner ainsi que lui-même. ",
+          "en": "Lúcio moves toward an ally to make him Invulnerable and heal both them and himself. "
         },
-        "demoYoutubeId": "ysz5S6PUM-U"
+        "demoYoutubeId": ""
+      },
+      {
+        "key": "",
+        "name": {
+          "fr": "Wall Ride",
+          "en": "Wall Ride"
+        },
+        "icon": "assets/heroes/base_spells/lucio/images/spells/storm_ui_icon_lucio_wallride.png",
+        "description": {
+          "fr": "Permet à Lúcio de glisser sur les décors de la carte, ce qui augmente sa vitesse de déplacement.",
+          "en": "Allows Lúcio to slide across the map's terrain, increasing his movement speed. "
+        },
+        "demoYoutubeId": ""
       }
     ],
     "tips": [
@@ -5524,11 +5523,11 @@ const HEROES = [
         "enabled": true,
         "order": 1,
         "label": {
-          "fr": "Build 1 (À venir)",
-          "en": "Build 1 (TBA)"
+          "fr": "Build recommandé",
+          "en": "Recommanded build"
         },
         "summary": {
-          "fr": "En construction.",
+          "fr": "LE seul build jouable",
           "en": "Under construction."
         },
         "buildCodeTitle": {
@@ -5536,52 +5535,7 @@ const HEROES = [
           "en": "PASTE IN TALENT TREE"
         },
         "buildCode": "",
-        "videos": [
-          {
-            "title": {
-              "fr": "Combo 1",
-              "en": "Combo 1"
-            },
-            "youtubeId": "M7lc1UVf-VE",
-            "desc": {
-              "fr": "En construction.",
-              "en": "Under construction."
-            }
-          },
-          {
-            "title": {
-              "fr": "Combo 2",
-              "en": "Combo 2"
-            },
-            "youtubeId": "ysz5S6PUM-U",
-            "desc": {
-              "fr": "En construction.",
-              "en": "Under construction."
-            }
-          },
-          {
-            "title": {
-              "fr": "Combo 3",
-              "en": "Combo 3"
-            },
-            "youtubeId": "ScMzIvxBSi4",
-            "desc": {
-              "fr": "En construction.",
-              "en": "Under construction."
-            }
-          },
-          {
-            "title": {
-              "fr": "Combo 4",
-              "en": "Combo 4"
-            },
-            "youtubeId": "aqz-KE-bpKQ",
-            "desc": {
-              "fr": "En construction.",
-              "en": "Under construction."
-            }
-          }
-        ],
+        "videos": [],
         "talents": [
           {
             "level": 1,
@@ -5681,7 +5635,7 @@ const HEROES = [
         }
       },
       {
-        "enabled": true,
+        "enabled": false,
         "order": 2,
         "label": {
           "fr": "Build 2 (À venir)",
@@ -5696,52 +5650,7 @@ const HEROES = [
           "en": "PASTE IN TALENT TREE"
         },
         "buildCode": "",
-        "videos": [
-          {
-            "title": {
-              "fr": "Combo 1",
-              "en": "Combo 1"
-            },
-            "youtubeId": "M7lc1UVf-VE",
-            "desc": {
-              "fr": "En construction.",
-              "en": "Under construction."
-            }
-          },
-          {
-            "title": {
-              "fr": "Combo 2",
-              "en": "Combo 2"
-            },
-            "youtubeId": "ysz5S6PUM-U",
-            "desc": {
-              "fr": "En construction.",
-              "en": "Under construction."
-            }
-          },
-          {
-            "title": {
-              "fr": "Combo 3",
-              "en": "Combo 3"
-            },
-            "youtubeId": "ScMzIvxBSi4",
-            "desc": {
-              "fr": "En construction.",
-              "en": "Under construction."
-            }
-          },
-          {
-            "title": {
-              "fr": "Combo 4",
-              "en": "Combo 4"
-            },
-            "youtubeId": "aqz-KE-bpKQ",
-            "desc": {
-              "fr": "En construction.",
-              "en": "Under construction."
-            }
-          }
-        ],
+        "videos": [],
         "talents": [
           {
             "level": 1,
@@ -5841,6 +5750,14 @@ const HEROES = [
         }
       }
     ],
-    "guideVideos": []
+    "guideVideos": [
+      {
+        "title": {
+          "fr": "Guide Express",
+          "en": "Guide Express"
+        },
+        "youtubeId": "https://youtu.be/lA3w9KGURrg"
+      }
+    ]
   }
 ];
