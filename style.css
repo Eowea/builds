@@ -134,20 +134,55 @@
        HEADER
        ═══════════════════════════════ */
     .topbar {
-      display: none !important;
-      flex-wrap: wrap;
-      justify-content: space-between;
+      display: flex !important;
+      position: relative;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       gap: 16px;
-      padding: 24px;
+      padding: 28px 24px;
       border-bottom: 2px solid var(--gold-dim);
+      border-radius: var(--radius-sm) var(--radius-sm) 0 0;
     }
 
-    .brand-block { 
-      flex: 1 1 300px;
+    /* Rattache visuellement la barre d'outils juste sous le header (annule le gap du .page),
+       sans les envelopper dans un conteneur commun : le sticky de .toolbar doit rester
+       relatif à .page (sinon il ne peut coller que dans les limites de son parent direct). */
+    .topbar + .toolbar {
+      margin-top: -16px;
+      border-top: none;
+      border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    }
+
+    .home-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--blue-border);
+      border-radius: 4px;
+      color: var(--blue);
+      background: rgba(0, 229, 255, 0.05);
+      text-decoration: none;
+      transition: all var(--t);
+      flex-shrink: 0;
+    }
+
+    .home-btn svg { width: 22px; height: 22px; }
+
+    .home-btn:hover {
+      color: var(--blue-bright);
+      border-color: var(--blue-bright);
+      background: rgba(0, 229, 255, 0.12);
+      box-shadow: 0 0 12px var(--blue-glow);
+    }
+
+    .brand-block {
       display: flex;
       flex-direction: column;
-      gap: 14px; 
-      align-content: start; 
+      align-items: center;
+      text-align: center;
     }
 
     .desktop-player {
@@ -171,26 +206,13 @@
       font-weight: 700;
     }
 
-    .eyebrow {
-      font-size: 14px;
-      color: var(--blue);
-      text-shadow: 0 0 10px var(--blue-glow);
-    }
-
-    .title-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
     .site-title {
       font-family: 'Metronic for Blizzard', 'Rajdhani', serif;
       font-size: clamp(30px, 5vw, 56px);
       font-weight: 900;
       line-height: 1;
       letter-spacing: .02em;
+      text-transform: uppercase;
       background: linear-gradient(to bottom, #fff, var(--gold-bright), var(--gold));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -198,50 +220,86 @@
       transform: translateZ(0);
     }
 
-    .site-subtitle {
-      margin-top: 10px;
-      color: var(--text-dim);
-      font-size: 14px;
-      line-height: 1.6;
-      max-width: 62ch;
+    .site-logo-img {
+      display: block;
+      max-height: 72px;
+      width: auto;
+      max-width: 100%;
     }
 
-    /* ── Header Actions (Socials + Lang) ── */
-    .header-actions {
+    .header-nav {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .header-nav-link {
+      display: inline-flex;
+      align-items: center;
+      height: 34px;
+      padding: 0 18px;
+      font-family: 'Metronic for Blizzard', 'Rajdhani', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-bright);
+      text-decoration: none;
+      background: rgba(0, 229, 255, 0.08);
+      border: 1px solid var(--blue-border);
+      border-radius: 2px;
+      transition: all var(--t);
+    }
+
+    .header-nav-link:hover {
+      color: var(--gold-bright);
+      background: rgba(248, 183, 0, 0.12);
+      border-color: var(--gold-border);
+      box-shadow: 0 0 10px var(--gold-glow);
+    }
+
+    /* ── Header Actions (Lang switcher, bottom-right) ── */
+    .header-actions {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      display: flex;
+      align-items: center;
       gap: 12px;
       flex-wrap: wrap;
       justify-content: flex-end;
     }
 
-    /* ── Social links ── */
-    .socials { display: flex; gap: 8px; flex-wrap: wrap; }
+    /* ── Social links (icônes seules, bottom-left) ── */
+    .socials {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
 
     .social-link {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      height: 40px;
-      padding: 0 16px;
-      border-radius: 2px;
-      border: 1px solid var(--blue-border);
-      background: rgba(0, 229, 255, 0.05);
-      font-family: 'Metronic for Blizzard', 'Rajdhani', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      color: var(--text-dim);
       cursor: pointer;
-      transition: all var(--t);
+      transition: color var(--t), text-shadow var(--t), transform var(--t);
     }
     .social-link:hover {
-      background: var(--blue-soft);
-      border-color: var(--blue);
-      box-shadow: 0 0 15px var(--blue-glow);
       color: var(--blue-bright);
+      text-shadow: 0 0 10px var(--blue-glow);
+      transform: translateY(-1px);
     }
-    .social-link svg { width: 14px; height: 14px; }
+    .social-link svg { width: 20px; height: 20px; }
+    .social-link span { display: none; }
 
 
     .twitch-head {
@@ -1103,7 +1161,8 @@
     .combo-slide-title {
       font-family: 'Metronic for Blizzard', 'Rajdhani', sans-serif; text-transform: uppercase; letter-spacing: 0.06em;
       font-size: 15px; font-weight: 700; color: var(--gold); text-align: center;
-      margin-bottom: 10px; overflow-wrap: break-word;
+      margin-bottom: 10px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
     .combo-stage {
       position: relative; aspect-ratio: 16 / 9; width: 100%; background: #000;
@@ -1242,10 +1301,10 @@
       .toolbar { top: 8px; } /* Ajuste l'espacement flottant sur petit écran */
       
       .topbar { text-align: center; }
+      .home-btn { width: 38px; height: 38px; }
+      .home-btn svg { width: 19px; height: 19px; }
       .brand-block { justify-items: center; text-align: center; }
-      .title-row { flex-direction: column; align-items: center; justify-content: center; width: 100%; gap: 12px; }
-      .site-title { font-size: clamp(28px, 8vw, 36px); text-align: center; } 
-      .site-subtitle { text-align: center; margin: 0 auto; }
+      .site-title { font-size: clamp(28px, 8vw, 36px); text-align: center; }
       .header-actions { justify-content: center; flex-direction: column-reverse; align-items: center; width: 100%; }
       .socials { justify-content: center; width: 100%; }
       
@@ -1300,142 +1359,6 @@
       .social-link { flex: 1 1 100%; }
     }
 
-    /* ── Random Build Card ── */
-    .random-build-card {
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      border: 1px solid var(--blue-border);
-      background: var(--bg-1);
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-    }
-
-    .random-card-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--blue-border);
-      background: linear-gradient(90deg, rgba(0, 229, 255, 0.1), transparent);
-      color: var(--blue-bright);
-      font-family: 'Metronic for Blizzard', 'Rajdhani', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-    }
-
-    .random-card-body {
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      flex-grow: 1;
-    }
-
-    .random-hero-row {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-/* --- PORTRAIT DANS LA LIGNE DU BUILD ALÉATOIRE --- */
-.random-hero-row .portrait {
-  width: 48px;
-  height: 48px;
-  flex-shrink: 0;
-  
-  /* 1. On utilise une couleur de bordure plus discrète (semi-transparente) */
-  background: var(--gold-bright) !important; 
-  
-  clip-path: var(--hex-clip);
-  
-  /* 2. Bordure */
-  padding: 2px !important; 
-  
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none !important; /* Sécurité pour enlever toute bordure navigateur */
-}
-
-.random-hero-row .portrait img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  clip-path: var(--hex-clip);
-  
-  /* 3. LE FIX : On force un fond sombre sur l'image pour masquer le jaune du dessous */
-  background: #0d131f !important; 
-  
-  display: block;
-  
-  /* Optimisation netteté */
-  transform: translateZ(0);
-  image-rendering: auto;
-}
-
-    .random-meta .name {
-      font-family: 'Metronic for Blizzard', 'Rajdhani', sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--text-bright);
-      line-height: 1;
-      text-transform: uppercase;
-    }
-    .random-meta .role {
-      font-size: 12px;
-      color: var(--blue);
-      font-family: 'Metronic for Blizzard', 'Rajdhani', sans-serif;
-      text-transform: uppercase;
-    }
-
-    .random-build-label {
-      font-family: 'Metronic for Blizzard', 'Rajdhani', serif;
-      font-size: 14px;
-      color: var(--gold-bright);
-      margin: 4px 0;
-      font-weight: 800; /* Nom du build en gras */
-      text-transform: uppercase;
-    }
-
-    .random-talents-strip {
-      display: flex;
-      justify-content: space-between;
-      gap: 4px;
-      margin-top: 8px;
-    }
-
-    .random-talents-strip .talent-trigger {
-      width: 34px;
-      height: 34px;
-      padding: 1px;
-    }
-
-    .btn-suggest {
-      width: 100%;
-      margin-top: auto;
-      height: 36px;
-      background: var(--blue-soft);
-      border: 1px solid var(--blue-border);
-      color: var(--blue-bright);
-      font-family: 'Metronic for Blizzard', 'Rajdhani', sans-serif;
-      font-weight: 700;
-      text-transform: uppercase;
-      font-size: 12px;
-      cursor: pointer;
-      transition: all var(--t);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .btn-suggest:hover {
-      background: rgba(0, 229, 255, 0.15);
-      border-color: var(--blue);
-      box-shadow: 0 0 15px var(--blue-glow);
-    }
 /* --- TEST VUE GRILLE (Avec nom au-dessus du portrait) --- */
 .hero-list {
   display: grid !important;
@@ -1518,277 +1441,45 @@
   height: 14px; 
   color: var(--gold-dim); 
 }
-/* ==========================================================================
-   COULEURS DES RÉSEAUX SOCIAUX
-   ========================================================================== */
-
-/* Twitch (Violet) */
-.social-link[data-network="twitch"] {
-    background-color: #9146FF;
-    border-color: #9146FF;
-    color: #FFFFFF;
-}
-.social-link[data-network="twitch"]:hover {
-    background-color: #772ce8; /* Un peu plus sombre au survol */
-    border-color: #772ce8;
-}
-
-/* YouTube (Rouge) */
-.social-link[data-network="youtube"] {
-    background-color: #FF0000;
-    border-color: #FF0000;
-    color: #FFFFFF;
-}
-.social-link[data-network="youtube"]:hover {
-    background-color: #cc0000;
-    border-color: #cc0000;
-}
-
-/* Discord (Bleu) */
-.social-link[data-network="discord"] {
-    background-color: #5865F2;
-    border-color: #5865F2;
-    color: #FFFFFF;
-}
-.social-link[data-network="discord"]:hover {
-    background-color: #4752c4;
-    border-color: #4752c4;
-}
-
-/* Ko-fi (Corail / Rouge) */
-.social-link[data-network="kofi"] {
-    background-color: #FF5E5B;
-    border-color: #FF5E5B;
-    color: #FFFFFF;
-}
-.social-link[data-network="kofi"]:hover {
-    background-color: #e54b48;
-    border-color: #e54b48;
-}
-
-/* X / Twitter (Noir) */
-.social-link[data-network="x"] {
-    background-color: #111111; /* Presque noir pour bien contraster avec le fond du site */
-    border-color: #333333;
-    color: #FFFFFF;
-}
-.social-link[data-network="x"]:hover {
-    background-color: #222222;
-    border-color: #444444;
-}
-
-/* Fixer le switch de langue à droite */
-
-.center-random-container {
-  padding: 10px;
-  animation: fadeIn 0.3s ease-out; /* Petite animation d'apparition douce */
-}
-
-.center-random-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 colonnes par défaut */
-  gap: 20px; /* Espace entre les builds */
-}
-
-/* On force un fond sur les cartes pour qu'elles se détachent du fond principal */
-.center-random-card {
-  background-color: rgba(25, 27, 35, 0.6); 
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  padding: 20px;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.center-random-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
 
 /* ==========================================================================
-   SÉLECTEUR DE LANGUE (Drapeaux - Fixe PC & Mobile)
+   SÉLECTEUR DE LANGUE (Drapeaux - dans le header)
    ========================================================================== */
-#langSwitcher {
-    position: fixed !important;
-    top: 50% !important;
-    right: 8px !important; /* On les décolle un tout petit peu du bord de l'écran */
-    transform: translateY(-50%) !important;
-    z-index: 10000 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px !important; /* Espace entre les drapeaux */
-    
-    /* SUPPRESSION DE L'ENCADRÉ ICI */
-    background: transparent !important; 
-    border: none !important;
-    padding: 0 !important;
-    
-    list-style: none !important; 
-    margin: 0 !important;
-    pointer-events: none !important; /* Laisse passer les clics autour */
+.lang-switcher {
+    display: flex;
+    gap: 8px;
 }
 
 .lang-btn {
-    width: 40px !important; 
-    height: 28px !important; 
-    padding: 0 !important;
-    border: 1px solid var(--blue-border) !important;
-    background: transparent !important;
+    width: 26px;
+    height: 18px;
+    padding: 0;
+    border: 1px solid var(--blue-border);
+    background: transparent;
     cursor: pointer;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: all var(--t);
-    border-radius: 2px !important;
-    overflow: hidden !important;
+    border-radius: 2px;
+    overflow: hidden;
     opacity: 0.8;
-    flex-shrink: 0 !important; /* Empêche les drapeaux de devenir des points ! */
-    text-decoration: none !important;
+    flex-shrink: 0;
+    text-decoration: none;
 }
 
 .lang-btn img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    display: block !important;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .lang-btn:hover {
     transform: scale(1.05);
     opacity: 1;
-    border-color: var(--blue-bright) !important;
-    box-shadow: 0 0 10px var(--blue-glow) !important;
-}
-
-/* ==========================================================================
-   1. Conteneur des réseaux (PC & Mobile)
-   ========================================================================== */
-#socials {
-    position: fixed;
-    top: 50%; 
-    left: 0;  
-    transform: translateY(-50%); 
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-/* 2. Bouton de base */
-#socials .social-link {
-    display: flex;
-    align-items: center;
-    height: 44px;
-    width: 44px; 
-    padding: 0 13px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 0 4px 4px 0; 
-    color: #ffffff;
-    text-decoration: none;
-    transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), background 0.3s ease, opacity 0.3s ease;
-    overflow: hidden;
-    cursor: pointer;
-    opacity: 0.7; 
-    box-sizing: border-box;
-    outline: none;
-    -webkit-tap-highlight-color: transparent; /* Supprime le flash de sélection bleu sur mobile */
-}
-
-/* 3. Couleurs pleines appliquées au repos */
-#socials .social-link[data-network="twitch"] { background: #9146FF; }
-#socials .social-link[data-network="youtube"] { background: #FF0000; }
-#socials .social-link[data-network="discord"] { background: #5865F2; }
-#socials .social-link[data-network="x"] { background: #111111; }
-#socials .social-link[data-network="kofi"] { background: #FF5E5B; }
-
-/* 4. Icône et Texte */
-#socials .social-link svg {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-    fill: currentColor;
-}
-
-#socials .social-link span {
-    margin-left: 14px;
-    font-family: 'Metronic for Blizzard', 'Rajdhani', sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 13px;
-    opacity: 0; 
-    white-space: nowrap;
-    transition: opacity 0.2s ease 0.1s; 
-    display: inline-block;
-}
-
-/* ==========================================================================
-   5. GESTION DE L'OUVERTURE (Séparation PC / Mobile)
-   ========================================================================== */
-
-/* Sur PC : Le survol de la souris gère l'ouverture classique */
-@media (min-width: 769px) {
-    #socials .social-link:hover {
-        width: 150px;
-        opacity: 1;
-        border-color: rgba(255, 255, 255, 0.3);
-    }
-    #socials .social-link:hover span {
-        opacity: 1;
-    }
-}
-
-/* Sur Mobile : On utilise la classe .is-open gérée par le script JavaScript */
-@media (max-width: 768px) {
-    
-
-    /* --- 2. RÉSEAUX SOCIAUX --- */
-    #socials .social-link {
-        width: 36px !important;  
-        height: 40px !important; 
-        padding: 0 !important;
-        padding-left: 10px !important; /* Pousse l'icône exactement au centre du petit carré */
-        flex: 0 0 auto !important; 
-        
-        /* CORRIGE LE BUG DE L'ICÔNE : force le contenu à s'aligner à gauche pour que le texte invisible ne pousse pas l'icône dehors */
-        justify-content: flex-start !important; 
-    }
-    
-    /* Ajustement de l'icône */
-    #socials .social-link svg {
-        width: 16px !important;
-        height: 16px !important;
-        margin: 0 !important;
-    }
-
-    /* Ajustement du texte */
-    #socials .social-link span {
-        margin-left: 10px !important;
-        font-size: 12px !important;
-    }
-
-    /* --- 3. COMPORTEMENT À L'OUVERTURE (1 Tap) --- */
-    #socials .social-link.is-open {
-        width: 130px !important; /* Ne prend pas tout l'écran */
-        opacity: 1 !important;
-        border-color: rgba(255, 255, 255, 0.3) !important;
-    }
-    
-    #socials .social-link.is-open span {
-        opacity: 1 !important;
-    }
-}
-/* ==========================================================================
-   CORRECTION DES ZONES MORTES (Clics bloqués sur les bords)
-   ========================================================================== */
-/* 1. On désactive les clics sur les grandes "boîtes invisibles" qui contiennent les boutons */
-#socials, 
-#langSwitcher {
-    pointer-events: none !important;
-}
-
-/* 2. On réactive les clics UNIQUEMENT sur les vrais boutons colorés/drapeaux */
-#socials .social-link, 
-#langSwitcher .lang-btn {
-    pointer-events: auto !important;
+    border-color: var(--blue-bright);
+    box-shadow: 0 0 10px var(--blue-glow);
 }
 .new-badge {
     position: absolute;

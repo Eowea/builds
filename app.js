@@ -35,15 +35,15 @@
       lastUpdate: { fr: "Dernière mise à jour :", en: "Last updated:" },
       defaultBuildCodeTitle: { fr: "À COLLER DANS L'ARBRE DES TALENTS", en: "PASTE INTO TALENT TREE" },
       emptyTalents: { fr: "Aucun talent dans ce build.", en: "No talents in this build." },
-      emptySelection: { fr: "Sélectionne un héros dans la liste.", en: "Select a hero from the list." },
       gameplay: { fr: "Gameplay", en: "Gameplay" },
       tips: { fr: "Conseils", en: "Tips" },
       descUnavailable: { fr: "Description indisponible.", en: "Description unavailable." },
       loading: { fr: "Chargement...", en: "Loading..." },
       invalidId: { fr: "ID YouTube invalide", en: "Invalid YouTube ID" },
       loadError: { fr: "Impossible de charger la vidéo", en: "Cannot load the video" },
-      randomBuildTitle: { fr: "Proposition de build", en: "Suggested Build" },
-      viewBuild: { fr: "Voir ce build", en: "View Build" },
+      latestVideoTitle: { fr: "Dernières vidéos", en: "Latest Videos" },
+      patchAnalysisTitle: { fr: "Analyses Patch", en: "Patch Analyses" },
+      noVideosYet: { fr: "Aucune vidéo pour le moment.", en: "No videos yet." },
       copySuccess: { fr: "Build copié !", en: "Build copied!" },
       copyError: { fr: "Copie impossible", en: "Copy failed" },
       copyHint: { fr: "Clique pour copier", en: "Click to copy" },
@@ -76,9 +76,10 @@ const getInitialLang = () => {
     let activeFloatingTrigger = null, hideTooltipTimer = null, tooltipRaf = 0, layoutRaf = 0;
 
     const $ = id => document.getElementById(id);
-    const els = { siteTitle: $('siteTitle'), siteSubtitle: $('siteSubtitle'), socials: $('socials'), desktopTwitchMount: $('desktopTwitchMount'), mobileTwitchMount: $('mobileTwitchMount'), desktopTwitchCard: $('desktopTwitchCard'), toggleTwitch: $('toggleTwitch'), searchInput: $('searchInput'), resultsCount: $('resultsCount'), roleFilters: $('roleFilters'), heroList: $('heroList'), detailView: $('detailView'), tooltipPortal: $('tooltipPortal'), videoOverlay: $('videoOverlay'), closeOverlayBtn: $('closeOverlayBtn'), overlayStatusText: $('overlayStatusText'), expandedYoutube: $('expandedYoutube'), expandedMedia: $('expandedMedia'), langSwitcher: $('langSwitcher') };
+    const els = { siteTitle: $('siteTitle'), headerNav: $('headerNav'), socials: $('socials'), desktopTwitchMount: $('desktopTwitchMount'), mobileTwitchMount: $('mobileTwitchMount'), desktopTwitchCard: $('desktopTwitchCard'), toggleTwitch: $('toggleTwitch'), searchInput: $('searchInput'), resultsCount: $('resultsCount'), roleFilters: $('roleFilters'), heroList: $('heroList'), detailView: $('detailView'), tooltipPortal: $('tooltipPortal'), videoOverlay: $('videoOverlay'), closeOverlayBtn: $('closeOverlayBtn'), overlayStatusText: $('overlayStatusText'), expandedYoutube: $('expandedYoutube'), expandedMedia: $('expandedMedia'), langSwitcher: $('langSwitcher'), homeBtn: $('homeBtn') };
 
     /* ── Utilities ── */
+    const escapeHtml = (s) => (s ?? '').toString().replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     const loc = (val) => (val && typeof val === 'object' && !Array.isArray(val)) ? (val[state.lang] !== undefined ? val[state.lang] : (val['fr'] || '')) : (val || '');
 
 function getHeroStateSignature(hero) {
@@ -161,6 +162,35 @@ function markEverythingAsSeen(hero) {
     function ytPreview(id) { return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?${new URLSearchParams({autoplay:'1',mute:'1',controls:'0',rel:'0',modestbranding:'1',playsinline:'1',disablekb:'1',fs:'0',iv_load_policy:'3'})}`; }
     function ytMini(id) { return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?${new URLSearchParams({autoplay:'1',mute:'1',controls:'0',rel:'0',modestbranding:'1',playsinline:'1',loop:'1',playlist:id,disablekb:'1',fs:'0',iv_load_policy:'3'})}`; }
 
+    // Force l'ouverture de l'application YouTube sur mobile si elle est installée. Un simple
+    // lien https en target="_blank" ne suffit pas partout (ex: Opera GX Mobile n'intercepte
+    // pas toujours les liens youtube.com pour proposer l'appli) : on passe donc par les
+    // mécanismes natifs de chaque OS, avec repli sur la page web si l'appli n'est pas installée.
+    function openYoutubeForceApp(id) {
+      const fallbackUrl = `https://www.youtube.com/watch?v=${id}`;
+      const ua = navigator.userAgent || '';
+      if (/Android/i.test(ua)) {
+        // intent:// est un mécanisme Chromium (supporté par Chrome, Opera, Edge...) qui
+        // déclenche l'Intent Android pour l'appli YouTube, avec repli intégré (S.browser_fallback_url).
+        window.location.href = `intent://www.youtube.com/watch?v=${id}#Intent;package=com.google.android.youtube;scheme=https;S.browser_fallback_url=${encodeURIComponent(fallbackUrl)};end;`;
+        return;
+      }
+      if (/iPhone|iPad|iPod/i.test(ua)) {
+        // Pas de mécanisme de repli intégré pour un schéma personnalisé côté iOS : on bascule
+        // nous-mêmes sur la page web si l'appli ne s'est pas ouverte après un court délai.
+        let appOpened = false;
+        const onHide = () => { appOpened = true; };
+        document.addEventListener('visibilitychange', onHide, { once: true });
+        window.location.href = `vnd.youtube://www.youtube.com/watch?v=${id}`;
+        setTimeout(() => {
+          document.removeEventListener('visibilitychange', onHide);
+          if (!appOpened) window.location.href = fallbackUrl;
+        }, 1200);
+        return;
+      }
+      window.location.href = fallbackUrl;
+    }
+
     const visibleHeroes = () => HEROES.filter(h=>h.enabled!==false);
     const roles = () =>['all',...new Set(visibleHeroes().map(h=>h.role))];
     function filteredHeroes() { const q=normalize(state.search); return visibleHeroes().filter(h=>(state.role==='all'||h.role===state.role)&&(!q||normalize(loc(h.name)).includes(q))).sort((a,b)=>loc(a.name).localeCompare(loc(b.name),state.lang,{sensitivity:'base'})); }
@@ -187,10 +217,14 @@ function markEverythingAsSeen(hero) {
       document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === state.lang));
     }
 
-    function renderHeader() { 
-      els.siteTitle.textContent = loc(STREAMER_CONFIG.siteTitle); 
-      els.siteSubtitle.textContent = loc(STREAMER_CONFIG.siteSubtitle); 
+    function renderHeader() {
+      if (STREAMER_CONFIG.logoImage) {
+        els.siteTitle.innerHTML = `<img class="site-logo-img" src="${escapeHtml(STREAMER_CONFIG.logoImage)}" alt="${escapeHtml(loc(STREAMER_CONFIG.siteTitle))}" />`;
+      } else {
+        els.siteTitle.textContent = loc(STREAMER_CONFIG.siteTitle);
+      }
       els.socials.innerHTML = STREAMER_CONFIG.socials.map(s=>`<a class="social-link" data-network="${s.icon}" href="${s.url}" target="_blank" rel="noreferrer">${ICONS[s.icon]||''}<span>${s.label}</span></a>`).join('');
+      els.headerNav.innerHTML = (STREAMER_CONFIG.navLinks || []).filter(l => l.enabled !== false).map(l => `<a class="header-nav-link" href="${escapeHtml(l.url || '#')}"${l.newTab ? ' target="_blank" rel="noreferrer"' : ''}>${escapeHtml(loc(l.label))}</a>`).join('');
     }
     
     function renderFilters() { els.roleFilters.innerHTML=roles().map(r=>`<button class="filter-chip${state.role===r?' active':''}" type="button" data-role="${r}">${locRole(r)}</button>`).join(''); }
@@ -254,6 +288,22 @@ function renderSpells(sp=[]) {
       if(!sp.length) return '';
       return `<div class="spell-strip">${sp.map(s=>`<div class="spell-item">${ftHTML({cls:'spell-trigger floating-trigger',title:s.name,desc:s.description,demoId:s.demoYoutubeId||s.demoYoutubeUrl,inner:`<div class="spell-icon" data-fallback="${esc(uiSpellKey(s.key)||initials(loc(s.name)))}"><img src="${s.icon||svgBadge(loc(s.name))}" alt="${esc(loc(s.name))}" loading="lazy" onerror="this.parentNode.classList.add('fallback');this.remove();" /></div>`})}<div class="spell-name">${esc(uiSpellKey(s.key)||'')}</div></div>`).join('')}</div>`;
     }
+function resolveBuildTalents(hero, build) {
+  // Nouveau format : le héros a un "réservoir" de talents (hero.talentPool), et chaque
+  // build ne stocke qu'une sélection (quel talent est principal / alternatif par palier).
+  // On reconstruit ici la même forme qu'avant (un tableau de talents avec .alternatives)
+  // pour que le reste du site n'ait rien à changer.
+  if (Array.isArray(build.talentSelections) && Array.isArray(hero?.talentPool) && hero.talentPool.length) {
+    return build.talentSelections.map(sel => {
+      const primary = hero.talentPool.find(p => p.id === sel.primaryId);
+      if (!primary) return null;
+      const alternatives = (sel.alternativeIds || []).map(id => hero.talentPool.find(p => p.id === id)).filter(Boolean);
+      return { ...primary, alternatives };
+    }).filter(Boolean);
+  }
+  // Ancien format (rétrocompatibilité) : les talents sont écrits en entier dans le build.
+  return Array.isArray(build.talents) ? build.talents : [];
+}
 function renderTalentBoard(ts=[]) { 
       if(!ts.length) return `<div class="empty-state">${t('emptyTalents')}</div>`; 
       
@@ -345,20 +395,30 @@ function renderBuildCode(b) {
       return [];
     }
     function hasGuide(h) { return getGuideVideos(h).some(g => parseYouTubeId(g?.youtubeId||g?.youtubeUrl||g?.url||'')); }
-function renderGuide(h) {
-  const slides = getGuideVideos(h)
-    .map(g => ({ g, id: parseYouTubeId(g?.youtubeId||g?.youtubeUrl||g?.url||'') }))
+// Construit le carrousel de vignettes YouTube (utilisé par le guide d'un héros, et par les
+// sections "Dernière vidéo" / "Analyse Patchs" de la page d'accueil). `videos` est une liste
+// d'objets {title:{fr,en}, youtubeId}.
+function buildYoutubeCarouselMarkup(videos) {
+  const slides = (videos||[])
+    .map(v => ({ v, id: parseYouTubeId(v?.youtubeId||v?.youtubeUrl||v?.url||'') }))
     .filter(x => x.id);
   if (!slides.length) return '';
 
+  // Sur téléphone, on ouvre le lien dans le même onglet (pas de target="_blank") : c'est ce
+  // qui permet à l'OS d'intercepter le lien youtube.com et de forcer l'ouverture de
+  // l'application YouTube si elle est installée. Un target="_blank" (nouvel onglet) empêche
+  // cette interception sur mobile. Sur PC, on garde l'ouverture dans un nouvel onglet.
+  const isTouchLike = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+  const linkAttrs = isTouchLike ? '' : ' target="_blank" rel="noopener noreferrer"';
+
   const slidesHtml = slides.map((x, idx) => `
     <div class="combo-slide${idx===0?' is-active':''}" data-index="${idx}">
-      <div class="combo-slide-title">${esc(loc(x.g.title) || 'Guide')}</div>
-      <a class="combo-stage guide-stage-link" href="https://www.youtube.com/watch?v=${x.id}" target="_blank" rel="noopener noreferrer">
-        <img class="combo-poster" src="${ytThumb(x.id)}" alt="${esc(loc(x.g.title))}" loading="lazy" />
+      <div class="combo-slide-title">${esc(loc(x.v.title) || 'Guide')}</div>
+      <a class="combo-stage guide-stage-link" data-yt-id="${x.id}" href="https://www.youtube.com/watch?v=${x.id}"${linkAttrs}>
+        <img class="combo-poster" src="${ytThumb(x.id)}" alt="${esc(loc(x.v.title))}" loading="lazy" />
         ${APP_CONFIG.showGuideBadge ? '<span class="youtube-badge">guide</span>' : ''}
         <span class="youtube-play"></span>
-        ${x.g.duration ? `<span class="video-duration-badge">${esc(x.g.duration)}</span>` : ''}
+        ${x.v.duration ? `<span class="video-duration-badge">${esc(x.v.duration)}</span>` : ''}
       </a>
     </div>
   `).join('');
@@ -367,7 +427,12 @@ function renderGuide(h) {
     <button class="combo-nav next" type="button" aria-label="${t('nextVideo')}">&#10095;</button>
     <div class="combo-dots">${slides.map((_,idx)=>`<span class="combo-dot${idx===0?' is-active':''}" data-dot="${idx}"></span>`).join('')}</div>
   ` : '';
-  return `<section class="video-group guide-video-section"><div class="combo-carousel">${slidesHtml}${navHtml}</div></section>`;
+  return `<div class="combo-carousel">${slidesHtml}${navHtml}</div>`;
+}
+function renderGuide(h) {
+  const markup = buildYoutubeCarouselMarkup(getGuideVideos(h));
+  if (!markup) return '';
+  return `<section class="video-group guide-video-section">${markup}</section>`;
 }
     function renderVideoCards(vs) {
       if(!vs?.length) return '';
@@ -431,82 +496,36 @@ const tabsHtml = sortedBuildIndices.map(i => {
     ? `<div class="build-date"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> ${t('lastUpdate')} ${esc(loc(b.updatedAt))}</div>` 
     : '';
   
-  el.innerHTML=`<div class="build-tabs">${tabsHtml}</div>${dateHtml}<div class="build-summary">${esc(loc(b.summary))}</div>${renderTalentBoard(b.talents)}${renderBuildCode(b)}${renderBuildVideos(hero,b)}`;
+  el.innerHTML=`<div class="build-tabs">${tabsHtml}</div>${dateHtml}<div class="build-summary">${esc(loc(b.summary))}</div>${renderTalentBoard(resolveBuildTalents(hero,b))}${renderBuildCode(b)}${renderBuildVideos(hero,b)}`;
   bindFloatingTriggers();
   bindComboCarousel();
   queueLayoutSync();
 }
 
-let cachedFourBuilds = null;
+function renderHomeVideoSections() {
+  const latestMarkup = buildYoutubeCarouselMarkup(STREAMER_CONFIG.latestVideos || []);
+  const patchMarkup = buildYoutubeCarouselMarkup(STREAMER_CONFIG.patchVideos || []);
 
-function renderFourRandomBuildsHtml() {
-  if (!cachedFourBuilds) {
-    const activeHeroes = HEROES.filter(h => h.enabled !== false && h.builds && h.builds.length > 0);
-    let pool = [];
-    if (activeHeroes.length > 0) {
-      activeHeroes.forEach(hero => {
-        hero.builds.filter(b => b.enabled !== false).forEach((build, bIdx) => {
-          pool.push({ hero, build, bIdx });
-        });
-      });
-      // Mélange aléatoire (shuffle) de tous les builds existants
-      for (let i = pool.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [pool[i], pool[j]] = [pool[j], pool[i]];
-      }
-    }
-    // On garde les 4 premiers
-    cachedFourBuilds = pool.slice(0, 4);
-  }
+  const col = (titleKey, markup) => `
+    <div class="video-group">
+      <h2 class="section-title" style="text-align:center;margin-bottom:16px;">${t(titleKey)}</h2>
+      ${markup ? `<section class="guide-video-section">${markup}</section>` : `<div class="empty-state">${t('noVideosYet')}</div>`}
+    </div>`;
 
-  if (!cachedFourBuilds.length) return `<div class="empty-state">${t('emptySelection')}</div>`;
-
-  let html = `<div class="center-random-container">`;
-  html += `<h2 class="section-title" style="text-align: center; margin-bottom: 25px;">${t('randomBuildTitle')}</h2>`;
-  html += `<div class="center-random-grid">`;
-  
-  cachedFourBuilds.forEach(item => {
-    const { hero, build, bIdx } = item;
-    // On réutilise l'esthétique de ta carte aléatoire existante
-    html += `
-      <div class="random-card-body center-random-card">
-        <div class="random-hero-row">
-          <div class="portrait"><img src="${hero.portrait}" alt=""></div>
-          <div class="random-meta">
-            <div class="name" style="font-size: 1.1rem;">${esc(loc(hero.name))}</div>
-            <div class="role" style="font-size: 0.85rem; opacity: 0.8;">${esc(locRole(hero.role))}</div>
-          </div>
-        </div>
-        <div class="random-build-label" style="margin: 15px 0;">${esc(loc(build.label))}</div>
-        <div class="random-talents-strip" style="margin-bottom: 20px;">
-          ${(build.talents || []).slice(0, 7).map(td => ftHTML({
-            cls: 'talent-trigger floating-trigger',
-            title: td.name,
-            desc: td.description,
-            inner: `<div class="talent-icon"><img src="${td.icon || svgBadge(loc(td.name))}"></div>`
-          })).join('')}
-        </div>
-        <button class="btn-suggest" onclick="window.goToBuild('${hero.id}', ${bIdx})">
-          ${t('viewBuild')}
-        </button>
-      </div>
-    `;
-  });
-  
-  html += `</div></div>`;
-  return html;
+  return `<div class="videos-layout with-guide">${col('latestVideoTitle', latestMarkup)}${col('patchAnalysisTitle', patchMarkup)}</div>`;
 }
 
 function renderDetail() { 
   hideFloatingTooltip(true); 
   const h=currentHero(); 
   
-  // NOUVEAUTÉ : Si aucun héros n'est sélectionné, on affiche les 4 builds !
+  // Si aucun héros n'est sélectionné, on affiche les carrousels "Dernière vidéo" / "Analyse Patchs".
   if(!h){
-    els.detailView.innerHTML = renderFourRandomBuildsHtml();
-    bindFloatingTriggers(); // Très important pour que les infobulles marchent au centre
+    els.detailView.innerHTML = renderHomeVideoSections();
+    bindFloatingTriggers();
+    bindComboCarousel();
     return;
-  } 
+  }
   
   clampBuildIndex(h); 
   els.detailView.innerHTML=`<section class="hero-header"><div class="detail-portrait" data-fallback="${esc(initials(loc(h.name)))}"><img src="${h.portrait}" alt="${esc(loc(h.name))}" loading="lazy" onerror="this.parentNode.classList.add('fallback');this.remove();" /></div><div><h2 class="detail-title">${esc(loc(h.name))}</h2><div class="role-badge">${esc(locRole(h.role))}</div><p class="detail-headline">${esc(loc(h.headline))}</p></div></section><section class="meta-grid"><article class="card"><div class="card-head">${t('gameplay')}</div><div class="card-body"><p>${esc(loc(h.gameplay))}</p>${renderSpells(h.spells)}</div></article><article class="card"><div class="card-head">${t('tips')}</div><div class="card-body"><ul class="bullet-list">${(h.tips||[]).map(tip=>`<li>${esc(loc(tip))}</li>`).join('')}</ul></div></article></section><div id="buildSection"></div>`; 
@@ -678,7 +697,7 @@ function bindFloatingTriggers(root = document) {
       if (v.readyState >= 2) doWarm();
       else v.addEventListener('loadeddata', doWarm, { once: true });
     }
-function bindComboCarousel() {
+    function bindComboCarousel() {
       els.detailView.querySelectorAll('.combo-carousel').forEach(carousel => {
         if (carousel.dataset.bound) return;
         carousel.dataset.bound = '1';
@@ -687,103 +706,66 @@ function bindComboCarousel() {
         const dots = [...carousel.querySelectorAll('.combo-dot')];
         const prevBtn = carousel.querySelector('.combo-nav.prev');
         const nextBtn = carousel.querySelector('.combo-nav.next');
-        
         let active = 0;
-        let autoPlayInterval = null;
-        const isGuideCarousel = carousel.closest('.guide-video-section');
 
         function goTo(idx) {
-          // Calcul du nouvel index avec bouclage
-          let newIdx = idx;
-          if (idx < 0) newIdx = slides.length - 1;
-          if (idx >= slides.length) newIdx = 0;
-          
-          // Si on est déjà sur la slide, on ne fait rien
-          if (newIdx === active && slides[active].classList.contains('is-active')) return;
-
-          // Arrêt du média sur l'ancienne slide
+          if (idx < 0) idx = slides.length - 1;
+          if (idx >= slides.length) idx = 0;
+          if (idx === active) return;
           stopSlideMedia(slides[active]);
           slides[active].classList.remove('is-active');
-          if (dots[active]) dots[active].classList.remove('is-active');
-
-          // Mise à jour de l'index global
-          active = newIdx;
-
-          // Activation de la nouvelle slide
+          dots[active]?.classList.remove('is-active');
+          active = idx;
           slides[active].classList.add('is-active');
-          if (dots[active]) dots[active].classList.add('is-active');
-          
+          dots[active]?.classList.add('is-active');
           warmUpVideoFrame(slides[active]);
         }
-
-        // --- GESTION DU DÉFILEMENT AUTO ---
-        function startAutoPlay() {
-          if (!isGuideCarousel || slides.length <= 1) return;
-          stopAutoPlay(); // Sécurité : on nettoie avant de lancer
-          autoPlayInterval = setInterval(() => {
-            goTo(active + 1);
-          }, 5000); 
-        }
-
-        function stopAutoPlay() {
-          if (autoPlayInterval) {
-            clearInterval(autoPlayInterval);
-            autoPlayInterval = null;
-          }
-        }
-
-        // Relance le défilement après un délai (pour éviter les conflits)
-        function handleManualInteraction(direction) {
-          stopAutoPlay();
-          if (direction === 'next') goTo(active + 1);
-          else if (direction === 'prev') goTo(active - 1);
-          else if (typeof direction === 'number') goTo(direction);
-          
-          // On attend 2 secondes d'inactivité avant de reprendre le défilement auto
-          startAutoPlay();
-        }
-
-        // --- EVENTS ---
-        prevBtn?.addEventListener('click', (e) => {
-          e.preventDefault();
-          handleManualInteraction('prev');
-        });
-
-        nextBtn?.addEventListener('click', (e) => {
-          e.preventDefault();
-          handleManualInteraction('next');
-        });
-
-        dots.forEach((d, i) => {
-          d.addEventListener('click', (e) => {
-            e.preventDefault();
-            handleManualInteraction(i);
-          });
-        });
+        prevBtn?.addEventListener('click', () => { goTo(active - 1); restartAutoAdvance(); });
+        nextBtn?.addEventListener('click', () => { goTo(active + 1); restartAutoAdvance(); });
+        dots.forEach(d => d.addEventListener('click', () => { goTo(Number(d.dataset.dot)); restartAutoAdvance(); }));
 
         slides.forEach(slide => {
-          slide.addEventListener('mouseenter', () => {
-            stopAutoPlay();
-            playSlideMedia(slide);
-          });
-          slide.addEventListener('mouseleave', () => {
-            stopSlideMedia(slide);
-            startAutoPlay();
-          });
-          // Mobile
-          slide.addEventListener('touchstart', () => {
-            stopAutoPlay();
-            playSlideMedia(slide);
-          }, {passive:true});
-          slide.addEventListener('touchend', () => {
-            startAutoPlay();
-            stopSlideMedia(slide);
-          });
+          slide.addEventListener('mouseenter', () => playSlideMedia(slide));
+          slide.addEventListener('mouseleave', () => stopSlideMedia(slide));
+          slide.addEventListener('touchstart', () => playSlideMedia(slide), {passive:true});
+          slide.addEventListener('touchend', () => stopSlideMedia(slide));
+          slide.addEventListener('touchcancel', () => stopSlideMedia(slide));
         });
 
-        // Initialisation
         warmUpVideoFrame(slides[active]);
-        if (isGuideCarousel) startAutoPlay();
+
+        // Défilement automatique : uniquement pour le carrousel des vidéos guide (mise en
+        // avant de créateurs), pas pour celui des vidéos de build. En pause au survol/appui,
+        // et redémarre à zéro après une navigation manuelle (flèches/points).
+        let autoTimer = null;
+        const isGuideCarousel = !!carousel.closest('.guide-video-section');
+        function startAutoAdvance() {
+          if (!isGuideCarousel || slides.length <= 1) return;
+          stopAutoAdvance();
+          autoTimer = setInterval(() => goTo(active + 1), 7000);
+        }
+        function stopAutoAdvance() {
+          if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+        }
+        function restartAutoAdvance() { if (isGuideCarousel) startAutoAdvance(); }
+
+        if (isGuideCarousel) {
+          carousel.addEventListener('mouseenter', stopAutoAdvance);
+          carousel.addEventListener('mouseleave', startAutoAdvance);
+          carousel.addEventListener('touchstart', stopAutoAdvance, {passive:true});
+          startAutoAdvance();
+
+          if (window.matchMedia('(hover: none), (pointer: coarse)').matches) {
+            slides.forEach(slide => {
+              const link = slide.querySelector('.guide-stage-link[data-yt-id]');
+              if (!link) return;
+              link.addEventListener('click', (e) => {
+                e.preventDefault();
+                openYoutubeForceApp(link.dataset.ytId);
+              });
+            });
+          }
+        }
       });
     }
 
@@ -1026,6 +1008,13 @@ els.langSwitcher.addEventListener('click', (e) => {
   state.lang = btn.dataset.lang;
   localStorage.setItem('eowea_lang', state.lang);
   renderAll();
+});
+els.homeBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  state.heroId = null;
+  resetHeroNavigationFilters();
+  renderAll();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 });
     document.addEventListener('keydown',e=>{if(e.key==='Escape'&&els.videoOverlay.classList.contains('active')) closeLightbox();});
     document.addEventListener('click', (e) => {
