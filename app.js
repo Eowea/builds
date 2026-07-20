@@ -21,9 +21,6 @@
       role_Support: { fr: "Soutien", en: "Support" },
       role_AssassinMelee: { fr: "Assassin Mêlée", en: "Melee Assassin" },
       role_AssassinDistance: { fr: "Assassin Distance", en: "Ranged Assassin" },
-      twitchOpen: { fr: "ouvrir", en: "open" },
-      twitchClose: { fr: "replier", en: "close" },
-      twitchPlaceholder: { fr: "Lecteur replié.", en: "Player collapsed." },
       heroesTitle: { fr: "Héros", en: "Heroes" },
       heroesNote: { fr: "Choisis un héros dans la liste, ou utilise la recherche et les filtres ci-dessus.", en: "Choose a hero from the list, or use the search and filters above." },
       level: { fr: "Niv.", en: "Lvl" },
@@ -64,19 +61,18 @@ const getInitialLang = () => {
       return (browserLang && browserLang.toLowerCase().startsWith('fr')) ? 'fr' : 'en';
     };
 
-    const state = { 
-      search: '', 
-      role: 'all', 
-      heroId: null, 
-      buildIndex: 0, 
-      twitchOpen: true,
-      lang: getInitialLang() 
+    const state = {
+      search: '',
+      role: 'all',
+      heroId: null,
+      buildIndex: 0,
+      lang: getInitialLang()
     };
 
-    let activeFloatingTrigger = null, hideTooltipTimer = null, tooltipRaf = 0, layoutRaf = 0;
+    let activeFloatingTrigger = null, hideTooltipTimer = null, tooltipRaf = 0, layoutRaf = 0, layoutSyncTimers = [];
 
     const $ = id => document.getElementById(id);
-    const els = { siteTitle: $('siteTitle'), headerNav: $('headerNav'), socials: $('socials'), desktopTwitchMount: $('desktopTwitchMount'), mobileTwitchMount: $('mobileTwitchMount'), desktopTwitchCard: $('desktopTwitchCard'), toggleTwitch: $('toggleTwitch'), searchInput: $('searchInput'), resultsCount: $('resultsCount'), roleFilters: $('roleFilters'), heroList: $('heroList'), detailView: $('detailView'), tooltipPortal: $('tooltipPortal'), videoOverlay: $('videoOverlay'), closeOverlayBtn: $('closeOverlayBtn'), overlayStatusText: $('overlayStatusText'), expandedYoutube: $('expandedYoutube'), expandedMedia: $('expandedMedia'), langSwitcher: $('langSwitcher'), homeBtn: $('homeBtn') };
+    const els = { siteTitle: $('siteTitle'), headerNav: $('headerNav'), socials: $('socials'), searchInput: $('searchInput'), resultsCount: $('resultsCount'), roleFilters: $('roleFilters'), heroList: $('heroList'), detailView: $('detailView'), tooltipPortal: $('tooltipPortal'), videoOverlay: $('videoOverlay'), closeOverlayBtn: $('closeOverlayBtn'), overlayStatusText: $('overlayStatusText'), expandedYoutube: $('expandedYoutube'), expandedMedia: $('expandedMedia'), langSwitcher: $('langSwitcher'), homeBtn: $('homeBtn') };
 
     /* ── Utilities ── */
     const escapeHtml = (s) => (s ?? '').toString().replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -193,7 +189,7 @@ function markEverythingAsSeen(hero) {
 
     const visibleHeroes = () => HEROES.filter(h=>h.enabled!==false);
     const roles = () =>['all',...new Set(visibleHeroes().map(h=>h.role))];
-    function filteredHeroes() { const q=normalize(state.search); return visibleHeroes().filter(h=>(state.role==='all'||h.role===state.role)&&(!q||normalize(loc(h.name)).includes(q))).sort((a,b)=>loc(a.name).localeCompare(loc(b.name),state.lang,{sensitivity:'base'})); }
+    function filteredHeroes() { const q=normalize(state.search); return visibleHeroes().filter(h=>(state.role==='all'||h.role===state.role)&&(!q||normalize(h.name?.fr).includes(q)||normalize(h.name?.en).includes(q))).sort((a,b)=>loc(a.name).localeCompare(loc(b.name),state.lang,{sensitivity:'base'})); }
     const currentHero = () => HEROES.find(h=>h.id===state.heroId&&h.enabled!==false)||null;
     function clampBuildIndex(h) { if(!h?.builds?.length){state.buildIndex=0;return 0;} state.buildIndex=Math.min(h.builds.length-1,Math.max(0,Number(state.buildIndex)||0)); return state.buildIndex; }
     function firstBuildIndex(h) {
@@ -204,16 +200,11 @@ function markEverythingAsSeen(hero) {
     }
     function ensureSelection() { const l=filteredHeroes(); if(state.heroId&&(!currentHero()||!l.some(h=>h.id===state.heroId))){state.heroId=null;state.buildIndex=0;} clampBuildIndex(currentHero()); }
 
-    function twitchFrame() { if(!STREAMER_CONFIG.twitchChannel) return ''; return `<iframe src="https://player.twitch.tv/?channel=${encodeURIComponent(STREAMER_CONFIG.twitchChannel)}&parent=${encodeURIComponent(location.hostname||'localhost')}&muted=true" allowfullscreen loading="lazy"></iframe>`; }
-
-
     function updateStaticLang() {
       const el = id => { const e = $(id); if (e) return e; return { textContent: '', placeholder: '' }; };
       el('heroesTitle').textContent = t('heroesTitle');
       el('heroesNote').textContent = t('heroesNote');
       els.searchInput.placeholder = t('searchPlaceholder');
-      el('twitchPlaceholder1').textContent = t('twitchPlaceholder');
-      el('twitchPlaceholder2').textContent = t('twitchPlaceholder');
       document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === state.lang));
     }
 
@@ -796,6 +787,18 @@ function bindFloatingTriggers(root = document) {
       });
     }
     function queueLayoutSync() {
+      // Annule les filets de sécurité encore en attente d'un appel précédent : sinon, en cas
+      // de changements de héros rapprochés (clics répétés/rapides), ils s'accumulent et
+      // déclenchent des dizaines de recalculs de mise en page forcés (reflow) bien après que
+      // l'utilisateur soit passé à un autre héros, ce qui provoquait un effet de
+      // saccade/clignotement visible sur les icônes de talents.
+      layoutSyncTimers.forEach(clearTimeout);
+      layoutSyncTimers = [
+        setTimeout(syncTalentBoards, 150),
+        setTimeout(syncTalentBoards, 400),
+        setTimeout(syncTalentBoards, 900),
+      ];
+
       if (layoutRaf) return;
       layoutRaf = requestAnimationFrame(() => {
         layoutRaf = 0;
@@ -804,11 +807,6 @@ function bindFloatingTriggers(root = document) {
         // la largeur des cartes de talents).
         requestAnimationFrame(syncTalentBoards);
       });
-      // Filets de sécurité supplémentaires : si quelque chose (police web, icônes) fait
-      // encore bouger la mise en page un peu plus tard, on revérifie plusieurs fois.
-      setTimeout(syncTalentBoards, 150);
-      setTimeout(syncTalentBoards, 400);
-      setTimeout(syncTalentBoards, 900);
     }
 
     function openLightbox(ref, type='youtube') {

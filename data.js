@@ -12,7 +12,6 @@ const STREAMER_CONFIG = {
     "fr": "Recherche le build du héros qui t'intéresse grâce à la barre de recherche, aux filtres ou en cliquant dans la liste. Passe ton curseur sur les sorts et talents pour un descriptif écrit et vidéo.",
     "en": "Search for the hero build you're interested in using the search bar, filters, or by clicking in the list. Hover over spells and talents for a written and video description."
   },
-  "twitchChannel": "eowea",
   "socials": [
     {
       "label": "Twitch",
@@ -78,7 +77,7 @@ const STREAMER_CONFIG = {
         "fr": "Démo Deathwing face à 2 counters",
         "en": "Deathwing Demo vs. 2 Counters"
       },
-      "youtubeId": "https://youtu.be/4pxYSpCJ0Lc?si=n4xLlWM69v7XlxFv"
+      "youtubeId": "https://youtu.be/4pxYSpCJ0Lc?si=bk3IAV7G-6j1IGG3"
     }
   ],
   "patchVideos": [
