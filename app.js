@@ -47,6 +47,8 @@
       optionalTalents: { fr: "Options", en: "Options" },
       newBadge: { fr: "Nouveau", en: "New" },
       updatedBadge: { fr: "Mis à jour", en: "Updated" },
+      heroRotationTitle: { fr: "Rotation gratuite", en: "Free Rotation" },
+      heroRotationError: { fr: "Rotation indisponible pour le moment.", en: "Rotation unavailable right now." },
     };
 
     /* =========================================================================
@@ -66,6 +68,7 @@ const getInitialLang = () => {
       role: 'all',
       heroId: null,
       buildIndex: 0,
+      formId: null,
       lang: getInitialLang()
     };
 
@@ -215,7 +218,13 @@ function markEverythingAsSeen(hero) {
         els.siteTitle.textContent = loc(STREAMER_CONFIG.siteTitle);
       }
       els.socials.innerHTML = STREAMER_CONFIG.socials.map(s=>`<a class="social-link" data-network="${s.icon}" href="${s.url}" target="_blank" rel="noreferrer">${ICONS[s.icon]||''}<span>${s.label}</span></a>`).join('');
-      els.headerNav.innerHTML = (STREAMER_CONFIG.navLinks || []).filter(l => l.enabled !== false).map(l => `<a class="header-nav-link" href="${escapeHtml(l.url || '#')}"${l.newTab ? ' target="_blank" rel="noreferrer"' : ''}>${escapeHtml(loc(l.label))}</a>`).join('');
+      // Cette page est "index.html" (Builds) : on ne garde que les liens marqués pour y apparaître.
+      els.headerNav.innerHTML = (STREAMER_CONFIG.navLinks || [])
+        .filter(l => l.enabled !== false && l.showOnBuilds !== false)
+        .map(l => {
+          const isActive = (l.url || '').replace(/^\.?\//, '') === 'index.html';
+          return `<a class="header-nav-link${isActive ? ' active' : ''}" href="${escapeHtml(l.url || '#')}"${l.newTab ? ' target="_blank" rel="noreferrer"' : ''}>${escapeHtml(loc(l.label))}</a>`;
+        }).join('');
     }
     
     function renderFilters() { els.roleFilters.innerHTML=roles().map(r=>`<button class="filter-chip${state.role===r?' active':''}" type="button" data-role="${r}">${locRole(r)}</button>`).join(''); }
@@ -503,7 +512,70 @@ function renderHomeVideoSections() {
       ${markup ? `<section class="guide-video-section">${markup}</section>` : `<div class="empty-state">${t('noVideosYet')}</div>`}
     </div>`;
 
-  return `<div class="videos-layout with-guide">${col('latestVideoTitle', latestMarkup)}${col('patchAnalysisTitle', patchMarkup)}</div>`;
+  const rotationHtml = STREAMER_CONFIG.showHeroRotation !== false ? renderHeroRotationSection() : '';
+  return `<div class="videos-layout with-guide">${col('latestVideoTitle', latestMarkup)}${col('patchAnalysisTitle', patchMarkup)}</div>${rotationHtml}`;
+}
+
+/* =========================================================================
+   ROTATION DES HÉROS GRATUITS (source: nexuscompendium.com, via proxy CORS
+   car cette API ne renvoie pas d'en-têtes Access-Control-Allow-Origin)
+   ========================================================================= */
+let heroRotationCache = null;
+let heroRotationPromise = null;
+
+function renderHeroRotationSection() {
+  return `<div class="video-group">
+    <h2 class="section-title" style="text-align:center;margin-bottom:16px;">${t('heroRotationTitle')}</h2>
+    <section class="rotation-section" id="heroRotationBody"><div class="empty-state">${t('loading')}</div></section>
+  </div>`;
+}
+
+function renderHeroRotationBody(rotation) {
+  const container = document.getElementById('heroRotationBody');
+  if (!container) return;
+  if (!rotation || !Array.isArray(rotation.Heroes) || !rotation.Heroes.length) {
+    container.innerHTML = `<div class="empty-state">${t('heroRotationError')}</div>`;
+    return;
+  }
+  const fmt = new Intl.DateTimeFormat(state.lang === 'en' ? 'en-US' : 'fr-FR', { day: 'numeric', month: 'long' });
+  let dateRangeHtml = '';
+  const start = rotation.StartDate ? new Date(rotation.StartDate) : null;
+  const end = rotation.EndDate ? new Date(rotation.EndDate) : null;
+  if (start && !isNaN(start) && end && !isNaN(end)) {
+    dateRangeHtml = `<div class="rotation-date-range">${esc(fmt.format(start))} – ${esc(fmt.format(end))}</div>`;
+  }
+  const cardsHtml = rotation.Heroes.map(h => {
+    const lvl = h.ReqLevel;
+    const showLevel = lvl !== undefined && lvl !== null && lvl !== 0 && lvl !== '0' && lvl !== '';
+    return `
+    <div class="rotation-hero">
+      <div class="rotation-hero-portrait"><img src="${esc(h.ImageURL)}" alt="${esc(h.Name)}" loading="lazy" /></div>
+      <div class="rotation-hero-name">${esc(h.Name)}</div>
+      ${showLevel ? `<div class="rotation-hero-level">${esc(t('level'))} ${esc(String(lvl))}</div>` : ''}
+    </div>`;
+  }).join('');
+  container.innerHTML = `${dateRangeHtml}<div class="rotation-hero-grid">${cardsHtml}</div>`;
+}
+
+async function loadHeroRotation() {
+  const container = document.getElementById('heroRotationBody');
+  if (!container) return;
+  if (heroRotationCache) { renderHeroRotationBody(heroRotationCache); return; }
+  if (!heroRotationPromise) {
+    const target = encodeURIComponent('https://nexuscompendium.com/api/currently/herorotation');
+    heroRotationPromise = fetch('https://corsproxy.io/?url=' + target)
+      .then(res => { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
+      .then(data => data && data.RotationHero ? data.RotationHero : null);
+  }
+  try {
+    const rotation = await heroRotationPromise;
+    heroRotationCache = rotation;
+    renderHeroRotationBody(rotation);
+  } catch (e) {
+    heroRotationPromise = null;
+    const c = document.getElementById('heroRotationBody');
+    if (c) c.innerHTML = `<div class="empty-state">${t('heroRotationError')}</div>`;
+  }
 }
 
 function renderDetail() { 
@@ -515,13 +587,24 @@ function renderDetail() {
     els.detailView.innerHTML = renderHomeVideoSections();
     bindFloatingTriggers();
     bindComboCarousel();
+    if (STREAMER_CONFIG.showHeroRotation !== false) loadHeroRotation();
     return;
   }
   
-  clampBuildIndex(h); 
-  els.detailView.innerHTML=`<section class="hero-header"><div class="detail-portrait" data-fallback="${esc(initials(loc(h.name)))}"><img src="${h.portrait}" alt="${esc(loc(h.name))}" loading="lazy" onerror="this.parentNode.classList.add('fallback');this.remove();" /></div><div><h2 class="detail-title">${esc(loc(h.name))}</h2><div class="role-badge">${esc(locRole(h.role))}</div><p class="detail-headline">${esc(loc(h.headline))}</p></div></section><section class="meta-grid"><article class="card"><div class="card-head">${t('gameplay')}</div><div class="card-body"><p>${esc(loc(h.gameplay))}</p>${renderSpells(h.spells)}</div></article><article class="card"><div class="card-head">${t('tips')}</div><div class="card-body"><ul class="bullet-list">${(h.tips||[]).map(tip=>`<li>${esc(loc(tip))}</li>`).join('')}</ul></div></article></section><div id="buildSection"></div>`; 
-  renderBuildSection(h); 
-  bindFloatingTriggers(); 
+  clampBuildIndex(h);
+  const forms = h.forms || [];
+  let activeFormId = null;
+  if (forms.length) {
+    activeFormId = forms.some(f => f.id === state.formId) ? state.formId : forms[0].id;
+    state.formId = activeFormId;
+  } else {
+    state.formId = null;
+  }
+  const visibleSpells = forms.length ? (h.spells||[]).filter(s => !s.form || (Array.isArray(s.form) ? s.form.includes(activeFormId) : s.form === activeFormId)) : (h.spells||[]);
+  const formSwitcherHtml = forms.length ? `<div class="form-switcher">${forms.map(f => `<button type="button" class="form-switch-btn${f.id===activeFormId?' active':''}" data-form-id="${esc(f.id)}">${esc(loc(f.label))}</button>`).join('')}</div>` : '';
+  els.detailView.innerHTML=`<section class="hero-header"><div class="detail-portrait" data-fallback="${esc(initials(loc(h.name)))}"><img src="${h.portrait}" alt="${esc(loc(h.name))}" loading="lazy" onerror="this.parentNode.classList.add('fallback');this.remove();" /></div><div><h2 class="detail-title">${esc(loc(h.name))}</h2><div class="role-badge">${esc(locRole(h.role))}</div><p class="detail-headline">${esc(loc(h.headline))}</p></div></section><section class="meta-grid"><article class="card"><div class="card-head">${t('gameplay')}</div><div class="card-body"><p>${esc(loc(h.gameplay))}</p>${formSwitcherHtml}${renderSpells(visibleSpells)}</div></article><article class="card"><div class="card-head">${t('tips')}</div><div class="card-body"><ul class="bullet-list">${(h.tips||[]).map(tip=>`<li>${esc(loc(tip))}</li>`).join('')}</ul></div></article></section><div id="buildSection"></div>`;
+  renderBuildSection(h);
+  bindFloatingTriggers();
 }
     function renderAll() { updateStaticLang(); ensureSelection(); renderHeader(); renderFilters(); renderHeroList(); renderDetail(); updateHash(); }
     // Encodage minimal : on n'échappe que ce qui casserait vraiment le fragment d'URL
@@ -868,6 +951,7 @@ window.goToBuild = (heroId, buildIndex) => {
 
   state.heroId = heroId;
   state.buildIndex = buildIndex;
+  state.formId = null;
 
   renderAll();
 
@@ -906,6 +990,7 @@ window.goToBuild = (heroId, buildIndex) => {
   if (!matches.some(h => h.id === state.heroId)) {
     state.heroId = matches[0]?.id || null;
     state.buildIndex = firstBuildIndex(matches[0]);
+    state.formId = null;
   }
 
   renderAll();
@@ -925,6 +1010,7 @@ els.heroList.addEventListener('click', (e) => {
 
     state.heroId = heroId;
     state.buildIndex = firstBuildIndex(heroObj);
+    state.formId = null;
     renderAll(); //
 
   setTimeout(() => {
@@ -951,6 +1037,7 @@ els.heroList.addEventListener('click', (e) => {
           if (!state.heroId || !matches.some(h => h.id === state.heroId)) {
             state.heroId = matches[0].id;
             state.buildIndex = firstBuildIndex(matches[0]);
+            state.formId = null;
           }
         }
         
@@ -978,6 +1065,12 @@ els.heroList.addEventListener('click', (e) => {
     const h = currentHero();
     if (h) renderBuildSection(h);
     updateHash();
+    return;
+  }
+  const formBtn = e.target.closest('[data-form-id]');
+  if (formBtn) {
+    state.formId = formBtn.dataset.formId;
+    renderDetail();
     return;
   }
 els.detailView.addEventListener('mousedown', (e) => {
@@ -1010,6 +1103,7 @@ els.langSwitcher.addEventListener('click', (e) => {
 els.homeBtn.addEventListener('click', (e) => {
   e.preventDefault();
   state.heroId = null;
+  state.formId = null;
   resetHeroNavigationFilters();
   renderAll();
   window.scrollTo({ top: 0, behavior: 'smooth' });

@@ -100,7 +100,7 @@ const HEROES = [
       "en": "Kael'thas"
     },
     "role": "AssassinDistance",
-    "isNew": true,
+    "isNew": false,
     "portrait": "assets/heroes/portraits/storm_ui_glues_draft_portrait_kaelthas.png",
     "headline": {
       "fr": "Dégâts de zone massifs, punition des regroupements et contrôle puissant.",
@@ -276,8 +276,8 @@ const HEROES = [
           "en": "Devastating against melee-heavy compositions."
         },
         "buildCodeTitle": {
-          "fr": "A COLLER",
-          "en": "PASTE"
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "[T2322131,Kaelthas]",
         "videos": [],
@@ -516,11 +516,12 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "anduin",
-    "enabled": false,
+    "enabled": true,
     "name": {
       "fr": "Anduin",
       "en": "Anduin"
@@ -528,37 +529,37 @@ const HEROES = [
     "role": "Healer",
     "portrait": "assets/heroes/portraits/storm_ui_glues_draft_portrait_anduin.png",
     "headline": {
-      "fr": "Soins fiables, sauvetage cible et backline stable.",
-      "en": "Reliable healing, targeted rescue, and stable backline."
+      "fr": "Soins fiables, sauvetage rapide.",
+      "en": "Reliable healing, fast rescue."
     },
     "gameplay": {
-      "fr": "Anduin apporte un soin lisible, un gros bouton de sauvetage et une excellente reponse aux engages front to back.",
-      "en": "Anduin provides straightforward healing, a massive rescue button, and an excellent response to front-to-back engages."
+      "fr": "Anduin offre des soins simples et efficaces et une puissante capacité de sauvetage.",
+      "en": "Anduin provides straightforward healing and a massive rescue button."
     },
     "spells": [
       {
         "key": "Trait",
         "name": {
-          "fr": "Foi désespérée",
+          "fr": "Saut de foi",
           "en": "Leap of Faith"
         },
         "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_leap_of_faith.png",
         "description": {
-          "fr": "Repositionne un allié en danger.",
-          "en": "Reposition an ally in danger."
+          "fr": "Attire instantanément un héros allié vers Anduin, le rendant insensible au contrôle pendant le trajet.",
+          "en": "Instantly pulls an allied Hero to Anduin, granting them Unstoppable while they travel."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "A",
         "name": {
-          "fr": "Soin éclair",
+          "fr": "Soins rapides",
           "en": "Flash Heal"
         },
         "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_flash_heal.png",
         "description": {
-          "fr": "Soin direct et fiable.",
-          "en": "Direct and reliable heal."
+          "fr": "Incante brièvement pour soigner un héros allié.",
+          "en": "Briefly channels to heal an allied Hero."
         },
         "demoYoutubeId": ""
       },
@@ -570,8 +571,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_divine_star.png",
         "description": {
-          "fr": "Ligne qui soigne et poke.",
-          "en": "A line that heals and pokes."
+          "fr": "Projette une lumière qui blesse les ennemis puis revient en soignant les alliés sur son passage.",
+          "en": "Sends light that damages enemies, then returns healing allies along the way."
         },
         "demoYoutubeId": ""
       },
@@ -583,8 +584,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_chastise.png",
         "description": {
-          "fr": "Contrôle linéaire utile pour stopper une entrée.",
-          "en": "Linear CC useful for stopping an engage."
+          "fr": "Projette un trait de lumière qui blesse et immobilise le premier héros adverse touché.",
+          "en": "Shoves light forward, damaging and Rooting the first enemy Hero hit."
         },
         "demoYoutubeId": ""
       },
@@ -596,8 +597,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_holy_word_salvation.png",
         "description": {
-          "fr": "Gros outil défensif de teamfight.",
-          "en": "Massive defensive teamfight tool."
+          "fr": "Canalise pour soigner et protéger les héros alliés proches.",
+          "en": "Channels to heal and Protect nearby allied Heroes."
         },
         "demoYoutubeId": ""
       },
@@ -609,24 +610,24 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_light_bomb.png",
         "description": {
-          "fr": "Excellent follow-up sur un allié qui plonge.",
-          "en": "Excellent follow-up on an engaging ally."
+          "fr": "Investit un allié de Lumière qui explose, blessant et étourdissant les ennemis proches.",
+          "en": "Imbues an ally with Light that explodes, damaging and Stunning nearby enemies."
         },
         "demoYoutubeId": ""
       }
     ],
     "tips": [
       {
-        "fr": "Garde ton pull pour la vraie cible menacée.",
-        "en": "Keep your pull for the actual threatened target."
+        "fr": "N'attends pas que ton allié soit sur le point de mourir, utilise ton pull avant ! ",
+        "en": "Don't wait until your ally is about to die, use your pull sooner!"
       },
       {
-        "fr": "Place Châtiment avant l'engage adverse.",
-        "en": "Place Chastise before the enemy engage."
+        "fr": "Utilise ton Châtiment en suivi ou pour protéger tes alliés.",
+        "en": "Use your Chastise as a follow-up or to protect your allies."
       },
       {
-        "fr": "Bombe de lumière adore les tanks qui foncent.",
-        "en": "Lightbomb loves diving tanks."
+        "fr": "Bombe de lumière est à utiliser quand l'un des tes alliés engage, pas à la fin du fight !",
+        "en": "Use Lightbomb when one of your allies engages the enemy, not at the end of the fight!"
       }
     ],
     "builds": [
@@ -634,52 +635,59 @@ const HEROES = [
         "enabled": true,
         "order": 1,
         "label": {
-          "fr": "Heal fiable",
-          "en": "Reliable Heal"
+          "fr": "Build recommandé",
+          "en": "Recommanded build"
         },
         "summary": {
-          "fr": "Build généraliste pour garder régularité, contrôle et sécurité.",
-          "en": "Generalist build to keep consistency, control, and safety."
+          "fr": "Build qui passe partout, peu importe le mode de jeu.",
+          "en": "A build that works in any situation, no matter the game mode."
         },
         "buildCodeTitle": {
-          "fr": "A COLLER",
-          "en": "PASTE"
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE INTO TALENT TREE"
         },
-        "buildCode": "[T1111111,Anduin]",
+        "buildCode": "[T2132134,Anduin]",
         "videos": [],
         "updatedAt": {
-          "fr": "",
-          "en": ""
+          "fr": "14 Août 2026",
+          "en": "August 14, 2026"
         },
         "talentSelections": [
           {
             "level": 1,
-            "primaryId": "tmrryr6joy25rj",
+            "primaryId": "tmk7j3and02rz3",
             "alternativeIds": []
           },
           {
             "level": 4,
-            "primaryId": "tmrryr6joeu4zo",
-            "alternativeIds": []
+            "primaryId": "tmk7j3and03sw0",
+            "alternativeIds": [
+              "tmrryr6joeu4zo",
+              "tmk7j3and04tv5"
+            ]
           },
           {
             "level": 7,
-            "primaryId": "tmrryr6jofjb75",
+            "primaryId": "tmk7j3and06vx9",
             "alternativeIds": []
           },
           {
             "level": 10,
-            "primaryId": "tmrryr6joopacq",
-            "alternativeIds": []
+            "primaryId": "tmk7j3and07wz4",
+            "alternativeIds": [
+              "tmrryr6joopacq"
+            ]
           },
           {
             "level": 13,
             "primaryId": "tmrryr6jopq9n2",
-            "alternativeIds": []
+            "alternativeIds": [
+              "tmk7j3and09yb6"
+            ]
           },
           {
             "level": 16,
-            "primaryId": "tmrryr6jo7jzzn",
+            "primaryId": "tmk7j3and11ad8",
             "alternativeIds": []
           },
           {
@@ -690,7 +698,7 @@ const HEROES = [
         ]
       },
       {
-        "enabled": true,
+        "enabled": false,
         "order": 2,
         "label": {
           "fr": "Build Lumière",
@@ -701,8 +709,8 @@ const HEROES = [
           "en": "Build centered around Lightbomb and basic attacks."
         },
         "buildCodeTitle": {
-          "fr": "A COLLER",
-          "en": "PASTE"
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "[T2222222,Anduin]",
         "videos": [],
@@ -752,16 +760,58 @@ const HEROES = [
     "guideVideos": [],
     "talentPool": [
       {
+        "id": "tmk7j3and01qx8",
+        "level": 1,
+        "name": {
+          "fr": "Bénédictions égales",
+          "en": "Evenhanded Blessings"
+        },
+        "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_flash_heal.png",
+        "description": {
+          "fr": "Lancer Soins rapides sur une nouvelle cible augmente ses soins et rembourse du temps de recharge.",
+          "en": "Casting Flash Heal on a new target increases its healing and refunds part of its cooldown."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmk7j3and02rz3",
+        "level": 1,
+        "name": {
+          "fr": "Mot de pouvoir : Bouclier",
+          "en": "Power Word: Shield"
+        },
+        "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_divine_star.png",
+        "description": {
+          "fr": "Étoile divine procure un bouclier aux alliés traversés à l'aller, et à Anduin si elle touche un ennemi.",
+          "en": "Divine Star shields allies on its outgoing path, and shields Anduin too if it hits an enemy."
+        },
+        "demoYoutubeId": null
+      },
+      {
         "id": "tmrryr6joy25rj",
         "level": 1,
         "name": {
-          "fr": "Totem Colossal",
-          "en": "Colossal Totem"
+          "fr": "Puits de lumière",
+          "en": "Lightwell"
         },
-        "icon": "https://psionic-storm.com/media/img/talents/rehgar_earthbindtotem.png",
+        "icon": "assets/heroes/base_spells/anduin/images/talents/storm_ui_icon_anduin_lightwell.png",
         "description": {
-          "fr": "Augmente les points de vie, le rayon et la durée du totem. Permet de le repositionner une nouvelle fois.",
-          "en": "Increases health, radius, and duration of the totem. Can be repositioned once."
+          "fr": "Invoque un Puits de lumière qui soigne un allié proche au fil du temps ; son temps de recharge diminue quand Anduin soigne.",
+          "en": "Summons a Lightwell that heals a nearby ally over time; its cooldown drops each time Anduin heals."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmk7j3and03sw0",
+        "level": 4,
+        "name": {
+          "fr": "Intégrité morale",
+          "en": "Moral Compass"
+        },
+        "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_divine_star.png",
+        "description": {
+          "fr": "Étoile divine attaque les héros proches de son apogée. Passif : augmente la portée des attaques de base.",
+          "en": "Divine Star fires Basic Attacks at Heroes near its apex. Passive: increases Basic Attack range."
         },
         "demoYoutubeId": null
       },
@@ -769,13 +819,41 @@ const HEROES = [
         "id": "tmrryr6joeu4zo",
         "level": 4,
         "name": {
-          "fr": "Viveterre",
-          "en": "Earthliving Enchant"
+          "fr": "Vague de lumière",
+          "en": "Surge of Light"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_chainheal.jpg",
+        "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_chastise.png",
         "description": {
-          "fr": "Renforce Salve de guerison pour les héros dont les points de vie sont bas.",
-          "en": "Empowers Chain Heal for heroes at low health."
+          "fr": "Les attaques de base réduisent le recharge de Châtiment, et sur une cible immobilisée déclenchent une attaque bonus et rendent du mana.",
+          "en": "Basic Attacks reduce Chastise's cooldown, and against a Rooted target trigger a bonus attack and restore Mana."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmk7j3and04tv5",
+        "level": 4,
+        "name": {
+          "fr": "Lumière transperçante",
+          "en": "Piercing Light"
+        },
+        "icon": "assets/heroes/base_spells/anduin/images/talents/storm_ui_icon_anduin_chastise_a.png",
+        "description": {
+          "fr": "Châtiment transperce et touche un héros supplémentaire. Quête : toucher deux héros avec un seul Châtiment augmente la puissance de capacité.",
+          "en": "Chastise pierces to hit an extra Hero. Quest: hitting two Heroes with it permanently boosts Spell Power."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmk7j3and05uy2",
+        "level": 7,
+        "name": {
+          "fr": "Soins de lien",
+          "en": "Binding Heal"
+        },
+        "icon": "assets/heroes/base_spells/anduin/images/talents/storm_ui_icon_anduin_flash_heal_a.png",
+        "description": {
+          "fr": "Lancer Soins rapides sur un allié rend aussi des points de vie à Anduin.",
+          "en": "Casting Flash Heal on an ally also heals Anduin."
         },
         "demoYoutubeId": null
       },
@@ -783,13 +861,27 @@ const HEROES = [
         "id": "tmrryr6jofjb75",
         "level": 7,
         "name": {
-          "fr": "Totem lié à la terre",
-          "en": "Grounded Totem"
+          "fr": "Rétablissement béni",
+          "en": "Blessed Recovery"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_earthbindtotem.jpg",
+        "icon": "assets/heroes/base_spells/anduin/images/talents/storm_ui_icon_anduin_blessed_recovery.png",
         "description": {
-          "fr": "Réduis la vitesse d'attaque et la puissance de capacité, augmente la portée du totem.",
-          "en": "Reduces attack and spell power of enemies in range."
+          "fr": "Après une grosse perte de vie soudaine, Anduin en récupère une partie peu après.",
+          "en": "After a sudden big Health loss, Anduin recovers part of it shortly after."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmk7j3and06vx9",
+        "level": 7,
+        "name": {
+          "fr": "Prière du désespoir",
+          "en": "Desperate Prayer"
+        },
+        "icon": "assets/heroes/base_spells/anduin/images/talents/storm_ui_icon_anduin_desperate_prayer.png",
+        "description": {
+          "fr": "Nouvelle capacité active : soigne instantanément un allié, mais rend Anduin incapable d'agir un moment après.",
+          "en": "New active ability: instantly heals an ally, but leaves Anduin unable to act for a moment after."
         },
         "demoYoutubeId": null
       },
@@ -797,13 +889,27 @@ const HEROES = [
         "id": "tmrryr6joopacq",
         "level": 10,
         "name": {
-          "fr": "Guérison ancestrale",
-          "en": "Ancestral Healing"
+          "fr": "Mot sacré : Salut",
+          "en": "Holy Word: Salvation"
         },
-        "icon": "https://psionic-storm.com/media/img/talents/rehgar_ancestralhealing.png",
+        "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_holy_word_salvation.png",
         "description": {
-          "fr": "Gros soin monocible, utilisable sur soi.",
-          "en": "Massive single-target heal, usable on self."
+          "fr": "Canalise pour soigner fortement les alliés proches et les rendre protégés.",
+          "en": "Channels to heavily heal nearby allies and grant them Protected."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmk7j3and07wz4",
+        "level": 10,
+        "name": {
+          "fr": "Bombe de lumière",
+          "en": "Lightbomb"
+        },
+        "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_light_bomb.png",
+        "description": {
+          "fr": "Investit un allié de Lumière qui explose après un délai, blessant et étourdissant les ennemis proches et procurant un bouclier à la cible.",
+          "en": "Imbues an ally with Light that explodes after a delay, damaging and Stunning nearby enemies and shielding the target."
         },
         "demoYoutubeId": null
       },
@@ -811,13 +917,55 @@ const HEROES = [
         "id": "tmrryr6jopq9n2",
         "level": 13,
         "name": {
-          "fr": "Raz-de-marée",
-          "en": "Tidal Waves"
+          "fr": "Rapidité du pieux",
+          "en": "Speed of the Pious"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_chainheal.jpg",
+        "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_divine_star.png",
         "description": {
-          "fr": "Réduit le temps de recharge de Salve de guérison et son coût en mana.",
-          "en": "Reduces Chain Heal cooldown and mana cost."
+          "fr": "Anduin gagne de la vitesse tant qu'Étoile divine s'éloigne ; les alliés soignés à son retour réduisent son recharge.",
+          "en": "Anduin gains Movement Speed while Divine Star travels out; allies healed on its return reduce its cooldown."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmk7j3and08xa1",
+        "level": 13,
+        "name": {
+          "fr": "En avant !",
+          "en": "Push Forward!"
+        },
+        "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_leap_of_faith.png",
+        "description": {
+          "fr": "Blesser un ennemi procure un cumul de vitesse de déplacement et augmente temporairement les soins procurés.",
+          "en": "Damaging an enemy grants stacking Movement Speed and temporarily boosts healing done."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmk7j3and09yb6",
+        "level": 13,
+        "name": {
+          "fr": "Enchantement de bottes - Vitesse du lion",
+          "en": "Enchant Boots - Lion's Speed"
+        },
+        "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_leap_of_faith.png",
+        "description": {
+          "fr": "Bonus de vitesse de déplacement, quadruplé quand Saut de foi est disponible. Les alliés attirés sont soignés au fil du temps.",
+          "en": "Bonus Movement Speed, quadrupled while Leap of Faith is available. Allies pulled by it heal over time."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmk7j3and10zc3",
+        "level": 16,
+        "name": {
+          "fr": "Rénovation",
+          "en": "Renew"
+        },
+        "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_flash_heal.png",
+        "description": {
+          "fr": "Soins rapides soigne aussi au fil du temps, et se réinitialise sur une attaque de base réussie.",
+          "en": "Flash Heal also heals over time, refreshing whenever Anduin lands a Basic Attack."
         },
         "demoYoutubeId": null
       },
@@ -825,13 +973,69 @@ const HEROES = [
         "id": "tmrryr6jo7jzzn",
         "level": 16,
         "name": {
-          "fr": "Totem d’emprise de la terre",
-          "en": "Earthgrasp Totem"
+          "fr": "Nova sacrée",
+          "en": "Holy Nova"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_earthbindtotem.jpg",
+        "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_divine_star.png",
         "description": {
-          "fr": "Quand le totem est posé pour la première fois, il inflige des dégâts en zone et ralentit fortement.",
-          "en": "When first spawned, the totem deals AoE damage and heavily slows."
+          "fr": "Rattraper Étoile divine la fait exploser, soignant les alliés proches et blessant les ennemis.",
+          "en": "Catching Divine Star makes it explode, healing nearby allies and damaging enemies."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmk7j3and11ad8",
+        "level": 16,
+        "name": {
+          "fr": "Glyphe de foi",
+          "en": "Glyph of Faith"
+        },
+        "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_leap_of_faith.png",
+        "description": {
+          "fr": "Saut de foi obtient une deuxième charge.",
+          "en": "Leap of Faith gains a second charge."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmk7j3and12be5",
+        "level": 20,
+        "name": {
+          "fr": "Phare de Hurlevent",
+          "en": "Light of Stormwind"
+        },
+        "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_holy_word_salvation.png",
+        "description": {
+          "fr": "Mot sacré : Salut rend les alliés invulnérables au lieu de protégés (pas Anduin). Canaliser à fond réduit son recharge.",
+          "en": "Holy Word: Salvation grants Invulnerability instead of Protected (not Anduin). Fully channeling it reduces its cooldown."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmk7j3and13cf2",
+        "level": 20,
+        "name": {
+          "fr": "Feu intérieur",
+          "en": "Inner Fire"
+        },
+        "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_light_bomb.png",
+        "description": {
+          "fr": "La cible de Bombe de lumière gagne vitesse de déplacement et armure pendant quelques secondes.",
+          "en": "The target of Lightbomb gains bonus Movement Speed and Armor for a few seconds."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmk7j3and14dg7",
+        "level": 20,
+        "name": {
+          "fr": "Blâme",
+          "en": "Censure"
+        },
+        "icon": "assets/heroes/base_spells/anduin/images/spells/storm_ui_icon_anduin_chastise.png",
+        "description": {
+          "fr": "Châtiment étourdit sa cible et sa durée d'immobilisation est augmentée.",
+          "en": "Chastise Stuns its target and its Root duration is increased."
         },
         "demoYoutubeId": null
       },
@@ -839,17 +1043,18 @@ const HEROES = [
         "id": "tmrryr6jop1tna",
         "level": 20,
         "name": {
-          "fr": "Bénédiction du long-voyant",
-          "en": "Farseer's Blessing"
+          "fr": "Legs de Varian",
+          "en": "Varian's Legacy"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_ancestralhealing.jpg",
+        "icon": "assets/heroes/base_spells/anduin/images/talents/storm_ui_icon_anduin_varians_legacy.png",
         "description": {
-          "fr": "Une deuxième Guérison Ancestrale apparait, et soigne en zone autour de la cible.",
-          "en": "A second Ancestral Healing triggers and heals in an AoE."
+          "fr": "Les attaques de base brûlent les ennemis, et soignent Anduin selon les dégâts infligés.",
+          "en": "Basic Attacks burn enemies over time, and Anduin heals for a portion of the damage dealt."
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "rehgar",
@@ -993,7 +1198,7 @@ const HEROES = [
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
-          "en": "PASTE IN TALENT TREE"
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "[T2111121,Rehgar]",
         "videos": [],
@@ -1052,7 +1257,7 @@ const HEROES = [
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
-          "en": "PASTE IN TALENT TREE"
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "[T3131231,Rehgar]",
         "videos": [],
@@ -1270,7 +1475,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "luisaile",
@@ -1414,7 +1620,7 @@ const HEROES = [
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
-          "en": "PASTE IN TALENT TREE"
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "[T2331323,Brightwing]",
         "videos": [],
@@ -1592,7 +1798,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "deckard",
@@ -1723,7 +1930,7 @@ const HEROES = [
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
-          "en": "PASTE IN TALENT TREE"
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "[T3121331,Deckard]",
         "videos": [],
@@ -1782,7 +1989,7 @@ const HEROES = [
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
-          "en": "PASTE IN TALENT TREE"
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "[T1311314,Deckard]",
         "videos": [],
@@ -2000,11 +2207,12 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "alexstrasza",
-    "enabled": false,
+    "enabled": true,
     "name": {
       "fr": "Alexstrasza",
       "en": "Alexstrasza"
@@ -2016,9 +2224,25 @@ const HEROES = [
       "en": "Massive AoE healing and dragon form."
     },
     "gameplay": {
-      "fr": "Elle sacrifie sa propre santé pour soigner ses alliés et se transforme en Reine-dragon pour dominer les combats d'équipe.",
+      "fr": "Elle sacrifie sa propre santé pour soigner ses alliés et se transforme en Reine-dragon pour dominer les combats.",
       "en": "She sacrifices her own health to heal allies and transforms into the Dragonqueen to dominate teamfights."
     },
+    "forms": [
+      {
+        "id": "normal",
+        "label": {
+          "fr": "Forme normale",
+          "en": "Normal Form"
+        }
+      },
+      {
+        "id": "dragon",
+        "label": {
+          "fr": "Forme dragon",
+          "en": "Dragon Form"
+        }
+      }
+    ],
     "spells": [
       {
         "key": "Trait",
@@ -2028,47 +2252,92 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_dragon_queen.png",
         "description": {
-          "fr": "Se transforme en dragon surpuissant.",
-          "en": "Transforms into a massively powerful dragon."
+          "fr": "Se transforme en dragon, ce qui renforce ses capacités et ses attaques de base.",
+          "en": "Transforms into a dragon, empowering her abilities and Basic Attacks."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "A",
+        "form": "normal",
         "name": {
           "fr": "Don de vie",
           "en": "Gift of Life"
         },
         "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_gift_of_life.png",
         "description": {
-          "fr": "Sacrifie de la vie pour soigner un allié.",
-          "en": "Sacrifices health to heal an ally."
+          "fr": "Sacrifie des points de vie pour soigner un allié d'un montant supérieur.",
+          "en": "Sacrifices Health to heal an allied Hero for more than the cost."
+        },
+        "demoYoutubeId": ""
+      },
+      {
+        "key": "A",
+        "form": "dragon",
+        "name": {
+          "fr": "Souffle de vie",
+          "en": "Breath of Life"
+        },
+        "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_breath_of_life.png",
+        "description": {
+          "fr": "Version dragon de Don de vie : temps de recharge très réduit et sans coût en vie.",
+          "en": "Dragon form Gift of Life: greatly reduced cooldown and no Health cost."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "Z",
+        "form": "normal",
         "name": {
-          "fr": "Abondance",
+          "fr": "Luxuriance",
           "en": "Abundance"
         },
         "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_abundance.png",
         "description": {
-          "fr": "Pose une zone qui soigne après un délai.",
-          "en": "Plants an AoE that heals after a delay."
+          "fr": "Plante un soin qui éclot après un délai et soigne les alliés proches.",
+          "en": "Plants healing that blooms after a delay, healing nearby allies."
+        },
+        "demoYoutubeId": ""
+      },
+      {
+        "key": "Z",
+        "form": "dragon",
+        "name": {
+          "fr": "Or rouge",
+          "en": "Preservation"
+        },
+        "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_preservation.png",
+        "description": {
+          "fr": "Version dragon de Luxuriance : zone et soins fortement augmentés.",
+          "en": "Dragon form Abundance: larger area and much more healing."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "E",
+        "form": "normal",
         "name": {
           "fr": "Rafale de flammes",
           "en": "Flame Buffet"
         },
         "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_flame_buffet.png",
         "description": {
-          "fr": "Enflamme un ennemi. Toucher un ennemi enflammé le ralentit.",
-          "en": "Ignites an enemy. Hitting an ignited enemy slows them."
+          "fr": "Lance une boule de feu qui embrase les ennemis touchés.",
+          "en": "Launches a fireball that Burns enemies over time."
+        },
+        "demoYoutubeId": ""
+      },
+      {
+        "key": "E",
+        "form": "dragon",
+        "name": {
+          "fr": "Rafale draconique",
+          "en": "Wing Buffet"
+        },
+        "icon": "assets/heroes/base_spells/alexstrasza/images/talents/storm_ui_icon_alexstrasza_wing_buffet.png",
+        "description": {
+          "fr": "Version dragon de Rafale de flammes : dégâts et repoussement en arc de cercle.",
+          "en": "Dragon form Flame Buffet: damages and knocks back enemies in an arc."
         },
         "demoYoutubeId": ""
       },
@@ -2080,33 +2349,37 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_life_binder.png",
         "description": {
-          "fr": "Égalise les pourcentages de vie entre elle et un allié.",
-          "en": "Equalizes health percentages between her and an ally."
+          "fr": "Lie sa force vitale à un allié, soignant les deux et égalisant leurs points de vie.",
+          "en": "Binds her life force to an ally, healing both and equalizing their Health."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "R2",
         "name": {
-          "fr": "Flammes purificatrices",
+          "fr": "Flammes rédemptrices",
           "en": "Cleansing Flame"
         },
         "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_cleansing_flame.png",
         "description": {
-          "fr": "S'envole et bombarde la zone.",
-          "en": "Takes to the skies and bombs the area."
+          "fr": "S'envole et largue des boules de feu qui blessent les ennemis et soignent les alliés.",
+          "en": "Flies up and drops fireballs that damage enemies and heal allies."
         },
         "demoYoutubeId": ""
       }
     ],
     "tips": [
       {
-        "fr": "N'utilise pas ton D pour un petit combat.",
-        "en": "Do not waste your D for a small skirmish."
+        "fr": "N'utilise pas ton D pour un petit combat, favorise les phases objectifs. ",
+        "en": "Don't use your D for a small skirmish; focus on objective-based gameplay instead."
       },
       {
-        "fr": "Pose ton W là où tes alliés vont reculer.",
-        "en": "Place your W where your allies will retreat."
+        "fr": "Pose ton Z là où tes alliés vont.",
+        "en": "Place your W where your allies will go."
+      },
+      {
+        "fr": "Pendant la transformation en dragon et un court instant, tu deviens inciblable. ",
+        "en": "While you're transforming into a dragon, you become untargetable for a brief moment."
       }
     ],
     "builds": [
@@ -2114,22 +2387,22 @@ const HEROES = [
         "enabled": true,
         "order": 1,
         "label": {
-          "fr": "W Build",
-          "en": "W Build"
+          "fr": "Build recommandé",
+          "en": "Recommanded build"
         },
         "summary": {
-          "fr": "Max de soins en zone.",
-          "en": "Max AoE healing."
+          "fr": "Build qui passe partout, peu importe le mode de jeu.",
+          "en": "A build that works in any situation, no matter the game mode."
         },
         "buildCodeTitle": {
-          "fr": "A COLLER",
-          "en": "PASTE"
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE INTO TALENT TREE"
         },
-        "buildCode": "[T2222222,Alexstrasza]",
+        "buildCode": "[T2231121,Alexstrasza]",
         "videos": [],
         "updatedAt": {
-          "fr": "",
-          "en": ""
+          "fr": "14 Août 2026",
+          "en": "August 14, 2026"
         },
         "talentSelections": [
           {
@@ -2139,38 +2412,48 @@ const HEROES = [
           },
           {
             "level": 4,
-            "primaryId": "tmrryr6jou3tky",
+            "primaryId": "tmw3k2alx03kl9",
             "alternativeIds": []
           },
           {
             "level": 7,
-            "primaryId": "tmrryr6jokn8xj",
+            "primaryId": "tmw3k2alx06rs8",
             "alternativeIds": []
           },
           {
             "level": 10,
             "primaryId": "tmrryr6joiests",
-            "alternativeIds": []
+            "alternativeIds": [
+              "tmw3k2alx07tu3"
+            ]
           },
           {
             "level": 13,
-            "primaryId": "tmrryr6jol2wqz",
-            "alternativeIds": []
+            "primaryId": "tmw3k2alx08vw0",
+            "alternativeIds": [
+              "tmw3k2alx09xy5",
+              "tmrryr6jol2wqz"
+            ]
           },
           {
             "level": 16,
             "primaryId": "tmrryr6joxdbs0",
-            "alternativeIds": []
+            "alternativeIds": [
+              "tmw3k2alx10za2",
+              "tmw3k2alx11bc7"
+            ]
           },
           {
             "level": 20,
-            "primaryId": "tmrryr6jo8uzwx",
-            "alternativeIds": []
+            "primaryId": "tmw3k2alx12de4",
+            "alternativeIds": [
+              "tmw3k2alx14gi6"
+            ]
           }
         ]
       },
       {
-        "enabled": true,
+        "enabled": false,
         "order": 2,
         "label": {
           "fr": "E Build",
@@ -2181,8 +2464,8 @@ const HEROES = [
           "en": "Damage and frequent dragons."
         },
         "buildCodeTitle": {
-          "fr": "A COLLER",
-          "en": "PASTE"
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "[T3331333,Alexstrasza]",
         "videos": [],
@@ -2232,16 +2515,44 @@ const HEROES = [
     "guideVideos": [],
     "talentPool": [
       {
+        "id": "tmw3k2alx01fg7",
+        "level": 1,
+        "name": {
+          "fr": "Vivre et laisser vivre",
+          "en": "Live and Let Live"
+        },
+        "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_gift_of_life.png",
+        "description": {
+          "fr": "Au-delà d'un seuil de vie, Don de vie recharge bien plus vite ; bonus similaire pour Souffle de vie.",
+          "en": "Above a Health threshold, Gift of Life recharges much faster; also boosts Breath of Life's recharge."
+        },
+        "demoYoutubeId": null
+      },
+      {
         "id": "tmrryr6joeq0ja",
         "level": 1,
         "name": {
-          "fr": "Totem Colossal",
-          "en": "Colossal Totem"
+          "fr": "Cercle de vie",
+          "en": "Circle of Life"
         },
-        "icon": "https://psionic-storm.com/media/img/talents/rehgar_earthbindtotem.png",
+        "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_abundance.png",
         "description": {
-          "fr": "Augmente les points de vie, le rayon et la durée du totem. Permet de le repositionner une nouvelle fois.",
-          "en": "Increases health, radius, and duration of the totem. Can be repositioned once."
+          "fr": "Quête : collecter des globes de régénération augmente les soins de Luxuriance, qui finit par produire elle-même un globe.",
+          "en": "Quest: collecting Regeneration Globes increases Abundance's healing, which eventually creates its own Globe."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw3k2alx02hj2",
+        "level": 1,
+        "name": {
+          "fr": "Fureur du dragon",
+          "en": "Flames of Fury"
+        },
+        "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_flame_buffet.png",
+        "description": {
+          "fr": "Réduit le coût en mana de Rafale de flammes. Quête : toucher des héros déjà embrasés réduit le temps de recharge de Reine-dragon, et à terme la rafraîchit en infligeant des dégâts.",
+          "en": "Reduces Flame Buffet's Mana cost. Quest: hitting already-Burning Heroes reduces Dragonqueen's cooldown, and eventually refreshes its duration on damage."
         },
         "demoYoutubeId": null
       },
@@ -2249,13 +2560,55 @@ const HEROES = [
         "id": "tmrryr6jou3tky",
         "level": 4,
         "name": {
-          "fr": "Viveterre",
-          "en": "Earthliving Enchant"
+          "fr": "Afflux de vitalité",
+          "en": "Surge of Vitality"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_chainheal.jpg",
+        "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_abundance.png",
         "description": {
-          "fr": "Renforce Salve de guerison pour les héros dont les points de vie sont bas.",
-          "en": "Empowers Chain Heal for heroes at low health."
+          "fr": "Le soin en zone de Luxuriance procure de la vitesse de déplacement aux alliés touchés.",
+          "en": "Abundance's healing burst grants Movement Speed to allied Heroes for a few seconds."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw3k2alx03kl9",
+        "level": 4,
+        "name": {
+          "fr": "Hyperthermie",
+          "en": "Heat Exhaustion"
+        },
+        "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_flame_buffet.png",
+        "description": {
+          "fr": "Augmente le ralentissement de Rafale de flammes et l'empêche de diminuer avec le temps.",
+          "en": "Increases Flame Buffet's Slow and prevents it from decaying."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw3k2alx04mn4",
+        "level": 4,
+        "name": {
+          "fr": "Volubilité",
+          "en": "Exuberance"
+        },
+        "icon": "assets/heroes/base_spells/alexstrasza/images/talents/storm_ui_icon_alexstrasza_exuberance.png",
+        "description": {
+          "fr": "Au-delà d'un certain seuil de vie, gagne un bonus de vitesse de déplacement.",
+          "en": "While above a Health threshold, gain bonus Movement Speed."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw3k2alx05pq1",
+        "level": 7,
+        "name": {
+          "fr": "Floraison vitale",
+          "en": "Lifeblossom"
+        },
+        "icon": "assets/heroes/base_spells/alexstrasza/images/talents/storm_ui_icon_alexstrasza_life_blossom.png",
+        "description": {
+          "fr": "Au-delà d'un seuil de vie, Don de vie crée une floraison qui rend le prochain lancer gratuit, et réduit son coût en vie. Souffle de vie retire aussi les ralentissements et immobilisations.",
+          "en": "Above a Health threshold, Gift of Life creates a blossom that makes her next cast free, and reduces its Health cost. Breath of Life also cleanses Slows and Roots."
         },
         "demoYoutubeId": null
       },
@@ -2263,13 +2616,27 @@ const HEROES = [
         "id": "tmrryr6jokn8xj",
         "level": 7,
         "name": {
-          "fr": "Totem lié à la terre",
-          "en": "Grounded Totem"
+          "fr": "Verdissement",
+          "en": "Verdant Flourish"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_earthbindtotem.jpg",
+        "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_abundance.png",
         "description": {
-          "fr": "Réduis la vitesse d'attaque et la puissance de capacité, augmente la portée du totem.",
-          "en": "Reduces attack and spell power of enemies in range."
+          "fr": "Alexstrasza reçoit davantage de soins de la part de Luxuriance et des globes de régénération.",
+          "en": "Alexstrasza receives more healing from Abundance and from Regeneration Globes."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw3k2alx06rs8",
+        "level": 7,
+        "name": {
+          "fr": "Feu nourricier",
+          "en": "Fire Within"
+        },
+        "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_flame_buffet.png",
+        "description": {
+          "fr": "Toucher un héros embrasé avec Rafale de flammes soigne Alexstrasza d'une partie de son maximum de points de vie.",
+          "en": "Hitting a Burning Hero with Flame Buffet heals Alexstrasza for a portion of her maximum Health."
         },
         "demoYoutubeId": null
       },
@@ -2277,13 +2644,55 @@ const HEROES = [
         "id": "tmrryr6joiests",
         "level": 10,
         "name": {
-          "fr": "Guérison ancestrale",
-          "en": "Ancestral Healing"
+          "fr": "Lieuse-de-Vie",
+          "en": "Life-Binder"
         },
-        "icon": "https://psionic-storm.com/media/img/talents/rehgar_ancestralhealing.png",
+        "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_life_binder.png",
         "description": {
-          "fr": "Gros soin monocible, utilisable sur soi.",
-          "en": "Massive single-target heal, usable on self."
+          "fr": "Lie sa force vitale à un allié, soignant les deux et égalisant leurs points de vie. Reine-dragon augmente sa portée.",
+          "en": "Binds her life force to an ally, healing both and equalizing their Health. Dragonqueen increases its range."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw3k2alx07tu3",
+        "level": 10,
+        "name": {
+          "fr": "Flammes rédemptrices",
+          "en": "Cleansing Flame"
+        },
+        "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_cleansing_flame.png",
+        "description": {
+          "fr": "S'envole et largue des boules de feu qui blessent les ennemis et soignent les alliés.",
+          "en": "Flies up and drops fireballs that damage enemies and heal allies."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw3k2alx08vw0",
+        "level": 13,
+        "name": {
+          "fr": "Peau de dragon",
+          "en": "Dragon Scales"
+        },
+        "icon": "assets/heroes/base_spells/alexstrasza/images/talents/storm_ui_icon_alexstrasza_dragon_scales.png",
+        "description": {
+          "fr": "Gagne de l'armure pendant un étourdissement, une immobilisation ou un silence, et brièvement après.",
+          "en": "Gains bonus Armor while Stunned, Rooted, or Silenced, and briefly after."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw3k2alx09xy5",
+        "level": 13,
+        "name": {
+          "fr": "Pacification",
+          "en": "Pacify"
+        },
+        "icon": "assets/heroes/base_spells/alexstrasza/images/talents/storm_ui_icon_alexstrasza_pacify.png",
+        "description": {
+          "fr": "Nouvelle capacité active : ralentit un ennemi et réduit ses dégâts. Soigner un allié sous contrôle réduit son temps de recharge.",
+          "en": "New active ability: Slows an enemy and reduces their damage. Healing a crowd-controlled ally reduces its cooldown."
         },
         "demoYoutubeId": null
       },
@@ -2291,13 +2700,27 @@ const HEROES = [
         "id": "tmrryr6jol2wqz",
         "level": 13,
         "name": {
-          "fr": "Raz-de-marée",
-          "en": "Tidal Waves"
+          "fr": "Éruption de vie",
+          "en": "Life Unbound"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_chainheal.jpg",
+        "icon": "assets/heroes/base_spells/alexstrasza/images/talents/storm_ui_icon_alexstrasza_life_unbound.png",
         "description": {
-          "fr": "Réduit le temps de recharge de Salve de guérison et son coût en mana.",
-          "en": "Reduces Chain Heal cooldown and mana cost."
+          "fr": "Nouvelle capacité active : soigne un allié et blesse les ennemis proches. Ne peut pas être utilisée sur Alexstrasza.",
+          "en": "New active ability: heals an ally and damages nearby enemies. Cannot be used on Alexstrasza."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw3k2alx10za2",
+        "level": 16,
+        "name": {
+          "fr": "Force d'amour",
+          "en": "Tough Love"
+        },
+        "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_gift_of_life.png",
+        "description": {
+          "fr": "Don de vie confère à sa cible de l'armure temporaire, encore augmentée si Alexstrasza est au-delà d'un seuil de vie.",
+          "en": "Gift of Life grants its target temporary Armor, increased further while Alexstrasza is above a Health threshold."
         },
         "demoYoutubeId": null
       },
@@ -2305,13 +2728,71 @@ const HEROES = [
         "id": "tmrryr6joxdbs0",
         "level": 16,
         "name": {
-          "fr": "Totem d’emprise de la terre",
-          "en": "Earthgrasp Totem"
+          "fr": "Surprotection",
+          "en": "Overprotective"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_earthbindtotem.jpg",
+        "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_abundance.png",
         "description": {
-          "fr": "Quand le totem est posé pour la première fois, il inflige des dégâts en zone et ralentit fortement.",
-          "en": "When first spawned, the totem deals AoE damage and heavily slows."
+          "fr": "Les héros soignés par Luxuriance ou Or rouge gagnent un bouclier proportionnel au montant soigné.",
+          "en": "Heroes healed by Abundance or Preservation gain a Shield based on the amount healed."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw3k2alx11bc7",
+        "level": 16,
+        "form": "dragon",
+        "name": {
+          "fr": "Maîtrise draconienne",
+          "en": "Draconic Discipline"
+        },
+        "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_dragon_queen.png",
+        "description": {
+          "fr": "Augmente les soins des attaques de base en Reine-dragon, et réduit le recharge d'Or rouge à chaque allié soigné.",
+          "en": "Increases healing from Dragonqueen's empowered Basic Attacks, and reduces Preservation's cooldown per ally healed."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw3k2alx12de4",
+        "level": 20,
+        "name": {
+          "fr": "Rituel de vie",
+          "en": "Ritual of Life"
+        },
+        "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_life_binder.png",
+        "description": {
+          "fr": "Lieuse-de-Vie s'active plusieurs fois sur quelques secondes.",
+          "en": "Life-Binder activates multiple times over a few seconds."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw3k2alx13fh1",
+        "level": 20,
+        "name": {
+          "fr": "Vive la reine",
+          "en": "On Ruby Wings"
+        },
+        "icon": "assets/heroes/base_spells/alexstrasza/images/spells/storm_ui_icon_alexstrasza_cleansing_flame.png",
+        "description": {
+          "fr": "Refonte : une boule de feu de Flammes rédemptrices ne consomme pas sa charge si elle touche assez d'ennemis.",
+          "en": "Rework: if a Fireball from Cleansing Flame hits enough Heroes, that charge is not consumed."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw3k2alx14gi6",
+        "level": 20,
+        "form": "dragon",
+        "name": {
+          "fr": "Flamme ancestrale",
+          "en": "Ancient Flame"
+        },
+        "icon": "assets/heroes/base_spells/alexstrasza/images/talents/storm_ui_icon_alexstrasza_dragon_queen_a.png",
+        "description": {
+          "fr": "Confère un bonus passif de points de vie, et fait appliquer Rafale de flammes par les attaques de base tant que Reine-dragon est active. Ne compte pas pour la quête de Fureur du dragon.",
+          "en": "Grants a passive Health bonus, and while Dragonqueen is active, Basic Attacks also apply Flame Buffet. Doesn't count toward Flames of Fury's quest."
         },
         "demoYoutubeId": null
       },
@@ -2319,13 +2800,13 @@ const HEROES = [
         "id": "tmrryr6jo8uzwx",
         "level": 20,
         "name": {
-          "fr": "Bénédiction du long-voyant",
-          "en": "Farseer's Blessing"
+          "fr": "Bénédiction du Vol rouge",
+          "en": "Blessing of the Red"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_ancestralhealing.jpg",
+        "icon": "assets/heroes/base_spells/alexstrasza/images/talents/storm_ui_icon_alexstrasza_blessing_of_the_red.png",
         "description": {
-          "fr": "Une deuxième Guérison Ancestrale apparait, et soigne en zone autour de la cible.",
-          "en": "A second Ancestral Healing triggers and heals in an AoE."
+          "fr": "Nouvelle capacité active : confère à un allié un bonus de vie maximum jusqu'à sa mort. Inutilisable sur Alexstrasza ou un héros qui en bénéficie déjà.",
+          "en": "New active ability: grants an ally bonus maximum Health until they die. Cannot target Alexstrasza or a Hero who already has it."
         },
         "demoYoutubeId": null
       }
@@ -2333,7 +2814,7 @@ const HEROES = [
   },
   {
     "id": "ana",
-    "enabled": false,
+    "enabled": true,
     "name": {
       "fr": "Ana",
       "en": "Ana"
@@ -2352,26 +2833,26 @@ const HEROES = [
       {
         "key": "Trait",
         "name": {
-          "fr": "Pie-grièche",
+          "fr": "Nuhas",
           "en": "Shrike"
         },
         "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_aim_down_sights.png",
         "description": {
-          "fr": "Empoisonne les ennemis avec ses attaques.",
-          "en": "Poisons enemies with basic attacks."
+          "fr": "Les attaques de base appliquent des Doses qui soignent Ana. Tireuse embusquée augmente la portée et le transpercement de ses fléchettes.",
+          "en": "Basic Attacks apply Doses that heal Ana. Aim Down Sights adds range and piercing to her darts."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "A",
         "name": {
-          "fr": "Fléchette de soins",
+          "fr": "Fléchette soignante",
           "en": "Healing Dart"
         },
         "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_healing_dart.png",
         "description": {
-          "fr": "Tire un soin en ligne droite.",
-          "en": "Fires a healing dart in a line."
+          "fr": "Tire une fléchette qui soigne le premier héros allié touché.",
+          "en": "Fires a dart that heals the first allied Hero hit."
         },
         "demoYoutubeId": ""
       },
@@ -2383,8 +2864,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_biotic_grenade.png",
         "description": {
-          "fr": "Soigne les alliés et empêche les ennemis de se soigner.",
-          "en": "Heals allies and prevents enemy healing."
+          "fr": "Lance une grenade qui soigne les alliés et blesse les ennemis, en réduisant leurs soins.",
+          "en": "Tosses a grenade that heals allies and damages enemies, reducing their healing."
         },
         "demoYoutubeId": ""
       },
@@ -2396,8 +2877,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_sleep_dart.png",
         "description": {
-          "fr": "Endort le premier ennemi touché.",
-          "en": "Puts the first enemy hit to sleep."
+          "fr": "Tire une fléchette qui endort le premier héros adverse touché.",
+          "en": "Fires a dart that puts the first enemy Hero hit to Sleep."
         },
         "demoYoutubeId": ""
       },
@@ -2409,8 +2890,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_nano_bost.png",
         "description": {
-          "fr": "Booste massivement la magie d'un allié.",
-          "en": "Massively boosts an ally's spell power and cooldowns."
+          "fr": "Restaure du mana à un allié et lui procure puissance de capacité et recharge accélérée.",
+          "en": "Restores Mana to an ally and grants bonus Spell Power with faster cooldowns."
         },
         "demoYoutubeId": ""
       },
@@ -2422,8 +2903,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_overwatch.png",
         "description": {
-          "fr": "Prend position pour tirer à portée illimitée.",
-          "en": "Sets up to fire unlimited range rounds."
+          "fr": "Tire plusieurs balles à longue portée qui soignent les alliés et blessent les ennemis. Ana ne peut pas se déplacer.",
+          "en": "Fires several long-range rounds that heal allies and damage enemies. Ana cannot move while active."
         },
         "demoYoutubeId": ""
       }
@@ -2443,22 +2924,22 @@ const HEROES = [
         "enabled": true,
         "order": 1,
         "label": {
-          "fr": "Grenade",
-          "en": "Grenade"
+          "fr": "Build Grenade",
+          "en": "Grenade Build"
         },
         "summary": {
           "fr": "Amplifie l'anti-heal et le soin burst.",
           "en": "Amplifies anti-heal and burst healing."
         },
         "buildCodeTitle": {
-          "fr": "A COLLER",
-          "en": "PASTE"
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE INTO TALENT TREE"
         },
-        "buildCode": "[T1111111,Ana]",
+        "buildCode": "[T1111331,Ana]",
         "videos": [],
         "updatedAt": {
-          "fr": "",
-          "en": ""
+          "fr": "13 Août 2026",
+          "en": "August 13, 2026"
         },
         "talentSelections": [
           {
@@ -2479,22 +2960,28 @@ const HEROES = [
           {
             "level": 10,
             "primaryId": "tmrryr6jo6yhcn",
-            "alternativeIds": []
+            "alternativeIds": [
+              "tmt9k2ana05rk9"
+            ]
           },
           {
             "level": 13,
-            "primaryId": "tmrryr6jon5jc2",
-            "alternativeIds": []
+            "primaryId": "tmt9k2ana07nh1",
+            "alternativeIds": [
+              "tmt9k2ana06wj4"
+            ]
           },
           {
             "level": 16,
-            "primaryId": "tmrryr6joljrqh",
+            "primaryId": "tmt9k2ana09bd5",
             "alternativeIds": []
           },
           {
             "level": 20,
             "primaryId": "tmrryr6jozz7tm",
-            "alternativeIds": []
+            "alternativeIds": [
+              "tmt9k2ana10tg3"
+            ]
           }
         ]
       },
@@ -2502,58 +2989,68 @@ const HEROES = [
         "enabled": true,
         "order": 2,
         "label": {
-          "fr": "Sleep / Trait",
-          "en": "Sleep / Trait"
+          "fr": "Build Sleep",
+          "en": "Sleep Build"
         },
         "summary": {
-          "fr": "Plus de dégâts et de contrôles.",
-          "en": "More damage and CC."
+          "fr": "Build apportant un peu de suivi même si la cible endormie est réveillé ",
+          "en": "A build that provides some followup even if the sleeping target is awakened"
         },
         "buildCodeTitle": {
-          "fr": "A COLLER",
-          "en": "PASTE"
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE INTO TALENT TREE"
         },
-        "buildCode": "[T3331333,Ana]",
+        "buildCode": "[T2221331,Ana]",
         "videos": [],
         "updatedAt": {
-          "fr": "",
-          "en": ""
+          "fr": "13 Août 2026",
+          "en": "August 13, 2026"
         },
         "talentSelections": [
           {
             "level": 1,
-            "primaryId": "tmrryr6jotiqpq",
+            "primaryId": "tmsrq1hscdy86x",
             "alternativeIds": []
           },
           {
             "level": 4,
-            "primaryId": "tmrryr6jorgbfi",
-            "alternativeIds": []
+            "primaryId": "tmt9k2ana01xy7",
+            "alternativeIds": [
+              "tmt9k2ana02qz3"
+            ]
           },
           {
             "level": 7,
-            "primaryId": "tmrryr6jo5tq30",
-            "alternativeIds": []
+            "primaryId": "tmt9k2ana03mv8",
+            "alternativeIds": [
+              "tmt9k2ana04pl2"
+            ]
           },
           {
             "level": 10,
             "primaryId": "tmrryr6jo6yhcn",
-            "alternativeIds": []
+            "alternativeIds": [
+              "tmt9k2ana05rk9"
+            ]
           },
           {
             "level": 13,
-            "primaryId": "tmrryr6jon5jc2",
-            "alternativeIds": []
+            "primaryId": "tmt9k2ana07nh1",
+            "alternativeIds": [
+              "tmt9k2ana06wj4"
+            ]
           },
           {
             "level": 16,
-            "primaryId": "tmrryr6joljrqh",
+            "primaryId": "tmt9k2ana09bd5",
             "alternativeIds": []
           },
           {
             "level": 20,
             "primaryId": "tmrryr6jozz7tm",
-            "alternativeIds": []
+            "alternativeIds": [
+              "tmt9k2ana10tg3"
+            ]
           }
         ]
       }
@@ -2564,13 +3061,41 @@ const HEROES = [
         "id": "tmrryr6jotiqpq",
         "level": 1,
         "name": {
-          "fr": "Totem Colossal",
-          "en": "Colossal Totem"
+          "fr": "Soins d'assaut",
+          "en": "Contact Healing"
         },
-        "icon": "https://psionic-storm.com/media/img/talents/rehgar_earthbindtotem.png",
+        "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_biotic_grenade.png",
         "description": {
-          "fr": "Augmente les points de vie, le rayon et la durée du totem. Permet de le repositionner une nouvelle fois.",
-          "en": "Increases health, radius, and duration of the totem. Can be repositioned once."
+          "fr": "Grenade biotique inflige plus de dégâts et de soins selon le nombre de héros touchés.",
+          "en": "Biotic Grenade deals more damage and provides more healing for each Hero it hits."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmsrq1hscdy86x",
+        "level": 1,
+        "name": {
+          "fr": "Cartouches léthargiques",
+          "en": "Slumber Shells"
+        },
+        "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_sleep_dart.png",
+        "description": {
+          "fr": "Réduit le recharge de Fléchette hypodermique et ralentit brièvement les héros adverses à leur réveil.",
+          "en": "Reduces Sleep Dart's cooldown and Slows enemies briefly when they wake up."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmsrq338v8420j",
+        "level": 1,
+        "name": {
+          "fr": "Cartouches vampiriques",
+          "en": "Vampiric Rounds"
+        },
+        "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_aim_down_sights.png",
+        "description": {
+          "fr": "Augmente les soins de Nuhas. Quêtes répétables : cumuler puis frapper des héros au maximum de doses augmente encore ses soins.",
+          "en": "Increases Shrike's healing. Repeatable quests: stacking and then basic-attacking fully-Dosed Heroes further boosts its healing."
         },
         "demoYoutubeId": null
       },
@@ -2578,13 +3103,41 @@ const HEROES = [
         "id": "tmrryr6jorgbfi",
         "level": 4,
         "name": {
-          "fr": "Viveterre",
-          "en": "Earthliving Enchant"
+          "fr": "Condensé biotique",
+          "en": "Biotic Enhancements"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_chainheal.jpg",
+        "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_biotic_grenade.png",
         "description": {
-          "fr": "Renforce Salve de guerison pour les héros dont les points de vie sont bas.",
-          "en": "Empowers Chain Heal for heroes at low health."
+          "fr": "Augmente la durée du bonus de soin de Grenade biotique et réduit son temps de recharge.",
+          "en": "Increases Biotic Grenade's bonus healing duration and reduces its cooldown."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmt9k2ana01xy7",
+        "level": 4,
+        "name": {
+          "fr": "Surdose",
+          "en": "Overdose"
+        },
+        "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_sleep_dart.png",
+        "description": {
+          "fr": "Fléchette hypodermique applique des doses supplémentaires et transperce tous les ennemis si Tireuse embusquée est active.",
+          "en": "Sleep Dart applies extra Doses to its target, and pierces all enemy Heroes while Aim Down Sights is active."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmt9k2ana02qz3",
+        "level": 4,
+        "name": {
+          "fr": "Fléchette affaiblissante",
+          "en": "Debilitating Dart"
+        },
+        "icon": "assets/heroes/base_spells/ana/images/talents/storm_ui_icon_ana_debilitatingdart.png",
+        "description": {
+          "fr": "Nouvelle capacité active : tire une fléchette qui ralentit et affaiblit le premier ennemi touché. Rater réduit son temps de recharge.",
+          "en": "New active ability: fires a dart that Slows and weakens the first enemy hit. Missing reduces its cooldown."
         },
         "demoYoutubeId": null
       },
@@ -2592,13 +3145,41 @@ const HEROES = [
         "id": "tmrryr6jo5tq30",
         "level": 7,
         "name": {
-          "fr": "Totem lié à la terre",
-          "en": "Grounded Totem"
+          "fr": "Inhibiteur de soin",
+          "en": "Anti-Healer"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_earthbindtotem.jpg",
+        "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_biotic_grenade.png",
         "description": {
-          "fr": "Réduis la vitesse d'attaque et la puissance de capacité, augmente la portée du totem.",
-          "en": "Reduces attack and spell power of enemies in range."
+          "fr": "Augmente la zone d'effet de Grenade biotique ainsi que la durée de sa réduction de soins.",
+          "en": "Increases Biotic Grenade's area of effect and the duration of its healing reduction."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmt9k2ana03mv8",
+        "level": 7,
+        "name": {
+          "fr": "Terreur nocturne",
+          "en": "Night Terrors"
+        },
+        "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_sleep_dart.png",
+        "description": {
+          "fr": "Vitesse de déplacement pour chaque héros touché par Fléchette hypodermique, qui inflige aussi des dégâts au réveil.",
+          "en": "Grants Movement Speed for each Hero hit by Sleep Dart, and deals damage to enemies when they wake up."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmt9k2ana04pl2",
+        "level": 7,
+        "name": {
+          "fr": "Agent bêtifiant",
+          "en": "Mind-Numbing Agent"
+        },
+        "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_aim_down_sights.png",
+        "description": {
+          "fr": "Chaque dose active sur un héros réduit sa puissance de capacité.",
+          "en": "Doses on a Hero reduce their Spell Power."
         },
         "demoYoutubeId": null
       },
@@ -2606,13 +3187,27 @@ const HEROES = [
         "id": "tmrryr6jo6yhcn",
         "level": 10,
         "name": {
-          "fr": "Guérison ancestrale",
-          "en": "Ancestral Healing"
+          "fr": "Nanoboost",
+          "en": "Nano Boost"
         },
-        "icon": "https://psionic-storm.com/media/img/talents/rehgar_ancestralhealing.png",
+        "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_nano_bost.png",
         "description": {
-          "fr": "Gros soin monocible, utilisable sur soi.",
-          "en": "Massive single-target heal, usable on self."
+          "fr": "Restaure du mana à un allié et lui procure puissance de capacité et recharge accélérée. Ne peut pas cibler Ana.",
+          "en": "Restores Mana to an ally and grants bonus Spell Power with faster cooldowns. Cannot target Ana."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmt9k2ana05rk9",
+        "level": 10,
+        "name": {
+          "fr": "Œil d'Horus",
+          "en": "Eye of Horus"
+        },
+        "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_overwatch.png",
+        "description": {
+          "fr": "Prend une posture de tireuse d'élite et tire plusieurs balles à portée illimitée qui soignent les alliés et blessent les ennemis. Ana ne peut pas se déplacer.",
+          "en": "Assumes a sniping stance and fires several unlimited-range rounds that heal allies and damage enemies. Ana cannot move while active."
         },
         "demoYoutubeId": null
       },
@@ -2620,13 +3215,41 @@ const HEROES = [
         "id": "tmrryr6jon5jc2",
         "level": 13,
         "name": {
-          "fr": "Raz-de-marée",
-          "en": "Tidal Waves"
+          "fr": "Sérum de vitesse",
+          "en": "Speed Serum"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_chainheal.jpg",
+        "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_healing_dart.png",
         "description": {
-          "fr": "Réduit le temps de recharge de Salve de guérison et son coût en mana.",
-          "en": "Reduces Chain Heal cooldown and mana cost."
+          "fr": "Fléchette soignante procure de la vitesse de déplacement aux héros affectés.",
+          "en": "Healing Dart grants Movement Speed to the Heroes it heals."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmt9k2ana06wj4",
+        "level": 13,
+        "name": {
+          "fr": "Fléchette tonifiante",
+          "en": "Purifying Darts"
+        },
+        "icon": "assets/heroes/base_spells/ana/images/talents/storm_ui_icon_ana_healing_dart_a.png",
+        "description": {
+          "fr": "Fléchette soignante supprime les ralentissements et immobilisations de sa cible, avec un soin bonus dans ce cas.",
+          "en": "Healing Dart cleanses Roots and Slows from its target and provides extra healing when doing so."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmt9k2ana07nh1",
+        "level": 13,
+        "name": {
+          "fr": "Sels",
+          "en": "Smelling Salts"
+        },
+        "icon": "assets/heroes/base_spells/ana/images/talents/storm_ui_icon_ana_healing_dart_b.png",
+        "description": {
+          "fr": "Fléchette soignante supprime les étourdissements de sa cible et lui procure de l'armure temporaire.",
+          "en": "Healing Dart cleanses Stuns from its target and grants them temporary Armor when doing so."
         },
         "demoYoutubeId": null
       },
@@ -2634,13 +3257,41 @@ const HEROES = [
         "id": "tmrryr6joljrqh",
         "level": 16,
         "name": {
-          "fr": "Totem d’emprise de la terre",
-          "en": "Earthgrasp Totem"
+          "fr": "Œil de lynx",
+          "en": "Sharpshooter"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_earthbindtotem.jpg",
+        "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_healing_dart.png",
         "description": {
-          "fr": "Quand le totem est posé pour la première fois, il inflige des dégâts en zone et ralentit fortement.",
-          "en": "When first spawned, the totem deals AoE damage and heavily slows."
+          "fr": "Les soins de Fléchette soignante augmentent à chaque héros soigné, jusqu'à un maximum, avec un bonus au plafond. Rater réinitialise le bonus.",
+          "en": "Healing Dart's healing grows with each Hero hit, up to a cap with a bonus at max stacks. Missing resets the bonus."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmt9k2ana08cf6",
+        "level": 16,
+        "name": {
+          "fr": "Formule concentrée",
+          "en": "Concentrated Doses"
+        },
+        "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_healing_dart.png",
+        "description": {
+          "fr": "Fléchette soignante soigne davantage selon le nombre de doses actives sur les héros adverses.",
+          "en": "Healing Dart heals for more based on the number of Doses active on the enemy team."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmt9k2ana09bd5",
+        "level": 16,
+        "name": {
+          "fr": "Recharge active",
+          "en": "Active Reload"
+        },
+        "icon": "assets/heroes/base_spells/ana/images/talents/storm_ui_icon_ana_healing_dart_b.png",
+        "description": {
+          "fr": "Nouvelle capacité active : confère instantanément des charges de Fléchette soignante.",
+          "en": "New active ability: instantly refill Healing Dart's charges."
         },
         "demoYoutubeId": null
       },
@@ -2648,17 +3299,61 @@ const HEROES = [
         "id": "tmrryr6jozz7tm",
         "level": 20,
         "name": {
-          "fr": "Bénédiction du long-voyant",
-          "en": "Farseer's Blessing"
+          "fr": "Nanotransfusion",
+          "en": "Nano Infusion"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_ancestralhealing.jpg",
+        "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_nano_bost.png",
         "description": {
-          "fr": "Une deuxième Guérison Ancestrale apparait, et soigne en zone autour de la cible.",
-          "en": "A second Ancestral Healing triggers and heals in an AoE."
+          "fr": "Les alliés sous Nanoboost récupèrent des points de vie selon les dégâts de sort qu'ils infligent.",
+          "en": "Allies boosted by Nano Boost also heal based on the Spell Damage they deal."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmt9k2ana10tg3",
+        "level": 20,
+        "name": {
+          "fr": "Infaillible",
+          "en": "Deadeye"
+        },
+        "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_overwatch.png",
+        "description": {
+          "fr": "Œil d'Horus regagne des balles plus vite mais par petites quantités. Chaque héros touché augmente ses dégâts et soins, réinitialisés en quittant la capacité.",
+          "en": "Eye of Horus regains charges faster but in smaller amounts, and gains damage/healing per Hero hit, resetting after leaving the stance."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmt9k2ana11se8",
+        "level": 20,
+        "name": {
+          "fr": "Posture retranchée",
+          "en": "Armored Stance"
+        },
+        "icon": "assets/heroes/base_spells/ana/images/spells/storm_ui_icon_ana_aim_down_sights.png",
+        "description": {
+          "fr": "Augmente les dégâts de Nuhas, et confère de l'armure supplémentaire tant que Tireuse embusquée est active.",
+          "en": "Increases Shrike's damage, and grants bonus Armor while Aim Down Sights is active."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmt9k2ana12ux0",
+        "level": 20,
+        "name": {
+          "fr": "Lunette évolutive",
+          "en": "Dynamic Optics"
+        },
+        "icon": "assets/heroes/base_spells/ana/images/talents/storm_ui_icon_ana_aim_down_sights_a.png",
+        "description": {
+          "fr": "Les attaques de base cumulent de la vitesse d'attaque, et gagnent en portée tant que Tireuse embusquée est active.",
+          "en": "Basic Attacks stack bonus Attack Speed, and grant extra Basic Attack range while Aim Down Sights is active."
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "isNew": true,
+    "forms": []
   },
   {
     "id": "auriel",
@@ -2789,7 +3484,7 @@ const HEROES = [
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
-          "en": "PASTE IN TALENT TREE"
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "[T3332332,Auriel]",
         "videos": [],
@@ -2848,7 +3543,7 @@ const HEROES = [
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
-          "en": "PASTE IN TALENT TREE"
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "[T1112232,Auriel]",
         "videos": [],
@@ -3068,11 +3763,12 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "kharazim",
-    "enabled": false,
+    "enabled": true,
     "name": {
       "fr": "Kharazim",
       "en": "Kharazim"
@@ -3080,24 +3776,24 @@ const HEROES = [
     "role": "Healer",
     "portrait": "assets/heroes/portraits/storm_ui_glues_draft_portrait_monk.png",
     "headline": {
-      "fr": "Soigneur de mêlée ultra mobile.",
+      "fr": "Soigneur mêlée ultra mobile.",
       "en": "Ultra mobile melee healer."
     },
     "gameplay": {
-      "fr": "Kharazim bondit d'allié en ennemi, infligeant des dégâts de mêlée pour générer ses soins.",
-      "en": "Kharazim dashes between allies and enemies, dealing melee damage to fuel his healing."
+      "fr": "Kharazim bondit d'allié en ennemi, tout en infligeant des dégâts et soignant ses alliés.",
+      "en": "Kharazim dashes from ally to enemy, dealing damage and healing his allies along the way."
     },
     "spells": [
       {
         "key": "Trait",
         "name": {
-          "fr": "Dogme",
-          "en": "Dogma"
+          "fr": "Choisissez un trait",
+          "en": "Pick Your Trait"
         },
         "icon": "assets/heroes/base_spells/kharazim/images/spells/storm_ui_icon_monk_trait1.png",
         "description": {
-          "fr": "Le Trait se choisit au niveau 1 (Dégâts, Soins ou Mana).",
-          "en": "Trait is chosen at level 1 (Damage, Heals or Mana)."
+          "fr": "Le trait se choisit au niveau 1, entre Transcendance, Poings d'acier et Spiritualité.",
+          "en": "The trait is chosen at level 1, between Transcendence, Iron Fists, and Insight."
         },
         "demoYoutubeId": ""
       },
@@ -3109,8 +3805,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/kharazim/images/spells/storm_ui_icon_monk_dash.png",
         "description": {
-          "fr": "Bondit vers un allié ou un ennemi.",
-          "en": "Dashes to an ally or enemy."
+          "fr": "Bondit vers un allié ou un ennemi, qui subit une attaque de base à l'arrivée. Peut stocker plusieurs charges.",
+          "en": "Dashes to an ally or enemy, hitting them with a Basic Attack on arrival. Can store multiple charges."
         },
         "demoYoutubeId": ""
       },
@@ -3122,8 +3818,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/kharazim/images/spells/storm_ui_icon_monk_breath0fheaven.png",
         "description": {
-          "fr": "Soigne les alliés proches et donne de la vitesse.",
-          "en": "Heals nearby allies and grants movement speed."
+          "fr": "Soigne les héros alliés proches et leur donne de la vitesse de déplacement.",
+          "en": "Heals nearby allied Heroes and grants them Movement Speed."
         },
         "demoYoutubeId": ""
       },
@@ -3135,8 +3831,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/kharazim/images/spells/storm_ui_icon_monk_deadlyreach.png",
         "description": {
-          "fr": "Augmente la vitesse d'attaque et la portée.",
-          "en": "Increases attack speed and range."
+          "fr": "Augmente temporairement la vitesse et la portée des attaques de base de Kharazim.",
+          "en": "Temporarily increases Kharazim's Attack Speed and Attack Range."
         },
         "demoYoutubeId": ""
       },
@@ -3146,10 +3842,10 @@ const HEROES = [
           "fr": "Paume divine",
           "en": "Divine Palm"
         },
-        "icon": "assets/heroes/base_spells/kharazim/images/spells/storm_ui_icon_monk_sevensidedstrike.png",
+        "icon": "assets/heroes/base_spells/kharazim/images/spells/storm_ui_icon_monk_divinepalm.png",
         "description": {
-          "fr": "Sauve un allié de la mort avec un gros soin.",
-          "en": "Saves an ally from death with a massive heal."
+          "fr": "Empêche un héros allié de mourir, en le soignant s'il subit des dégâts fatals peu après.",
+          "en": "Protects an allied Hero from death, healing them if they take fatal damage shortly after."
         },
         "demoYoutubeId": ""
       },
@@ -3159,22 +3855,26 @@ const HEROES = [
           "fr": "Les Sept frappes",
           "en": "Seven-Sided Strike"
         },
-        "icon": "assets/heroes/base_spells/kharazim/images/spells/storm_ui_icon_monk_divinepalm.png",
+        "icon": "assets/heroes/base_spells/kharazim/images/spells/storm_ui_icon_monk_sevensidedstrike.png",
         "description": {
-          "fr": "Inflige des dégâts lourds en pourcentage de vie dans une zone.",
-          "en": "Deals heavy percentage health damage in an area."
+          "fr": "Devient invulnérable et frappe plusieurs fois le héros ennemi proche ayant le plus de vie.",
+          "en": "Becomes Invulnerable and strikes the nearest highest-Health enemy Hero multiple times."
         },
         "demoYoutubeId": ""
       }
     ],
     "tips": [
       {
-        "fr": "Tape sans arrêt pour maximiser ton passif.",
+        "fr": "Tape sans arrêt pour maximiser ton passif. ",
         "en": "Attack constantly to maximize your passive."
       },
       {
         "fr": "Garde un Q pour fuir.",
         "en": "Keep a Q charge to escape."
+      },
+      {
+        "fr": "Les Sept Frappes inflige + de dégâts à une seule cible qu'à plusieurs. ",
+        "en": "Seven Strikes deals more damage to a single target than to multiple targets."
       }
     ],
     "builds": [
@@ -3182,63 +3882,73 @@ const HEROES = [
         "enabled": true,
         "order": 1,
         "label": {
-          "fr": "Poings de fer",
-          "en": "Iron Fists"
+          "fr": "Build recommandé",
+          "en": "Recommanded build"
         },
         "summary": {
-          "fr": "Soins via l'élimination rapide des cibles.",
-          "en": "Healing through quick target elimination."
+          "fr": "Build qui passe partout, peu importe le mode de jeu.",
+          "en": "A build that works in any situation, no matter the game mode."
         },
         "buildCodeTitle": {
-          "fr": "A COLLER",
-          "en": "PASTE"
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE INTO TALENT TREE"
         },
-        "buildCode": "[T1222222,Kharazim]",
+        "buildCode": "[T2312113,Kharazim]",
         "videos": [],
         "updatedAt": {
-          "fr": "",
-          "en": ""
+          "fr": "14 Août 2026",
+          "en": "August 14, 2026"
         },
         "talentSelections": [
           {
             "level": 1,
-            "primaryId": "tmrryr6joui4y6",
+            "primaryId": "tmq8v3khz02tva",
             "alternativeIds": []
           },
           {
             "level": 4,
-            "primaryId": "tmrryr6joa02vm",
-            "alternativeIds": []
+            "primaryId": "tmq8v3khz06mqu",
+            "alternativeIds": [
+              "tmq8v3khz05y3f"
+            ]
           },
           {
             "level": 7,
-            "primaryId": "tmrryr6joykuho",
+            "primaryId": "tmq8v3khz07735",
             "alternativeIds": []
           },
           {
             "level": 10,
-            "primaryId": "tmrryr6joh3ve9",
-            "alternativeIds": []
+            "primaryId": "tmq8v3khz11cz2",
+            "alternativeIds": [
+              "tmq8v3khz10ocb"
+            ]
           },
           {
             "level": 13,
-            "primaryId": "tmrryr6jottn94",
-            "alternativeIds": []
+            "primaryId": "tmq8v3khz12bh2",
+            "alternativeIds": [
+              "tmq8v3khz14c43"
+            ]
           },
           {
             "level": 16,
-            "primaryId": "tmrryr6job0tif",
-            "alternativeIds": []
+            "primaryId": "tmq8v3khz154yr",
+            "alternativeIds": [
+              "tmq8v3khz16muk"
+            ]
           },
           {
             "level": 20,
-            "primaryId": "tmrryr6joau8lk",
-            "alternativeIds": []
+            "primaryId": "tmq8v3khz208te",
+            "alternativeIds": [
+              "tmq8v3khz226ex"
+            ]
           }
         ]
       },
       {
-        "enabled": true,
+        "enabled": false,
         "order": 2,
         "label": {
           "fr": "Transcendance",
@@ -3249,49 +3959,49 @@ const HEROES = [
           "en": "The classic sustained healing build."
         },
         "buildCodeTitle": {
-          "fr": "A COLLER",
-          "en": "PASTE"
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE INTO TALENT TREE"
         },
-        "buildCode": "[T2111111,Kharazim]",
+        "buildCode": "[T1121331,Kharazim]",
         "videos": [],
         "updatedAt": {
-          "fr": "",
-          "en": ""
+          "fr": "14 Août 2026",
+          "en": "August 14, 2026"
         },
         "talentSelections": [
           {
             "level": 1,
-            "primaryId": "tmrryr6joui4y6",
+            "primaryId": "tmq8v3khz01n1q",
             "alternativeIds": []
           },
           {
             "level": 4,
-            "primaryId": "tmrryr6joa02vm",
+            "primaryId": "tmq8v3khz04eup",
             "alternativeIds": []
           },
           {
             "level": 7,
-            "primaryId": "tmrryr6joykuho",
+            "primaryId": "tmq8v3khz0836c",
             "alternativeIds": []
           },
           {
             "level": 10,
-            "primaryId": "tmrryr6joh3ve9",
+            "primaryId": "tmq8v3khz10ocb",
             "alternativeIds": []
           },
           {
             "level": 13,
-            "primaryId": "tmrryr6jottn94",
+            "primaryId": "tmq8v3khz14c43",
             "alternativeIds": []
           },
           {
             "level": 16,
-            "primaryId": "tmrryr6job0tif",
+            "primaryId": "tmq8v3khz176qz",
             "alternativeIds": []
           },
           {
             "level": 20,
-            "primaryId": "tmrryr6joau8lk",
+            "primaryId": "tmq8v3khz1842q",
             "alternativeIds": []
           }
         ]
@@ -3300,108 +4010,319 @@ const HEROES = [
     "guideVideos": [],
     "talentPool": [
       {
-        "id": "tmrryr6joui4y6",
+        "id": "tmq8v3khz01n1q",
         "level": 1,
         "name": {
-          "fr": "Totem Colossal",
-          "en": "Colossal Totem"
+          "fr": "Transcendance",
+          "en": "Transcendence"
         },
-        "icon": "https://psionic-storm.com/media/img/talents/rehgar_earthbindtotem.png",
+        "icon": "assets/heroes/base_spells/kharazim/images/talents/storm_ui_icon_monk_trait_transcendence.png",
         "description": {
-          "fr": "Augmente les points de vie, le rayon et la durée du totem. Permet de le repositionner une nouvelle fois.",
-          "en": "Increases health, radius, and duration of the totem. Can be repositioned once."
+          "fr": "Chaque 3e attaque de base soigne le héros allié proche ayant le moins de vie et augmente la vitesse de déplacement.",
+          "en": "Every 3rd Basic Attack heals the lowest-Health nearby allied Hero and grants Movement Speed."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6joa02vm",
+        "id": "tmq8v3khz02tva",
+        "level": 1,
+        "name": {
+          "fr": "Poings d'acier",
+          "en": "Iron Fists"
+        },
+        "icon": "assets/heroes/base_spells/kharazim/images/talents/storm_ui_icon_monk_trait_ironfist.png",
+        "description": {
+          "fr": "Chaque 3e attaque de base inflige des dégâts bonus et augmente la vitesse de déplacement.",
+          "en": "Every 3rd Basic Attack deals bonus damage and grants Movement Speed."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmq8v3khz037hg",
+        "level": 1,
+        "name": {
+          "fr": "Spiritualité",
+          "en": "Insight"
+        },
+        "icon": "assets/heroes/base_spells/kharazim/images/talents/storm_ui_icon_monk_trait_insight.png",
+        "description": {
+          "fr": "Quête : chaque 3e attaque de base rend du mana et augmente la vitesse de déplacement. Récompense : à terme, réduit aussi le temps de recharge des capacités de base.",
+          "en": "Quest: every 3rd Basic Attack restores Mana and grants Movement Speed. Reward: eventually also reduces Basic Ability cooldowns."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmq8v3khz04eup",
         "level": 4,
         "name": {
-          "fr": "Viveterre",
-          "en": "Earthliving Enchant"
+          "fr": "Allié d'esprit",
+          "en": "Spirit Ally"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_chainheal.jpg",
+        "icon": "assets/heroes/base_spells/kharazim/images/talents/storm_ui_icon_monk_allyspirit.png",
         "description": {
-          "fr": "Renforce Salve de guerison pour les héros dont les points de vie sont bas.",
-          "en": "Empowers Chain Heal for heroes at low health."
+          "fr": "Place un allié d'esprit qui soigne les héros alliés proches au fil du temps. Kharazim peut Bondir vers lui.",
+          "en": "Places a Spirit Ally that heals nearby allied Heroes over time. Kharazim can Dash to it."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6joykuho",
+        "id": "tmq8v3khz05y3f",
+        "level": 4,
+        "name": {
+          "fr": "Allié de terre",
+          "en": "Earth Ally"
+        },
+        "icon": "assets/heroes/base_spells/kharazim/images/talents/storm_ui_icon_monk_allyearth.png",
+        "description": {
+          "fr": "Place un allié de terre qui confère de l'armure physique aux héros alliés proches contre les attaques de base. Kharazim peut Bondir vers lui.",
+          "en": "Places an Earth Ally that grants nearby allied Heroes Physical Armor against Basic Attacks. Kharazim can Dash to it."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmq8v3khz06mqu",
+        "level": 4,
+        "name": {
+          "fr": "Allié d'air",
+          "en": "Air Ally"
+        },
+        "icon": "assets/heroes/base_spells/kharazim/images/talents/storm_ui_icon_monk_allyair.png",
+        "description": {
+          "fr": "Place un allié d'air qui donne de la puissance de capacité aux alliés et dévoile une large zone. Kharazim peut Bondir vers lui.",
+          "en": "Places an Air Ally that grants allies Spell Power and reveals a large area. Kharazim can Dash to it."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmq8v3khz07735",
         "level": 7,
         "name": {
-          "fr": "Totem lié à la terre",
-          "en": "Grounded Totem"
+          "fr": "Vitesse fulgurante",
+          "en": "Blinding Speed"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_earthbindtotem.jpg",
+        "icon": "assets/heroes/base_spells/kharazim/images/spells/storm_ui_icon_monk_dash.png",
         "description": {
-          "fr": "Réduis la vitesse d'attaque et la puissance de capacité, augmente la portée du totem.",
-          "en": "Reduces attack and spell power of enemies in range."
+          "fr": "Réduit le temps de recharge de Frappe éclair et augmente son nombre maximal de charges.",
+          "en": "Reduces Radiant Dash's cooldown and increases its maximum charges."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6joh3ve9",
+        "id": "tmq8v3khz0836c",
+        "level": 7,
+        "name": {
+          "fr": "Zèle divin",
+          "en": "Heavenly Zeal"
+        },
+        "icon": "assets/heroes/base_spells/kharazim/images/spells/storm_ui_icon_monk_breath0fheaven.png",
+        "description": {
+          "fr": "Augmente le bonus de vitesse de déplacement de Souffle divin. Bondir vers un allié augmente aussi les soins qu'il reçoit de Souffle divin peu après.",
+          "en": "Increases Breath of Heaven's Movement Speed bonus. Dashing to an ally also boosts the healing they receive from Breath of Heaven shortly after."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmq8v3khz09qn6",
+        "level": 7,
+        "name": {
+          "fr": "Poings ardents",
+          "en": "Blazing Fists"
+        },
+        "icon": "assets/heroes/base_spells/kharazim/images/spells/storm_ui_icon_monk_deadlyreach.png",
+        "description": {
+          "fr": "Augmente la durée de Frappe mortelle. Chaque 3e attaque de base réduit son temps de recharge.",
+          "en": "Increases Deadly Reach's duration. Every 3rd Basic Attack reduces its cooldown."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmq8v3khz10ocb",
         "level": 10,
         "name": {
-          "fr": "Guérison ancestrale",
-          "en": "Ancestral Healing"
+          "fr": "Paume divine",
+          "en": "Divine Palm"
         },
-        "icon": "https://psionic-storm.com/media/img/talents/rehgar_ancestralhealing.png",
+        "icon": "assets/heroes/base_spells/kharazim/images/spells/storm_ui_icon_monk_divinepalm.png",
         "description": {
-          "fr": "Gros soin monocible, utilisable sur soi.",
-          "en": "Massive single-target heal, usable on self."
+          "fr": "Empêche un héros allié de mourir, en le soignant s'il subit des dégâts fatals peu après.",
+          "en": "Protects an allied Hero from death, healing them if they take fatal damage shortly after."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jottn94",
+        "id": "tmq8v3khz11cz2",
+        "level": 10,
+        "name": {
+          "fr": "Les Sept frappes",
+          "en": "Seven-Sided Strike"
+        },
+        "icon": "assets/heroes/base_spells/kharazim/images/spells/storm_ui_icon_monk_sevensidedstrike.png",
+        "description": {
+          "fr": "Devient invulnérable et frappe plusieurs fois le héros ennemi proche ayant le plus de vie.",
+          "en": "Becomes Invulnerable and strikes the nearest highest-Health enemy Hero multiple times."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmq8v3khz12bh2",
         "level": 13,
         "name": {
-          "fr": "Raz-de-marée",
-          "en": "Tidal Waves"
+          "fr": "Vif-argent",
+          "en": "Quicksilver"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_chainheal.jpg",
+        "icon": "assets/heroes/base_spells/kharazim/images/spells/storm_ui_icon_monk_dash.png",
         "description": {
-          "fr": "Réduit le temps de recharge de Salve de guérison et son coût en mana.",
-          "en": "Reduces Chain Heal cooldown and mana cost."
+          "fr": "Bondir vers un allié donne de la vitesse de déplacement à Kharazim et à sa cible.",
+          "en": "Dashing to an ally grants Kharazim and the target bonus Movement Speed."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6job0tif",
+        "id": "tmq8v3khz13sw2",
+        "level": 13,
+        "name": {
+          "fr": "Bouclier anti-sort",
+          "en": "Spell Shield"
+        },
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_spellshield.png",
+        "description": {
+          "fr": "Confère périodiquement de l'armure anti-sort contre la prochaine capacité adverse. Peut être désactivé.",
+          "en": "Periodically grants Spell Armor against the next enemy Ability. Can be toggled off."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmq8v3khz14c43",
+        "level": 13,
+        "name": {
+          "fr": "Sixième sens",
+          "en": "Sixth Sense"
+        },
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_relentless.png",
+        "description": {
+          "fr": "En cas d'étourdissement ou d'immobilisation, confère de l'armure physique contre les attaques de base de héros.",
+          "en": "While Stunned or Rooted, grants Physical Armor against Hero Basic Attacks."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmq8v3khz154yr",
         "level": 16,
         "name": {
-          "fr": "Totem d’emprise de la terre",
-          "en": "Earthgrasp Totem"
+          "fr": "Toucher purificateur",
+          "en": "Cleansing Touch"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_earthbindtotem.jpg",
+        "icon": "assets/heroes/base_spells/kharazim/images/spells/storm_ui_icon_monk_dash.png",
         "description": {
-          "fr": "Quand le totem est posé pour la première fois, il inflige des dégâts en zone et ralentit fortement.",
-          "en": "When first spawned, the totem deals AoE damage and heavily slows."
+          "fr": "Bondir vers un allié le rend insensible au contrôle pendant un court instant.",
+          "en": "Dashing to an ally makes them Unstoppable for a brief moment."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6joau8lk",
+        "id": "tmq8v3khz16muk",
+        "level": 16,
+        "name": {
+          "fr": "La Voie des mille poings",
+          "en": "Way of the Hundred Fists"
+        },
+        "icon": "assets/heroes/base_spells/kharazim/images/talents/storm_ui_icon_monk_dash_a.png",
+        "description": {
+          "fr": "Bondir vers un ennemi déclenche une rafale d'attaques de base supplémentaires.",
+          "en": "Dashing to an enemy triggers a rapid volley of extra Basic Attacks."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmq8v3khz176qz",
+        "level": 16,
+        "name": {
+          "fr": "Écho divin",
+          "en": "Echo of Heaven"
+        },
+        "icon": "assets/heroes/base_spells/kharazim/images/spells/storm_ui_icon_monk_breath0fheaven.png",
+        "description": {
+          "fr": "Souffle divin soigne moins au premier soin, mais se déclenche une seconde fois peu après.",
+          "en": "Breath of Heaven heals for less initially, but triggers a second time shortly after."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmq8v3khz1842q",
         "level": 20,
         "name": {
-          "fr": "Bénédiction du long-voyant",
-          "en": "Farseer's Blessing"
+          "fr": "Sommeil paisible",
+          "en": "Peaceful Repose"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_ancestralhealing.jpg",
+        "icon": "assets/heroes/base_spells/kharazim/images/spells/storm_ui_icon_monk_divinepalm.png",
         "description": {
-          "fr": "Une deuxième Guérison Ancestrale apparait, et soigne en zone autour de la cible.",
-          "en": "A second Ancestral Healing triggers and heals in an AoE."
+          "fr": "Augmente les soins de Paume divine et réduit fortement son temps de recharge si le héros protégé ne meurt pas.",
+          "en": "Increases Divine Palm's healing and greatly reduces its cooldown if the protected Hero doesn't die."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmq8v3khz193gr",
+        "level": 20,
+        "name": {
+          "fr": "Transgression",
+          "en": "Transgression"
+        },
+        "icon": "assets/heroes/base_spells/kharazim/images/spells/storm_ui_icon_monk_sevensidedstrike.png",
+        "description": {
+          "fr": "Les Sept frappes touche plusieurs cibles supplémentaires.",
+          "en": "Seven-Sided Strike hits several additional targets."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmq8v3khz208te",
+        "level": 20,
+        "name": {
+          "fr": "Poings légendaires",
+          "en": "Fists of Legend"
+        },
+        "icon": "assets/heroes/base_spells/kharazim/images/talents/storm_ui_icon_monk_fistoflegend.png",
+        "description": {
+          "fr": "Confère une partie des bénéfices des deux talents de niveau 1 qui n'ont pas été choisis.",
+          "en": "Grants a portion of the benefits from both level 1 talents that weren't chosen."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmq8v3khz215jl",
+        "level": 20,
+        "name": {
+          "fr": "Bouclier du Nexus",
+          "en": "Storm Shield"
+        },
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_stormshield.png",
+        "description": {
+          "fr": "Nouvelle capacité active : confère un bouclier à tous les héros alliés proches.",
+          "en": "New active ability: grants a Shield to all nearby allied Heroes."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmq8v3khz226ex",
+        "level": 20,
+        "name": {
+          "fr": "Épiphanie",
+          "en": "Epiphany"
+        },
+        "icon": "assets/heroes/base_spells/kharazim/images/talents/storm_ui_icon_monk_epiphany.png",
+        "description": {
+          "fr": "Nouvelle capacité active : restaure une grande partie du mana de Kharazim et des charges de Frappe éclair.",
+          "en": "New active ability: restores a large portion of Kharazim's Mana and Radiant Dash charges."
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "lili",
-    "enabled": false,
+    "enabled": true,
     "name": {
       "fr": "Li Li",
       "en": "Li Li"
@@ -3409,7 +4330,7 @@ const HEROES = [
     "role": "Healer",
     "portrait": "assets/heroes/portraits/storm_ui_glues_draft_portrait_lili.png",
     "headline": {
-      "fr": "Soigneuse esquiveuse, aveugle les attaquants.",
+      "fr": "Soigneuse mobile, aveugle les adversaires.",
       "en": "Slippery healer, blinds attackers."
     },
     "gameplay": {
@@ -3420,39 +4341,39 @@ const HEROES = [
       {
         "key": "Trait",
         "name": {
-          "fr": "Pied véloce",
+          "fr": "Prompts petons",
           "en": "Fast Feet"
         },
         "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_fastfeet.png",
         "description": {
-          "fr": "Gagne en vitesse de déplacement quand elle prend des dégâts.",
-          "en": "Gains movement speed when taking damage."
+          "fr": "Prendre des dégâts accélère la recharge des capacités de base et donne une vitesse de déplacement bonus.",
+          "en": "Taking damage refreshes Basic Ability cooldowns faster and grants brief bonus Movement Speed."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "A",
         "name": {
-          "fr": "Cruche des mille tasses",
+          "fr": "Infusion requinquante",
           "en": "Healing Brew"
         },
         "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_healingbrew.png",
         "description": {
-          "fr": "Soigne automatiquement l'allié le plus blessé à portée.",
-          "en": "Automatically heals the most injured ally in range."
+          "fr": "Soigne automatiquement l'allié le moins en vie à portée.",
+          "en": "Automatically heals the lowest-Health ally in range."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "Z",
         "name": {
-          "fr": "Serpent nuageux",
+          "fr": "Serpent-nuage",
           "en": "Cloud Serpent"
         },
         "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_cloudserpent.png",
         "description": {
-          "fr": "Place un serpent sur un allié qui attaque et soigne.",
-          "en": "Places a serpent on an ally that attacks and heals."
+          "fr": "Invoque un serpent qui se met au service d'un allié et attaque les ennemis proches, le soignant à chaque coup.",
+          "en": "Summons a serpent that fights for an ally, attacking nearby enemies and healing them with each hit."
         },
         "demoYoutubeId": ""
       },
@@ -3464,21 +4385,21 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_blindingwind.png",
         "description": {
-          "fr": "Aveugle automatiquement les cibles proches.",
-          "en": "Automatically blinds nearby targets."
+          "fr": "Lance une bourrasque sur les ennemis proches, qui aveugle et ralentit les héros touchés.",
+          "en": "Throws a gust at nearby enemies, Blinding and Slowing the Heroes it hits."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "R1",
         "name": {
-          "fr": "Cruche des 1 000 tasses",
+          "fr": "Gourde à 1 000 tasses",
           "en": "Jug of 1,000 Cups"
         },
         "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_jugofathousandcups.png",
         "description": {
-          "fr": "Canalise d'énormes soins continus en zone.",
-          "en": "Channels massive continuous AoE heals."
+          "fr": "Canalise pour soigner à plusieurs reprises l'allié le moins en vie proche, au prix d'un temps de recharge de plus en plus long.",
+          "en": "Channels to repeatedly heal the lowest-Health nearby ally, at the cost of an increasingly long cooldown."
         },
         "demoYoutubeId": ""
       },
@@ -3490,20 +4411,24 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_waterdragon.png",
         "description": {
-          "fr": "Invoque un dragon qui ralentit et blesse un ennemi.",
-          "en": "Summons a dragon that slows and damages an enemy."
+          "fr": "Invoque un dragon d'eau qui frappe l'ennemi le plus proche et les héros autour de lui, les ralentissant.",
+          "en": "Summons a Water Dragon that strikes the nearest enemy and nearby Heroes, slowing them."
         },
         "demoYoutubeId": ""
       }
     ],
     "tips": [
       {
-        "fr": "Maintiens la touche Q enfoncée en combat.",
+        "fr": "Tu peux maintenir ta touche A pour soigner.",
         "en": "Hold down the Q key during combat."
       },
       {
-        "fr": "Ne te fais pas étourdir pendant ton R1.",
-        "en": "Do not get stunned during your R1."
+        "fr": "Approche toi de la cible que tu veux soigner.",
+        "en": "Move closer to the target you want to heal."
+      },
+      {
+        "fr": "De temps en temps, prends des dégâts pour bénéficier de ton trait.",
+        "en": "Sometimes, take some damage to activate your trait."
       }
     ],
     "builds": [
@@ -3511,57 +4436,60 @@ const HEROES = [
         "enabled": true,
         "order": 1,
         "label": {
-          "fr": "Build Aveuglement",
-          "en": "Blind Build"
+          "fr": "Build recommandé",
+          "en": "Recommanded build"
         },
         "summary": {
-          "fr": "Parfait contre les attaquants physiques.",
-          "en": "Perfect against physical attackers."
+          "fr": "Build qui passe partout, peu importe le mode de jeu.\n",
+          "en": "A build that works in any situation, no matter the game mode.\n"
         },
         "buildCodeTitle": {
-          "fr": "A COLLER",
-          "en": "PASTE"
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE INTO TALENT TREE"
         },
-        "buildCode": "[T3331333,LiLi]",
+        "buildCode": "[T1231111,LiLi]",
         "videos": [],
         "updatedAt": {
-          "fr": "",
-          "en": ""
+          "fr": "14 Août 2026",
+          "en": "August 14, 2026"
         },
         "talentSelections": [
           {
             "level": 1,
-            "primaryId": "tmrryr6johevnj",
+            "primaryId": "tmp5w2lil015y9",
             "alternativeIds": []
           },
           {
             "level": 4,
-            "primaryId": "tmrryr6jobg6i4",
+            "primaryId": "tmp5w2lil054tm",
             "alternativeIds": []
           },
           {
             "level": 7,
-            "primaryId": "tmrryr6jo0r4c1",
+            "primaryId": "tmp5w2lil096sa",
             "alternativeIds": []
           },
           {
             "level": 10,
-            "primaryId": "tmrryr6jon76p9",
+            "primaryId": "tmp5w2lil10pzq",
             "alternativeIds": []
           },
           {
             "level": 13,
-            "primaryId": "tmrryr6joi0k87",
+            "primaryId": "tmp5w2lil12at1",
             "alternativeIds": []
           },
           {
             "level": 16,
-            "primaryId": "tmrryr6jofjzpn",
-            "alternativeIds": []
+            "primaryId": "tmp5w2lil151th",
+            "alternativeIds": [
+              "tmp5w2lil16p6z",
+              "tmp5w2lil1732s"
+            ]
           },
           {
             "level": 20,
-            "primaryId": "tmrryr6joscwni",
+            "primaryId": "tmp5w2lil18irz",
             "alternativeIds": []
           }
         ]
@@ -3574,54 +4502,118 @@ const HEROES = [
           "en": "Serpent Build"
         },
         "summary": {
-          "fr": "Soins supplémentaires via le W.",
+          "fr": "Soins supplémentaires via le Z.",
           "en": "Extra healing via W."
         },
         "buildCodeTitle": {
-          "fr": "A COLLER",
-          "en": "PASTE"
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE INTO TALENT TREE"
         },
-        "buildCode": "[T1111111,LiLi]",
+        "buildCode": "[T2111131,LiLi]",
         "videos": [],
         "updatedAt": {
-          "fr": "",
-          "en": ""
+          "fr": "14 Août 2026",
+          "en": "August 14, 2026"
         },
         "talentSelections": [
           {
             "level": 1,
-            "primaryId": "tmrryr6johevnj",
+            "primaryId": "tmp5w2lil024yi",
             "alternativeIds": []
           },
           {
             "level": 4,
-            "primaryId": "tmrryr6jobg6i4",
+            "primaryId": "tmp5w2lil04dsr",
             "alternativeIds": []
           },
           {
             "level": 7,
-            "primaryId": "tmrryr6jo0r4c1",
+            "primaryId": "tmp5w2lil096sa",
             "alternativeIds": []
           },
           {
             "level": 10,
-            "primaryId": "tmrryr6jon76p9",
+            "primaryId": "tmp5w2lil10pzq",
             "alternativeIds": []
           },
           {
             "level": 13,
-            "primaryId": "tmrryr6joi0k87",
+            "primaryId": "tmp5w2lil12at1",
             "alternativeIds": []
           },
           {
             "level": 16,
-            "primaryId": "tmrryr6jofjzpn",
+            "primaryId": "tmp5w2lil1732s",
             "alternativeIds": []
           },
           {
             "level": 20,
-            "primaryId": "tmrryr6joscwni",
+            "primaryId": "tmp5w2lil18irz",
             "alternativeIds": []
+          }
+        ]
+      },
+      {
+        "enabled": true,
+        "order": 3,
+        "label": {
+          "fr": "Build Tank",
+          "en": "Tank build"
+        },
+        "updatedAt": {
+          "fr": "14 Août 2026",
+          "en": "August 14, 2026"
+        },
+        "summary": {
+          "fr": "Si t'adores courir dans les sorts et faire l'appât.",
+          "en": "If you love running through spells and bait."
+        },
+        "buildCodeTitle": {
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE IN TALENT TREE"
+        },
+        "buildCode": "[T3322131,LiLi]",
+        "videos": [],
+        "talentSelections": [
+          {
+            "level": 1,
+            "primaryId": "tmp5w2lil038gd",
+            "alternativeIds": []
+          },
+          {
+            "level": 4,
+            "primaryId": "tmp5w2lil06axd",
+            "alternativeIds": []
+          },
+          {
+            "level": 7,
+            "primaryId": "tmp5w2lil08ea4",
+            "alternativeIds": []
+          },
+          {
+            "level": 10,
+            "primaryId": "tmp5w2lil10pzq",
+            "alternativeIds": [
+              "tmp5w2lil119zc"
+            ]
+          },
+          {
+            "level": 13,
+            "primaryId": "tmp5w2lil12at1",
+            "alternativeIds": []
+          },
+          {
+            "level": 16,
+            "primaryId": "tmp5w2lil1732s",
+            "alternativeIds": []
+          },
+          {
+            "level": 20,
+            "primaryId": "tmp5w2lil18irz",
+            "alternativeIds": [
+              "tmp5w2lil210v6",
+              "tmp5w2lil19o9c"
+            ]
           }
         ]
       }
@@ -3629,108 +4621,305 @@ const HEROES = [
     "guideVideos": [],
     "talentPool": [
       {
-        "id": "tmrryr6johevnj",
+        "id": "tmp5w2lil015y9",
         "level": 1,
         "name": {
-          "fr": "Totem Colossal",
-          "en": "Colossal Totem"
+          "fr": "Boissons gratuites",
+          "en": "Free Drinks"
         },
-        "icon": "https://psionic-storm.com/media/img/talents/rehgar_earthbindtotem.png",
+        "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_healingbrew.png",
         "description": {
-          "fr": "Augmente les points de vie, le rayon et la durée du totem. Permet de le repositionner une nouvelle fois.",
-          "en": "Increases health, radius, and duration of the totem. Can be repositioned once."
+          "fr": "Quand Infusion requinquante soigne un héros sous 50% de vie, rembourse son coût en mana et réduit son temps de recharge.",
+          "en": "When Healing Brew heals a Hero below 50% Health, its cooldown is reduced and its Mana cost is refunded."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jobg6i4",
+        "id": "tmp5w2lil024yi",
+        "level": 1,
+        "name": {
+          "fr": "Serpent personnel",
+          "en": "Serpent Sidekick"
+        },
+        "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_cloudserpent.png",
+        "description": {
+          "fr": "Serpent-nuage ne coûte plus de mana, et son temps de recharge diminue encore plus vite tant que Prompts petons est actif.",
+          "en": "Cloud Serpent no longer costs Mana, and its cooldown refreshes even faster while Fast Feet is active."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmp5w2lil038gd",
+        "level": 1,
+        "name": {
+          "fr": "Vraie aventurière",
+          "en": "Eager Adventurer"
+        },
+        "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_fastfeet.png",
+        "description": {
+          "fr": "Augmente fortement la durée de Prompts petons et la régénération de mana tant qu'il est actif.",
+          "en": "Greatly increases Fast Feet's duration and Mana regeneration while it's active."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmp5w2lil04dsr",
         "level": 4,
         "name": {
-          "fr": "Viveterre",
-          "en": "Earthliving Enchant"
+          "fr": "Serpent des vents",
+          "en": "Wind Serpent"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_chainheal.jpg",
+        "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_cloudserpent.png",
         "description": {
-          "fr": "Renforce Salve de guerison pour les héros dont les points de vie sont bas.",
-          "en": "Empowers Chain Heal for heroes at low health."
+          "fr": "Serpent-nuage donne de la vitesse de déplacement à son porteur, encore augmentée brièvement après un Vent aveuglant. Passif : le serpent attaque plus vite.",
+          "en": "Cloud Serpent grants its bearer Movement Speed, further increased briefly after casting Blinding Wind. Passive: the serpent attacks faster."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jo0r4c1",
+        "id": "tmp5w2lil054tm",
+        "level": 4,
+        "name": {
+          "fr": "Vents soudains",
+          "en": "Surging Winds"
+        },
+        "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_blindingwind.png",
+        "description": {
+          "fr": "Si Vent aveuglant touche plusieurs héros, son temps de recharge diminue instantanément et Li Li gagne de la puissance de capacité.",
+          "en": "If Blinding Wind hits multiple Heroes, its cooldown is instantly reduced and Li Li gains Spell Power."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmp5w2lil06axd",
+        "level": 4,
+        "name": {
+          "fr": "En arrière toute !",
+          "en": "Safety Sprint"
+        },
+        "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_fastfeet.png",
+        "description": {
+          "fr": "Nouvelle capacité active : active Prompts petons et donne de l'armure et de la vitesse de déplacement. Passif : de l'armure bonus tant que Prompts petons est actif.",
+          "en": "New active ability: activates Fast Feet and grants Armor and Movement Speed. Passive: bonus Armor while Fast Feet is active."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmp5w2lil07rkj",
         "level": 7,
         "name": {
-          "fr": "Totem lié à la terre",
-          "en": "Grounded Totem"
+          "fr": "Remède miracle",
+          "en": "The Good Stuff"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_earthbindtotem.jpg",
+        "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_healingbrew.png",
         "description": {
-          "fr": "Réduis la vitesse d'attaque et la puissance de capacité, augmente la portée du totem.",
-          "en": "Reduces attack and spell power of enemies in range."
+          "fr": "Infusion requinquante soigne aussi au fil du temps, avec un effet doublé tant que Prompts petons est actif.",
+          "en": "Healing Brew also heals over time, doubled while Fast Feet is active."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jon76p9",
+        "id": "tmp5w2lil08ea4",
+        "level": 7,
+        "name": {
+          "fr": "Vortex de masse",
+          "en": "Mass Vortex"
+        },
+        "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_blindingwind.png",
+        "description": {
+          "fr": "Vent aveuglant touche un ennemi de plus et inflige davantage de dégâts s'il touche le nombre maximal de héros.",
+          "en": "Blinding Wind hits one additional enemy and deals more damage when it hits the maximum number of Heroes."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmp5w2lil096sa",
+        "level": 7,
+        "name": {
+          "fr": "En route !",
+          "en": "Let's Go!"
+        },
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_cleanse.png",
+        "description": {
+          "fr": "Nouvelle capacité active : soigne un héros allié et le rend insensible au contrôle. Son temps de recharge est affecté par Prompts petons. Ne peut pas cibler Li Li.",
+          "en": "New active ability: heals an allied Hero and makes them Unstoppable. Its cooldown is affected by Fast Feet. Cannot target Li Li."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmp5w2lil10pzq",
         "level": 10,
         "name": {
-          "fr": "Guérison ancestrale",
-          "en": "Ancestral Healing"
+          "fr": "Gourde à 1 000 tasses",
+          "en": "Jug of 1,000 Cups"
         },
-        "icon": "https://psionic-storm.com/media/img/talents/rehgar_ancestralhealing.png",
+        "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_jugofathousandcups.png",
         "description": {
-          "fr": "Gros soin monocible, utilisable sur soi.",
-          "en": "Massive single-target heal, usable on self."
+          "fr": "Canalise pour soigner à plusieurs reprises l'allié le moins en vie proche, au prix d'un temps de recharge de plus en plus long.",
+          "en": "Channels to repeatedly heal the lowest-Health nearby ally, at the cost of an increasingly long cooldown."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6joi0k87",
+        "id": "tmp5w2lil119zc",
+        "level": 10,
+        "name": {
+          "fr": "Dragon d'eau",
+          "en": "Water Dragon"
+        },
+        "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_waterdragon.png",
+        "description": {
+          "fr": "Invoque un dragon d'eau qui frappe l'ennemi le plus proche et les héros autour de lui, les ralentissant.",
+          "en": "Summons a Water Dragon that strikes the nearest enemy and nearby Heroes, slowing them."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmp5w2lil12at1",
         "level": 13,
         "name": {
-          "fr": "Raz-de-marée",
-          "en": "Tidal Waves"
+          "fr": "Serpent de foudre",
+          "en": "Lightning Serpent"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_chainheal.jpg",
+        "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_cloudserpent.png",
         "description": {
-          "fr": "Réduit le temps de recharge de Salve de guérison et son coût en mana.",
-          "en": "Reduces Chain Heal cooldown and mana cost."
+          "fr": "Les attaques du serpent-nuage rebondissent vers des cibles supplémentaires, infligeant des dégâts et soignant l'allié.",
+          "en": "Cloud Serpent's attacks bounce to additional targets, dealing damage and healing the ally."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jofjzpn",
+        "id": "tmp5w2lil13hxl",
+        "level": 13,
+        "name": {
+          "fr": "Vent violent",
+          "en": "Gale Force"
+        },
+        "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_blindingwind.png",
+        "description": {
+          "fr": "Augmente la durée de l'aveuglement de Vent aveuglant. Les attaques de base contre un héros aveuglé infligent davantage de dégâts.",
+          "en": "Increases Blinding Wind's Blind duration. Basic Attacks against Blinded Heroes deal bonus damage."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmp5w2lil14lzh",
+        "level": 13,
+        "name": {
+          "fr": "Vent contraire",
+          "en": "Hindering Winds"
+        },
+        "icon": "assets/heroes/base_spells/lili/images/talents/storm_ui_icon_lili_blindingwind_a.png",
+        "description": {
+          "fr": "Augmente le ralentissement et la durée de Vent aveuglant.",
+          "en": "Increases Blinding Wind's Slow amount and duration."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmp5w2lil151th",
         "level": 16,
         "name": {
-          "fr": "Totem d’emprise de la terre",
-          "en": "Earthgrasp Totem"
+          "fr": "Double dose",
+          "en": "Two For One"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_earthbindtotem.jpg",
+        "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_healingbrew.png",
         "description": {
-          "fr": "Quand le totem est posé pour la première fois, il inflige des dégâts en zone et ralentit fortement.",
-          "en": "When first spawned, the totem deals AoE damage and heavily slows."
+          "fr": "Infusion requinquante soigne un allié supplémentaire, mais son temps de recharge augmente.",
+          "en": "Healing Brew heals an additional ally, but its cooldown increases."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6joscwni",
+        "id": "tmp5w2lil16p6z",
+        "level": 16,
+        "name": {
+          "fr": "Coup de fouet",
+          "en": "Pick Me Up"
+        },
+        "icon": "assets/heroes/base_spells/lili/images/talents/storm_ui_icon_lili_healingbrew_a.png",
+        "description": {
+          "fr": "Infusion requinquante soigne davantage quand la cible est sous 50% de vie.",
+          "en": "Healing Brew heals for more when the target is below 50% Health."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmp5w2lil1732s",
+        "level": 16,
+        "name": {
+          "fr": "Bénédictions de Yu'lon",
+          "en": "Blessings Of Yu'lon"
+        },
+        "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_cloudserpent.png",
+        "description": {
+          "fr": "Serpent-nuage augmente les soins reçus par son porteur, et lui rend un peu de vie à chaque attaque.",
+          "en": "Cloud Serpent increases healing received by its bearer, and heals them a bit with each of its attacks."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmp5w2lil18irz",
         "level": 20,
         "name": {
-          "fr": "Bénédiction du long-voyant",
-          "en": "Farseer's Blessing"
+          "fr": "Gourde à 1 000 000 tasses",
+          "en": "Jug of 1,000,000 Cups"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_ancestralhealing.jpg",
+        "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_jugofathousandcups.png",
         "description": {
-          "fr": "Une deuxième Guérison Ancestrale apparait, et soigne en zone autour de la cible.",
-          "en": "A second Ancestral Healing triggers and heals in an AoE."
+          "fr": "Gourde à 1 000 tasses soigne deux alliés à la fois.",
+          "en": "Jug of 1,000 Cups heals two allies at a time."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmp5w2lil19o9c",
+        "level": 20,
+        "name": {
+          "fr": "Double dragon",
+          "en": "Double Dragon"
+        },
+        "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_waterdragon.png",
+        "description": {
+          "fr": "Après avoir touché une cible, Dragon d'eau invoque un second dragon au point d'impact.",
+          "en": "After hitting a target, Water Dragon summons a second dragon at the point of impact."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmp5w2lil201b0",
+        "level": 20,
+        "name": {
+          "fr": "Tisse-brume",
+          "en": "Mistweaver"
+        },
+        "icon": "assets/heroes/base_spells/lili/images/talents/storm_ui_icon_lili_mistweaver.png",
+        "description": {
+          "fr": "Nouvelle capacité active : soigne les héros alliés proches. Les attaques de base et celles du serpent-nuage réduisent son temps de recharge.",
+          "en": "New active ability: heals nearby allied Heroes. Basic Attacks and Cloud Serpent's attacks reduce its cooldown."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmp5w2lil210v6",
+        "level": 20,
+        "name": {
+          "fr": "Ébrouement",
+          "en": "Shake It Off"
+        },
+        "icon": "assets/heroes/base_spells/lili/images/spells/storm_ui_icon_lili_fastfeet.png",
+        "description": {
+          "fr": "En cas d'étourdissement, de silence ou d'immobilisation, et brièvement après, Li Li gagne de l'armure. Passif : accélère encore le recharge de Prompts petons.",
+          "en": "While Stunned, Silenced, or Rooted, and briefly after, Li Li gains Armor. Passive: further speeds up Fast Feet's cooldown refresh."
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "ltmorales",
-    "enabled": false,
+    "enabled": true,
     "name": {
       "fr": "Lt. Morales",
       "en": "Lt. Morales"
@@ -3754,8 +4943,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_caduceusreactor.png",
         "description": {
-          "fr": "Régénère de la vie quand le rayon de soins n'est pas utilisé.",
-          "en": "Regenerates health when healing beam is not active."
+          "fr": "Tant qu'elle canalise Rayon de soins, Lt. Morales régénère un pourcentage de ses points de vie chaque seconde.",
+          "en": "While channeling Healing Beam, Lt. Morales regenerates a percentage of her Health each second."
         },
         "demoYoutubeId": ""
       },
@@ -3767,8 +4956,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_healingbeam.png",
         "description": {
-          "fr": "Canalise un soin continu sur un allié.",
-          "en": "Channels a continuous heal on an ally."
+          "fr": "Canalise un soin continu sur un allié tant qu'il reste à portée. L'énergie se régénère plus vite sans canalisation.",
+          "en": "Channels a continuous heal on an ally as long as they stay in range. Energy regenerates faster while not channeling."
         },
         "demoYoutubeId": ""
       },
@@ -3780,65 +4969,69 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_deployshield.png",
         "description": {
-          "fr": "Donne de l'armure à un allié.",
-          "en": "Grants armor to an ally."
+          "fr": "Confère de l'armure temporaire à un héros allié.",
+          "en": "Grants temporary Armor to an allied Hero."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "E",
         "name": {
-          "fr": "Grenade de déplacement",
+          "fr": "Grenade de distorsion",
           "en": "Displacement Grenade"
         },
         "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_displacementgrenade.png",
         "description": {
-          "fr": "Tire une grenade qui explose et repousse les ennemis.",
-          "en": "Fires a grenade that explodes and knocks enemies back."
+          "fr": "Tire une grenade qui peut être déclenchée manuellement, repoussant et blessant les ennemis proches.",
+          "en": "Fires a grenade that can be manually detonated, knocking back and damaging nearby enemies."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "R1",
         "name": {
-          "fr": "Drone de transport",
-          "en": "Medivac Dropship"
+          "fr": "Drone de stimulants",
+          "en": "Stim Drone"
         },
         "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_stim.png",
         "description": {
-          "fr": "Transporte l'équipe n'importe où sur la carte.",
-          "en": "Transports the team anywhere on the map."
+          "fr": "Donne un gros bonus de vitesse d'attaque et de déplacement à un héros allié.",
+          "en": "Grants an allied Hero a large boost to Attack Speed and Movement Speed."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "R2",
         "name": {
-          "fr": "Rayon stimulant",
-          "en": "Stim Drone"
+          "fr": "Transports Médivac",
+          "en": "Medivac Dropships"
         },
         "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_medivacdropship.png",
         "description": {
-          "fr": "Augmente massivement la vitesse d'un allié.",
-          "en": "Massively increases an ally's speed."
+          "fr": "Débloque un transport qui vient chercher les alliés pour les déplacer ailleurs sur la carte.",
+          "en": "Unlocks a transport that picks up allies to move them elsewhere on the map."
         },
         "demoYoutubeId": ""
       }
     ],
     "tips": [
       {
-        "fr": "Surveille ton niveau d'énergie.",
-        "en": "Monitor your energy level."
+        "fr": "Tu peux soigner les sbires.",
+        "en": "You can heal the minions."
       },
       {
         "fr": "Ta grenade est ton seul moyen de te défendre.",
         "en": "Your grenade is your only self-defense tool."
+      },
+      {
+        "fr": "Pense à mettre ton A sur un allié ou sbire pour te soigner grâce à ton trait !",
+        "en": "Remember to target an ally or minion with your Q to heal yourself using your trait!"
       }
     ],
     "builds": [
       {
-        "enabled": true,
-        "order": 1,
+        "enabled": false,
+        "order": 2,
         "label": {
           "fr": "Build Protection",
           "en": "Safeguard Build"
@@ -3848,56 +5041,56 @@ const HEROES = [
           "en": "Maximum armor to save targets."
         },
         "buildCodeTitle": {
-          "fr": "A COLLER",
-          "en": "PASTE"
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE INTO TALENT TREE"
         },
-        "buildCode": "[T2222222,LtMorales]",
+        "buildCode": "[T2222233,LtMorales]",
         "videos": [],
         "updatedAt": {
-          "fr": "",
-          "en": ""
+          "fr": "14 Août 2026",
+          "en": "August 14, 2026"
         },
         "talentSelections": [
           {
             "level": 1,
-            "primaryId": "tmrryr6jo9zwh9",
+            "primaryId": "tmn4x9mor0223a",
             "alternativeIds": []
           },
           {
             "level": 4,
-            "primaryId": "tmrryr6jo0cg7a",
+            "primaryId": "tmn4x9mor05tb2",
             "alternativeIds": []
           },
           {
             "level": 7,
-            "primaryId": "tmrryr6jodpj3a",
+            "primaryId": "tmn4x9mor084ww",
             "alternativeIds": []
           },
           {
             "level": 10,
-            "primaryId": "tmrryr6jobpccn",
+            "primaryId": "tmn4x9mor11txh",
             "alternativeIds": []
           },
           {
             "level": 13,
-            "primaryId": "tmrryr6joi10l5",
+            "primaryId": "tmn4x9mor13dsf",
             "alternativeIds": []
           },
           {
             "level": 16,
-            "primaryId": "tmrryr6jomqwbp",
+            "primaryId": "tmn4x9mor172j9",
             "alternativeIds": []
           },
           {
             "level": 20,
-            "primaryId": "tmrryr6jonimet",
+            "primaryId": "tmn4x9mor20bc9",
             "alternativeIds": []
           }
         ]
       },
       {
         "enabled": true,
-        "order": 2,
+        "order": 1,
         "label": {
           "fr": "Build Grenade",
           "en": "Grenade Build"
@@ -3907,50 +5100,58 @@ const HEROES = [
           "en": "More knockbacks and energy regeneration."
         },
         "buildCodeTitle": {
-          "fr": "A COLLER",
-          "en": "PASTE"
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE INTO TALENT TREE"
         },
-        "buildCode": "[T3332333,LtMorales]",
+        "buildCode": "[T3312124,LtMorales]",
         "videos": [],
         "updatedAt": {
-          "fr": "",
-          "en": ""
+          "fr": "14 Août 2026",
+          "en": "August 14, 2026"
         },
         "talentSelections": [
           {
             "level": 1,
-            "primaryId": "tmrryr6jo9zwh9",
+            "primaryId": "tmn4x9mor03448",
             "alternativeIds": []
           },
           {
             "level": 4,
-            "primaryId": "tmrryr6jo0cg7a",
+            "primaryId": "tmn4x9mor0610a",
             "alternativeIds": []
           },
           {
             "level": 7,
-            "primaryId": "tmrryr6jodpj3a",
+            "primaryId": "tmn4x9mor07ckk",
             "alternativeIds": []
           },
           {
             "level": 10,
-            "primaryId": "tmrryr6jobpccn",
-            "alternativeIds": []
+            "primaryId": "tmn4x9mor10xz7",
+            "alternativeIds": [
+              "tmn4x9mor11txh"
+            ]
           },
           {
             "level": 13,
-            "primaryId": "tmrryr6joi10l5",
-            "alternativeIds": []
+            "primaryId": "tmn4x9mor13dsf",
+            "alternativeIds": [
+              "tmn4x9mor1401a"
+            ]
           },
           {
             "level": 16,
-            "primaryId": "tmrryr6jomqwbp",
-            "alternativeIds": []
+            "primaryId": "tmn4x9mor172j9",
+            "alternativeIds": [
+              "tmn4x9mor16puu"
+            ]
           },
           {
             "level": 20,
-            "primaryId": "tmrryr6jonimet",
-            "alternativeIds": []
+            "primaryId": "tmn4x9mor20bc9",
+            "alternativeIds": [
+              "tmn4x9mor18jn9"
+            ]
           }
         ]
       }
@@ -3958,104 +5159,301 @@ const HEROES = [
     "guideVideos": [],
     "talentPool": [
       {
-        "id": "tmrryr6jo9zwh9",
+        "id": "tmn4x9mor01f9k",
         "level": 1,
         "name": {
-          "fr": "Totem Colossal",
-          "en": "Colossal Totem"
+          "fr": "Retour d'énergie",
+          "en": "Caduceus Feedback"
         },
-        "icon": "https://psionic-storm.com/media/img/talents/rehgar_earthbindtotem.png",
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_autoattack_mana.png",
         "description": {
-          "fr": "Augmente les points de vie, le rayon et la durée du totem. Permet de le repositionner une nouvelle fois.",
-          "en": "Increases health, radius, and duration of the totem. Can be repositioned once."
+          "fr": "Augmente la portée des attaques de base, qui génèrent aussi de l'énergie contre les héros.",
+          "en": "Increases Basic Attack range, and Basic Attacks against Heroes also generate Energy."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jo0cg7a",
+        "id": "tmn4x9mor0223a",
+        "level": 1,
+        "name": {
+          "fr": "Automédication",
+          "en": "Life Support"
+        },
+        "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_healingbeam.png",
+        "description": {
+          "fr": "Rayon de soins régénère bien plus d'énergie au début de sa régénération. Passif : augmente l'énergie maximale.",
+          "en": "Healing Beam regenerates much more Energy at the start of its regeneration. Passive: increases maximum Energy."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmn4x9mor03448",
+        "level": 1,
+        "name": {
+          "fr": "On dégage !",
+          "en": "Clear!"
+        },
+        "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_displacementgrenade.png",
+        "description": {
+          "fr": "Quête : toucher des héros avec Grenade de distorsion rend de l'énergie et finit par réduire son temps de recharge et augmenter sa zone d'effet.",
+          "en": "Quest: hitting Heroes with Displacement Grenade restores Energy, eventually reducing its cooldown and increasing its detonation area."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmn4x9mor042ll",
         "level": 4,
         "name": {
-          "fr": "Viveterre",
-          "en": "Earthliving Enchant"
+          "fr": "Réacteur cellulaire",
+          "en": "Cellular Reactor"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_chainheal.jpg",
+        "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_caduceusreactor.png",
         "description": {
-          "fr": "Renforce Salve de guerison pour les héros dont les points de vie sont bas.",
-          "en": "Empowers Chain Heal for heroes at low health."
+          "fr": "Nouvelle capacité active : dépense de l'énergie pour se soigner fortement, ce qui désactive temporairement Réacteur Caduceus.",
+          "en": "New active ability: spends Energy to heal herself for a large amount, which disables Caduceus Reactor while active."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jodpj3a",
+        "id": "tmn4x9mor05tb2",
+        "level": 4,
+        "name": {
+          "fr": "Déclenchement de traumatisme",
+          "en": "Trauma Trigger"
+        },
+        "icon": "assets/heroes/base_spells/ltmorales/images/talents/storm_ui_icon_medic_advancedblock.png",
+        "description": {
+          "fr": "Subir des dégâts sous un certain seuil de vie confère de l'armure. Passif : augmente les soins de Réacteur Caduceus.",
+          "en": "Taking damage below a Health threshold grants Armor. Passive: increases Caduceus Reactor's healing."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmn4x9mor0610a",
+        "level": 4,
+        "name": {
+          "fr": "Bouclier de distorsion",
+          "en": "Blast Shield"
+        },
+        "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_displacementgrenade.png",
+        "description": {
+          "fr": "Les héros touchés par Grenade de distorsion sont ralentis après avoir été repoussés, et confèrent un bouclier cumulable à Lt. Morales.",
+          "en": "Heroes hit by Displacement Grenade are Slowed after being knocked back, and grant Lt. Morales a stacking Shield."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmn4x9mor07ckk",
         "level": 7,
         "name": {
-          "fr": "Totem lié à la terre",
-          "en": "Grounded Totem"
+          "fr": "Kinésithérapie",
+          "en": "Physical Therapy"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_earthbindtotem.jpg",
+        "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_deployshield.png",
         "description": {
-          "fr": "Réduis la vitesse d'attaque et la puissance de capacité, augmente la portée du totem.",
-          "en": "Reduces attack and spell power of enemies in range."
+          "fr": "Protection dissipe les ralentissements de sa cible et voit son temps de recharge réduit.",
+          "en": "Safeguard cleanses Slows from its target and has its cooldown reduced."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jobpccn",
+        "id": "tmn4x9mor084ww",
+        "level": 7,
+        "name": {
+          "fr": "Blindage en vanadium",
+          "en": "Vanadium Plating"
+        },
+        "icon": "assets/heroes/base_spells/ltmorales/images/talents/storm_ui_icon_medic_deployshield_c.png",
+        "description": {
+          "fr": "Protection donne de l'armure supplémentaire si sa cible est étourdie ou immobilisée. Passif : augmente sa durée.",
+          "en": "Safeguard grants extra Armor if its target is Stunned or Rooted. Passive: increases its duration."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmn4x9mor09da8",
+        "level": 7,
+        "name": {
+          "fr": "Médi-drone",
+          "en": "Medi-Drone"
+        },
+        "icon": "assets/heroes/base_spells/ltmorales/images/talents/storm_ui_icon_medic_deployshield_b.png",
+        "description": {
+          "fr": "Les alliés sous Protection reçoivent une partie des soins de Rayon de soins lancé sur un autre allié.",
+          "en": "Allies with Safeguard receive a portion of the healing from Healing Beam cast on another ally."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmn4x9mor10xz7",
         "level": 10,
         "name": {
-          "fr": "Guérison ancestrale",
-          "en": "Ancestral Healing"
+          "fr": "Drone de stimulants",
+          "en": "Stim Drone"
         },
-        "icon": "https://psionic-storm.com/media/img/talents/rehgar_ancestralhealing.png",
+        "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_stim.png",
         "description": {
-          "fr": "Gros soin monocible, utilisable sur soi.",
-          "en": "Massive single-target heal, usable on self."
+          "fr": "Donne un gros bonus de vitesse d'attaque et de déplacement à un héros allié.",
+          "en": "Grants an allied Hero a large boost to Attack Speed and Movement Speed."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6joi10l5",
+        "id": "tmn4x9mor11txh",
+        "level": 10,
+        "name": {
+          "fr": "Transports Médivac",
+          "en": "Medivac Dropships"
+        },
+        "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_medivacdropship.png",
+        "description": {
+          "fr": "Débloque un transport qui vient chercher les alliés pour les déplacer ailleurs sur la carte.",
+          "en": "Unlocks a transport that picks up allies to move them elsewhere on the map."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmn4x9mor12abb",
         "level": 13,
         "name": {
-          "fr": "Raz-de-marée",
-          "en": "Tidal Waves"
+          "fr": "Grenade IEM",
+          "en": "EMP Grenade"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_chainheal.jpg",
+        "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_displacementgrenade.png",
         "description": {
-          "fr": "Réduit le temps de recharge de Salve de guérison et son coût en mana.",
-          "en": "Reduces Chain Heal cooldown and mana cost."
+          "fr": "Grenade de distorsion inflige des dégâts supplémentaires au fil du temps, et davantage aux boucliers des héros.",
+          "en": "Displacement Grenade deals additional damage over time, and bonus damage to Heroes' Shields."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jomqwbp",
+        "id": "tmn4x9mor13dsf",
+        "level": 13,
+        "name": {
+          "fr": "Choc systémique",
+          "en": "System Shock"
+        },
+        "icon": "assets/heroes/base_spells/ltmorales/images/talents/storm_ui_icon_medic_displacementgrenade_b.png",
+        "description": {
+          "fr": "Les héros touchés par Grenade de distorsion infligent moins de dégâts pendant quelques secondes.",
+          "en": "Heroes hit by Displacement Grenade deal reduced damage for a few seconds."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmn4x9mor1401a",
+        "level": 13,
+        "name": {
+          "fr": "Au chevet des malades",
+          "en": "Bedside Manner"
+        },
+        "icon": "assets/heroes/base_spells/ltmorales/images/talents/storm_ui_icon_medic_displacementgrenade_c.png",
+        "description": {
+          "fr": "Les attaques de base contre des héros infligent des dégâts bonus, fortement augmentés après un coup de Grenade de distorsion.",
+          "en": "Basic Attacks against Heroes deal bonus damage, greatly increased after landing Displacement Grenade."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmn4x9mor15btz",
         "level": 16,
         "name": {
-          "fr": "Totem d’emprise de la terre",
-          "en": "Earthgrasp Totem"
+          "fr": "Soins sans frontières",
+          "en": "Extended Care"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_earthbindtotem.jpg",
+        "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_healingbeam.png",
         "description": {
-          "fr": "Quand le totem est posé pour la première fois, il inflige des dégâts en zone et ralentit fortement.",
-          "en": "When first spawned, the totem deals AoE damage and heavily slows."
+          "fr": "Canaliser Rayon de soins assez longtemps sur un allié le soigne aussi au fil du temps une fois terminé. Passif : augmente sa portée.",
+          "en": "Channeling Healing Beam long enough on an ally also heals them over time once it ends. Passive: increases its range."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jonimet",
+        "id": "tmn4x9mor16puu",
+        "level": 16,
+        "name": {
+          "fr": "Primo-intervenante",
+          "en": "First Responder"
+        },
+        "icon": "assets/heroes/base_spells/ltmorales/images/talents/storm_ui_icon_medic_healingbeam_c.png",
+        "description": {
+          "fr": "Au-delà d'un certain seuil d'énergie, Rayon de soins soigne davantage et donne de la vitesse de déplacement à Lt. Morales et sa cible.",
+          "en": "Above a certain Energy threshold, Healing Beam heals for more and grants Movement Speed to Lt. Morales and its target."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmn4x9mor172j9",
+        "level": 16,
+        "name": {
+          "fr": "Séquenceur de bouclier",
+          "en": "Shield Sequencer"
+        },
+        "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_deployshield.png",
+        "description": {
+          "fr": "Protection obtient une charge supplémentaire et une portée accrue.",
+          "en": "Safeguard gains an additional charge and increased range."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmn4x9mor18jn9",
         "level": 20,
         "name": {
-          "fr": "Bénédiction du long-voyant",
-          "en": "Farseer's Blessing"
+          "fr": "Hyperactivité",
+          "en": "Hyperactivity"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_ancestralhealing.jpg",
+        "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_stim.png",
         "description": {
-          "fr": "Une deuxième Guérison Ancestrale apparait, et soigne en zone autour de la cible.",
-          "en": "A second Ancestral Healing triggers and heals in an AoE."
+          "fr": "Réduit fortement le temps de recharge de Drone de stimulants et augmente son bonus de vitesse de déplacement.",
+          "en": "Greatly reduces Stim Drone's cooldown and increases its Movement Speed bonus."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmn4x9mor19z3e",
+        "level": 20,
+        "name": {
+          "fr": "Zone sûre",
+          "en": "Safe Zone"
+        },
+        "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_medivacdropship.png",
+        "description": {
+          "fr": "En sortant du Médivac, les alliés sont protégés contre tous les dégâts. Passif : réduit le temps de recharge des capacités de transport.",
+          "en": "Allies exiting the Medivac are protected from all damage. Passive: reduces the transport abilities' cooldown."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmn4x9mor20bc9",
+        "level": 20,
+        "name": {
+          "fr": "Soins palliatifs",
+          "en": "Hospice Care"
+        },
+        "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_deployshield.png",
+        "description": {
+          "fr": "Protection rend sa cible impossible à tuer brièvement, puis la soigne si elle est toujours sous 50% de vie.",
+          "en": "Safeguard makes its target briefly Unkillable, then heals them if they're still below 50% Health."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmn4x9mor210fp",
+        "level": 20,
+        "name": {
+          "fr": "Seconde opinion",
+          "en": "Second Opinion"
+        },
+        "icon": "assets/heroes/base_spells/ltmorales/images/spells/storm_ui_icon_medic_displacementgrenade.png",
+        "description": {
+          "fr": "Toucher plusieurs héros avec Grenade de distorsion réduit fortement son temps de recharge.",
+          "en": "Hitting multiple Heroes with Displacement Grenade greatly reduces its cooldown."
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "malfurion",
@@ -4187,7 +5585,7 @@ const HEROES = [
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
-          "en": "PASTE IN TALENT TREE"
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "[T3131131,Malfurion]",
         "videos": [],
@@ -4241,8 +5639,8 @@ const HEROES = [
           "en": "More control and zoning."
         },
         "buildCodeTitle": {
-          "fr": "A COLLER",
-          "en": "PASTE"
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "[T3332333,Malfurion]",
         "videos": [],
@@ -4506,7 +5904,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "stukov",
@@ -4633,7 +6032,7 @@ const HEROES = [
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
-          "en": "PASTE IN TALENT TREE"
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "[T3322212,Stukov]",
         "videos": [],
@@ -4691,8 +6090,8 @@ const HEROES = [
           "en": "Huge burst and slow on W explosion."
         },
         "buildCodeTitle": {
-          "fr": "A COLLER",
-          "en": "PASTE"
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "[T1112111,Stukov]",
         "videos": [],
@@ -4870,7 +6269,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "tyrande",
@@ -5001,7 +6401,7 @@ const HEROES = [
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
-          "en": "PASTE IN TALENT TREE"
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "[T2332312,Tyrande]",
         "videos": [],
@@ -5056,7 +6456,7 @@ const HEROES = [
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
-          "en": "PASTE IN TALENT TREE"
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "[T2332312,Tyrande]",
         "videos": [],
@@ -5206,11 +6606,12 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "uther",
-    "enabled": false,
+    "enabled": true,
     "name": {
       "fr": "Uther",
       "en": "Uther"
@@ -5222,85 +6623,104 @@ const HEROES = [
       "en": "Tanky healer, armor and crowd control."
     },
     "gameplay": {
-      "fr": "Uther joue en mêlée, encaisse les dégâts, étourdit les ennemis et confère une armure vitale avec ses soins.",
-      "en": "Uther plays in melee, absorbs damage, stuns enemies, and grants vital armor with his heals."
+      "fr": "Uther joue en mêlée, encaisse les dégâts, étourdit les ennemis et confère de l'armure avec ses soins.",
+      "en": "Uther plays in melee, absorbs damage, stuns enemies, and grants armor with his heals."
     },
     "spells": [
       {
         "key": "Trait",
         "name": {
-          "fr": "Dévotion d'avant-garde",
-          "en": "Vanguard"
+          "fr": "Dévotion",
+          "en": "Devotion"
         },
         "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_eternaldevotion.png",
         "description": {
-          "fr": "Les soins d'Uther donnent de l'armure. S'il meurt, il soigne en fantôme.",
-          "en": "Uther's heals grant armor. If he dies, he heals as a ghost."
+          "fr": "Les capacités de base d'Uther confèrent de l'armure temporaire aux alliés touchés et à lui-même. À sa mort, il devient un esprit invulnérable qui peut soigner avec Éclair lumineux.",
+          "en": "Uther's Basic Abilities grant temporary Armor to allied targets and himself. Upon dying, he becomes an Invulnerable spirit that can heal with Flash of Light."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "A",
+        "form": "normal",
         "name": {
           "fr": "Lumière sacrée",
           "en": "Holy Light"
         },
         "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_holylight.png",
         "description": {
-          "fr": "Soin monocible massif.",
-          "en": "Massive single-target heal."
+          "fr": "Soigne fortement un héros allié. Lancé sur un autre héros qu'Uther, le soigne aussi lui-même.",
+          "en": "Heavily heals an allied Hero. When cast on someone other than Uther, also heals himself."
+        },
+        "demoYoutubeId": ""
+      },
+      {
+        "key": "A",
+        "form": "ghost",
+        "name": {
+          "fr": "Éclair lumineux",
+          "en": "Flash of Light"
+        },
+        "icon": "assets/heroes/base_spells/uther/images/talents/storm_ui_icon_uther_flashoflight.png",
+        "description": {
+          "fr": "Soigne les héros alliés proches. Seule capacité utilisable tant qu'Uther est sous la forme d'esprit d'Avant-garde éternelle.",
+          "en": "Heals nearby allied Heroes. The only ability usable while Uther is in his Eternal Vanguard spirit form."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "Z",
+        "form": "normal",
         "name": {
           "fr": "Radiance sacrée",
           "en": "Holy Radiance"
         },
         "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_holyradiance.png",
         "description": {
-          "fr": "Vague qui soigne les alliés et blesse les ennemis.",
-          "en": "Wave that heals allies and damages enemies."
+          "fr": "Vague qui soigne les alliés et blesse les ennemis sur une ligne.",
+          "en": "A wave that heals allies and damages enemies in a line."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "E",
+        "form": "normal",
         "name": {
           "fr": "Marteau de la justice",
           "en": "Hammer of Justice"
         },
         "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_hammerofjustice.png",
         "description": {
-          "fr": "Étourdit un ennemi au corps-à-corps.",
-          "en": "Stuns an enemy in melee range."
+          "fr": "Inflige des dégâts et étourdit un ennemi au corps-à-corps.",
+          "en": "Deals damage and Stuns an enemy in melee range."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "R1",
+        "form": "normal",
         "name": {
           "fr": "Bouclier divin",
           "en": "Divine Shield"
         },
         "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_divineshield.png",
         "description": {
-          "fr": "Rend un allié invulnérable.",
-          "en": "Makes an ally Invulnerable."
+          "fr": "Rend un héros allié invulnérable et augmente sa vitesse de déplacement.",
+          "en": "Makes an allied Hero Invulnerable and increases their Movement Speed."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "R2",
+        "form": "normal",
         "name": {
           "fr": "Tempête divine",
           "en": "Divine Storm"
         },
         "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_divinestorm.png",
         "description": {
-          "fr": "Étourdit tous les ennemis en zone.",
-          "en": "Stuns all enemies in an area."
+          "fr": "Inflige des dégâts et étourdit tous les ennemis proches.",
+          "en": "Deals damage and Stuns all nearby enemies."
         },
         "demoYoutubeId": ""
       }
@@ -5313,6 +6733,10 @@ const HEROES = [
       {
         "fr": "N'hésite pas à mourir pour sauver ton équipe.",
         "en": "Do not hesitate to die to save your team as a ghost."
+      },
+      {
+        "fr": "Utilise ton Bouclier Divin quand ton allié saute dedans ou qu'il va prendre d'énormes dégâts ou contrôles, et pas quand il est sur le point de mourir.",
+        "en": "Use your Divine Shield when your ally jumps into it or is about to take massive damage or be subjected to crowd control, not when he is about to die."
       }
     ],
     "builds": [
@@ -5320,63 +6744,74 @@ const HEROES = [
         "enabled": true,
         "order": 1,
         "label": {
-          "fr": "Build Q",
-          "en": "Q Build"
+          "fr": "Build recommandé",
+          "en": "Recommanded build"
         },
         "summary": {
-          "fr": "Soins massifs et réduction de CD sur soi.",
-          "en": "Massive heals and self-CD reduction."
+          "fr": "Build qui passe partout, peu importe le mode de jeu.",
+          "en": "Build qui passe partout, peu importe le mode de jeu."
         },
         "buildCodeTitle": {
-          "fr": "A COLLER",
-          "en": "PASTE"
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE INTO TALENT TREE"
         },
-        "buildCode": "[T1111111,Uther]",
+        "buildCode": "[T2231234,Uther]",
         "videos": [],
         "updatedAt": {
-          "fr": "",
-          "en": ""
+          "fr": "14 Août 2026",
+          "en": "August 14, 2026"
         },
         "talentSelections": [
           {
             "level": 1,
-            "primaryId": "tmrryr6joiw0g8",
+            "primaryId": "tmv7k4uth02924",
             "alternativeIds": []
           },
           {
             "level": 4,
-            "primaryId": "tmrryr6jo83h5w",
+            "primaryId": "tmv7k4uth05bvs",
             "alternativeIds": []
           },
           {
             "level": 7,
-            "primaryId": "tmrryr6jozq27b",
-            "alternativeIds": []
+            "primaryId": "tmv7k4uth0920h",
+            "alternativeIds": [
+              "tmv7k4uth08dg7"
+            ]
           },
           {
             "level": 10,
-            "primaryId": "tmrryr6jo3kqgp",
-            "alternativeIds": []
+            "primaryId": "tmv7k4uth10kza",
+            "alternativeIds": [
+              "tmv7k4uth11t30"
+            ]
           },
           {
             "level": 13,
-            "primaryId": "tmrryr6jo3f78a",
-            "alternativeIds": []
+            "primaryId": "tmv7k4uth13waf",
+            "alternativeIds": [
+              "tmv7k4uth12up2"
+            ]
           },
           {
             "level": 16,
-            "primaryId": "tmrryr6jo5uuj6",
-            "alternativeIds": []
+            "primaryId": "tmv7k4uth17avh",
+            "alternativeIds": [
+              "tmv7k4uth1564j"
+            ]
           },
           {
             "level": 20,
-            "primaryId": "tmrryr6joafxbi",
-            "alternativeIds": []
+            "primaryId": "tmv7k4uth21nic",
+            "alternativeIds": [
+              "tmv7k4uth18s5m",
+              "tmv7k4uth20ezi"
+            ]
           }
         ]
       },
       {
-        "enabled": true,
+        "enabled": false,
         "order": 2,
         "label": {
           "fr": "Build Tank",
@@ -5387,49 +6822,49 @@ const HEROES = [
           "en": "Plays like a secondary tank with his CC."
         },
         "buildCodeTitle": {
-          "fr": "A COLLER",
-          "en": "PASTE"
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE INTO TALENT TREE"
         },
-        "buildCode": "[T3332333,Uther]",
+        "buildCode": "[T3222222,Uther]",
         "videos": [],
         "updatedAt": {
-          "fr": "",
-          "en": ""
+          "fr": "14 Août 2026",
+          "en": "August 14, 2026"
         },
         "talentSelections": [
           {
             "level": 1,
-            "primaryId": "tmrryr6joiw0g8",
+            "primaryId": "tmv7k4uth03r7e",
             "alternativeIds": []
           },
           {
             "level": 4,
-            "primaryId": "tmrryr6jo83h5w",
+            "primaryId": "tmv7k4uth05bvs",
             "alternativeIds": []
           },
           {
             "level": 7,
-            "primaryId": "tmrryr6jozq27b",
+            "primaryId": "tmv7k4uth08dg7",
             "alternativeIds": []
           },
           {
             "level": 10,
-            "primaryId": "tmrryr6jo3kqgp",
+            "primaryId": "tmv7k4uth11t30",
             "alternativeIds": []
           },
           {
             "level": 13,
-            "primaryId": "tmrryr6jo3f78a",
+            "primaryId": "tmv7k4uth13waf",
             "alternativeIds": []
           },
           {
             "level": 16,
-            "primaryId": "tmrryr6jo5uuj6",
+            "primaryId": "tmv7k4uth161sx",
             "alternativeIds": []
           },
           {
             "level": 20,
-            "primaryId": "tmrryr6joafxbi",
+            "primaryId": "tmv7k4uth19egw",
             "alternativeIds": []
           }
         ]
@@ -5438,102 +6873,314 @@ const HEROES = [
     "guideVideos": [],
     "talentPool": [
       {
-        "id": "tmrryr6joiw0g8",
+        "id": "tmv7k4uth01e3e",
         "level": 1,
         "name": {
-          "fr": "Totem Colossal",
-          "en": "Colossal Totem"
+          "fr": "Toucher d'argent",
+          "en": "Silver Touch"
         },
-        "icon": "https://psionic-storm.com/media/img/talents/rehgar_earthbindtotem.png",
+        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_holylight.png",
         "description": {
-          "fr": "Augmente les points de vie, le rayon et la durée du totem. Permet de le repositionner une nouvelle fois.",
-          "en": "Increases health, radius, and duration of the totem. Can be repositioned once."
+          "fr": "Quête : réduire les dégâts de sources héroïques avec Dévotion finit par réduire le coût en mana de Lumière sacrée et augmenter sa portée.",
+          "en": "Quest: reducing damage from Heroic sources with Devotion eventually reduces Holy Light's Mana cost and increases its range."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jo83h5w",
+        "id": "tmv7k4uth02924",
+        "level": 1,
+        "name": {
+          "fr": "Onde de lumière",
+          "en": "Wave of Light"
+        },
+        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_holyradiance.png",
+        "description": {
+          "fr": "Quête : soigner ou blesser des héros avec Radiance sacrée augmente la durée de Dévotion. Passif : rembourse du mana et réduit son temps de recharge à chaque utilisation efficace.",
+          "en": "Quest: healing or damaging Heroes with Holy Radiance increases Devotion's duration. Passive: refunds Mana and reduces its cooldown each time it connects."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmv7k4uth03r7e",
+        "level": 1,
+        "name": {
+          "fr": "Marteau du Porteur de Lumière",
+          "en": "Hammer of the Lightbringer"
+        },
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_autoattack_mana.png",
+        "description": {
+          "fr": "Quête : les attaques de base finissent par réduire le temps de recharge de Marteau de la justice. Passif : les attaques de base rendent du mana à Uther.",
+          "en": "Quest: Basic Attacks eventually reduce Hammer of Justice's cooldown. Passive: Basic Attacks restore Mana to Uther."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmv7k4uth04wz6",
         "level": 4,
         "name": {
-          "fr": "Viveterre",
-          "en": "Earthliving Enchant"
+          "fr": "Horion sacré",
+          "en": "Holy Shock"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_chainheal.jpg",
+        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_holylight.png",
         "description": {
-          "fr": "Renforce Salve de guerison pour les héros dont les points de vie sont bas.",
-          "en": "Empowers Chain Heal for heroes at low health."
+          "fr": "Nouvelle capacité active : inflige des dégâts à un ennemi et procure les soins de Lumière sacrée à Uther. Partage son temps de recharge avec Lumière sacrée.",
+          "en": "New active ability: deals damage to an enemy and grants Uther the self-healing of Holy Light. Shares a cooldown with Holy Light."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jozq27b",
+        "id": "tmv7k4uth05bvs",
+        "level": 4,
+        "name": {
+          "fr": "Poursuite de la justice",
+          "en": "Pursuit of Justice"
+        },
+        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_hammerofjustice.png",
+        "description": {
+          "fr": "Marteau de la justice donne de la vitesse de déplacement à Uther.",
+          "en": "Hammer of Justice grants Uther Movement Speed."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmv7k4uth06x1u",
+        "level": 4,
+        "name": {
+          "fr": "Flammes sacrées",
+          "en": "Holy Fire"
+        },
+        "icon": "assets/heroes/base_spells/uther/images/talents/storm_ui_icon_uther_holyfire.png",
+        "description": {
+          "fr": "Inflige des dégâts au fil du temps aux ennemis proches, augmentés temporairement par les attaques de base.",
+          "en": "Deals damage over time to nearby enemies, temporarily increased by Basic Attacks."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmv7k4uth073ty",
         "level": 7,
         "name": {
-          "fr": "Totem lié à la terre",
-          "en": "Grounded Totem"
+          "fr": "Armure de foi",
+          "en": "Armor of Faith"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_earthbindtotem.jpg",
+        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_holylight.png",
         "description": {
-          "fr": "Réduis la vitesse d'attaque et la puissance de capacité, augmente la portée du totem.",
-          "en": "Reduces attack and spell power of enemies in range."
+          "fr": "Subir un étourdissement, une immobilisation ou un silence rend du mana à Uther et accélère fortement la recharge de Lumière sacrée.",
+          "en": "Being Stunned, Rooted, or Silenced grants Uther Mana and greatly speeds up Holy Light's cooldown."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jo3kqgp",
+        "id": "tmv7k4uth08dg7",
+        "level": 7,
+        "name": {
+          "fr": "Gardien des anciens rois",
+          "en": "Guardian of Ancient Kings"
+        },
+        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_eternaldevotion.png",
+        "description": {
+          "fr": "Soigner avec une capacité de base un héros étourdi, immobilisé ou réduit au silence lui confère de l'armure.",
+          "en": "Healing a Stunned, Rooted, or Silenced Hero with a Basic Ability grants them Armor."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmv7k4uth0920h",
+        "level": 7,
+        "name": {
+          "fr": "Main de protection",
+          "en": "Hand of Protection"
+        },
+        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_divineshield.png",
+        "description": {
+          "fr": "Nouvelle capacité active : rend un allié insensible au contrôle. Ne peut pas cibler Uther. Les attaques de base réduisent son temps de recharge.",
+          "en": "New active ability: makes an ally Unstoppable. Cannot target Uther. Basic Attacks reduce its cooldown."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmv7k4uth10kza",
         "level": 10,
         "name": {
-          "fr": "Guérison ancestrale",
-          "en": "Ancestral Healing"
+          "fr": "Bouclier divin",
+          "en": "Divine Shield"
         },
-        "icon": "https://psionic-storm.com/media/img/talents/rehgar_ancestralhealing.png",
+        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_divineshield.png",
         "description": {
-          "fr": "Gros soin monocible, utilisable sur soi.",
-          "en": "Massive single-target heal, usable on self."
+          "fr": "Rend un héros allié invulnérable et augmente sa vitesse de déplacement.",
+          "en": "Makes an allied Hero Invulnerable and increases their Movement Speed."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jo3f78a",
+        "id": "tmv7k4uth11t30",
+        "level": 10,
+        "name": {
+          "fr": "Tempête divine",
+          "en": "Divine Storm"
+        },
+        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_divinestorm.png",
+        "description": {
+          "fr": "Inflige des dégâts et étourdit tous les ennemis proches.",
+          "en": "Deals damage and Stuns all nearby enemies."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmv7k4uth12up2",
         "level": 13,
         "name": {
-          "fr": "Raz-de-marée",
-          "en": "Tidal Waves"
+          "fr": "Bénédiction du champion",
+          "en": "Blessed Champion"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_chainheal.jpg",
+        "icon": "assets/heroes/base_spells/uther/images/talents/storm_ui_icon_uther_holylight_var1.png",
         "description": {
-          "fr": "Réduit le temps de recharge de Salve de guérison et son coût en mana.",
-          "en": "Reduces Chain Heal cooldown and mana cost."
+          "fr": "Après avoir utilisé Lumière sacrée, les attaques de base d'Uther soignent aussi les alliés proches selon les soins procurés.",
+          "en": "After using Holy Light, Uther's Basic Attacks also heal nearby allies based on the amount healed."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jo5uuj6",
+        "id": "tmv7k4uth13waf",
+        "level": 13,
+        "name": {
+          "fr": "C'est un plaisir",
+          "en": "Well Met"
+        },
+        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_hammerofjustice.png",
+        "description": {
+          "fr": "Marteau de la justice réduit aussi la vitesse de déplacement et les dégâts infligés par sa cible.",
+          "en": "Hammer of Justice also reduces its target's Movement Speed and damage dealt."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmv7k4uth141qa",
+        "level": 13,
+        "name": {
+          "fr": "Bouclier anti-sort",
+          "en": "Spell Shield"
+        },
+        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_divinestorm.png",
+        "description": {
+          "fr": "Confère périodiquement de l'armure anti-sort contre la prochaine capacité adverse. Peut être désactivé.",
+          "en": "Periodically grants Spell Armor against the next enemy Ability. Can be toggled off."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmv7k4uth1564j",
         "level": 16,
         "name": {
-          "fr": "Totem d’emprise de la terre",
-          "en": "Earthgrasp Totem"
+          "fr": "Guide de lumière",
+          "en": "Beacon of Light"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_earthbindtotem.jpg",
+        "icon": "assets/heroes/base_spells/uther/images/talents/storm_ui_icon_uther_beaconoflight.png",
         "description": {
-          "fr": "Quand le totem est posé pour la première fois, il inflige des dégâts en zone et ralentit fortement.",
-          "en": "When first spawned, the totem deals AoE damage and heavily slows."
+          "fr": "Uther se soigne davantage en ciblant un autre héros avec Lumière sacrée, encore plus sous 50% de vie.",
+          "en": "Uther heals himself for more when targeting others with Holy Light, even more while below 50% Health."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6joafxbi",
-        "level": 20,
+        "id": "tmv7k4uth161sx",
+        "level": 16,
         "name": {
-          "fr": "Bénédiction du long-voyant",
-          "en": "Farseer's Blessing"
+          "fr": "Délivrance de Tyr",
+          "en": "Tyr's Deliverance"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/icons/large/storm_ui_icon_rehgar_ancestralhealing.jpg",
+        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_holyradiance.png",
         "description": {
-          "fr": "Une deuxième Guérison Ancestrale apparait, et soigne en zone autour de la cible.",
-          "en": "A second Ancestral Healing triggers and heals in an AoE."
+          "fr": "Augmente les dégâts et les soins de Radiance sacrée. Les attaques de base augmentent encore ce bonus pour sa prochaine utilisation.",
+          "en": "Increases Holy Radiance's damage and healing. Basic Attacks further boost this bonus for its next cast."
         },
         "demoYoutubeId": null
+      },
+      {
+        "id": "tmv7k4uth17avh",
+        "level": 16,
+        "name": {
+          "fr": "Bénédiction",
+          "en": "Benediction"
+        },
+        "icon": "assets/heroes/base_spells/uther/images/talents/storm_ui_icon_uther_benediction.png",
+        "description": {
+          "fr": "Nouvelle capacité active : réduit le coût en mana et le temps de recharge de la prochaine capacité de base.",
+          "en": "New active ability: reduces the Mana cost and cooldown of Uther's next Basic Ability."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmv7k4uth18s5m",
+        "level": 20,
+        "name": {
+          "fr": "Rempart de lumière",
+          "en": "Bulwark of Light"
+        },
+        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_divineshield.png",
+        "description": {
+          "fr": "Bouclier divin s'applique aussi à tous les héros alliés proches et dure plus longtemps.",
+          "en": "Divine Shield also applies to all nearby allied Heroes and lasts longer."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmv7k4uth19egw",
+        "level": 20,
+        "name": {
+          "fr": "Ouragan divin",
+          "en": "Divine Hurricane"
+        },
+        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_divinestorm.png",
+        "description": {
+          "fr": "Augmente le rayon de Tempête divine et réduit fortement son temps de recharge.",
+          "en": "Increases Divine Storm's radius and greatly reduces its cooldown."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmv7k4uth20ezi",
+        "level": 20,
+        "name": {
+          "fr": "Rédemption",
+          "en": "Redemption"
+        },
+        "icon": "assets/heroes/base_spells/uther/images/talents/storm_ui_icon_uther_eternaldevotion_a.png",
+        "description": {
+          "fr": "Quand Avant-garde éternelle prend fin, Uther ressuscite à l'emplacement de l'esprit avec une partie de sa vie.",
+          "en": "When Eternal Vanguard ends, Uther revives at the spirit's location with a portion of his Health."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmv7k4uth21nic",
+        "level": 20,
+        "name": {
+          "fr": "Protection divine",
+          "en": "Divine Protection"
+        },
+        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_eternaldevotion.png",
+        "description": {
+          "fr": "Augmente l'armure et la durée procurées par Dévotion.",
+          "en": "Increases the Armor and duration granted by Devotion."
+        },
+        "demoYoutubeId": null
+      }
+    ],
+    "forms": [
+      {
+        "id": "normal",
+        "label": {
+          "fr": "Forme normale",
+          "en": "Normal Form"
+        }
+      },
+      {
+        "id": "ghost",
+        "label": {
+          "fr": "Forme fantôme",
+          "en": "Ghost Form"
+        }
       }
     ]
   },
@@ -5679,7 +7326,7 @@ const HEROES = [
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
-          "en": "PASTE IN TALENT TREE"
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "[T1231121,Whitemane]",
         "videos": [],
@@ -5733,8 +7380,8 @@ const HEROES = [
           "en": "Stronger direct heals but very mana intensive."
         },
         "buildCodeTitle": {
-          "fr": "A COLLER",
-          "en": "PASTE"
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "[T1112111,Whitemane]",
         "videos": [],
@@ -5884,7 +7531,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "lucio",
@@ -6024,7 +7672,7 @@ const HEROES = [
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
-          "en": "PASTE IN TALENT TREE"
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "[T2322222,Lucio]",
         "videos": [],
@@ -6093,7 +7741,7 @@ const HEROES = [
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
-          "en": "PASTE IN TALENT TREE"
+          "en": "PASTE INTO TALENT TREE"
         },
         "buildCode": "",
         "videos": [],
@@ -6156,7 +7804,7 @@ const HEROES = [
         "youtubeId": "https://www.youtube.com/watch?v=BBs6DDOFGS8"
       }
     ],
-    "isNew": true,
+    "isNew": false,
     "talentPool": [
       {
         "id": "tmrryr6jofzn8j",
@@ -6410,7 +8058,8 @@ const HEROES = [
         },
         "demoYoutubeId": "ScMzIvxBSi4"
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "abathur",
@@ -6684,7 +8333,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "alarak",
@@ -6958,7 +8608,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "anubarak",
@@ -7232,7 +8883,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "artanis",
@@ -7506,7 +9158,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "arthas",
@@ -7780,7 +9433,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "azmodan",
@@ -8054,7 +9708,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "blaze",
@@ -8328,7 +9983,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "cassia",
@@ -8602,7 +10258,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "chen",
@@ -8876,7 +10533,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "chogall",
@@ -9150,7 +10808,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "chromie",
@@ -9424,7 +11083,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "deathwing",
@@ -9698,7 +11358,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "dehaka",
@@ -9985,7 +11646,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "diablo",
@@ -10259,7 +11921,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "dva",
@@ -10546,7 +12209,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "etc",
@@ -10820,7 +12484,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "falstad",
@@ -11107,7 +12772,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "fenix",
@@ -11381,7 +13047,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "gall",
@@ -11668,7 +13335,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "garrosh",
@@ -11942,7 +13610,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "gazlowe",
@@ -12216,7 +13885,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "genji",
@@ -12490,7 +14160,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "greymane",
@@ -12764,7 +14435,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "guldan",
@@ -13038,7 +14710,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "hanzo",
@@ -13312,7 +14985,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "hogger",
@@ -13586,7 +15260,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "illidan",
@@ -13860,7 +15535,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "imperius",
@@ -14134,7 +15810,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "jaina",
@@ -14408,7 +16085,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "johanna",
@@ -14682,7 +16360,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "junkrat",
@@ -14956,7 +16635,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "kelthuzad",
@@ -15230,7 +16910,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "kerrigan",
@@ -15504,7 +17185,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "leoric",
@@ -15778,7 +17460,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "liming",
@@ -16052,7 +17735,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "lostvikings",
@@ -16339,7 +18023,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "lunara",
@@ -16626,7 +18311,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "maiev",
@@ -16900,7 +18586,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "malganis",
@@ -17174,7 +18861,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "malthael",
@@ -17448,7 +19136,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "medivh",
@@ -17735,7 +19424,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "mei",
@@ -18009,7 +19699,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "mephisto",
@@ -18283,7 +19974,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "muradin",
@@ -18557,7 +20249,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "murky",
@@ -18831,7 +20524,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "nazeebo",
@@ -19105,7 +20799,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "nova",
@@ -19379,7 +21074,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "orphea",
@@ -19653,7 +21349,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "probius",
@@ -19940,7 +21637,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "qhira",
@@ -20214,7 +21912,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "ragnaros",
@@ -20488,7 +22187,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "raynor",
@@ -20762,7 +22462,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "rexxar",
@@ -21036,7 +22737,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "samuro",
@@ -21297,7 +22999,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "sgthammer",
@@ -21584,7 +23287,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "sonya",
@@ -21858,7 +23562,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "stitches",
@@ -22132,7 +23837,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "sylvanas",
@@ -22406,7 +24112,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "tassadar",
@@ -22680,7 +24387,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "thebutcher",
@@ -22954,7 +24662,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "thrall",
@@ -23228,7 +24937,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "tracer",
@@ -23489,7 +25199,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "tychus",
@@ -23763,7 +25474,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "tyrael",
@@ -24037,7 +25749,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "valeera",
@@ -24311,7 +26024,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "valla",
@@ -24585,7 +26299,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "varian",
@@ -24872,7 +26587,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "xul",
@@ -25146,7 +26862,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "yrel",
@@ -25420,7 +27137,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "zagara",
@@ -25694,7 +27412,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "zarya",
@@ -25968,7 +27687,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "zeratul",
@@ -26242,7 +27962,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   },
   {
     "id": "zuljin",
@@ -26516,6 +28237,9 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "forms": []
   }
 ];
+
+const BATTLEGROUNDS = [];
