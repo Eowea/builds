@@ -53,6 +53,20 @@ const STREAMER_CONFIG = {
   "latestVideos": [
     {
       "title": {
+        "fr": "Slapathur Master Gameplay - Aucun commentaire",
+        "en": "Slapathur Master Gameplay - No commentary"
+      },
+      "youtubeId": "sNeMU-aHYQY"
+    },
+    {
+      "title": {
+        "fr": "Ana Grand Master Gameplay - Aucun commentaire",
+        "en": "Ana Grand Master Gameplay - No commentary"
+      },
+      "youtubeId": "Fl23LG4v-U0"
+    },
+    {
+      "title": {
         "fr": "Dehaka Grand Master Gameplay - Analyse & Explications",
         "en": "Dehaka Grandmaster Gameplay - Analysis & Explanations"
       },
@@ -60,24 +74,10 @@ const STREAMER_CONFIG = {
     },
     {
       "title": {
-        "fr": "Tableau Noir Dehaka Bronze 5",
-        "en": "Dehaka Bronze 5 Blackboard"
-      },
-      "youtubeId": "https://youtu.be/QQ7259LX4gc?si=s1_XK3TrBcDE0ti1"
-    },
-    {
-      "title": {
         "fr": "Zagara Grand Master Gameplay - Analyse & Explications",
         "en": "Zagara Grandmaster Gameplay - Analysis & Explanations"
       },
       "youtubeId": "https://youtu.be/iPxEnYt_2Y0"
-    },
-    {
-      "title": {
-        "fr": "Démo Deathwing face à 2 counters",
-        "en": "Deathwing Demo vs. 2 Counters"
-      },
-      "youtubeId": "https://youtu.be/4pxYSpCJ0Lc?si=bk3IAV7G-6j1IGG3"
     }
   ],
   "patchVideos": [
@@ -88,7 +88,8 @@ const STREAMER_CONFIG = {
       },
       "youtubeId": "https://youtu.be/m8kifCbSy-s"
     }
-  ]
+  ],
+  "showHeroRotation": false
 };
 
 const HEROES = [
@@ -2917,6 +2918,10 @@ const HEROES = [
       {
         "fr": "Place-toi très en arrière pour soigner.",
         "en": "Position yourself very far back to heal."
+      },
+      {
+        "fr": "Lorsque tu touches un ennemi avec ton E, pendant 0,5secondes il ne peut pas être réveillé. ",
+        "en": "When you hit an enemy with your E, they cannot be woken up for 0.5 seconds."
       }
     ],
     "builds": [
@@ -3869,7 +3874,7 @@ const HEROES = [
         "en": "Attack constantly to maximize your passive."
       },
       {
-        "fr": "Garde un Q pour fuir.",
+        "fr": "Garde un A pour fuir.",
         "en": "Keep a Q charge to escape."
       },
       {
@@ -6921,7 +6926,7 @@ const HEROES = [
           "fr": "Horion sacré",
           "en": "Holy Shock"
         },
-        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_holylight.png",
+        "icon": "assets/heroes/base_spells/uther/images/talents/storm_ui_icon_uther_holyshock.png",
         "description": {
           "fr": "Nouvelle capacité active : inflige des dégâts à un ennemi et procure les soins de Lumière sacrée à Uther. Partage son temps de recharge avec Lumière sacrée.",
           "en": "New active ability: deals damage to an enemy and grants Uther the self-healing of Holy Light. Shares a cooldown with Holy Light."
@@ -6991,7 +6996,7 @@ const HEROES = [
           "fr": "Main de protection",
           "en": "Hand of Protection"
         },
-        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_divineshield.png",
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_cleanse.png",
         "description": {
           "fr": "Nouvelle capacité active : rend un allié insensible au contrôle. Ne peut pas cibler Uther. Les attaques de base réduisent son temps de recharge.",
           "en": "New active ability: makes an ally Unstoppable. Cannot target Uther. Basic Attacks reduce its cooldown."
@@ -7033,7 +7038,7 @@ const HEROES = [
           "fr": "Bénédiction du champion",
           "en": "Blessed Champion"
         },
-        "icon": "assets/heroes/base_spells/uther/images/talents/storm_ui_icon_uther_holylight_var1.png",
+        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_holylight.png",
         "description": {
           "fr": "Après avoir utilisé Lumière sacrée, les attaques de base d'Uther soignent aussi les alliés proches selon les soins procurés.",
           "en": "After using Holy Light, Uther's Basic Attacks also heal nearby allies based on the amount healed."
@@ -7061,7 +7066,7 @@ const HEROES = [
           "fr": "Bouclier anti-sort",
           "en": "Spell Shield"
         },
-        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_divinestorm.png",
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_spellshield.png",
         "description": {
           "fr": "Confère périodiquement de l'armure anti-sort contre la prochaine capacité adverse. Peut être désactivé.",
           "en": "Periodically grants Spell Armor against the next enemy Ability. Can be toggled off."
@@ -7075,7 +7080,7 @@ const HEROES = [
           "fr": "Guide de lumière",
           "en": "Beacon of Light"
         },
-        "icon": "assets/heroes/base_spells/uther/images/talents/storm_ui_icon_uther_beaconoflight.png",
+        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_holylight.png",
         "description": {
           "fr": "Uther se soigne davantage en ciblant un autre héros avec Lumière sacrée, encore plus sous 50% de vie.",
           "en": "Uther heals himself for more when targeting others with Holy Light, even more while below 50% Health."
@@ -7145,7 +7150,7 @@ const HEROES = [
           "fr": "Rédemption",
           "en": "Redemption"
         },
-        "icon": "assets/heroes/base_spells/uther/images/talents/storm_ui_icon_uther_eternaldevotion_a.png",
+        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_eternaldevotion.png",
         "description": {
           "fr": "Quand Avant-garde éternelle prend fin, Uther ressuscite à l'emplacement de l'esprit avec une partie de sa vie.",
           "en": "When Eternal Vanguard ends, Uther revives at the spirit's location with a portion of his Health."
@@ -7159,7 +7164,7 @@ const HEROES = [
           "fr": "Protection divine",
           "en": "Divine Protection"
         },
-        "icon": "assets/heroes/base_spells/uther/images/spells/storm_ui_icon_uther_eternaldevotion.png",
+        "icon": "assets/heroes/base_spells/uther/images/talents/storm_ui_icon_uther_eternaldevotion_a.png",
         "description": {
           "fr": "Augmente l'armure et la durée procurées par Dévotion.",
           "en": "Increases the Armor and duration granted by Devotion."
