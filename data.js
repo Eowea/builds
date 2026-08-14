@@ -88,7 +88,8 @@ const STREAMER_CONFIG = {
       },
       "youtubeId": "https://youtu.be/m8kifCbSy-s"
     }
-  ]
+  ],
+  "showHeroRotation": false
 };
 
 const HEROES = [
@@ -1054,7 +1055,8 @@ const HEROES = [
         "demoYoutubeId": null
       }
     ],
-    "forms": []
+    "forms": [],
+    "isNew": true
   },
   {
     "id": "rehgar",
@@ -2810,7 +2812,8 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ]
+    ],
+    "isNew": true
   },
   {
     "id": "ana",
@@ -3352,7 +3355,7 @@ const HEROES = [
         "demoYoutubeId": null
       }
     ],
-    "isNew": true,
+    "isNew": false,
     "forms": []
   },
   {
@@ -4318,7 +4321,8 @@ const HEROES = [
         "demoYoutubeId": null
       }
     ],
-    "forms": []
+    "forms": [],
+    "isNew": true
   },
   {
     "id": "lili",
@@ -4915,7 +4919,8 @@ const HEROES = [
         "demoYoutubeId": null
       }
     ],
-    "forms": []
+    "forms": [],
+    "isNew": true
   },
   {
     "id": "ltmorales",
@@ -5453,7 +5458,8 @@ const HEROES = [
         "demoYoutubeId": null
       }
     ],
-    "forms": []
+    "forms": [],
+    "isNew": true
   },
   {
     "id": "malfurion",
@@ -7182,7 +7188,8 @@ const HEROES = [
           "en": "Ghost Form"
         }
       }
-    ]
+    ],
+    "isNew": true
   },
   {
     "id": "whitemane",
