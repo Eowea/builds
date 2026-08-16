@@ -169,6 +169,7 @@
   [data-drag-item]{transition:opacity .15s, border-color .15s;}
   [data-drag-item].dragging{opacity:.4;}
   [data-drag-item].drag-over{border-color:var(--gold) !important;border-width:2px;}
+  [data-drop-level].drop-target{outline:2px dashed var(--gold);outline-offset:2px;}
   details.collapsible > summary::-webkit-details-marker{display:none;}
   details.collapsible > summary .chevron{color:var(--gold);font-size:11px;transition:transform .15s;flex:0 0 auto;}
   details.collapsible[open] > summary .chevron{transform:rotate(90deg);}
@@ -727,7 +728,15 @@ async function checkTokenAccess(){
 }
 async function getFile(path){
   const data = await ghFetch(`/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}?ref=${BRANCH}`);
-  return { content: b64DecodeUnicode(data.content.replace(/\n/g,'')), sha: data.sha };
+  // L'API "contents" ne renvoie le contenu que jusqu'à 1 Mo : au-delà elle répond
+  // encoding:"none" avec un contenu vide (data.js a dépassé cette taille). On repasse
+  // alors par l'API "blobs", qui accepte jusqu'à 100 Mo, via le sha déjà renvoyé ici.
+  let b64 = data.content;
+  if (data.encoding !== 'base64' || !b64){
+    const blob = await ghFetch(`/repos/${REPO_OWNER}/${REPO_NAME}/git/blobs/${data.sha}`);
+    b64 = blob.content;
+  }
+  return { content: b64DecodeUnicode(b64.replace(/\n/g,'')), sha: data.sha };
 }
 async function putFile(path, contentStr, sha, message, authorName){
   const body = { message, content: b64EncodeUnicode(contentStr), branch: BRANCH };
@@ -757,7 +766,14 @@ async function loadAssetTree(force){
    ========================================================================= */
 function parseDataFile(jsText){
   const runner = new Function(jsText + '\nreturn { APP_CONFIG, STREAMER_CONFIG, HEROES, BATTLEGROUNDS };');
-  return runner();
+  const parsed = runner();
+  // Un contenu vide ne lèverait pas d'erreur ici : les identifiants retomberaient sur les
+  // variables globales du panneau (null au premier chargement), et l'échec ne se verrait
+  // que plus loin sous la forme d'un obscur "Cannot read properties of null".
+  if (!Array.isArray(parsed.HEROES)){
+    throw new Error('data.js n\'a pas pu être récupéré (contenu vide ou illisible).');
+  }
+  return parsed;
 }
 function serializeDataFile(){
   return [
@@ -858,6 +874,15 @@ function normalizeLoadedData(){
       delete b.talents;
     });
   });
+
+  // Garde-fou : un data.js enregistré par un onglet admin antérieur à cette fonctionnalité
+  // n'a pas la clé "siteUpdate", et un nouvel enregistrement la ferait disparaître
+  // silencieusement. On la recrée systématiquement au chargement.
+  STREAMER_CONFIG.siteUpdate = STREAMER_CONFIG.siteUpdate || {};
+  const su = STREAMER_CONFIG.siteUpdate;
+  if (su.enabled === undefined) su.enabled = true;
+  if (su.autoDate === undefined) su.autoDate = true;
+  su.date = su.date || { fr: '', en: '' };
 
   if (!Array.isArray(BATTLEGROUNDS)) BATTLEGROUNDS = [];
   BATTLEGROUNDS.forEach(bg => {
@@ -1011,11 +1036,30 @@ function confirmPushModal(defaultMessage){
   });
 }
 
+// Date de "mise à jour du site" affichée dans le header. Elle est renseignée toute seule
+// au moment de l'enregistrement : c'est le seul instant où l'on sait qu'une modification
+// part réellement en ligne. Décocher l'auto-date dans la configuration rend la main.
+function applyAutoSiteUpdateDate(){
+  // On recrée la clé au besoin plutôt que d'abandonner : sinon un état incomplet se
+  // propagerait à l'enregistrement, et la date resterait absente du site.
+  STREAMER_CONFIG.siteUpdate = STREAMER_CONFIG.siteUpdate || { enabled: true, autoDate: true, date: { fr: '', en: '' } };
+  const u = STREAMER_CONFIG.siteUpdate;
+  if (u.autoDate === false) return;
+  const d = new Date();
+  u.date = {
+    // "15 août 2026" → "15 Août 2026", pour coller au style des dates déjà saisies.
+    fr: d.toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' })
+         .replace(/ (\p{L})/u, (m, c) => ' ' + c.toUpperCase()),
+    en: d.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' })
+  };
+}
+
 async function saveAll(){
   const btn = document.getElementById('saveBtn');
   btn.disabled = true;
   btn.textContent = 'Enregistrement...';
   try{
+    applyAutoSiteUpdateDate();
     const content = serializeDataFile();
     const choice = await confirmPushModal(buildAutoCommitMessage());
     if (choice.action === 'keep'){
@@ -1267,6 +1311,7 @@ let dragState = null; // { listType, fromIndex, itemEl }
     dragState = {
       listType: item.dataset.dragList,
       fromIndex: Number(item.dataset.dragIndex),
+      fromId: item.dataset.dragId,
       itemEl: item,
     };
     item.classList.add('dragging');
@@ -1279,8 +1324,15 @@ let dragState = null; // { listType, fromIndex, itemEl }
     const target = document.elementFromPoint(e.clientX, e.clientY);
     const overItem = target ? target.closest('[data-drag-item]') : null;
     container.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+    container.querySelectorAll('.drop-target').forEach(el => el.classList.remove('drop-target'));
     if (overItem && overItem.dataset.dragList === dragState.listType && overItem !== dragState.itemEl){
       overItem.classList.add('drag-over');
+    }
+    // Un talent se dépose aussi sur un palier entier, pas seulement sur un autre talent :
+    // c'est ce qui permet de le faire changer de palier.
+    if (dragState.listType === 'talentPool' && target){
+      const overLevel = target.closest('[data-drop-level]');
+      if (overLevel) overLevel.classList.add('drop-target');
     }
   });
 
@@ -1290,7 +1342,17 @@ let dragState = null; // { listType, fromIndex, itemEl }
     const overItem = target ? target.closest('[data-drag-item]') : null;
     dragState.itemEl.classList.remove('dragging');
     container.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+    container.querySelectorAll('.drop-target').forEach(el => el.classList.remove('drop-target'));
     document.body.style.userSelect = '';
+    if (dragState.listType === 'talentPool'){
+      const overLevel = target ? target.closest('[data-drop-level]') : null;
+      const beforeId = (overItem && overItem.dataset.dragList === 'talentPool') ? overItem.dataset.dragId : null;
+      if (overLevel || beforeId){
+        movePoolTalent(currentHeroIndex, dragState.fromId, overLevel ? Number(overLevel.dataset.dropLevel) : null, beforeId);
+      }
+      dragState = null;
+      return;
+    }
     if (overItem && overItem.dataset.dragList === dragState.listType){
       const toIndex = Number(overItem.dataset.dragIndex);
       if (toIndex !== dragState.fromIndex){
@@ -1304,6 +1366,7 @@ let dragState = null; // { listType, fromIndex, itemEl }
     if (!dragState) return;
     dragState.itemEl.classList.remove('dragging');
     container.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+    container.querySelectorAll('.drop-target').forEach(el => el.classList.remove('drop-target'));
     document.body.style.userSelect = '';
     dragState = null;
   });
@@ -1631,7 +1694,7 @@ function renderTalentPoolTab(hero){
     html += `<p style="color:var(--text-dim);font-size:13px;">Aucun talent pour le moment.</p>`;
   }
   html += levels.map(level => `
-    <div class="card">
+    <div class="card" data-drop-level="${escapeHtml(level)}">
       <div class="card-head"><div class="title">Palier ${escapeHtml(level)}</div></div>
       ${hero.talentPool.filter(p => p.level === level).map(p => renderPoolTalentItem(p, hero)).join('')}
       <button onclick="addPoolTalent(${currentHeroIndex}, ${level})">+ Ajouter une option à ce palier</button>
@@ -1651,8 +1714,9 @@ function renderTalentPoolTab(hero){
 function renderPoolTalentItem(p, hero){
   const uid = assignUid(p);
   return `
-    <details class="collapsible" data-uid="${uid}"${collapsibleState[uid]?' open':''}>
+    <details class="collapsible" data-uid="${uid}"${collapsibleState[uid]?' open':''} data-drag-item data-drag-list="talentPool" data-drag-id="${escapeHtml(p.id)}">
       <summary>
+        <span class="drag-handle" title="Glisser vers un autre palier, ou sur un talent pour le placer avant lui">⠿</span>
         <span class="chevron">▸</span>
         <span class="s-title">${escapeHtml(p.name?.fr || 'Talent sans nom')}</span>
       </summary>
@@ -1693,6 +1757,39 @@ function renderPoolTalentItem(p, hero){
 }
 function getPoolEntry(heroIdx, id){
   return (HEROES[heroIdx].talentPool||[]).find(p => p.id === id);
+}
+// Déplace un talent d'un palier à l'autre (ou le réordonne à l'intérieur de son palier).
+// L'ordre à l'intérieur d'un palier compte : c'est lui qui donne la position 1/2/3/4 du
+// talent, celle que reprend le code de build.
+function movePoolTalent(idx, talentId, toLevel, beforeId){
+  const hero = HEROES[idx];
+  const pool = hero.talentPool || [];
+  const from = pool.findIndex(p => p.id === talentId);
+  if (from < 0 || talentId === beforeId) return;
+  const talent = pool[from];
+  const changingLevel = toLevel !== null && !isNaN(toLevel) && toLevel !== talent.level;
+
+  pool.splice(from, 1);
+  if (changingLevel){
+    talent.level = toLevel;
+    // Le talent quitte son palier : les builds qui le sélectionnaient là pointeraient sur
+    // un talent absent de ce palier. On retire donc la référence, comme à la suppression.
+    (hero.builds||[]).forEach(b => (b.talentSelections||[]).forEach(sel => {
+      if (sel.primaryId === talentId) sel.primaryId = null;
+      sel.alternativeIds = (sel.alternativeIds||[]).filter(aid => aid !== talentId);
+    }));
+  }
+
+  // Déposé sur un talent : on s'insère juste avant lui. Déposé sur le palier : on se met
+  // à la suite des talents déjà présents (ou en fin de liste si le palier était vide).
+  let at = beforeId ? pool.findIndex(p => p.id === beforeId) : -1;
+  if (at < 0){
+    let last = -1;
+    pool.forEach((p, i) => { if (p.level === talent.level) last = i; });
+    at = last >= 0 ? last + 1 : pool.length;
+  }
+  pool.splice(at, 0, talent);
+  markDirty(); renderHeroPanel();
 }
 function addPoolLevelFromInput(idx){
   const input = document.getElementById('newPoolLevelInput');
@@ -2096,6 +2193,26 @@ function showConfigPanel(){
       <div class="checkbox-row">
         <input type="checkbox" ${STREAMER_CONFIG.showHeroRotation !== false ? 'checked' : ''} onchange="setNested(STREAMER_CONFIG,'showHeroRotation',this.checked)" />
         <label style="margin:0;text-transform:none;">Afficher la rotation gratuite</label>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Mise à jour du site (header)</h3>
+      <small class="help" style="margin-top:-4px;margin-bottom:10px;">Affiche « Mise à jour » suivi de la date, au-dessus des réseaux sociaux, sur la page Builds et la page Cartes.</small>
+      <div class="checkbox-row">
+        <input type="checkbox" ${STREAMER_CONFIG.siteUpdate?.enabled !== false ? 'checked' : ''} onchange="setNested(STREAMER_CONFIG,'siteUpdate.enabled',this.checked)" />
+        <label style="margin:0;text-transform:none;">Afficher la date de mise à jour</label>
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" ${STREAMER_CONFIG.siteUpdate?.autoDate !== false ? 'checked' : ''} onchange="setNested(STREAMER_CONFIG,'siteUpdate.autoDate',this.checked); showConfigPanel();" />
+        <label style="margin:0;text-transform:none;">Mettre la date à aujourd'hui à chaque enregistrement</label>
+      </div>
+      ${STREAMER_CONFIG.siteUpdate?.autoDate !== false
+        ? `<small class="help">La date ci-dessous est remplie automatiquement au moment où tu enregistres : tu n'as rien à saisir. Décoche la case au-dessus pour la fixer toi-même.</small>`
+        : `<small class="help">Saisie manuelle : la date restera telle quelle jusqu'à ce que tu la changes.</small>`}
+      <div class="row">
+        <div class="field"><label>Date (FR)</label><input ${STREAMER_CONFIG.siteUpdate?.autoDate !== false ? 'disabled' : ''} value="${escapeHtml(STREAMER_CONFIG.siteUpdate?.date?.fr)}" oninput="setNested(STREAMER_CONFIG,'siteUpdate.date.fr',this.value)" placeholder="Ex: 15 Août 2026" /></div>
+        <div class="field"><label>Date (EN)</label><input ${STREAMER_CONFIG.siteUpdate?.autoDate !== false ? 'disabled' : ''} value="${escapeHtml(STREAMER_CONFIG.siteUpdate?.date?.en)}" oninput="setNested(STREAMER_CONFIG,'siteUpdate.date.en',this.value)" placeholder="Ex: August 15, 2026" /></div>
       </div>
     </div>
   `;

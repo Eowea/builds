@@ -46,6 +46,7 @@
       copyHint: { fr: "Clique pour copier", en: "Click to copy" },
       optionalTalents: { fr: "Options", en: "Options" },
       newBadge: { fr: "Nouveau", en: "New" },
+      siteUpdateLabel: { fr: "Mise à jour", en: "Update" },
       updatedBadge: { fr: "Mis à jour", en: "Updated" },
       heroRotationTitle: { fr: "Rotation gratuite", en: "Free Rotation" },
       heroRotationError: { fr: "Rotation indisponible pour le moment.", en: "Rotation unavailable right now." },
@@ -75,7 +76,7 @@ const getInitialLang = () => {
     let activeFloatingTrigger = null, hideTooltipTimer = null, tooltipRaf = 0, layoutRaf = 0, layoutSyncTimers = [];
 
     const $ = id => document.getElementById(id);
-    const els = { siteTitle: $('siteTitle'), headerNav: $('headerNav'), socials: $('socials'), searchInput: $('searchInput'), resultsCount: $('resultsCount'), roleFilters: $('roleFilters'), heroList: $('heroList'), detailView: $('detailView'), tooltipPortal: $('tooltipPortal'), videoOverlay: $('videoOverlay'), closeOverlayBtn: $('closeOverlayBtn'), overlayStatusText: $('overlayStatusText'), expandedYoutube: $('expandedYoutube'), expandedMedia: $('expandedMedia'), langSwitcher: $('langSwitcher'), homeBtn: $('homeBtn') };
+    const els = { siteTitle: $('siteTitle'), headerNav: $('headerNav'), socials: $('socials'), searchInput: $('searchInput'), resultsCount: $('resultsCount'), roleFilters: $('roleFilters'), heroList: $('heroList'), detailView: $('detailView'), tooltipPortal: $('tooltipPortal'), videoOverlay: $('videoOverlay'), closeOverlayBtn: $('closeOverlayBtn'), overlayStatusText: $('overlayStatusText'), expandedYoutube: $('expandedYoutube'), expandedMedia: $('expandedMedia'), langSwitcher: $('langSwitcher'), homeBtn: $('homeBtn'), siteUpdate: $('siteUpdate') };
 
     /* ── Utilities ── */
     const escapeHtml = (s) => (s ?? '').toString().replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -97,6 +98,26 @@ function hasSeenBuildUpdate(hero) {
     const newBuildsCount = (hero.builds || []).filter(b => b.isNew).length;
     const seenUpdates = JSON.parse(localStorage.getItem('seenBuildUpdates') || '[]');
     return seenUpdates.includes(`${hero.id}_${newBuildsCount}`);
+}
+
+// Suivi "build vu", distinct du suivi par héros : le badge d'un build ne doit disparaître
+// que lorsque ce build précis a été affiché, pas dès l'ouverture du héros. On se base sur
+// le libellé FR (stable quelle que soit la langue affichée) plutôt que sur l'index, qui
+// change si les builds sont réordonnés.
+function buildSeenKey(heroId, build) {
+    return `${heroId}::${(build.label && build.label.fr) || build.order || ''}`;
+}
+function hasSeenBuild(heroId, build) {
+    const seen = JSON.parse(localStorage.getItem('seenBuilds') || '[]');
+    return seen.includes(buildSeenKey(heroId, build));
+}
+function markBuildSeen(heroId, build) {
+    const seen = JSON.parse(localStorage.getItem('seenBuilds') || '[]');
+    const key = buildSeenKey(heroId, build);
+    if (!seen.includes(key)) {
+        seen.push(key);
+        localStorage.setItem('seenBuilds', JSON.stringify(seen));
+    }
 }
 
 // Marque tout comme "vu" d'un coup
@@ -225,6 +246,19 @@ function markEverythingAsSeen(hero) {
           const isActive = (l.url || '').replace(/^\.?\//, '') === 'index.html';
           return `<a class="header-nav-link${isActive ? ' active' : ''}" href="${escapeHtml(l.url || '#')}"${l.newTab ? ' target="_blank" rel="noreferrer"' : ''}>${escapeHtml(loc(l.label))}</a>`;
         }).join('');
+      renderSiteUpdate();
+    }
+
+    // Bandeau "Mise à jour du site" dans le header : masqué tant qu'aucune date n'est
+    // saisie, pour ne pas laisser un libellé seul quand il n'y a rien à annoncer.
+    function renderSiteUpdate() {
+      if (!els.siteUpdate) return;
+      const u = STREAMER_CONFIG.siteUpdate || {};
+      const date = u.enabled === false ? '' : loc(u.date);
+      if (!date) { els.siteUpdate.innerHTML = ''; els.siteUpdate.hidden = true; return; }
+      els.siteUpdate.hidden = false;
+      els.siteUpdate.innerHTML = `<span class="site-update-label">${t('siteUpdateLabel')}</span>`
+        + `<span class="site-update-date">${escapeHtml(date)}</span>`;
     }
     
     function renderFilters() { els.roleFilters.innerHTML=roles().map(r=>`<button class="filter-chip${state.role===r?' active':''}" type="button" data-role="${r}">${locRole(r)}</button>`).join(''); }
@@ -479,7 +513,7 @@ function renderBuildSection(hero) {
 const sortedBuildIndices = hero.builds.map((_, i) => i).sort((a, b) => (hero.builds[a].order ?? 0) - (hero.builds[b].order ?? 0));
 const tabsHtml = sortedBuildIndices.map(i => {
     const x = hero.builds[i];
-    const newBadge = x.isNew ? `<span class="new-badge">${t('newBadge')}</span>` : '';
+    const newBadge = (x.isNew && !hasSeenBuild(hero.id, x)) ? `<span class="new-badge">${t('newBadge')}</span>` : '';
     
     // On entoure le bouton d'un "wrapper" pour que le badge ne soit pas coupé par le clip-path du bouton
     return `
@@ -497,6 +531,9 @@ const tabsHtml = sortedBuildIndices.map(i => {
     : '';
   
   el.innerHTML=`<div class="build-tabs">${tabsHtml}</div>${dateHtml}<div class="build-summary">${esc(loc(b.summary))}</div>${renderTalentBoard(resolveBuildTalents(hero,b))}${renderBuildCode(b)}${renderBuildVideos(hero,b)}`;
+  // Le build qu'on vient d'afficher est désormais vu : son badge disparaîtra au prochain
+  // rendu. Le marquage est différé pour qu'il reste visible sur celui-ci.
+  if (b.isNew) setTimeout(() => markBuildSeen(hero.id, b), 0);
   bindFloatingTriggers();
   bindComboCarousel();
   queueLayoutSync();

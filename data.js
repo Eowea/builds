@@ -89,7 +89,15 @@ const STREAMER_CONFIG = {
       "youtubeId": "https://youtu.be/m8kifCbSy-s"
     }
   ],
-  "showHeroRotation": false
+  "showHeroRotation": false,
+  "siteUpdate": {
+    "enabled": true,
+    "autoDate": true,
+    "date": {
+      "fr": "16 Août 2026",
+      "en": "August 16, 2026"
+    }
+  }
 };
 
 const HEROES = [
@@ -211,7 +219,7 @@ const HEROES = [
         "order": 1,
         "label": {
           "fr": "Build recommandé",
-          "en": "Recommended Build"
+          "en": "Recommended build"
         },
         "summary": {
           "fr": "Le meilleur build, tout simplement.",
@@ -440,7 +448,7 @@ const HEROES = [
           "fr": "Infusion gangrenée",
           "en": "Fel Infusion"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/talents/kaelthas_fel_infusion.png",
+        "icon": "assets/heroes/base_spells/kaelthas/images/talents/storm_ui_icon_kaelthas_verdantspheres_2.png",
         "description": {
           "fr": "Augmente la puissance de sort et soigne lors de l'utilisation du Trait.",
           "en": "Increases spell power and heals when using Trait."
@@ -454,7 +462,7 @@ const HEROES = [
           "fr": "Accro à la mana",
           "en": "Mana Addict"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/talents/kaelthas_mana_addict.png",
+        "icon": "assets/heroes/base_spells/kaelthas/images/talents/storm_ui_icon_kaelthas_manaaddict.png",
         "description": {
           "fr": "Indispensable pour la survie tard dans la partie.",
           "en": "Essential for late-game survival."
@@ -468,7 +476,7 @@ const HEROES = [
           "fr": "Enchantement du Feu solaire",
           "en": "Sunfire Enchantment"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/talents/kaelthas_sunfire_enchantment.png",
+        "icon": "assets/heroes/base_spells/kaelthas/images/talents/storm_ui_icon_kaelthas_arcanebarrier.png",
         "description": {
           "fr": "Activer le Trait booste vos prochaines attaques de base.",
           "en": "Activating Trait empowers your next basic attacks."
@@ -482,7 +490,7 @@ const HEROES = [
           "fr": "Explosion pyrotechnique",
           "en": "Pyroblast"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/skills/kaelthas_pyroblast.png",
+        "icon": "assets/heroes/base_spells/kaelthas/images/spells/storm_ui_icon_kaelthas_pyroblast.png",
         "description": {
           "fr": "Pour punir une cible fragile hors de position.",
           "en": "To punish a fragile target out of position."
@@ -496,7 +504,7 @@ const HEROES = [
           "fr": "Fureur du Roi-Soleil",
           "en": "Sun King's Fury"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/talents/kaelthas_sun_kings_fury.png",
+        "icon": "assets/heroes/base_spells/kaelthas/images/talents/storm_ui_icon_kaelthas_livingbomb_b.png",
         "description": {
           "fr": "Augmente considérablement les dégâts de Bombe vivante sur les cibles principales.",
           "en": "Greatly increases Living Bomb damage on primary targets."
@@ -510,7 +518,7 @@ const HEROES = [
           "fr": "Présence d'esprit",
           "en": "Presence of Mind"
         },
-        "icon": "https://static.icy-veins.com/images/heroes/talents/kaelthas_presence_of_mind.png",
+        "icon": "assets/heroes/base_spells/kaelthas/images/spells/storm_ui_icon_kaelthas_pyroblast.png",
         "description": {
           "fr": "Réduit le temps de recharge de l'Explosion pyrotechnique.",
           "en": "Reduces Pyroblast cooldown."
@@ -637,7 +645,7 @@ const HEROES = [
         "order": 1,
         "label": {
           "fr": "Build recommandé",
-          "en": "Recommanded build"
+          "en": "Recommended build"
         },
         "summary": {
           "fr": "Build qui passe partout, peu importe le mode de jeu.",
@@ -1055,8 +1063,7 @@ const HEROES = [
         "demoYoutubeId": null
       }
     ],
-    "forms": [],
-    "isNew": true
+    "forms": []
   },
   {
     "id": "rehgar",
@@ -1610,7 +1617,7 @@ const HEROES = [
         "order": 1,
         "label": {
           "fr": "Build recommandé",
-          "en": "Recommanded build"
+          "en": "Recommended build"
         },
         "updatedAt": {
           "fr": "6 Mai 2026",
@@ -1920,7 +1927,7 @@ const HEROES = [
         "order": 1,
         "label": {
           "fr": "Build recommandé",
-          "en": "Recommanded build"
+          "en": "Recommended build"
         },
         "updatedAt": {
           "fr": "6 Mai 2026",
@@ -2390,7 +2397,7 @@ const HEROES = [
         "order": 1,
         "label": {
           "fr": "Build recommandé",
-          "en": "Recommanded build"
+          "en": "Recommended build"
         },
         "summary": {
           "fr": "Build qui passe partout, peu importe le mode de jeu.",
@@ -2812,8 +2819,7 @@ const HEROES = [
         },
         "demoYoutubeId": null
       }
-    ],
-    "isNew": true
+    ]
   },
   {
     "id": "ana",
@@ -3359,7 +3365,7 @@ const HEROES = [
         "demoYoutubeId": null
       }
     ],
-    "isNew": false,
+    "isNew": true,
     "forms": []
   },
   {
@@ -3479,7 +3485,7 @@ const HEROES = [
         "order": 1,
         "label": {
           "fr": "Build recommandé",
-          "en": "Recommanded Build"
+          "en": "Recommended build"
         },
         "updatedAt": {
           "fr": "6 Mai 2026",
@@ -3890,7 +3896,7 @@ const HEROES = [
         "order": 1,
         "label": {
           "fr": "Build recommandé",
-          "en": "Recommanded build"
+          "en": "Recommended build"
         },
         "summary": {
           "fr": "Build qui passe partout, peu importe le mode de jeu.",
@@ -4325,8 +4331,7 @@ const HEROES = [
         "demoYoutubeId": null
       }
     ],
-    "forms": [],
-    "isNew": true
+    "forms": []
   },
   {
     "id": "lili",
@@ -4445,7 +4450,7 @@ const HEROES = [
         "order": 1,
         "label": {
           "fr": "Build recommandé",
-          "en": "Recommanded build"
+          "en": "Recommended build"
         },
         "summary": {
           "fr": "Build qui passe partout, peu importe le mode de jeu.\n",
@@ -4923,8 +4928,7 @@ const HEROES = [
         "demoYoutubeId": null
       }
     ],
-    "forms": [],
-    "isNew": true
+    "forms": []
   },
   {
     "id": "ltmorales",
@@ -5462,8 +5466,7 @@ const HEROES = [
         "demoYoutubeId": null
       }
     ],
-    "forms": [],
-    "isNew": true
+    "forms": []
   },
   {
     "id": "malfurion",
@@ -5582,7 +5585,7 @@ const HEROES = [
         "order": 1,
         "label": {
           "fr": "Build recommandé",
-          "en": "Recommended Build"
+          "en": "Recommended build"
         },
         "isNew": false,
         "updatedAt": {
@@ -6030,7 +6033,7 @@ const HEROES = [
         "order": 1,
         "label": {
           "fr": "Build recommandé",
-          "en": "Recommanded Build"
+          "en": "Recommended build"
         },
         "updatedAt": {
           "fr": "6 Mai 2026",
@@ -6755,11 +6758,11 @@ const HEROES = [
         "order": 1,
         "label": {
           "fr": "Build recommandé",
-          "en": "Recommanded build"
+          "en": "Recommended build"
         },
         "summary": {
           "fr": "Build qui passe partout, peu importe le mode de jeu.",
-          "en": "Build qui passe partout, peu importe le mode de jeu."
+          "en": "A build that works in any situation, no matter the game mode."
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
@@ -7192,8 +7195,7 @@ const HEROES = [
           "en": "Ghost Form"
         }
       }
-    ],
-    "isNew": true
+    ]
   },
   {
     "id": "whitemane",
@@ -7325,7 +7327,7 @@ const HEROES = [
         "order": 1,
         "label": {
           "fr": "Build recommandé",
-          "en": "Recommanded Build"
+          "en": "Recommended build"
         },
         "updatedAt": {
           "fr": "6 Mai 2026",
@@ -7675,7 +7677,7 @@ const HEROES = [
         "order": 1,
         "label": {
           "fr": "Build recommandé",
-          "en": "Recommanded build"
+          "en": "Recommended build"
         },
         "summary": {
           "fr": "LE SEUL BUILD JOUABLE",
@@ -17476,7 +17478,7 @@ const HEROES = [
   },
   {
     "id": "liming",
-    "enabled": false,
+    "enabled": true,
     "name": {
       "fr": "Li-Ming",
       "en": "Li-Ming"
@@ -17484,11 +17486,11 @@ const HEROES = [
     "role": "AssassinDistance",
     "portrait": "assets/heroes/portraits/storm_ui_glues_draft_portrait_wizard.png",
     "headline": {
-      "fr": "Mage de burst extrême qui se recharge à chaque élimination.",
+      "fr": "Mage avec gros burst.",
       "en": "Extreme burst mage whose cooldowns reset on takedowns."
     },
     "gameplay": {
-      "fr": "Li-Ming supprime les cibles fragiles en un combo. Chaque élimination réinitialise ses temps de recharge et lui permet d'enchaîner.",
+      "fr": "Li-Ming tue les cibles fragiles en un combo. Chaque élimination réinitialise ses temps de recharge et lui permet d'enchaîner.",
       "en": "Li-Ming deletes squishy targets in a single combo. Every takedown resets her cooldowns, letting her chain kills."
     },
     "spells": [
@@ -17500,21 +17502,21 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_criticalmass.png",
         "description": {
-          "fr": "Tes temps de recharge sont réinitialisés à chaque élimination.",
-          "en": "Your cooldowns reset on every takedown."
+          "fr": "Une élimination réinitialise le temps de recharge de toutes tes capacités.",
+          "en": "A takedown resets the cooldown of all your Abilities."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "A",
         "name": {
-          "fr": "Missiles magiques",
+          "fr": "Projectiles magiques",
           "en": "Magic Missiles"
         },
         "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_magicmissiles.png",
         "description": {
-          "fr": "Trois missiles qui suivent la cible.",
-          "en": "Three homing missiles."
+          "fr": "Lance trois projectiles qui infligent des dégâts au premier ennemi touché, avec des dégâts réduits contre les bâtiments.",
+          "en": "Fires three missiles that deal damage to the first enemy hit, with reduced damage against Structures."
         },
         "demoYoutubeId": ""
       },
@@ -17526,8 +17528,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_arcaneorb.png",
         "description": {
-          "fr": "Orbe qui fait plus de dégâts de loin.",
-          "en": "Orb that deals more damage at range."
+          "fr": "Projette un orbe qui gagne en puissance avec la distance parcourue, infligeant plus de dégâts au premier ennemi touché à longue portée.",
+          "en": "Fires an orb that grows more powerful the farther it travels, dealing more damage to the first enemy hit at range."
         },
         "demoYoutubeId": ""
       },
@@ -17539,8 +17541,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_teleport.png",
         "description": {
-          "fr": "Se téléporte sur une courte distance.",
-          "en": "Teleports a short distance."
+          "fr": "Se téléporte instantanément sur une courte distance.",
+          "en": "Teleports instantly a short distance."
         },
         "demoYoutubeId": ""
       },
@@ -17552,21 +17554,21 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_disintegrate.png",
         "description": {
-          "fr": "Rayon canalisé orientable.",
-          "en": "Channeled beam you can steer."
+          "fr": "Canalise un puissant rayon orientable qui inflige des dégâts continus aux ennemis touchés.",
+          "en": "Channels a powerful steerable beam that deals ongoing damage to enemies caught in it."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "R2",
         "name": {
-          "fr": "Vague de force",
+          "fr": "Onde de choc",
           "en": "Wave of Force"
         },
         "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_waveofforce.png",
         "description": {
-          "fr": "Repousse les ennemis proches.",
-          "en": "Knocks nearby enemies back."
+          "fr": "Repousse et inflige des dégâts à tous les ennemis proches.",
+          "en": "Knocks back and damages all nearby enemies."
         },
         "demoYoutubeId": ""
       }
@@ -17577,12 +17579,12 @@ const HEROES = [
         "en": "A takedown resets your abilities: chain immediately."
       },
       {
-        "fr": "Téléportation est ta seule survie : ne la gaspille pas pour l'agression.",
-        "en": "Teleport is your only survival tool: don't waste it on aggression."
+        "fr": "Pense à poke les structure de temps en temps.",
+        "en": "Remember to poke the structures from time to time."
       },
       {
-        "fr": "Orbe arcanique fait beaucoup plus mal à longue distance.",
-        "en": "Arcane Orb hits far harder at long range."
+        "fr": "Téléportation peut annuler des attaques de base des héros ou structures.",
+        "en": "Teleportation can cancel basic attacks by heroes or structures."
       }
     ],
     "builds": [
@@ -17590,58 +17592,64 @@ const HEROES = [
         "enabled": true,
         "order": 1,
         "label": {
-          "fr": "Build de départ",
-          "en": "Starter Build"
+          "fr": "Build recommandé",
+          "en": "Recommended build"
         },
         "summary": {
-          "fr": "Une base solide et polyvalente, à personnaliser selon la partie.",
-          "en": "A solid, versatile baseline to adapt to each game."
+          "fr": "Build qui passe partout, peu importe le mode de jeu.",
+          "en": "A build that works in any situation, no matter the game mode."
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
           "en": "PASTE INTO TALENT TREE"
         },
-        "buildCode": "[T1111111,Wizard]",
+        "buildCode": "[T1211312,LiMing]",
         "videos": [],
         "updatedAt": {
-          "fr": "19 Juillet 2026",
-          "en": "July 19, 2026"
+          "fr": "14 Août 2026",
+          "en": "August 14, 2026"
         },
         "talentSelections": [
           {
             "level": 1,
-            "primaryId": "tmrryr6jonupaj",
-            "alternativeIds": []
+            "primaryId": "tmr7gscbm02hjv",
+            "alternativeIds": [
+              "tmr7gscbm01fv3"
+            ]
           },
           {
             "level": 4,
-            "primaryId": "tmrryr6jotbsn3",
-            "alternativeIds": []
+            "primaryId": "tmr7gscbm05cgj",
+            "alternativeIds": [
+              "tmr7gscbm04gko"
+            ]
           },
           {
             "level": 7,
-            "primaryId": "tmrryr6jow4khn",
+            "primaryId": "tmr7gscbm09r01",
             "alternativeIds": []
           },
           {
             "level": 10,
-            "primaryId": "tmrryr6jo4z76i",
+            "primaryId": "tmr7gscbm119lm",
             "alternativeIds": []
           },
           {
             "level": 13,
-            "primaryId": "tmrryr6joc6xfn",
+            "primaryId": "tmr7gscbm12w83",
             "alternativeIds": []
           },
           {
             "level": 16,
-            "primaryId": "tmrryr6josj97v",
+            "primaryId": "tmr7gscbm1609s",
             "alternativeIds": []
           },
           {
             "level": 20,
-            "primaryId": "tmrryr6josnvzg",
-            "alternativeIds": []
+            "primaryId": "tmr7gscbm203yd",
+            "alternativeIds": [
+              "tmr7gscbm21a5l"
+            ]
           }
         ]
       }
@@ -17649,105 +17657,316 @@ const HEROES = [
     "guideVideos": [],
     "talentPool": [
       {
-        "id": "tmrryr6jonupaj",
+        "id": "tmr7gscbm01fv3",
         "level": 1,
         "name": {
-          "fr": "Force Armor",
+          "fr": "Armure de force",
           "en": "Force Armor"
         },
-        "icon": "assets/heroes/base_spells/liming/images/talents/storm_ui_icon_wizard_magicmissiles.png",
+        "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_magicmissiles.png",
         "description": {
-          "fr": "When Magic Missiles damages an enemy Hero, gain 50 Spell Armor, reducing the damage taken by the next Ability by 50%. Gain 1 charge per cast and store up to 4 charges.  Passive: Li-Ming's Mana regeneration is increased by 100% while below 35% Mana.",
-          "en": "When Magic Missiles damages an enemy Hero, gain 50 Spell Armor, reducing the damage taken by the next Ability by 50%. Gain 1 charge per cast and store up to 4 charges.  Passive: Li-Ming's Mana regeneration is increased by 100% while below 35% Mana."
+          "fr": "Toucher un héros avec Projectiles magiques accorde de l'armure anti-sort, réduisant les dégâts de la prochaine capacité subie. Possède plusieurs charges. Passif : régénération de mana augmentée sous 35% de mana.",
+          "en": "Hitting a Hero with Magic Missiles grants Spell Armor, reducing the damage of the next Ability taken. Has multiple charges. Passive: Mana regeneration is increased below 35% Mana."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jotbsn3",
+        "id": "tmr7gscbm02hjv",
+        "level": 1,
+        "name": {
+          "fr": "Naviguéther",
+          "en": "Aether Walker"
+        },
+        "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_teleport.png",
+        "description": {
+          "fr": "Téléportation ne coûte plus de mana et son temps de recharge est réduit si tu n'as pas subi de dégâts récemment. L'utiliser augmente les dégâts du prochain Projectiles magiques.",
+          "en": "Teleport no longer costs Mana and its cooldown is reduced if you haven't taken damage recently. Using it increases the damage of your next Magic Missiles."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmr7gscbm03oq3",
+        "level": 1,
+        "name": {
+          "fr": "Avide de puissance",
+          "en": "Power Hungry"
+        },
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_powerhungry.png",
+        "description": {
+          "fr": "Les globes de régénération rendent bien plus de mana et accordent temporairement de la puissance de capacité.",
+          "en": "Regeneration Globes restore much more Mana and temporarily grant Spell Power."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmr7gscbm04gko",
         "level": 4,
         "name": {
-          "fr": "Charged Blast",
+          "fr": "Éclair chargé",
           "en": "Charged Blast"
         },
-        "icon": "assets/heroes/base_spells/liming/images/talents/storm_ui_icon_wizard_magicmissiles.png",
+        "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_magicmissiles.png",
         "description": {
-          "fr": "Basic Attacking a target recently hit by a Magic Missile does an extra 87 (+4% per level) damage.",
-          "en": "Basic Attacking a target recently hit by a Magic Missile does an extra 87 (+4% per level) damage."
+          "fr": "L'attaque de base contre une cible récemment touchée par Projectiles magiques inflige des dégâts supplémentaires.",
+          "en": "Basic Attacking a target recently hit by Magic Missiles deals bonus damage."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jow4khn",
+        "id": "tmr7gscbm05cgj",
+        "level": 4,
+        "name": {
+          "fr": "Triumvirat",
+          "en": "Triumvirate"
+        },
+        "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_arcaneorb.png",
+        "description": {
+          "fr": "Si Orbe arcanique touche un héros après avoir parcouru une grande distance, son temps de recharge est réduit et une partie du mana est remboursée.",
+          "en": "If Arcane Orb hits a Hero after traveling a long distance, its cooldown is reduced and part of its Mana cost is refunded."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmr7gscbm06biv",
+        "level": 4,
+        "name": {
+          "fr": "Suprématie",
+          "en": "Dominance"
+        },
+        "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_criticalmass.png",
+        "description": {
+          "fr": "Les éliminations rendent une partie des points de vie manquants de Li-Ming.",
+          "en": "Takedowns restore a portion of Li-Ming's missing Health."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmr7gscbm079y3",
         "level": 7,
         "name": {
-          "fr": "Seeker",
+          "fr": "Focalisation des Arcanes",
           "en": "Seeker"
         },
-        "icon": "assets/heroes/base_spells/liming/images/talents/storm_ui_icon_wizard_magicmissiles.png",
+        "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_magicmissiles.png",
         "description": {
-          "fr": "If three Magic Missiles hit the same target, the third one deals an additional 140 (+4% per level) damage.",
-          "en": "If three Magic Missiles hit the same target, the third one deals an additional 140 (+4% per level) damage."
+          "fr": "Si trois Projectiles magiques touchent la même cible, le troisième inflige des dégâts supplémentaires.",
+          "en": "If three Magic Missiles hit the same target, the third deals bonus damage."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jo4z76i",
+        "id": "tmr7gscbm08cmq",
+        "level": 7,
+        "name": {
+          "fr": "Vengeance de Zei",
+          "en": "Zei's Vengeance"
+        },
+        "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_arcaneorb.png",
+        "description": {
+          "fr": "Augmente le bonus de dégâts d'Orbe arcanique selon la distance parcourue, et réduit son temps de recharge.",
+          "en": "Increases Arcane Orb's distance-based damage bonus, and reduces its cooldown."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmr7gscbm09r01",
+        "level": 7,
+        "name": {
+          "fr": "Calamité",
+          "en": "Calamity"
+        },
+        "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_teleport.png",
+        "description": {
+          "fr": "Téléportation inflige des dégâts aux héros ennemis proches du point d'arrivée.",
+          "en": "Teleport deals damage to enemy Heroes near the landing point."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmr7gscbm10v34",
         "level": 10,
         "name": {
-          "fr": "Disintegrate",
+          "fr": "Désintégration",
           "en": "Disintegrate"
         },
-        "icon": "assets/heroes/base_spells/liming/images/talents/storm_ui_icon_wizard_disintegrate.png",
+        "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_disintegrate.png",
         "description": {
-          "fr": "Channel a powerful beam, dealing 480 (+5% per level) damage over 2.6 seconds to enemies while they are in it. The direction of the beam changes with your mouse cursor position.",
-          "en": "Channel a powerful beam, dealing 480 (+5% per level) damage over 2.6 seconds to enemies while they are in it. The direction of the beam changes with your mouse cursor position."
+          "fr": "Canalise un puissant rayon orientable qui inflige des dégâts continus aux ennemis touchés.",
+          "en": "Channels a powerful steerable beam that deals ongoing damage to enemies caught in it."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6joc6xfn",
+        "id": "tmr7gscbm119lm",
+        "level": 10,
+        "name": {
+          "fr": "Onde de choc",
+          "en": "Wave of Force"
+        },
+        "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_waveofforce.png",
+        "description": {
+          "fr": "Repousse et inflige des dégâts à tous les ennemis proches.",
+          "en": "Knocks back and damages all nearby enemies."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmr7gscbm12w83",
         "level": 13,
         "name": {
-          "fr": "Illusionist",
+          "fr": "Illusionniste",
           "en": "Illusionist"
         },
-        "icon": "assets/heroes/base_spells/liming/images/talents/storm_ui_icon_wizard_teleport.png",
+        "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_teleport.png",
         "description": {
-          "fr": "If Li-Ming loses more than 20% of her Health at once, its cooldown is instantly refreshed.  This effect has a 4 second cooldown.  Passive: Increases Teleport range by 50%",
-          "en": "If Li-Ming loses more than 20% of her Health at once, its cooldown is instantly refreshed.  This effect has a 4 second cooldown.  Passive: Increases Teleport range by 50%"
+          "fr": "Perdre une grande partie de ses points de vie d'un coup réinitialise instantanément Téléportation. Passif : augmente la portée de Téléportation.",
+          "en": "Losing a large portion of Health at once instantly refreshes Teleport's cooldown. Passive: increases Teleport's range."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6josj97v",
+        "id": "tmr7gscbm13cxt",
+        "level": 13,
+        "name": {
+          "fr": "Canonnier",
+          "en": "Cannoneer"
+        },
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_autoattack_damage.png",
+        "description": {
+          "fr": "Utiliser une capacité augmente les dégâts de la prochaine attaque de base et la transforme en dégâts de capacité. Possède plusieurs charges.",
+          "en": "Using an Ability increases the damage of the next Basic Attack and converts it to Spell damage. Has multiple charges."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmr7gscbm143f7",
+        "level": 13,
+        "name": {
+          "fr": "Dragon de papier",
+          "en": "Glass Cannon"
+        },
+        "icon": "assets/heroes/base_spells/liming/images/talents/storm_btn_d3_traits_wizard_glasscannon.png",
+        "description": {
+          "fr": "Augmente la puissance de capacité, mais réduit les points de vie maximum.",
+          "en": "Increases Spell Power, but reduces maximum Health."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmr7gscbm153cg",
         "level": 16,
         "name": {
-          "fr": "Fireflies",
+          "fr": "Lucioles",
           "en": "Fireflies"
         },
-        "icon": "assets/heroes/base_spells/liming/images/talents/storm_ui_icon_wizard_magicmissiles.png",
+        "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_magicmissiles.png",
         "description": {
-          "fr": "Drastically increases Magic Missiles speed. Its cooldown is reduced by 1 second, and its Mana cost is reduced by 5.",
-          "en": "Drastically increases Magic Missiles speed. Its cooldown is reduced by 1 second, and its Mana cost is reduced by 5."
+          "fr": "Augmente fortement la vitesse de Projectiles magiques, et réduit son temps de recharge et son coût en mana.",
+          "en": "Greatly increases Magic Missiles' speed, and reduces its cooldown and Mana cost."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6josnvzg",
+        "id": "tmr7gscbm1609s",
+        "level": 16,
+        "name": {
+          "fr": "Boule à facettes",
+          "en": "Mirrorball"
+        },
+        "icon": "assets/heroes/base_spells/liming/images/talents/storm_ui_icon_wizard_magicmissiles_b.png",
+        "description": {
+          "fr": "Projectiles magiques lance des projectiles supplémentaires, mais son coût en mana augmente.",
+          "en": "Magic Missiles fires additional missiles, but its Mana cost increases."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmr7gscbm17rok",
+        "level": 16,
+        "name": {
+          "fr": "Orbite arcanique",
+          "en": "Arcane Orbit"
+        },
+        "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_arcaneorb.png",
+        "description": {
+          "fr": "Orbe arcanique parcourt une plus grande distance, augmentant son bonus de dégâts maximal.",
+          "en": "Arcane Orb travels farther, increasing its maximum damage bonus."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmr7gscbm18w3d",
+        "level": 16,
+        "name": {
+          "fr": "Peau de diamant",
+          "en": "Diamond Skin"
+        },
+        "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_teleport.png",
+        "description": {
+          "fr": "Téléportation accorde un bouclier temporaire à Li-Ming.",
+          "en": "Teleport grants Li-Ming a temporary Shield."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmr7gscbm19e5t",
         "level": 20,
         "name": {
-          "fr": "Temporal Flux",
+          "fr": "Fluctuation temporelle",
           "en": "Temporal Flux"
         },
-        "icon": "assets/heroes/base_spells/liming/images/talents/storm_ui_icon_wizard_disintegrate.png",
+        "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_disintegrate.png",
         "description": {
-          "fr": "Disintegrate gradually slows enemies caught in its beam, to a maximum of 60%.",
-          "en": "Disintegrate gradually slows enemies caught in its beam, to a maximum of 60%."
+          "fr": "Désintégration ralentit progressivement les ennemis pris dans son rayon.",
+          "en": "Disintegrate gradually Slows enemies caught in its beam."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmr7gscbm203yd",
+        "level": 20,
+        "name": {
+          "fr": "Répulsion",
+          "en": "Repulsion"
+        },
+        "icon": "assets/heroes/base_spells/liming/images/spells/storm_ui_icon_wizard_waveofforce.png",
+        "description": {
+          "fr": "Augmente la distance de recul et la portée d'Onde de choc.",
+          "en": "Increases Wave of Force's knockback distance and cast range."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmr7gscbm21a5l",
+        "level": 20,
+        "name": {
+          "fr": "Les Éléments de Tal Rasha",
+          "en": "Tal Rasha's Elements"
+        },
+        "icon": "assets/heroes/base_spells/liming/images/talents/storm_btn_d3_traits_wizard_elementalexposure.png",
+        "description": {
+          "fr": "Lancer une capacité augmente les dégâts de la prochaine capacité différente, jusqu'à un maximum.",
+          "en": "Casting an Ability increases the damage of the next different Ability, up to a cap."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmr7gscbm22ej0",
+        "level": 20,
+        "name": {
+          "fr": "Archonte : puissance pure",
+          "en": "Archon: Pure Power"
+        },
+        "icon": "assets/heroes/base_spells/liming/images/talents/storm_ui_icon_wizard_archon.png",
+        "description": {
+          "fr": "Capacité active : Li-Ming se transforme en archonte, pouvant lancer Désintégration en continu mais plus aucune autre capacité.",
+          "en": "Active: Li-Ming transforms into an Archon, allowing her to repeatedly cast Disintegrate but no other Abilities."
         },
         "demoYoutubeId": null
       }
     ],
-    "forms": []
+    "forms": [],
+    "isNew": true
   },
   {
     "id": "lostvikings",
@@ -20540,19 +20759,19 @@ const HEROES = [
   },
   {
     "id": "nazeebo",
-    "enabled": false,
+    "enabled": true,
     "name": {
-      "fr": "Nazeebo",
+      "fr": "Nasibo",
       "en": "Nazeebo"
     },
     "role": "AssassinDistance",
     "portrait": "assets/heroes/portraits/storm_ui_glues_draft_portrait_witchdoctor.png",
     "headline": {
-      "fr": "Mage de zone qui devient monstrueux en fin de partie.",
-      "en": "Area mage who becomes monstrous late game."
+      "fr": "Mage qui devient monstrueux en fin de partie.",
+      "en": "Mage who becomes monstrous late game."
     },
     "gameplay": {
-      "fr": "Nazeebo accumule des points de vie en tuant des sbires grâce à sa quête, et couvre le terrain d'araignées, de crapauds et de murs de zombies.",
+      "fr": "Nasibo accumule des points de vie en tuant des sbires grâce à sa quête, et couvre le terrain d'araignées, de crapauds et de murs de zombies.",
       "en": "Nazeebo stacks Health by killing minions through his quest and covers the ground with spiders, toads, and zombie walls."
     },
     "spells": [
@@ -20564,21 +20783,21 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_voodooritual.png",
         "description": {
-          "fr": "Empoisonne les ennemis ; les sbires tués accumulent ta quête.",
-          "en": "Poisons enemies; slain minions stack your quest."
+          "fr": "Les attaques de base et les capacités de Nasibo empoisonnent les ennemis non-héroïques. Quête : un sbire empoisonné qui meurt donne à Nasibo des points de vie et de mana permanents.",
+          "en": "Nazeebo's Basic Attacks and Abilities poison Non-Heroic enemies. Quest: a poisoned Minion that dies permanently grants Nazeebo Health and Mana."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "A",
         "name": {
-          "fr": "Araignées de cadavre",
+          "fr": "Araignées nécrophages",
           "en": "Corpse Spiders"
         },
         "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_corpsespider.png",
         "description": {
-          "fr": "Invoque des araignées qui poursuivent les ennemis.",
-          "en": "Summons spiders that chase enemies."
+          "fr": "Projette une jarre qui invoque des araignées poursuivant les ennemis touchés.",
+          "en": "Hurls a jar that summons spiders chasing the enemies it hits."
         },
         "demoYoutubeId": ""
       },
@@ -20590,63 +20809,63 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_zombiewall.png",
         "description": {
-          "fr": "Emprisonne les ennemis dans un cercle de zombies.",
-          "en": "Traps enemies inside a ring of zombies."
+          "fr": "Entoure une zone d'un anneau de zombies qui blessent les ennemis à leur contact.",
+          "en": "Surrounds an area with a ring of zombies that damage enemies on contact."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "E",
         "name": {
-          "fr": "Peste de crapauds",
+          "fr": "Invasion de grenouilles",
           "en": "Plague of Toads"
         },
         "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_plagueoftoads.png",
         "description": {
-          "fr": "Crapauds qui se propagent et explosent.",
-          "en": "Toads that spread and explode."
+          "fr": "Libère une vague de grenouilles qui explosent au contact des ennemis. Peut stocker plusieurs charges.",
+          "en": "Releases a wave of toads that explode on contact with enemies. Can store multiple charges."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "R1",
         "name": {
-          "fr": "Gargantuesque",
+          "fr": "Gargantua",
           "en": "Gargantuan"
         },
         "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_gargantuan.png",
         "description": {
-          "fr": "Invoque un géant qui combat pour toi.",
-          "en": "Summons a giant that fights for you."
+          "fr": "Invoque un gargantua qui garde une zone, attaque les ennemis proches et peut piétiner sur commande.",
+          "en": "Summons a Gargantuan that guards an area, attacks nearby enemies, and can be ordered to stomp."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "R2",
         "name": {
-          "fr": "Esprit vorace",
+          "fr": "Esprit affamé",
           "en": "Ravenous Spirit"
         },
         "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_ravenousspirit.png",
         "description": {
-          "fr": "Esprit canalisé qui inflige d'énormes dégâts de zone.",
-          "en": "Channeled spirit dealing huge area damage."
+          "fr": "Canalise un esprit qui inflige d'énormes dégâts autour de lui. Immobilise Nasibo pendant sa durée.",
+          "en": "Channels a spirit that deals massive damage around it. Roots Nazeebo in place for its duration."
         },
         "demoYoutubeId": ""
       }
     ],
     "tips": [
       {
-        "fr": "Accumule ta quête sur les sbires dès les premières minutes.",
-        "en": "Start stacking your quest on minions from the first minutes."
+        "fr": "Tu n'es pas obligé d'avoir tes stacks pour le talent 20 à la fin de la game !",
+        "en": "You don't need to have your stacks for Talent 20 by the end of the game!"
       },
       {
-        "fr": "Mur de zombies bloque une fuite ou coupe un plongeur.",
-        "en": "Zombie Wall blocks an escape or cuts off a diver."
+        "fr": "Mur de zombies bloque les gens à l'intérieur, pense à le désactiver si c'est un allié.",
+        "en": "Zombies wall is trapping people inside; remember to deactivate it if it's an ally."
       },
       {
-        "fr": "Esprit vorace est très puissant, mais te laisse immobile : protège-toi.",
-        "en": "Ravenous Spirit is very strong but leaves you channeling: stay safe."
+        "fr": "Essaye de viser un seul sbire avec tes araignées pour optimiser ton waveclear.",
+        "en": "Try to target a single minion with your spiders to optimize your waveclear."
       }
     ],
     "builds": [
@@ -20654,58 +20873,129 @@ const HEROES = [
         "enabled": true,
         "order": 1,
         "label": {
-          "fr": "Build de départ",
-          "en": "Starter Build"
+          "fr": "Build recommandé",
+          "en": "Recommended build"
         },
         "summary": {
-          "fr": "Une base solide et polyvalente, à personnaliser selon la partie.",
-          "en": "A solid, versatile baseline to adapt to each game."
+          "fr": "Build qui passe partout, peu importe le mode de jeu.",
+          "en": "A build that works in any situation, no matter the game mode."
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
           "en": "PASTE INTO TALENT TREE"
         },
-        "buildCode": "[T1111111,WitchDoctor]",
+        "buildCode": "[T1132212,Nazeebo]",
         "videos": [],
         "updatedAt": {
-          "fr": "19 Juillet 2026",
-          "en": "July 19, 2026"
+          "fr": "14 Août 2026",
+          "en": "August 14, 2026"
         },
         "talentSelections": [
           {
             "level": 1,
-            "primaryId": "tmrryr6jox2oe0",
+            "primaryId": "tmh3n8naz01xd0",
             "alternativeIds": []
           },
           {
             "level": 4,
-            "primaryId": "tmrryr6jollflx",
+            "primaryId": "tmh3n8naz041da",
             "alternativeIds": []
           },
           {
             "level": 7,
-            "primaryId": "tmrryr6jo6ym40",
+            "primaryId": "tmh3n8naz07a8t",
             "alternativeIds": []
           },
           {
             "level": 10,
-            "primaryId": "tmrryr6jo3fl6c",
-            "alternativeIds": []
+            "primaryId": "tmh3n8naz1071r",
+            "alternativeIds": [
+              "tmh3n8naz11x2q"
+            ]
           },
           {
             "level": 13,
-            "primaryId": "tmrryr6jokwyx0",
+            "primaryId": "tmh3n8naz13e86",
             "alternativeIds": []
           },
           {
             "level": 16,
-            "primaryId": "tmrryr6jojxk2w",
+            "primaryId": "tmh3n8naz15myb",
             "alternativeIds": []
           },
           {
             "level": 20,
-            "primaryId": "tmrryr6jonokbk",
+            "primaryId": "tmh3n8naz20fvs",
+            "alternativeIds": [
+              "tmh3n8naz18d5n",
+              "tmh3n8naz21id4",
+              "tmh3n8naz19on4"
+            ]
+          }
+        ]
+      },
+      {
+        "enabled": true,
+        "order": 2,
+        "label": {
+          "fr": "Build français",
+          "en": "French build"
+        },
+        "updatedAt": {
+          "fr": "14 Août 2026",
+          "en": "August 14, 2026"
+        },
+        "summary": {
+          "fr": "PLEIN DE GRENOUILLES",
+          "en": "LOTS OF FROGS"
+        },
+        "buildCodeTitle": {
+          "fr": "A COLLER DANS L'ARBRE DES TALENTS",
+          "en": "PASTE IN TALENT TREE"
+        },
+        "buildCode": "[T2331233,Nazeebo]",
+        "videos": [],
+        "talentSelections": [
+          {
+            "level": 1,
+            "primaryId": "tmh3n8naz02hq7",
             "alternativeIds": []
+          },
+          {
+            "level": 4,
+            "primaryId": "tmh3n8naz053f0",
+            "alternativeIds": [
+              "tmh3n8naz0645y"
+            ]
+          },
+          {
+            "level": 7,
+            "primaryId": "tmh3n8naz097hj",
+            "alternativeIds": []
+          },
+          {
+            "level": 10,
+            "primaryId": "tmh3n8naz1071r",
+            "alternativeIds": []
+          },
+          {
+            "level": 13,
+            "primaryId": "tmh3n8naz13e86",
+            "alternativeIds": [
+              "tmh3n8naz123cf"
+            ]
+          },
+          {
+            "level": 16,
+            "primaryId": "tmh3n8naz17qjr",
+            "alternativeIds": []
+          },
+          {
+            "level": 20,
+            "primaryId": "tmh3n8naz20fvs",
+            "alternativeIds": [
+              "tmh3n8naz18d5n"
+            ]
           }
         ]
       }
@@ -20713,100 +21003,296 @@ const HEROES = [
     "guideVideos": [],
     "talentPool": [
       {
-        "id": "tmrryr6jox2oe0",
+        "id": "tmh3n8naz01xd0",
         "level": 1,
         "name": {
-          "fr": "Widowmakers",
+          "fr": "Venimosité",
           "en": "Widowmakers"
         },
-        "icon": "assets/heroes/base_spells/nazeebo/images/talents/storm_ui_icon_nazeebo_corpsespider.png",
+        "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_corpsespider.png",
         "description": {
-          "fr": "Enemies hit by Corpse Spiders' jar are Slowed by 25% for 1 second.  Reward: After Corpse Spiders attack Heroes 100 times, their attack damage is increased by 25% and their duration is increased by 1 second.",
-          "en": "Enemies hit by Corpse Spiders' jar are Slowed by 25% for 1 second.  Reward: After Corpse Spiders attack Heroes 100 times, their attack damage is increased by 25% and their duration is increased by 1 second."
+          "fr": "Les araignées nécrophages ralentissent les ennemis touchés par la jarre. À terme, elles infligent plus de dégâts et durent plus longtemps.",
+          "en": "Corpse Spiders Slow enemies hit by the jar. Eventually they deal more damage and last longer."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jollflx",
+        "id": "tmh3n8naz02hq7",
+        "level": 1,
+        "name": {
+          "fr": "Pandémie",
+          "en": "Pandemic"
+        },
+        "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_plagueoftoads.png",
+        "description": {
+          "fr": "Quête : toucher des héros avec Invasion de grenouilles finit par générer des grenouilles supplémentaires, puis réduire les dégâts infligés par les héros touchés.",
+          "en": "Quest: hitting Heroes with Plague of Toads eventually spawns extra toads, then reduces the damage dealt by Heroes hit."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmh3n8naz0352b",
+        "level": 1,
+        "name": {
+          "fr": "La Chose des profondeurs",
+          "en": "Thing of the Deep"
+        },
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_elunesgrace.png",
+        "description": {
+          "fr": "Augmente la portée des capacités de base de Nasibo. Accumuler des charges de Rituel vaudou finit par augmenter sa puissance de capacité.",
+          "en": "Increases the range of Nazeebo's Basic Abilities. Stacking Voodoo Ritual charges eventually increases his Spell Power."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmh3n8naz041da",
         "level": 4,
         "name": {
-          "fr": "Hexed Crawlers",
+          "fr": "Morsure maléfique",
           "en": "Hexed Crawlers"
         },
-        "icon": "assets/heroes/base_spells/nazeebo/images/talents/storm_ui_icon_nazeebo_corpsespider.png",
+        "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_corpsespider.png",
         "description": {
-          "fr": "Corpse Spiders restore 1% of Nazeebo's maximum Health and Mana when they attack an enemy Hero.",
-          "en": "Corpse Spiders restore 1% of Nazeebo's maximum Health and Mana when they attack an enemy Hero."
+          "fr": "Les araignées nécrophages rendent des points de vie et de mana à Nasibo quand elles touchent un héros adverse.",
+          "en": "Corpse Spiders restore Health and Mana to Nazeebo when they hit an enemy Hero."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jo6ym40",
+        "id": "tmh3n8naz053f0",
+        "level": 4,
+        "name": {
+          "fr": "Le grand vaudou",
+          "en": "Big Voodoo"
+        },
+        "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_voodooritual.png",
+        "description": {
+          "fr": "Augmente les bonus de points de vie et de mana procurés par Rituel vaudou.",
+          "en": "Increases the Health and Mana bonuses granted by Voodoo Ritual."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmh3n8naz0645y",
+        "level": 4,
+        "name": {
+          "fr": "Rite de sang",
+          "en": "Blood Ritual"
+        },
+        "icon": "assets/heroes/base_spells/nazeebo/images/talents/storm_ui_icon_nazeebo_voodooritual_a.png",
+        "description": {
+          "fr": "Si un ennemi meurt empoisonné par Rituel vaudou, Nasibo récupère des points de vie et de mana. Passif : les victimes confèrent des charges de Rituel vaudou.",
+          "en": "If an enemy dies while poisoned by Voodoo Ritual, Nazeebo recovers Health and Mana. Passive: takedowns grant Voodoo Ritual stacks."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmh3n8naz07a8t",
         "level": 7,
         "name": {
-          "fr": "Spirit of Arachyr",
+          "fr": "Esprit d'Arachyr",
           "en": "Spirit of Arachyr"
         },
-        "icon": "assets/heroes/base_spells/nazeebo/images/talents/storm_ui_icon_nazeebo_corpsespider.png",
+        "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_corpsespider.png",
         "description": {
-          "fr": "The number of Corpse Spiders spawned is increased from 3 to 4. If Corpse Spiders' jar hits only one enemy, it creates an additional spider.",
-          "en": "The number of Corpse Spiders spawned is increased from 3 to 4. If Corpse Spiders' jar hits only one enemy, it creates an additional spider."
+          "fr": "Augmente le nombre d'araignées nécrophages générées. Toucher un seul ennemi avec la jarre génère une araignée supplémentaire.",
+          "en": "Increases the number of Corpse Spiders spawned. Hitting only one enemy with the jar spawns an extra spider."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jo3fl6c",
+        "id": "tmh3n8naz08gl6",
+        "level": 7,
+        "name": {
+          "fr": "Ruée de morts",
+          "en": "Dead Rush"
+        },
+        "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_zombiewall.png",
+        "description": {
+          "fr": "Mur de zombies inflige davantage de dégâts. À la fin de son effet, les zombies restants sortent du sol pour attaquer les ennemis proches.",
+          "en": "Zombie Wall deals more damage. When it ends, the remaining Zombies uproot and attack nearby enemies."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmh3n8naz097hj",
+        "level": 7,
+        "name": {
+          "fr": "Grenouilles monumentales",
+          "en": "Toads of Hugeness"
+        },
+        "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_plagueoftoads.png",
+        "description": {
+          "fr": "Chaque bond d'Invasion de grenouilles augmente ses dégâts et sa zone d'effet.",
+          "en": "Each hop of Plague of Toads increases its damage and explosion radius."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmh3n8naz1071r",
         "level": 10,
         "name": {
-          "fr": "Gargantuan",
+          "fr": "Gargantua",
           "en": "Gargantuan"
         },
-        "icon": "assets/heroes/base_spells/nazeebo/images/talents/storm_ui_icon_nazeebo_gargantuan.png",
+        "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_gargantuan.png",
         "description": {
-          "fr": "Summon a Gargantuan to guard an area for 20 seconds. Deals 100 (+4% per level) damage when summoned, attacks for 140 (+4% per level) damage, and can be ordered to stomp nearby enemies. The Gargantuan's Stomp deals 140 (+4% per level) damage and Slows by 30% for 2 seconds.",
-          "en": "Summon a Gargantuan to guard an area for 20 seconds. Deals 100 (+4% per level) damage when summoned, attacks for 140 (+4% per level) damage, and can be ordered to stomp nearby enemies. The Gargantuan's Stomp deals 140 (+4% per level) damage and Slows by 30% for 2 seconds."
+          "fr": "Invoque un gargantua qui garde une zone, attaque les ennemis proches et peut piétiner sur commande.",
+          "en": "Summons a Gargantuan that guards an area, attacks nearby enemies, and can be ordered to stomp."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jokwyx0",
+        "id": "tmh3n8naz11x2q",
+        "level": 10,
+        "name": {
+          "fr": "Esprit affamé",
+          "en": "Ravenous Spirit"
+        },
+        "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_ravenousspirit.png",
+        "description": {
+          "fr": "Canalise un esprit qui inflige d'énormes dégâts autour de lui. Immobilise Nasibo pendant sa durée.",
+          "en": "Channels a spirit that deals massive damage around it. Roots Nazeebo in place for its duration."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmh3n8naz123cf",
         "level": 13,
         "name": {
-          "fr": "Guardian Toads",
+          "fr": "Grenouilles gardiennes",
           "en": "Guardian Toads"
         },
-        "icon": "assets/heroes/base_spells/nazeebo/images/talents/storm_ui_icon_nazeebo_plagueoftoads.png",
+        "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_plagueoftoads.png",
         "description": {
-          "fr": "Hitting an enemy Hero with Plague of Toads grants 30 Armor for 3 seconds, stacking up to 6 seconds.",
-          "en": "Hitting an enemy Hero with Plague of Toads grants 30 Armor for 3 seconds, stacking up to 6 seconds."
+          "fr": "Toucher un héros adverse avec Invasion de grenouilles confère de l'armure, cumulable.",
+          "en": "Hitting an enemy Hero with Plague of Toads grants stacking Armor."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jojxk2w",
+        "id": "tmh3n8naz13e86",
+        "level": 13,
+        "name": {
+          "fr": "Superstition",
+          "en": "Superstition"
+        },
+        "icon": "assets/heroes/base_spells/nazeebo/images/talents/storm_ui_icon_nazeebo_suprerstition.png",
+        "description": {
+          "fr": "Confère de l'armure anti-sort en permanence. Une attaque de base héroïque annule ce bonus temporairement et fait apparaître une araignée nécrophage.",
+          "en": "Grants permanent Spell Armor. A Heroic Basic Attack removes this bonus temporarily and spawns a Corpse Spider."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmh3n8naz14wxk",
+        "level": 13,
+        "name": {
+          "fr": "Bloc de glace",
+          "en": "Ice Block"
+        },
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_iceblock.png",
+        "description": {
+          "fr": "Nouvelle capacité active : place Nasibo en stase et le rend invulnérable pendant quelques secondes.",
+          "en": "New active ability: places Nazeebo in Stasis and grants Invulnerability for a few seconds."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmh3n8naz15myb",
         "level": 16,
         "name": {
-          "fr": "Spider Colony",
+          "fr": "Colonie d'araignées",
           "en": "Spider Colony"
         },
-        "icon": "assets/heroes/base_spells/nazeebo/images/talents/storm_ui_icon_nazeebo_corpsespider.png",
+        "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_corpsespider.png",
         "description": {
-          "fr": "Corpse Spider Attacks against Heroes reduce the cooldown of Nazeebo's Basic Abilities by 0.125 seconds.",
-          "en": "Corpse Spider Attacks against Heroes reduce the cooldown of Nazeebo's Basic Abilities by 0.125 seconds."
+          "fr": "Les attaques des araignées nécrophages contre des héros réduisent le temps de recharge des capacités de base.",
+          "en": "Corpse Spider attacks against Heroes reduce Basic Ability cooldowns."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jonokbk",
+        "id": "tmh3n8naz16ktl",
+        "level": 16,
+        "name": {
+          "fr": "Anneau de poison",
+          "en": "Ring of Poison"
+        },
+        "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_zombiewall.png",
+        "description": {
+          "fr": "Mur de zombies dure plus longtemps et son centre se remplit de poison infligeant des dégâts croissants.",
+          "en": "Zombie Wall lasts longer and its center fills with poison dealing increasing damage."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmh3n8naz17qjr",
+        "level": 16,
+        "name": {
+          "fr": "Moisson d'âmes",
+          "en": "Soul Harvest"
+        },
+        "icon": "assets/heroes/base_spells/nazeebo/images/talents/storm_ui_icon_nazeebo_soulharvest.png",
+        "description": {
+          "fr": "Nouvelle capacité active : augmente les points de vie et la puissance de capacité de Nasibo selon le nombre d'ennemis proches.",
+          "en": "New active ability: increases Nazeebo's Health and Spell Power based on the number of nearby enemies."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmh3n8naz18d5n",
         "level": 20,
         "name": {
-          "fr": "Humongoid",
+          "fr": "Démesuré",
           "en": "Humongoid"
         },
-        "icon": "assets/heroes/base_spells/nazeebo/images/talents/storm_ui_icon_nazeebo_gargantuan.png",
+        "icon": "assets/heroes/base_spells/nazeebo/images/talents/storm_ui_icon_nazeebo_gargantuanstomp.png",
         "description": {
-          "fr": "Gargantuan Stomp's area is increased by 25% and its Slow amount is increased to 50%.  Passive: Reduce Gargantuan's cooldown by 40 seconds and its Mana cost by 50%.",
-          "en": "Gargantuan Stomp's area is increased by 25% and its Slow amount is increased to 50%.  Passive: Reduce Gargantuan's cooldown by 40 seconds and its Mana cost by 50%."
+          "fr": "Augmente la zone et le ralentissement du piétinement du gargantua. Passif : réduit le temps de recharge et le coût en mana de Gargantua.",
+          "en": "Increases the Gargantuan's Stomp area and Slow. Passive: reduces Gargantuan's cooldown and Mana cost."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmh3n8naz19on4",
+        "level": 20,
+        "name": {
+          "fr": "Esprit annihilateur",
+          "en": "Annihilating Spirit"
+        },
+        "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_ravenousspirit.png",
+        "description": {
+          "fr": "Esprit affamé réduit les soins reçus par les héros touchés et gagne en dégâts au fil du canal. Passif : augmente sa portée.",
+          "en": "Ravenous Spirit reduces healing received by Heroes hit and gains damage the longer it channels. Passive: increases its range."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmh3n8naz20fvs",
+        "level": 20,
+        "name": {
+          "fr": "Contagion ignoble",
+          "en": "Vile Infection"
+        },
+        "icon": "assets/heroes/base_spells/nazeebo/images/spells/storm_ui_icon_nazeebo_voodooritual.png",
+        "description": {
+          "fr": "Quête : accumuler des charges de Rituel vaudou finit par le rendre applicable aux héros, avec des dégâts augmentés.",
+          "en": "Quest: stacking Voodoo Ritual charges eventually makes it applicable to Heroes, with increased damage."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmh3n8naz21id4",
+        "level": 20,
+        "name": {
+          "fr": "Mauvais remède",
+          "en": "Bad Medicine"
+        },
+        "icon": "assets/heroes/base_spells/nazeebo/images/talents/storm_ui_icon_nazeebo_voodooritual_a.png",
+        "description": {
+          "fr": "Nouvelle capacité active : consomme des charges de Rituel vaudou pour devenir insensible au contrôle et gagner de la vitesse et de l'armure.",
+          "en": "New active ability: consumes Voodoo Ritual stacks to become Unstoppable and gain Movement Speed and Armor."
         },
         "demoYoutubeId": null
       }
@@ -23015,7 +23501,7 @@ const HEROES = [
   },
   {
     "id": "sgthammer",
-    "enabled": false,
+    "enabled": true,
     "name": {
       "fr": "Sgt. Marteau",
       "en": "Sgt. Hammer"
@@ -23027,85 +23513,85 @@ const HEROES = [
       "en": "Siege specialist with enormous range in Siege Mode."
     },
     "gameplay": {
-      "fr": "Sgt. Hammer se déploie en mode siège pour bombarder les forts et les regroupements ennemis depuis une distance impossible à contester.",
+      "fr": "Sgt. Hammer se déploie en mode siège pour bombarder les forts et les ennemis depuis une distance quasi impossible à contester.",
       "en": "Sgt. Hammer deploys into Siege Mode to bombard forts and enemy groups from an untouchable distance."
     },
     "spells": [
       {
         "key": "Trait",
         "name": {
-          "fr": "Mode siège",
+          "fr": "Mode Siège",
           "en": "Siege Mode"
         },
         "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_siegemode.png",
         "description": {
-          "fr": "Immobile mais portée et dégâts considérablement augmentés.",
-          "en": "Immobile, but greatly increased range and damage."
+          "fr": "Passe en Mode Siège : attaques de base plus puissantes, à plus longue portée et infligeant des dégâts en zone autour de la cible.",
+          "en": "Enters Siege Mode: Basic Attacks deal more damage, gain range, and deal splash damage around the target."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "A",
         "name": {
-          "fr": "Mines à araignées",
+          "fr": "Mines araignées",
           "en": "Spider Mines"
         },
         "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_spidermines.png",
         "description": {
-          "fr": "Pose des mines qui explosent au contact.",
-          "en": "Places mines that detonate on contact."
+          "fr": "Pose des mines qui explosent au contact d'un ennemi, blessant et ralentissant les cibles proches. Portée accrue en Mode Siège.",
+          "en": "Places mines that detonate when an enemy comes near, damaging and Slowing nearby targets. Increased range in Siege Mode."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "Z",
         "name": {
-          "fr": "Souffle à concussion",
+          "fr": "Décharge percutante",
           "en": "Concussive Blast"
         },
         "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_concussiveblast.png",
         "description": {
-          "fr": "Repousse fortement les ennemis proches.",
-          "en": "Strongly knocks back nearby enemies."
+          "fr": "Blesse et repousse fortement les ennemis devant Sgt. Hammer. Rayon augmenté en Mode Siège.",
+          "en": "Damages and strongly knocks back enemies in front of Sgt. Hammer. Increased radius in Siege Mode."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "E",
         "name": {
-          "fr": "Blindage néo-acier",
+          "fr": "Blindage en NéoAcier",
           "en": "Neosteel Plating"
         },
         "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_neosteelplating.png",
         "description": {
-          "fr": "Gagne de l'armure temporairement.",
-          "en": "Temporarily gain Armor."
+          "fr": "Gagne de l'armure temporairement, encore plus en Mode Siège.",
+          "en": "Temporarily gains Armor, even more while in Siege Mode."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "R1",
         "name": {
-          "fr": "Frappe au napalm",
-          "en": "Napalm Strike"
+          "fr": "Canon brutal",
+          "en": "Blunt Force Gun"
         },
-        "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_napalmstrike.png",
+        "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_bluntforcegun.png",
         "description": {
-          "fr": "Bombarde une zone en la laissant enflammée.",
-          "en": "Bombards an area, leaving it burning."
+          "fr": "Tire un missile qui traverse le champ de bataille, infligeant des dégâts à tous les ennemis sur sa trajectoire, avec des dégâts réduits contre les structures.",
+          "en": "Fires a missile across the battlefield, dealing damage to all enemies in its path, with reduced damage against Structures."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "R2",
         "name": {
-          "fr": "Canon de force brute",
-          "en": "Blunt Force Gun"
+          "fr": "Frappe de napalm",
+          "en": "Napalm Strike"
         },
-        "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_bluntforcegun.png",
+        "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_napalmstrike.png",
         "description": {
-          "fr": "Tir global qui inflige des dégâts massifs.",
-          "en": "Global shot dealing massive damage."
+          "fr": "Bombarde une zone qui reste enflammée, infligeant des dégâts à l'impact puis en continu.",
+          "en": "Bombards an area that stays ablaze, dealing impact damage and then ongoing damage."
         },
         "demoYoutubeId": ""
       },
@@ -23125,16 +23611,16 @@ const HEROES = [
     ],
     "tips": [
       {
-        "fr": "Ne te déploie que si ton équipe peut te protéger.",
+        "fr": "Tu peux activer tes Propulseurs en mode Siège pour fuir.",
         "en": "Only deploy if your team can protect you."
       },
       {
-        "fr": "Souffle à concussion repousse : c'est ta seule échappatoire.",
-        "en": "Concussive Blast knocks back: it's your only escape."
+        "fr": "Décharge percutante peut cancel des sorts, mais surtout te sauver !",
+        "en": "Concussive Blast can cancel spells—but more importantly, it can save your life!"
       },
       {
-        "fr": "Tes mines donnent de la vision et bloquent les approches.",
-        "en": "Your mines give vision and deny approaches."
+        "fr": "Tes mines donnent de la vision et peuvent ralentir un gank.",
+        "en": "Your mines provide vision and can slow down a gank."
       }
     ],
     "builds": [
@@ -23142,57 +23628,64 @@ const HEROES = [
         "enabled": true,
         "order": 1,
         "label": {
-          "fr": "Build de départ",
-          "en": "Starter Build"
+          "fr": "Build recommandé",
+          "en": "Recommended build"
         },
         "summary": {
-          "fr": "Une base solide et polyvalente, à personnaliser selon la partie.",
-          "en": "A solid, versatile baseline to adapt to each game."
+          "fr": "Build qui passe partout, peu importe le mode de jeu.\n",
+          "en": "A build that works in any situation, no matter the game mode."
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
           "en": "PASTE INTO TALENT TREE"
         },
-        "buildCode": "[T1111111,SgtHammer]",
+        "buildCode": "[T2112212,SgtHammer]",
         "videos": [],
         "updatedAt": {
-          "fr": "19 Juillet 2026",
-          "en": "July 19, 2026"
+          "fr": "14 Août 2026",
+          "en": "August 14, 2026"
         },
         "talentSelections": [
           {
             "level": 1,
-            "primaryId": "tmrryr6jo3sun5",
+            "primaryId": "tmw9c4hmr03d4g",
             "alternativeIds": []
           },
           {
             "level": 4,
-            "primaryId": "tmrryr6jodkd9k",
-            "alternativeIds": []
+            "primaryId": "tmw9c4hmr05wul",
+            "alternativeIds": [
+              "tmw9c4hmr069wm"
+            ]
           },
           {
             "level": 7,
-            "primaryId": "tmrryr6jov7hmk",
+            "primaryId": "tmw9c4hmr08o8j",
             "alternativeIds": []
           },
           {
             "level": 10,
-            "primaryId": "tmrryr6jos1465",
-            "alternativeIds": []
+            "primaryId": "tmw9c4hmr10wg7",
+            "alternativeIds": [
+              "tmw9c4hmr114cz"
+            ]
           },
           {
             "level": 13,
-            "primaryId": "tmrryr6joln008",
+            "primaryId": "tmw9c4hmr14h5w",
             "alternativeIds": []
           },
           {
             "level": 16,
-            "primaryId": "tmrryr6jozc7dk",
-            "alternativeIds": []
+            "primaryId": "tmw9c4hmr17xrs",
+            "alternativeIds": [
+              "tmw9c4hmr167vz",
+              "tmw9c4hmr15pc7"
+            ]
           },
           {
             "level": 20,
-            "primaryId": "tmrryr6jogeqcn",
+            "primaryId": "tmw9c4hmr216ho",
             "alternativeIds": []
           }
         ]
@@ -23201,105 +23694,302 @@ const HEROES = [
     "guideVideos": [],
     "talentPool": [
       {
-        "id": "tmrryr6jo3sun5",
+        "id": "tmw9c4hmr01nhk",
         "level": 1,
         "name": {
-          "fr": "Ambush",
+          "fr": "Embuscade",
           "en": "Ambush"
         },
-        "icon": "assets/heroes/base_spells/sgthammer/images/talents/storm_ui_icon_sgthammer_siegemode.png",
+        "icon": "assets/heroes/base_spells/sgthammer/images/talents/storm_ui_icon_sgthammer_siegemode_var2.png",
         "description": {
-          "fr": "Gain Stealth when entering Siege Mode or after not taking or dealing damage for 3 seconds while in Siege Mode. Basic Attacks while Stealthed deal 125% more damage.  Remaining stationary for at least 1.5 seconds while Stealthed grants Invisible.",
-          "en": "Gain Stealth when entering Siege Mode or after not taking or dealing damage for 3 seconds while in Siege Mode. Basic Attacks while Stealthed deal 125% more damage.  Remaining stationary for at least 1.5 seconds while Stealthed grants Invisible."
+          "fr": "Devient furtive en entrant en Mode Siège ou après un moment sans subir ni infliger de dégâts en Mode Siège. Les attaques de base depuis l'invisibilité infligent bien plus de dégâts, et rester immobile permet de devenir invisible.",
+          "en": "Gains Stealth upon entering Siege Mode or after a moment without dealing or taking damage in Siege Mode. Basic Attacks from Stealth deal much more damage, and staying still grants Invisibility."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jodkd9k",
+        "id": "tmw9c4hmr027xm",
+        "level": 1,
+        "name": {
+          "fr": "Artillerie améliorée",
+          "en": "Advanced Artillery"
+        },
+        "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_siegemode.png",
+        "description": {
+          "fr": "Augmente les dégâts de zone et le rayon des attaque de base en mode Siège.",
+          "en": "Increases area-of-effect damage and the range of basic attacks in Siege mode."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw9c4hmr03d4g",
+        "level": 1,
+        "name": {
+          "fr": "Obus Maelström",
+          "en": "Maelstrom Rounds"
+        },
+        "icon": "assets/heroes/base_spells/sgthammer/images/talents/storm_ui_icon_sgthammer_siegemode_var1.png",
+        "description": {
+          "fr": "Capacité active : augmente temporairement les dégâts des attaques de base. Toucher des héros ou des structures en Mode Siège réduit son temps de recharge. Possède plusieurs charges.",
+          "en": "Active: temporarily increases Basic Attack damage. Hitting Heroes or Structures with Basic Attacks in Siege Mode reduces its cooldown. Has multiple charges."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw9c4hmr04gwf",
         "level": 4,
         "name": {
           "fr": "Barricade",
           "en": "Barricade"
         },
-        "icon": "assets/heroes/base_spells/sgthammer/images/talents/storm_ui_icon_sgthammer_concussiveblast.png",
+        "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_concussiveblast.png",
         "description": {
-          "fr": "Reduce Concussive Blast's cooldown by 4 seconds, its Mana cost by 40, and when cast create an impassable wall in front of Sgt. Hammer for 4 seconds.",
-          "en": "Reduce Concussive Blast's cooldown by 4 seconds, its Mana cost by 40, and when cast create an impassable wall in front of Sgt. Hammer for 4 seconds."
+          "fr": "Réduit le temps de recharge et le coût en mana de Décharge percutante, qui érige aussi un mur infranchissable devant Sgt. Hammer.",
+          "en": "Reduces Concussive Blast's cooldown and Mana cost, and it now also raises an impassable wall in front of Sgt. Hammer."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jov7hmk",
+        "id": "tmw9c4hmr05wul",
+        "level": 4,
+        "name": {
+          "fr": "Poliocétique",
+          "en": "Siege Tactics"
+        },
+        "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_neosteelplating.png",
+        "description": {
+          "fr": "Utiliser Blindage en NéoAcier en Mode Siège rend Sgt. Hammer Insensible tant qu'elle reste en Mode Siège.",
+          "en": "Using Neosteel Plating in Siege Mode grants Sgt. Hammer Unstoppable for as long as she remains in Siege Mode."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw9c4hmr069wm",
+        "level": 4,
+        "name": {
+          "fr": "Bio-acier régénérant",
+          "en": "Regenerative Bio-Steel"
+        },
+        "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_siegemode.png",
+        "description": {
+          "fr": "Les attaques de base en Mode Siège soignent Sgt. Hammer d'une partie des dégâts infligés.",
+          "en": "Basic Attacks in Siege Mode heal Sgt. Hammer for a portion of the damage dealt."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw9c4hmr07lsz",
         "level": 7,
         "name": {
-          "fr": "Pulse Detonation Core",
+          "fr": "Charge à fragmentation",
           "en": "Pulse Detonation Core"
         },
-        "icon": "assets/heroes/base_spells/sgthammer/images/talents/storm_ui_icon_sgthammer_spidermines.png",
+        "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_spidermines.png",
         "description": {
-          "fr": "Spider Mines detonate 3 times over 3 seconds.  Basic Attacks against enemy Heroes grant 5 Mana and reduce the cooldown of Spider Mines by 1.5 seconds.  Increase this bonus to 2.5 seconds while in Siege Mode.",
-          "en": "Spider Mines detonate 3 times over 3 seconds.  Basic Attacks against enemy Heroes grant 5 Mana and reduce the cooldown of Spider Mines by 1.5 seconds.  Increase this bonus to 2.5 seconds while in Siege Mode."
+          "fr": "Mines araignées explosent en plusieurs vagues, et les attaques de base contre des héros réduisent leur temps de recharge et rendent du mana.",
+          "en": "Spider Mines detonates in multiple waves, and Basic Attacks against Heroes reduce its cooldown and restore Mana."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jos1465",
+        "id": "tmw9c4hmr08o8j",
+        "level": 7,
+        "name": {
+          "fr": "Aérosiège",
+          "en": "Hover Siege Mode"
+        },
+        "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_siegemode.png",
+        "description": {
+          "fr": "Sgt. Hammer peut se déplacer lentement en Mode Siège.",
+          "en": "Sgt. Hammer can move slowly while in Siege Mode."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw9c4hmr098mu",
+        "level": 7,
+        "name": {
+          "fr": "Portée graduée",
+          "en": "Graduating Range"
+        },
+        "icon": "assets/heroes/base_spells/sgthammer/images/talents/storm_ui_icon_sgthammer_tankmode.png",
+        "description": {
+          "fr": "La portée des attaques de base augmente progressivement plus Sgt. Hammer reste en Mode Siège.",
+          "en": "Basic Attack range gradually increases the longer Sgt. Hammer remains in Siege Mode."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw9c4hmr10wg7",
         "level": 10,
         "name": {
-          "fr": "Blunt Force Gun",
+          "fr": "Canon brutal",
           "en": "Blunt Force Gun"
         },
-        "icon": "assets/heroes/base_spells/sgthammer/images/talents/storm_ui_icon_sgthammer_bluntforcegun.png",
+        "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_bluntforcegun.png",
         "description": {
-          "fr": "Fire a missile across the battlefield, dealing 500 (+3% per level) damage to non-Structure enemies in its path.",
-          "en": "Fire a missile across the battlefield, dealing 500 (+3% per level) damage to non-Structure enemies in its path."
+          "fr": "Tire un missile qui traverse le champ de bataille, infligeant des dégâts à tous les ennemis sur sa trajectoire, avec des dégâts réduits contre les structures.",
+          "en": "Fires a missile across the battlefield, dealing damage to all enemies in its path, with reduced damage against Structures."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6joln008",
+        "id": "tmw9c4hmr114cz",
+        "level": 10,
+        "name": {
+          "fr": "Frappe de napalm",
+          "en": "Napalm Strike"
+        },
+        "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_napalmstrike.png",
+        "description": {
+          "fr": "Bombarde une zone qui reste enflammée, infligeant des dégâts à l'impact puis en continu.",
+          "en": "Bombards an area that stays ablaze, dealing impact damage and then ongoing damage."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw9c4hmr12pad",
         "level": 13,
         "name": {
-          "fr": "Tactical Mine Deployment",
+          "fr": "Sillage miné",
           "en": "Tactical Mine Deployment"
         },
-        "icon": "assets/heroes/base_spells/sgthammer/images/talents/storm_ui_icon_sgthammer_spidermines.png",
+        "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_spidermines.png",
         "description": {
-          "fr": "Moving while Thrusters is active leaves a trail of up to 5 Spider Mines. Additionally, increase the Slow of Spider Mines by 15%.",
-          "en": "Moving while Thrusters is active leaves a trail of up to 5 Spider Mines. Additionally, increase the Slow of Spider Mines by 15%."
+          "fr": "Se déplacer avec Propulseurs laisse une traînée de Mines araignées, et augmente leur effet de ralentissement.",
+          "en": "Moving with Thrusters leaves a trail of Spider Mines, and increases their Slow effect."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jozc7dk",
+        "id": "tmw9c4hmr1313m",
+        "level": 13,
+        "name": {
+          "fr": "Glacis",
+          "en": "Entrenched"
+        },
+        "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_neosteelplating.png",
+        "description": {
+          "fr": "En Mode Siège, Décharge percutante inflige plus de dégâts et repousse plus loin.",
+          "en": "While in Siege Mode, Concussive Blast deals more damage and knocks back farther."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw9c4hmr14h5w",
+        "level": 13,
+        "name": {
+          "fr": "Systèmes de refroidissement",
+          "en": "Hyper-Cooling Engines"
+        },
+        "icon": "assets/heroes/base_spells/sgthammer/images/talents/storm_ui_icon_sgthammer_hypercoolingengines.png",
+        "description": {
+          "fr": "En Mode Siège, toucher des héros ou des structures avec les attaques de base (hors dégâts de zone) réduit le temps de recharge de Propulseurs.",
+          "en": "While in Siege Mode, hitting Heroes or Structures with Basic Attacks (excluding splash damage) reduces the cooldown of Thrusters."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw9c4hmr15pc7",
         "level": 16,
         "name": {
-          "fr": "Mechanical Know-how",
+          "fr": "Sensibilité mécanique",
           "en": "Mechanical Know-how"
         },
-        "icon": "assets/heroes/base_spells/sgthammer/images/talents/storm_ui_icon_sgthammer_neosteelplating.png",
+        "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_neosteelplating.png",
         "description": {
-          "fr": "Neosteel Plating grants 20% maximum Health as a Shield for 2 seconds and increases Basic Attack damage by 30% for 5 seconds.",
-          "en": "Neosteel Plating grants 20% maximum Health as a Shield for 2 seconds and increases Basic Attack damage by 30% for 5 seconds."
+          "fr": "Blindage en NéoAcier accorde aussi un bouclier et augmente temporairement les dégâts des attaques de base.",
+          "en": "Neosteel Plating also grants a Shield and temporarily increases Basic Attack damage."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jogeqcn",
+        "id": "tmw9c4hmr167vz",
+        "level": 16,
+        "name": {
+          "fr": "Exécuteur",
+          "en": "Executioner"
+        },
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_autoattack_damage.png",
+        "description": {
+          "fr": "Attaquer un héros ralenti, immobilisé ou étourdi augmente les dégâts des attaques de base pendant quelques secondes.",
+          "en": "Attacking a Slowed, Rooted, or Stunned Hero increases Basic Attack damage for a few seconds."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw9c4hmr17xrs",
+        "level": 16,
+        "name": {
+          "fr": "Tueur de géants",
+          "en": "Giant Killer"
+        },
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_autoattack_searing.png",
+        "description": {
+          "fr": "Les attaques de base infligent des dégâts supplémentaires proportionnels aux points de vie maximum de la cible.",
+          "en": "Basic Attacks deal bonus damage based on the target's maximum Health."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw9c4hmr1803u",
         "level": 20,
         "name": {
-          "fr": "Orbital BFG",
+          "fr": "Canon brutal orbital",
           "en": "Orbital BFG"
         },
-        "icon": "assets/heroes/base_spells/sgthammer/images/talents/storm_ui_icon_sgthammer_bluntforcegun.png",
+        "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_bluntforcegun.png",
         "description": {
-          "fr": "Blunt Force Gun's missile orbits the planet every 5 seconds. Only the last missile fired orbits.",
-          "en": "Blunt Force Gun's missile orbits the planet every 5 seconds. Only the last missile fired orbits."
+          "fr": "Le missile de Canon brutal fait la trajectoire à l'infini.",
+          "en": "Blunt Force Gun's missile follows a trajectory to infinity."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw9c4hmr19hit",
+        "level": 20,
+        "name": {
+          "fr": "Frappe de lave avancée",
+          "en": "Advanced Lava Strike"
+        },
+        "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_napalmstrike.png",
+        "description": {
+          "fr": "Augmente la portée de Frappe de napalm, et ses dégâts d'impact sont accrus.",
+          "en": "Increases Napalm Strike's cast range, and its impact damage is increased."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw9c4hmr20c6a",
+        "level": 20,
+        "name": {
+          "fr": "Boîtes à mitraille",
+          "en": "Shrapnel Mines"
+        },
+        "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_spidermines.png",
+        "description": {
+          "fr": "En explosant, les Mines araignées réduisent l'armure des héros touchés.",
+          "en": "Upon detonating, Spider Mines reduce the Armor of Heroes hit."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmw9c4hmr216ho",
+        "level": 20,
+        "name": {
+          "fr": "Ultra-condensateurs",
+          "en": "Ultra Capacitors"
+        },
+        "icon": "assets/heroes/base_spells/sgthammer/images/spells/storm_ui_icon_sgthammer_siegemode.png",
+        "description": {
+          "fr": "Toucher des héros ou des structures avec les attaques de base (hors dégâts de zone) en Mode Siège accorde de la vitesse d'attaque, cumulable.",
+          "en": "Hitting Heroes or Structures with Basic Attacks (excluding splash damage) in Siege Mode grants stacking Attack Speed."
         },
         "demoYoutubeId": null
       }
     ],
-    "forms": []
+    "forms": [],
+    "isNew": true
   },
   {
     "id": "sonya",
@@ -25215,7 +25905,7 @@ const HEROES = [
   },
   {
     "id": "tychus",
-    "enabled": false,
+    "enabled": true,
     "name": {
       "fr": "Tychus",
       "en": "Tychus"
@@ -25227,101 +25917,149 @@ const HEROES = [
       "en": "Anti-tank assassin dealing percentage-of-Health damage."
     },
     "gameplay": {
-      "fr": "Tychus fond sur les cibles les plus résistantes grâce à ses dégâts en pourcentage, et tient les combats longs avec Cavale.",
-      "en": "Tychus melts the toughest targets thanks to %-Health damage and survives long fights with Run and Gun."
+      "fr": "Tychus détruit les cibles les plus résistantes grâce à ses dégâts en pourcentage.",
+      "en": "Tychus melts the toughest targets thanks to %-Health damage."
     },
     "spells": [
       {
         "key": "Trait",
+        "form": "normal",
         "name": {
           "fr": "Minigun",
           "en": "Minigun"
         },
         "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_minigun.png",
         "description": {
-          "fr": "Tes attaques successives infligent de plus en plus de dégâts.",
-          "en": "Your successive attacks deal increasing damage."
+          "fr": "Capacité active : pendant quelques secondes, les attaques de base contre les héros infligent des dégâts supplémentaires proportionnels à leur maximum de points de vie.",
+          "en": "Active: for a few seconds, Basic Attacks against Heroes deal bonus damage based on their maximum Health."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "A",
+        "form": "normal",
         "name": {
-          "fr": "Tir en rafale",
+          "fr": "Exécution",
           "en": "Overkill"
         },
         "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_overkill.png",
         "description": {
-          "fr": "Rafale qui inflige des dégâts basés sur la vie de la cible.",
-          "en": "Burst dealing damage based on the target's Health."
+          "fr": "Canalise une rafale sur une cible et les ennemis proches. Peut être réactivé pour changer de cible, et Tychus peut se déplacer et utiliser ses capacités pendant la canalisation.",
+          "en": "Channels a burst onto a target and nearby enemies. Can be reactivated to switch targets, and Tychus can move and use Abilities while channeling."
+        },
+        "demoYoutubeId": ""
+      },
+      {
+        "key": "A",
+        "form": "odin",
+        "name": {
+          "fr": "Annihilation",
+          "en": "Annihilate"
+        },
+        "icon": "assets/heroes/base_spells/tychus/images/talents/storm_ui_icon_tychus_annihilate.png",
+        "description": {
+          "fr": "Tire les canons de l'Odin en ligne droite, infligeant des dégâts à tout ce qui se trouve sur la trajectoire.",
+          "en": "Fires the Odin's cannons in a straight line, damaging everything in their path."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "Z",
+        "form": "normal",
         "name": {
           "fr": "Grenade à fragmentation",
           "en": "Frag Grenade"
         },
         "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_fraggrenade.png",
         "description": {
-          "fr": "Explosion de zone qui repousse.",
-          "en": "Area explosion that knocks back."
+          "fr": "Lance une grenade qui explose en infligeant des dégâts et en repoussant les ennemis depuis le point d'impact.",
+          "en": "Lobs a grenade that explodes, dealing damage and knocking enemies away from the impact point."
+        },
+        "demoYoutubeId": ""
+      },
+      {
+        "key": "Z",
+        "form": "odin",
+        "name": {
+          "fr": "Missiles Ragnarok",
+          "en": "Ragnarok Missiles"
+        },
+        "icon": "assets/heroes/base_spells/tychus/images/talents/storm_ui_icon_tychus_ragnarokmissiles.png",
+        "description": {
+          "fr": "Tire un missile sur chaque ennemi proche, leur infligeant des dégâts.",
+          "en": "Fires a missile at each nearby enemy, dealing damage to them."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "E",
+        "form": "normal",
         "name": {
-          "fr": "Cavale",
+          "fr": "Fonce et défonce",
           "en": "Run and Gun"
         },
         "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_runandgun.png",
         "description": {
-          "fr": "Déplacement rapide en tirant.",
-          "en": "Quick dash while shooting."
+          "fr": "Charge en avant sur une courte distance.",
+          "en": "Dashes forward a short distance."
+        },
+        "demoYoutubeId": ""
+      },
+      {
+        "key": "E",
+        "form": "odin",
+        "name": {
+          "fr": "Propulseurs",
+          "en": "Thrusters"
+        },
+        "icon": "assets/heroes/base_spells/tychus/images/talents/storm_ui_icon_tychus_thrusters.png",
+        "description": {
+          "fr": "Propulse l'Odin dans la direction ciblée. Ne permet pas de franchir le terrain infranchissable.",
+          "en": "Dashes the Odin in the targeted direction. Cannot cross impassable terrain."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "R1",
+        "form": "normal",
+        "name": {
+          "fr": "Réquisition du Odin",
+          "en": "Commandeer Odin"
+        },
+        "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_commandeerodin.png",
+        "description": {
+          "fr": "Largue un Odin et en prend les commandes : dégâts et portée d'attaque accrus, capacités différentes, armure élevée, pour une durée limitée.",
+          "en": "Calls down an Odin and pilots it: increased damage and Attack range, different Abilities, and high Armor, for a limited time."
+        },
+        "demoYoutubeId": ""
+      },
+      {
+        "key": "R2",
+        "form": "normal",
         "name": {
           "fr": "Foreuse laser Drakken",
           "en": "Drakken Laser Drill"
         },
         "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_drakkinlaserdrill.png",
         "description": {
-          "fr": "Un laser bombarde une zone en continu.",
-          "en": "A laser bombards an area continuously."
-        },
-        "demoYoutubeId": ""
-      },
-      {
-        "key": "R2",
-        "name": {
-          "fr": "Réquisition d'Odin",
-          "en": "Commandeer Odin"
-        },
-        "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_commandeerodin.png",
-        "description": {
-          "fr": "Pilote un Odin, très résistant et très puissant.",
-          "en": "Pilot an Odin: very tough and very powerful."
+          "fr": "Largue une foreuse laser qui attaque les ennemis proches en continu. Peut être réactivée pour désigner une nouvelle cible.",
+          "en": "Calls down a laser drill that continuously attacks nearby enemies. Can be reactivated to assign a new target."
         },
         "demoYoutubeId": ""
       }
     ],
     "tips": [
       {
-        "fr": "Tes dégâts sont proportionnels à la vie : concentre les tanks.",
-        "en": "Your damage scales with Health: focus tanks."
+        "fr": "Minigun inflige des dégâts proportionnels à la vie : garde-le pour les tanks.",
+        "en": "Minigun deals damage based on max Health: save it for tanks."
       },
       {
-        "fr": "Cavale sert autant à fuir qu'à replacer ton tir.",
+        "fr": "Fonce et défonce sert autant à fuir qu'à se replacer.",
         "en": "Run and Gun is as good for escaping as for repositioning."
       },
       {
-        "fr": "Odin transforme un combat d'objectif entier.",
-        "en": "Odin can swing an entire objective fight."
+        "fr": "Tes attaques de base font plus de dégâts que ton A (sans talent), utilise le utiliser pour poursuivre un ennemi. ",
+        "en": "Your basic attacks deal more damage than your A (without a talent), so use it to chase an enemy."
       }
     ],
     "builds": [
@@ -25329,164 +26067,383 @@ const HEROES = [
         "enabled": true,
         "order": 1,
         "label": {
-          "fr": "Build de départ",
-          "en": "Starter Build"
+          "fr": "Build recommandé",
+          "en": "Recommended build"
         },
         "summary": {
-          "fr": "Une base solide et polyvalente, à personnaliser selon la partie.",
-          "en": "A solid, versatile baseline to adapt to each game."
+          "fr": "Build qui passe partout, peu importe le mode de jeu.",
+          "en": "A build that works in any situation, no matter the game mode."
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
           "en": "PASTE INTO TALENT TREE"
         },
-        "buildCode": "[T1111111,Tychus]",
+        "buildCode": "[T3221331,Tychus]",
         "videos": [],
         "updatedAt": {
-          "fr": "19 Juillet 2026",
-          "en": "July 19, 2026"
+          "fr": "15 Août 2026",
+          "en": "August 15, 2026"
         },
         "talentSelections": [
           {
             "level": 1,
-            "primaryId": "tmrryr6jp7s9yu",
+            "primaryId": "tmd9vhtv001o7p",
             "alternativeIds": []
           },
           {
             "level": 4,
-            "primaryId": "tmrryr6jpq3ak9",
-            "alternativeIds": []
+            "primaryId": "tmd9vhtv0053is",
+            "alternativeIds": [
+              "tmd9vhtv006ir3"
+            ]
           },
           {
             "level": 7,
-            "primaryId": "tmrryr6jpgxzl1",
+            "primaryId": "tmd9vhtv007zku",
             "alternativeIds": []
           },
           {
             "level": 10,
-            "primaryId": "tmrryr6jpbaiiw",
+            "primaryId": "tmd9vhtv010203",
             "alternativeIds": []
           },
           {
             "level": 13,
-            "primaryId": "tmrryr6jp1e25e",
-            "alternativeIds": []
+            "primaryId": "tmd9vhtv014sni",
+            "alternativeIds": [
+              "tmd9vhtv0122br"
+            ]
           },
           {
             "level": 16,
-            "primaryId": "tmrryr6jpi88qo",
-            "alternativeIds": []
+            "primaryId": "tmd9vhtv017z33",
+            "alternativeIds": [
+              "tmd9vhtv015a9r",
+              "tmd9vhtv016frl"
+            ]
           },
           {
             "level": 20,
-            "primaryId": "tmrryr6jp4r79i",
+            "primaryId": "tmd9vhtv018a89",
             "alternativeIds": []
           }
-        ]
+        ],
+        "isNew": true
       }
     ],
     "guideVideos": [],
     "talentPool": [
       {
-        "id": "tmrryr6jp7s9yu",
+        "id": "tmd9vhtv001o7p",
         "level": 1,
         "name": {
-          "fr": "Quarterback",
+          "fr": "Discobole",
           "en": "Quarterback"
         },
-        "icon": "assets/heroes/base_spells/tychus/images/talents/storm_ui_icon_tychus_fraggrenade.png",
+        "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_fraggrenade.png",
         "description": {
-          "fr": "Increases Frag Grenade's damage by 10% and its range by 50%.",
-          "en": "Increases Frag Grenade's damage by 10% and its range by 50%."
+          "fr": "Augmente les dégâts et la portée de Grenade à fragmentation.",
+          "en": "Increases Frag Grenade's damage and range."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jpq3ak9",
+        "id": "tmd9vhtv002s0h",
+        "level": 1,
+        "name": {
+          "fr": "Course effrénée",
+          "en": "Dash"
+        },
+        "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_runandgun.png",
+        "description": {
+          "fr": "Augmente la portée de Fonce et défonce, et accorde temporairement de la vitesse de déplacement à l'utilisation.",
+          "en": "Increases Run and Gun's range, and grants temporary Movement Speed on cast."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmd9vhtv003g85",
+        "level": 1,
+        "name": {
+          "fr": "Défonce Alphonse",
+          "en": "Press the Advantage"
+        },
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_autoattack_range.png",
+        "description": {
+          "fr": "Augmente la portée des attaques de base de Tychus.",
+          "en": "Increases Tychus's Basic Attack range."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmd9vhtv004qsu",
         "level": 4,
         "name": {
-          "fr": "In the Rhythm",
+          "fr": "En rythme",
           "en": "In the Rhythm"
         },
-        "icon": "assets/heroes/base_spells/tychus/images/talents/storm_ui_icon_tychus_minigun.png",
+        "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_minigun.png",
         "description": {
-          "fr": "Quest: While Minigun is active, Basic Attacks against Heroes permanently increase future Minigun durations by 0.03 seconds.",
-          "en": "Quest: While Minigun is active, Basic Attacks against Heroes permanently increase future Minigun durations by 0.03 seconds."
+          "fr": "Quête : tant que Minigun est actif, les attaques de base contre les héros augmentent définitivement sa durée pour les prochaines utilisations.",
+          "en": "Quest: while Minigun is active, Basic Attacks against Heroes permanently increase its duration for future uses."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jpgxzl1",
+        "id": "tmd9vhtv0053is",
+        "level": 4,
+        "name": {
+          "fr": "Plus ils sont gros…",
+          "en": "The Bigger They Are..."
+        },
+        "icon": "assets/heroes/base_spells/tychus/images/talents/storm_ui_icon_tychus_minigun_a.png",
+        "description": {
+          "fr": "Augmente le bonus de dégâts de Minigun contre les héros au-dessus de 30% de points de vie, mais il n'a plus aucun effet en dessous de ce seuil.",
+          "en": "Increases Minigun's bonus damage against Heroes above 30% Health, but it no longer has any effect below that threshold."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmd9vhtv006ir3",
+        "level": 4,
+        "name": {
+          "fr": "Maître assassin",
+          "en": "Master Assassin"
+        },
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_autoattack_speed.png",
+        "description": {
+          "fr": "Passif : augmente la vitesse d'attaque de Tychus. Récompense : après un certain nombre de victimes, la vitesse d'attaque augmente encore.",
+          "en": "Passive: increases Tychus's Attack Speed. Reward: after a number of Takedowns, Attack Speed increases further."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmd9vhtv007zku",
         "level": 7,
         "name": {
-          "fr": "Melting Point",
+          "fr": "Fusion thermique",
           "en": "Melting Point"
         },
-        "icon": "assets/heroes/base_spells/tychus/images/talents/storm_ui_icon_tychus_fraggrenade.png",
+        "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_fraggrenade.png",
         "description": {
-          "fr": "Enemies hit by Frag Grenade take an additional 75 (+4% per level) damage over 3 seconds. This damage is increased by 100% against Minions, Mercenaries, and Monsters.",
-          "en": "Enemies hit by Frag Grenade take an additional 75 (+4% per level) damage over 3 seconds. This damage is increased by 100% against Minions, Mercenaries, and Monsters."
+          "fr": "Les ennemis touchés par Grenade à fragmentation subissent des dégâts supplémentaires dans la durée, bien plus élevés contre les serviteurs, mercenaires et monstres.",
+          "en": "Enemies hit by Frag Grenade take additional damage over time, much higher against Minions, Mercenaries, and Monsters."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jpbaiiw",
+        "id": "tmd9vhtv008fn7",
+        "level": 7,
+        "name": {
+          "fr": "Fin tacticien",
+          "en": "Combat Tactician"
+        },
+        "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_minigun.png",
+        "description": {
+          "fr": "Réduit le temps de recharge de Minigun, et le réduit encore davantage après l'utilisation de Fonce et défonce.",
+          "en": "Reduces Minigun's cooldown, and reduces it further after using Run and Gun."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmd9vhtv009tlp",
+        "level": 7,
+        "name": {
+          "fr": "Marche ou crève",
+          "en": "Relentless Soldier"
+        },
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_relentless.png",
+        "description": {
+          "fr": "Subir un étourdissement ou une immobilisation accorde temporairement de l'armure.",
+          "en": "Being Stunned or Rooted grants temporary Armor."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmd9vhtv010203",
         "level": 10,
         "name": {
-          "fr": "Commandeer Odin",
+          "fr": "Réquisition du Odin",
           "en": "Commandeer Odin"
         },
-        "icon": "assets/heroes/base_spells/tychus/images/talents/storm_ui_icon_tychus_commandeerodin.png",
+        "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_commandeerodin.png",
         "description": {
-          "fr": "Call down an Odin to pilot. The Odin deals increased Damage, has 100% increased Basic Attack range, and uses different Abilities. The Odin has 25 Armor and lasts 23 seconds.",
-          "en": "Call down an Odin to pilot. The Odin deals increased Damage, has 100% increased Basic Attack range, and uses different Abilities. The Odin has 25 Armor and lasts 23 seconds."
+          "fr": "Largue un Odin et en prend les commandes : dégâts et portée d'attaque accrus, capacités différentes, armure élevée, pour une durée limitée.",
+          "en": "Calls down an Odin and pilots it: increased damage and Attack range, different Abilities, and high Armor, for a limited time."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jp1e25e",
+        "id": "tmd9vhtv0113sm",
+        "level": 10,
+        "name": {
+          "fr": "Foreuse laser Drakken",
+          "en": "Drakken Laser Drill"
+        },
+        "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_drakkinlaserdrill.png",
+        "description": {
+          "fr": "Largue une foreuse laser qui attaque les ennemis proches en continu. Peut être réactivée pour désigner une nouvelle cible.",
+          "en": "Calls down a laser drill that continuously attacks nearby enemies. Can be reactivated to assign a new target."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmd9vhtv0122br",
         "level": 13,
         "name": {
-          "fr": "Spray 'n' Pray",
+          "fr": "J'arrose et tu douilles",
           "en": "Spray 'n' Pray"
         },
-        "icon": "assets/heroes/base_spells/tychus/images/talents/storm_ui_icon_tychus_overkill.png",
+        "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_overkill.png",
         "description": {
-          "fr": "Overkill Slows enemy Movement Speed by 25% and its range is increased by 25%.",
-          "en": "Overkill Slows enemy Movement Speed by 25% and its range is increased by 25%."
+          "fr": "Exécution ralentit les ennemis touchés et gagne en portée.",
+          "en": "Overkill Slows enemies hit and gains range."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jpi88qo",
+        "id": "tmd9vhtv0138nt",
+        "level": 13,
+        "name": {
+          "fr": "C'est de la bonne !",
+          "en": "That's the Stuff!"
+        },
+        "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_minigun.png",
+        "description": {
+          "fr": "À son expiration, Minigun soigne Tychus d'un montant équivalent aux dégâts bonus qu'il a infligés.",
+          "en": "When it expires, Minigun heals Tychus for the bonus damage it dealt."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmd9vhtv014sni",
+        "level": 13,
+        "name": {
+          "fr": "Enduction au NéoAcier",
+          "en": "Neosteel Coating"
+        },
+        "icon": "assets/heroes/base_spells/tychus/images/talents/storm_temp_btn-upgrade-terran-neosteelframe.png",
+        "description": {
+          "fr": "Capacité active : accorde temporairement une forte armure anti-sort, réduisant fortement les dégâts de capacité subis.",
+          "en": "Active: temporarily grants high Spell Armor, greatly reducing Ability damage taken."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmd9vhtv015a9r",
         "level": 16,
         "name": {
-          "fr": "Armor Piercing Rounds",
+          "fr": "Munitions anti-blindage",
           "en": "Armor Piercing Rounds"
         },
-        "icon": "assets/heroes/base_spells/tychus/images/talents/storm_ui_icon_tychus_overkill.png",
+        "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_overkill.png",
         "description": {
-          "fr": "Each time Overkill hits an enemy, its damage against them is increased by 15%, stacking up to 60% bonus damage.",
-          "en": "Each time Overkill hits an enemy, its damage against them is increased by 15%, stacking up to 60% bonus damage."
+          "fr": "Chaque fois qu'Exécution touche un ennemi, ses dégâts contre lui augmentent, de façon cumulable.",
+          "en": "Each time Overkill hits an enemy, its damage against them increases, stacking up to a cap."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jp4r79i",
+        "id": "tmd9vhtv016frl",
+        "level": 16,
+        "name": {
+          "fr": "Grenade Titan",
+          "en": "Titan Grenade"
+        },
+        "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_fraggrenade.png",
+        "description": {
+          "fr": "Grenade à fragmentation inflige aux héros des dégâts supplémentaires proportionnels à leur maximum de points de vie, et chaque héros touché réduit son temps de recharge.",
+          "en": "Frag Grenade deals Heroes bonus damage based on their maximum Health, and each Hero hit reduces its cooldown."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmd9vhtv017z33",
+        "level": 16,
+        "name": {
+          "fr": "Attaques brûlantes",
+          "en": "Sizzlin' Attacks"
+        },
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_autoattack_searing.png",
+        "description": {
+          "fr": "Les attaques de base infligent aux héros des dégâts supplémentaires proportionnels à leur maximum de points de vie. Cumulable avec Minigun.",
+          "en": "Basic Attacks deal Heroes bonus damage based on their maximum Health. Stacks with Minigun."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmd9vhtv018a89",
         "level": 20,
         "name": {
-          "fr": "Big Red Button",
+          "fr": "Gros bouton rouge",
           "en": "Big Red Button"
         },
-        "icon": "assets/heroes/base_spells/tychus/images/talents/storm_ui_icon_tychus_commandeerodin.png",
+        "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_commandeerodin.png",
         "description": {
-          "fr": "Odin lasts 50% longer and Ragnarok Missiles also launches a Nuclear Missile which lands 2.5 seconds later, dealing 319 (+4% per level) damage in its area.",
-          "en": "Odin lasts 50% longer and Ragnarok Missiles also launches a Nuclear Missile which lands 2.5 seconds later, dealing 319 (+4% per level) damage in its area."
+          "fr": "Le Odin dure plus longtemps et ses missiles Ragnarok déclenchent aussi une frappe nucléaire qui inflige de lourds dégâts en zone.",
+          "en": "The Odin lasts longer and its Ragnarok Missiles also launch a nuclear strike dealing heavy area damage."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmd9vhtv01938u",
+        "level": 20,
+        "name": {
+          "fr": "Miroir de focalisation",
+          "en": "Focusing Diodes"
+        },
+        "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_drakkinlaserdrill.png",
+        "description": {
+          "fr": "Augmente la portée de la foreuse laser, et ses dégâts augmentent tant qu'elle reste focalisée sur la même cible.",
+          "en": "Increases the laser drill's range, and its damage ramps up the longer it stays on the same target."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmd9vhtv0203ml",
+        "level": 20,
+        "name": {
+          "fr": "Je peux faire ça toute la journée",
+          "en": "Can Do This All Day"
+        },
+        "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_overkill.png",
+        "description": {
+          "fr": "Réduit le temps de recharge d'Exécution, et Tychus gagne de l'armure pendant sa canalisation.",
+          "en": "Reduces Overkill's cooldown, and Tychus gains Armor while channeling it."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmd9vhtv021ez3",
+        "level": 20,
+        "name": {
+          "fr": "Délit de fuite",
+          "en": "Bob and Weave"
+        },
+        "icon": "assets/heroes/base_spells/tychus/images/spells/storm_ui_icon_tychus_runandgun.png",
+        "description": {
+          "fr": "Fonce et défonce et les propulseurs du Odin gagnent des charges supplémentaires, le coût en mana est réduit, et la portée des attaques de base augmente temporairement après utilisation.",
+          "en": "Run and Gun and the Odin's Thrusters gain extra charges, its Mana cost is reduced, and Basic Attack range temporarily increases after use."
         },
         "demoYoutubeId": null
       }
     ],
-    "forms": []
+    "forms": [
+      {
+        "id": "normal",
+        "label": {
+          "fr": "Forme normale",
+          "en": "Normal Form"
+        }
+      },
+      {
+        "id": "odin",
+        "label": {
+          "fr": "Odin",
+          "en": "Odin"
+        }
+      }
+    ]
   },
   {
     "id": "tyrael",
@@ -27153,7 +28110,7 @@ const HEROES = [
   },
   {
     "id": "zagara",
-    "enabled": false,
+    "enabled": true,
     "name": {
       "fr": "Zagara",
       "en": "Zagara"
@@ -27165,101 +28122,101 @@ const HEROES = [
       "en": "Zerg specialist who pushes lanes without ever exposing herself."
     },
     "gameplay": {
-      "fr": "Zagara couvre la carte de mucus pour la vision, invoque des zergs pour pousser en continu et peut se téléporter avec son réseau de nydus.",
-      "en": "Zagara covers the map in creep for vision, summons zerg to push constantly, and can teleport with her Nydus Network."
+      "fr": "Zagara couvre la carte de mucus pour la vision, invoque des zergs pour sièger en continu ",
+      "en": "Zagara covers the map in creep for vision, summons zerg to push constantly."
     },
     "spells": [
       {
         "key": "Trait",
         "name": {
-          "fr": "Tumeur de mucus",
+          "fr": "Tumeur muqueuse",
           "en": "Creep Tumor"
         },
         "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_creep.png",
         "description": {
-          "fr": "Pose du mucus qui donne vision et vitesse.",
-          "en": "Places creep that grants vision and speed."
+          "fr": "Pose une tumeur qui génère du mucus. Zagara et ses créatures se déplacent plus vite sur le mucus, qui révèle aussi la zone. Peut stocker plusieurs charges.",
+          "en": "Plants a tumor that spreads Creep. Zagara and her summons move faster on Creep, which also reveals the area. Can store multiple charges."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "A",
         "name": {
-          "fr": "Barrage de banelings",
+          "fr": "Barrage de chancres",
           "en": "Baneling Barrage"
         },
         "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_banelingbarrage.png",
         "description": {
-          "fr": "Lance des banelings qui explosent en zone.",
-          "en": "Throws banelings that explode in an area."
+          "fr": "Lance des chancres qui explosent sur les ennemis touchés. Peut stocker plusieurs charges.",
+          "en": "Launches Banelings that explode on the enemies they hit. Can store multiple charges."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "Z",
         "name": {
-          "fr": "Chasseur tueur",
+          "fr": "Chasseur-tueur",
           "en": "Hunter Killer"
         },
         "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_hunterkiller.png",
         "description": {
-          "fr": "Invoque un hydralisk qui poursuit une cible.",
-          "en": "Summons a hydralisk that chases a target."
+          "fr": "Invoque un hydralisk qui poursuit et attaque une cible unique, puis perd de la vie avec le temps.",
+          "en": "Summons a Hydralisk that chases and attacks a single target, then loses Health over time."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "E",
         "name": {
-          "fr": "Largage infesté",
+          "fr": "Largage contaminé",
           "en": "Infested Drop"
         },
         "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_infesteddrop.png",
         "description": {
-          "fr": "Invoque des zergs qui bloquent et attaquent.",
-          "en": "Summons zerg that block and attack."
+          "fr": "Largue une capsule qui blesse la zone ciblée et invoque des cancrelats qui attaquent et perdent de la vie avec le temps.",
+          "en": "Drops a pod that damages the targeted area and spawns Roachlings that attack and lose Health over time."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "R1",
         "name": {
-          "fr": "Réseau de nydus",
-          "en": "Nydus Network"
+          "fr": "Gueule vorace",
+          "en": "Devouring Maw"
         },
-        "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_nydusworm.png",
+        "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_devouringmaw.png",
         "description": {
-          "fr": "Crée des vers de nydus pour te déplacer sur la carte.",
-          "en": "Creates Nydus worms to travel across the map."
+          "fr": "Invoque une gueule qui dévore les ennemis d'une zone, les empêchant de combattre pendant quelques secondes.",
+          "en": "Summons a maw that devours enemies in an area, preventing them from fighting for a few seconds."
         },
         "demoYoutubeId": ""
       },
       {
         "key": "R2",
         "name": {
-          "fr": "Gueule dévorante",
-          "en": "Devouring Maw"
+          "fr": "Réseau de Nydus",
+          "en": "Nydus Network"
         },
-        "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_devouringmaw.png",
+        "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_nydusworm.png",
         "description": {
-          "fr": "Avale les ennemis d'une zone pendant plusieurs secondes.",
-          "en": "Swallows enemies in an area for several seconds."
+          "fr": "Invoque un ver de Nydus sur le mucus. Zagara peut voyager entre plusieurs vers et récupère des points de vie et de mana à l'intérieur.",
+          "en": "Summons a Nydus Worm on Creep. Zagara can travel between worms and regenerates Health and Mana while inside."
         },
         "demoYoutubeId": ""
       }
     ],
     "tips": [
       {
-        "fr": "Ton mucus donne de la vision : couvre les objectifs.",
-        "en": "Your creep grants vision: cover the objectives."
+        "fr": "Ton mucus donne de la vision : couvre les objectifs et les buissons.",
+        "en": "Your creep grants vision: cover the objectives and the bushes."
       },
       {
         "fr": "Chasseur tueur est une excellente source de dégâts à distance.",
         "en": "Hunter Killer is an excellent ranged damage source."
       },
       {
-        "fr": "Réseau de nydus te permet d'être partout sur la carte.",
-        "en": "Nydus Network lets you be everywhere on the map."
+        "fr": "Tes invocations peuvent tanker les sorts ennemis.",
+        "en": "Your summons can tank enemy spells."
       }
     ],
     "builds": [
@@ -27267,57 +28224,57 @@ const HEROES = [
         "enabled": true,
         "order": 1,
         "label": {
-          "fr": "Build de départ",
-          "en": "Starter Build"
+          "fr": "Build recommandé",
+          "en": "Recommended build"
         },
         "summary": {
-          "fr": "Une base solide et polyvalente, à personnaliser selon la partie.",
-          "en": "A solid, versatile baseline to adapt to each game."
+          "fr": "Build qui passe partout, peu importe le mode de jeu.",
+          "en": "A build that works in any situation, no matter the game mode.\n"
         },
         "buildCodeTitle": {
           "fr": "A COLLER DANS L'ARBRE DES TALENTS",
           "en": "PASTE INTO TALENT TREE"
         },
-        "buildCode": "[T1111111,Zagara]",
+        "buildCode": "[T2131114,Zagara]",
         "videos": [],
         "updatedAt": {
-          "fr": "19 Juillet 2026",
-          "en": "July 19, 2026"
+          "fr": "14 Août 2026",
+          "en": "August 14, 2026"
         },
         "talentSelections": [
           {
             "level": 1,
-            "primaryId": "tmrryr6jphvmr4",
+            "primaryId": "tmy5r2zag02rpa",
             "alternativeIds": []
           },
           {
             "level": 4,
-            "primaryId": "tmrryr6jpu2ulv",
+            "primaryId": "tmy5r2zag04aot",
             "alternativeIds": []
           },
           {
             "level": 7,
-            "primaryId": "tmrryr6jpdo4h5",
+            "primaryId": "tmy5r2zag09nr7",
             "alternativeIds": []
           },
           {
             "level": 10,
-            "primaryId": "tmrryr6jp610sg",
+            "primaryId": "tmy5r2zag10avs",
             "alternativeIds": []
           },
           {
             "level": 13,
-            "primaryId": "tmrryr6jpl7w7r",
+            "primaryId": "tmy5r2zag120z2",
             "alternativeIds": []
           },
           {
             "level": 16,
-            "primaryId": "tmrryr6jpyxbcr",
+            "primaryId": "tmy5r2zag15lm2",
             "alternativeIds": []
           },
           {
             "level": 20,
-            "primaryId": "tmrryr6jp9er44",
+            "primaryId": "tmy5r2zag21tsv",
             "alternativeIds": []
           }
         ]
@@ -27326,105 +28283,302 @@ const HEROES = [
     "guideVideos": [],
     "talentPool": [
       {
-        "id": "tmrryr6jphvmr4",
+        "id": "tmy5r2zag01egs",
         "level": 1,
         "name": {
-          "fr": "Volatile Acid",
+          "fr": "Acide volatil",
           "en": "Volatile Acid"
         },
-        "icon": "assets/heroes/base_spells/zagara/images/talents/storm_ui_icon_zagara_banelingbarrage.png",
+        "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_banelingbarrage.png",
         "description": {
-          "fr": "Banelings can travel 50% further before exploding.",
-          "en": "Banelings can travel 50% further before exploding."
+          "fr": "Les chancres parcourent une plus grande distance avant d'exploser.",
+          "en": "Banelings travel further before exploding."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jpu2ulv",
+        "id": "tmy5r2zag02rpa",
+        "level": 1,
+        "name": {
+          "fr": "Charognards",
+          "en": "Corpse Feeders"
+        },
+        "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_infesteddrop.png",
+        "description": {
+          "fr": "Réduit le temps de recharge de Largage contaminé et augmente les points de vie des cancrelats.",
+          "en": "Reduces Infested Drop's cooldown and increases Roachlings' Health."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmy5r2zag03ty6",
+        "level": 1,
+        "name": {
+          "fr": "Contamination",
+          "en": "Infest"
+        },
+        "icon": "assets/heroes/base_spells/zagara/images/talents/storm_ui_icon_zagara_infest.png",
+        "description": {
+          "fr": "Nouvelle capacité active : les sbires à distance proches infligent plus de dégâts. Quête : les dégâts de siège de Zagara augmentent encore ce bonus.",
+          "en": "New active ability: nearby ranged Minions deal bonus damage. Quest: Zagara's Siege damage further increases this bonus."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmy5r2zag04aot",
         "level": 4,
         "name": {
-          "fr": "Envenomed Spines",
+          "fr": "Aiguillons envenimés",
           "en": "Envenomed Spines"
         },
-        "icon": "assets/heroes/base_spells/zagara/images/talents/storm_ui_icon_talent_autoattack_range.png",
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_autoattack_range.png",
         "description": {
-          "fr": "Activate to have Zagara's next Basic Attack apply 230 (+4% per level) damage over 5 seconds.",
-          "en": "Activate to have Zagara's next Basic Attack apply 230 (+4% per level) damage over 5 seconds."
+          "fr": "Nouvelle capacité active : la prochaine attaque de base de Zagara empoisonne sa cible.",
+          "en": "New active ability: Zagara's next Basic Attack poisons its target."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jpdo4h5",
+        "id": "tmy5r2zag05g84",
+        "level": 4,
+        "name": {
+          "fr": "Lames méduses",
+          "en": "Medusa Blades"
+        },
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_autoattack_aoe.png",
+        "description": {
+          "fr": "Les attaques de base touchent aussi des cibles proches supplémentaires pour des dégâts réduits.",
+          "en": "Basic Attacks also hit additional nearby targets for reduced damage."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmy5r2zag0638o",
+        "level": 4,
+        "name": {
+          "fr": "Aiguillons dentés",
+          "en": "Serrated Spines"
+        },
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_autoattack_damage.png",
+        "description": {
+          "fr": "Quête : chaque attaque de base contre un héros augmente en permanence les dégâts d'attaque de Zagara.",
+          "en": "Quest: each Basic Attack against a Hero permanently increases Zagara's Attack Damage."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmy5r2zag070h4",
         "level": 7,
         "name": {
-          "fr": "Baneling Massacre",
+          "fr": "Massacre de chancres",
           "en": "Baneling Massacre"
         },
-        "icon": "assets/heroes/base_spells/zagara/images/talents/storm_ui_icon_zagara_banelingbarrage.png",
+        "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_banelingbarrage.png",
         "description": {
-          "fr": "Gain 2 additional charges of Banelings Barrage, but increase its cooldown by 2 seconds.",
-          "en": "Gain 2 additional charges of Banelings Barrage, but increase its cooldown by 2 seconds."
+          "fr": "Confère des charges supplémentaires de Barrage de chancres, au prix d'un temps de recharge plus long.",
+          "en": "Grants additional Baneling Barrage charges, at the cost of a longer cooldown."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jp610sg",
+        "id": "tmy5r2zag08ajs",
+        "level": 7,
+        "name": {
+          "fr": "Acide visqueux",
+          "en": "Viscous Acid"
+        },
+        "icon": "assets/heroes/base_spells/zagara/images/talents/storm_ui_icon_zagara_banelingbarrage_a.png",
+        "description": {
+          "fr": "Les chancres ralentissent les ennemis touchés.",
+          "en": "Banelings Slow the enemies they hit."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmy5r2zag09nr7",
+        "level": 7,
+        "name": {
+          "fr": "Largage bilieux",
+          "en": "Bile Drop"
+        },
+        "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_infesteddrop.png",
+        "description": {
+          "fr": "Quête : augmente passivement le rayon de Largage contaminé, qui finit par générer un cancrelat supplémentaire sur les héros touchés.",
+          "en": "Quest: passively increases Infested Drop's radius, which eventually spawns an extra Roachling on Heroes hit."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmy5r2zag10avs",
         "level": 10,
         "name": {
-          "fr": "Devouring Maw",
+          "fr": "Gueule vorace",
           "en": "Devouring Maw"
         },
-        "icon": "assets/heroes/base_spells/zagara/images/talents/storm_ui_icon_zagara_devouringmaw.png",
+        "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_devouringmaw.png",
         "description": {
-          "fr": "Summon a Devouring Maw that devours enemies for 4 seconds. Devoured enemies cannot fight and take 94 (+4% per level) damage per second.  Usable on Unstoppable enemies.",
-          "en": "Summon a Devouring Maw that devours enemies for 4 seconds. Devoured enemies cannot fight and take 94 (+4% per level) damage per second.  Usable on Unstoppable enemies."
+          "fr": "Invoque une gueule qui dévore les ennemis d'une zone, les empêchant de combattre. Fonctionne même sur les ennemis insensibles au contrôle.",
+          "en": "Summons a maw that devours enemies in an area, preventing them from fighting. Works even on Unstoppable enemies."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jpl7w7r",
+        "id": "tmy5r2zag119ms",
+        "level": 10,
+        "name": {
+          "fr": "Réseau de Nydus",
+          "en": "Nydus Network"
+        },
+        "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_nydusworm.png",
+        "description": {
+          "fr": "Invoque un ver de Nydus sur le mucus. Zagara peut voyager entre plusieurs vers et y récupère des points de vie et de mana. Passif : étend la propagation du mucus et réduit les temps de recharge en attaquant dessus.",
+          "en": "Summons a Nydus Worm on Creep. Zagara can travel between worms and regenerates Health and Mana inside. Passive: extends Creep's spread and reduces cooldowns when attacking on it."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmy5r2zag120z2",
         "level": 13,
         "name": {
-          "fr": "Hydralisk Transfusion",
+          "fr": "Transfusion d'hydralisk",
           "en": "Hydralisk Transfusion"
         },
-        "icon": "assets/heroes/base_spells/zagara/images/talents/storm_ui_icon_zagara_hunterkiller.png",
+        "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_hunterkiller.png",
         "description": {
-          "fr": "Zagara is healed for 60% of the damage dealt by Hunter Killers' Basic Attacks to Heroes.",
-          "en": "Zagara is healed for 60% of the damage dealt by Hunter Killers' Basic Attacks to Heroes."
+          "fr": "Soigne Zagara selon les dégâts infligés aux héros par les attaques de base du chasseur-tueur.",
+          "en": "Heals Zagara based on the damage Hunter Killer's Basic Attacks deal to Heroes."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jpyxbcr",
+        "id": "tmy5r2zag13w2b",
+        "level": 13,
+        "name": {
+          "fr": "Enduction protectrice",
+          "en": "Protective Coating"
+        },
+        "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_creep.png",
+        "description": {
+          "fr": "Sur le mucus, Zagara gagne de l'armure qui réduit les dégâts subis.",
+          "en": "While on Creep, Zagara gains Armor that reduces the damage she takes."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmy5r2zag14h70",
+        "level": 13,
+        "name": {
+          "fr": "Bouclier anti-sort",
+          "en": "Spell Shield"
+        },
+        "icon": "assets/heroes/base_spells/generic/images/talents/storm_ui_icon_talent_spellshield.png",
+        "description": {
+          "fr": "Confère périodiquement de l'armure anti-sort contre la prochaine capacité adverse. Peut être désactivé.",
+          "en": "Periodically grants Spell Armor against the next enemy Ability. Can be toggled off."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmy5r2zag15lm2",
         "level": 16,
         "name": {
-          "fr": "Corrosive Saliva",
+          "fr": "Salive corrosive",
           "en": "Corrosive Saliva"
         },
-        "icon": "assets/heroes/base_spells/zagara/images/talents/storm_ui_icon_zagara_hunterkiller.png",
+        "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_hunterkiller.png",
         "description": {
-          "fr": "When attacking Heroes, Hunter Killers and Roachlings deal additional damage equal to 1.75% of their maximum Health.",
-          "en": "When attacking Heroes, Hunter Killers and Roachlings deal additional damage equal to 1.75% of their maximum Health."
+          "fr": "Les attaques du chasseur-tueur et des cancrelats contre des héros infligent des dégâts bonus selon leurs points de vie maximum.",
+          "en": "Hunter Killer's and Roachlings' attacks against Heroes deal bonus damage based on their maximum Health."
         },
         "demoYoutubeId": null
       },
       {
-        "id": "tmrryr6jp9er44",
+        "id": "tmy5r2zag1686k",
+        "level": 16,
+        "name": {
+          "fr": "Mutalisk",
+          "en": "Mutalisk"
+        },
+        "icon": "assets/heroes/base_spells/zagara/images/talents/storm_ui_icon_zagara_hunterkillermuta.png",
+        "description": {
+          "fr": "Réduit le temps de recharge de Chasseur-tueur, qui invoque désormais un mutalisk aux attaques rebondissantes.",
+          "en": "Reduces Hunter Killer's cooldown, which now summons a Mutalisk with a bouncing attack."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmy5r2zag17y20",
+        "level": 16,
+        "name": {
+          "fr": "Pointes dentelées",
+          "en": "Jagged Barbs"
+        },
+        "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_creep.png",
+        "description": {
+          "fr": "Sur le mucus, les attaques de base de Zagara infligent plus de dégâts et gagnent en portée.",
+          "en": "While on Creep, Zagara's Basic Attacks deal more damage and gain range."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmy5r2zag18hdt",
         "level": 20,
         "name": {
-          "fr": "Tyrant Maw",
+          "fr": "Gueule tyrannique",
           "en": "Tyrant Maw"
         },
-        "icon": "assets/heroes/base_spells/zagara/images/talents/storm_ui_icon_zagara_devouringmaw.png",
+        "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_devouringmaw.png",
         "description": {
-          "fr": "Devouring Maw deals 50% more damage. Takedowns reduce its cooldown by 25 seconds.",
-          "en": "Devouring Maw deals 50% more damage. Takedowns reduce its cooldown by 25 seconds."
+          "fr": "Gueule vorace inflige plus de dégâts. Les victimes réduisent son temps de recharge.",
+          "en": "Devouring Maw deals more damage. Takedowns reduce its cooldown."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmy5r2zag19hch",
+        "level": 20,
+        "name": {
+          "fr": "Mucus sans fin",
+          "en": "Endless Creep"
+        },
+        "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_nydusworm.png",
+        "description": {
+          "fr": "Augmente fortement la portée et la durée de Tumeur muqueuse. Sur le mucus, Zagara gagne encore plus de vitesse de déplacement.",
+          "en": "Greatly increases Creep Tumor's range and duration. While on Creep, Zagara gains even more Movement Speed."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmy5r2zag20jaj",
+        "level": 20,
+        "name": {
+          "fr": "Mère des couvées",
+          "en": "Broodmother"
+        },
+        "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_banelingbarrage.png",
+        "description": {
+          "fr": "Une attaque de base sur trois expulse aussi un chancre vers la cible. Passif : augmente la vitesse d'attaque.",
+          "en": "Every 3rd Basic Attack also launches a Baneling at the target. Passive: increases Attack Speed."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmy5r2zag21tsv",
+        "level": 20,
+        "name": {
+          "fr": "Instinct de meute",
+          "en": "Pack Instinct"
+        },
+        "icon": "assets/heroes/base_spells/zagara/images/spells/storm_ui_icon_zagara_hunterkiller.png",
+        "description": {
+          "fr": "Zagara et ses créatures infligent plus de dégâts aux ennemis récemment attaqués par le chasseur-tueur.",
+          "en": "Zagara and her summons deal more damage to enemies recently attacked by Hunter Killer."
         },
         "demoYoutubeId": null
       }
     ],
-    "forms": []
+    "forms": [],
+    "isNew": true
   },
   {
     "id": "zarya",
