@@ -96,7 +96,41 @@ const STREAMER_CONFIG = {
     "date": {
       "fr": "20 Août 2026",
       "en": "August 20, 2026"
-    }
+    },
+    "changelog": [
+      {
+        "date": {
+          "fr": "20 Août 2026",
+          "en": "August 20, 2026"
+        },
+        "items": [
+          {
+            "fr": "19 nouveaux héros en ligne, dont 13 tanks.",
+            "en": "19 new Heroes are live, 13 of them Tanks."
+          },
+          {
+            "fr": "Sélecteur de forme sur les héros qui changent de capacités en combat : Abathur, Aile de Mort, Alexstrasza, Ragnaros, Tychus et Uther.",
+            "en": "A form switcher on the Heroes whose abilities change mid-fight: Abathur, Deathwing, Alexstrasza, Ragnaros, Tychus and Uther."
+          },
+          {
+            "fr": "Nouvelle carte « Bugs connus » sur les fiches concernées, avec la date du relevé.",
+            "en": "New \"Known issues\" card on the Heroes concerned, with the date it was recorded."
+          },
+          {
+            "fr": "Les conseils indiquent désormais la touche du sort dont ils parlent.",
+            "en": "Tips now show the key of the Ability they mention."
+          },
+          {
+            "fr": "La rotation gratuite se met à jour toute seule chaque semaine, et chaque héros déjà en ligne est cliquable.",
+            "en": "The free rotation now updates itself every week, and every Hero already on the site is clickable."
+          },
+          {
+            "fr": "La recherche accepte les noms sans ponctuation : « etc » trouve E.T.C.",
+            "en": "Search accepts names without punctuation: \"etc\" finds E.T.C."
+          }
+        ]
+      }
+    ]
   }
 };
 
@@ -23057,8 +23091,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/imperius/images/spells/storm_ui_icon_imperius_e.png",
         "description": {
-          "fr": "Radiance confère de l'armure, dont la durée s'allonge chaque fois qu'elle touche un héros adverse.",
-          "en": "Radiance grants Armor, whose duration extends each time it strikes an enemy Hero."
+          "fr": "Radiance couvre Impérius d'armure pendant un court instant, et chaque héros adverse touché par les flammes en prolonge la durée.",
+          "en": "Molten Armor grants Imperius Armor for a brief moment, and each enemy Hero the flames strike extends its duration."
         },
         "demoYoutubeId": null
       },
