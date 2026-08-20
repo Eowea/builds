@@ -50,6 +50,9 @@
       updatedBadge: { fr: "Mis à jour", en: "Updated" },
       heroRotationTitle: { fr: "Rotation gratuite", en: "Free Rotation" },
       heroRotationError: { fr: "Rotation indisponible pour le moment.", en: "Rotation unavailable right now." },
+      knownIssues: { fr: "Bugs connus", en: "Known issues" },
+      prevIssue: { fr: "Bug précédent", en: "Previous issue" },
+      nextIssue: { fr: "Bug suivant", en: "Next issue" },
     };
 
     /* =========================================================================
@@ -213,7 +216,16 @@ function markEverythingAsSeen(hero) {
 
     const visibleHeroes = () => HEROES.filter(h=>h.enabled!==false);
     const roles = () =>['all',...new Set(visibleHeroes().map(h=>h.role))];
-    function filteredHeroes() { const q=normalize(state.search); return visibleHeroes().filter(h=>(state.role==='all'||h.role===state.role)&&(!q||normalize(h.name?.fr).includes(q)||normalize(h.name?.en).includes(q))).sort((a,b)=>loc(a.name).localeCompare(loc(b.name),state.lang,{sensitivity:'base'})); }
+    // normalize() remplace la ponctuation par des espaces : "E.T.C." devient "e t c",
+    // que "etc" ne retrouve pas. On compare donc aussi une forme compacte, sans aucun
+    // séparateur, qui rattrape "etc", "dva", "anubarak", "sgtmarteau", "ltmorales".
+    const compact = text => normalize(text).replace(/ /g, '');
+    function heroMatchesSearch(h, q, qc) {
+      if (!q) return true;
+      return normalize(h.name?.fr).includes(q) || normalize(h.name?.en).includes(q)
+          || compact(h.name?.fr).includes(qc) || compact(h.name?.en).includes(qc);
+    }
+    function filteredHeroes() { const q=normalize(state.search), qc=compact(state.search); return visibleHeroes().filter(h=>(state.role==='all'||h.role===state.role)&&heroMatchesSearch(h,q,qc)).sort((a,b)=>loc(a.name).localeCompare(loc(b.name),state.lang,{sensitivity:'base'})); }
     const currentHero = () => HEROES.find(h=>h.id===state.heroId&&h.enabled!==false)||null;
     function clampBuildIndex(h) { if(!h?.builds?.length){state.buildIndex=0;return 0;} state.buildIndex=Math.min(h.builds.length-1,Math.max(0,Number(state.buildIndex)||0)); return state.buildIndex; }
     function firstBuildIndex(h) {
@@ -615,9 +627,86 @@ async function loadHeroRotation() {
   }
 }
 
-function renderDetail() { 
-  hideFloatingTooltip(true); 
-  const h=currentHero(); 
+// Carte "Bugs connus" : une liste de talents choisis à la main dans l'admin, chacun
+// accompagné d'une note écrite pour l'occasion. L'icône garde son infobulle habituelle
+// (survol / clic sur mobile), la note s'affiche à côté. La carte disparaît entièrement
+// quand le héros n'a aucun bug renseigné.
+// Un bug peut viser un talent (id du réservoir) ou un sort. Les sorts n'ayant pas d'id,
+// ils sont désignés par "spell:<touche>", suffixé de "|<forme>" quand la touche est
+// partagée entre deux formes (Valeera camouflée, D.Va à pied, etc.).
+function findIssueTarget(hero, ref) {
+  const id = String(ref || '');
+  if (!id.startsWith('spell:')) return (hero.talentPool || []).find(p => p.id === id) || null;
+  const [key, form] = id.slice(6).split('|');
+  return (hero.spells || []).find(s => s.key === key &&
+    (!form || (Array.isArray(s.form) ? s.form.includes(form) : s.form === form))) || null;
+}
+
+function renderKnownIssues(hero) {
+  const slides = (hero.bugs || []).map(bug => {
+    const cible = findIssueTarget(hero, bug.talentId);
+    if (!cible) return '';             // talent ou sort retiré du héros depuis
+    const note = loc(bug.note);
+    if (!note) return '';              // pas de description écrite : rien à montrer
+    const trigger = ftHTML({
+      cls: 'talent-trigger issue-trigger floating-trigger',
+      title: cible.name,
+      desc: cible.description,
+      demoId: cible.demoYoutubeId || cible.demoYoutubeUrl,
+      inner: `<div class="talent-icon" data-fallback="${esc(initials(loc(cible.name)))}"><img src="${cible.icon||svgBadge(loc(cible.name))}" alt="${esc(loc(cible.name))}" loading="lazy" onerror="this.parentNode.classList.add('fallback');this.remove();" /></div>`
+    });
+    // Un talent se repère par son palier, un sort par sa touche.
+    const repere = cible.level != null ? `${t('level')} ${esc(String(cible.level))}` : esc(uiSpellKey(cible.key) || '');
+    const repereHtml = repere ? `<span class="issue-level">${repere}</span>` : '';
+    return `<div class="issue-slide"><div class="issue-row">${trigger}<div class="issue-text"><div class="issue-name">${esc(loc(cible.name))}${repereHtml}</div><p class="issue-note">${esc(note)}</p></div></div></div>`;
+  }).filter(Boolean);
+
+  if (!slides.length) return '';
+  // Date libre saisie dans l'admin (même convention que celle des builds) : elle dit
+  // de quand date le relevé, et disparaît tant qu'elle n'est pas renseignée.
+  const date = loc(hero.bugsUpdatedAt);
+  const dateHtml = date ? `<span class="issues-date">${esc(date)}</span>` : '';
+  // Un seul bug : pas de barre de navigation, la carte se comporte comme avant.
+  const compteur = slides.length > 1 ? `<span class="issues-count">${slides.length}</span>` : '';
+  const nav = slides.length > 1 ? `<div class="issues-nav">
+      <button class="issues-arrow prev" type="button" aria-label="${esc(t('prevIssue'))}">&#10094;</button>
+      <div class="issues-dots">${slides.map((_, i) => `<span class="issues-dot${i===0?' is-active':''}" data-dot="${i}"></span>`).join('')}</div>
+      <button class="issues-arrow next" type="button" aria-label="${esc(t('nextIssue'))}">&#10095;</button>
+    </div>` : '';
+  const marques = slides.map((s, i) => s.replace('class="issue-slide"', `class="issue-slide${i===0?' is-active':''}" data-index="${i}"`)).join('');
+  return `<section class="card issues-card"><div class="card-head">${t('knownIssues')}${compteur}${dateHtml}</div><div class="card-body"><div class="issues-carousel">${marques}${nav}</div></div></section>`;
+}
+
+// Pilote dédié : le carrousel des vidéos embarque lecture automatique et préchargement
+// d'iframe, dont on n'a pas besoin ici — et ses écouteurs de survol entreraient en
+// conflit avec l'infobulle du talent.
+function bindIssuesCarousel(root = document) {
+  root.querySelectorAll('.issues-carousel').forEach(car => {
+    if (car.dataset.bound) return;
+    car.dataset.bound = '1';
+    const slides = [...car.querySelectorAll('.issue-slide')];
+    const dots = [...car.querySelectorAll('.issues-dot')];
+    if (slides.length < 2) return;
+    let actif = 0;
+    const allerA = i => {
+      const idx = (i + slides.length) % slides.length;
+      if (idx === actif) return;
+      hideFloatingTooltip(true);       // l'icône visible change : on referme l'infobulle
+      slides[actif].classList.remove('is-active');
+      dots[actif]?.classList.remove('is-active');
+      actif = idx;
+      slides[actif].classList.add('is-active');
+      dots[actif]?.classList.add('is-active');
+    };
+    car.querySelector('.issues-arrow.prev')?.addEventListener('click', () => allerA(actif - 1));
+    car.querySelector('.issues-arrow.next')?.addEventListener('click', () => allerA(actif + 1));
+    dots.forEach(d => d.addEventListener('click', () => allerA(Number(d.dataset.dot))));
+  });
+}
+
+function renderDetail() {
+  hideFloatingTooltip(true);
+  const h=currentHero();
   
   // Si aucun héros n'est sélectionné, on affiche les carrousels "Dernière vidéo" / "Analyse Patchs".
   if(!h){
@@ -639,9 +728,13 @@ function renderDetail() {
   }
   const visibleSpells = forms.length ? (h.spells||[]).filter(s => !s.form || (Array.isArray(s.form) ? s.form.includes(activeFormId) : s.form === activeFormId)) : (h.spells||[]);
   const formSwitcherHtml = forms.length ? `<div class="form-switcher">${forms.map(f => `<button type="button" class="form-switch-btn${f.id===activeFormId?' active':''}" data-form-id="${esc(f.id)}">${esc(loc(f.label))}</button>`).join('')}</div>` : '';
-  els.detailView.innerHTML=`<section class="hero-header"><div class="detail-portrait" data-fallback="${esc(initials(loc(h.name)))}"><img src="${h.portrait}" alt="${esc(loc(h.name))}" loading="lazy" onerror="this.parentNode.classList.add('fallback');this.remove();" /></div><div><h2 class="detail-title">${esc(loc(h.name))}</h2><div class="role-badge">${esc(locRole(h.role))}</div><p class="detail-headline">${esc(loc(h.headline))}</p></div></section><section class="meta-grid"><article class="card"><div class="card-head">${t('gameplay')}</div><div class="card-body"><p>${esc(loc(h.gameplay))}</p>${formSwitcherHtml}${renderSpells(visibleSpells)}</div></article><article class="card"><div class="card-head">${t('tips')}</div><div class="card-body"><ul class="bullet-list">${(h.tips||[]).map(tip=>`<li>${esc(loc(tip))}</li>`).join('')}</ul></div></article></section><div id="buildSection"></div>`;
+  // La carte des bugs occupe la 3e colonne de l'en-tête ; sans bug, l'en-tête reprend
+  // sa grille à deux colonnes.
+  const issuesHtml = renderKnownIssues(h);
+  els.detailView.innerHTML=`<section class="hero-header${issuesHtml?' with-issues':''}"><div class="detail-portrait" data-fallback="${esc(initials(loc(h.name)))}"><img src="${h.portrait}" alt="${esc(loc(h.name))}" loading="lazy" onerror="this.parentNode.classList.add('fallback');this.remove();" /></div><div><h2 class="detail-title">${esc(loc(h.name))}</h2><div class="role-badge">${esc(locRole(h.role))}</div><p class="detail-headline">${esc(loc(h.headline))}</p></div>${issuesHtml}</section><section class="meta-grid"><article class="card"><div class="card-head">${t('gameplay')}</div><div class="card-body"><p>${esc(loc(h.gameplay))}</p>${formSwitcherHtml}${renderSpells(visibleSpells)}</div></article><article class="card"><div class="card-head">${t('tips')}</div><div class="card-body"><ul class="bullet-list">${(h.tips||[]).map(tip=>`<li>${esc(loc(tip))}</li>`).join('')}</ul></div></article></section><div id="buildSection"></div>`;
   renderBuildSection(h);
   bindFloatingTriggers();
+  bindIssuesCarousel(els.detailView);
 }
     function renderAll() { updateStaticLang(); ensureSelection(); renderHeader(); renderFilters(); renderHeroList(); renderDetail(); updateHash(); }
     // Encodage minimal : on n'échappe que ce qui casserait vraiment le fragment d'URL

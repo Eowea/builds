@@ -410,7 +410,7 @@ let dirtyHeroFields = {}; // nom du héros -> Set des champs/actions précis tou
 let dirtyHeroImages = {}; // nom du héros -> Set des noms de sorts/talents dont l'image a changé
 let dirtyConfigTouched = false;
 let dirtyAdminsTouched = false;
-const TAB_LABELS = { infos: 'Informations', spells: 'Sorts', talentpool: 'Talents', tips: 'Astuces', builds: 'Builds' };
+const TAB_LABELS = { infos: 'Informations', spells: 'Sorts', talentpool: 'Talents', tips: 'Astuces', bugs: 'Bugs connus', builds: 'Builds' };
 function getActiveActionLabel(){
   // Regarde quel champ avait le focus (son <label>), ou quel bouton vient d'être cliqué,
   // pour savoir précisément ce qui a été modifié — sans avoir à annoter chaque champ à la main.
@@ -1054,6 +1054,41 @@ function applyAutoSiteUpdateDate(){
   };
 }
 
+// Affichée quand GitHub refuse l'écriture (409) : data.js a changé depuis que ce panneau
+// l'a chargé. Résout avec 'reload' (reprendre la version de GitHub), 'overwrite' (écraser
+// quand même) ou 'cancel' (ne rien faire).
+function confirmConflictModal(){
+  return new Promise(resolve => {
+    const modalRoot = document.getElementById('modalRoot');
+    modalRoot.innerHTML = `
+      <div class="modal-overlay" id="conflictOverlay">
+        <div class="modal" style="max-width:600px;">
+          <div class="modal-head">
+            <h2 style="margin:0;">⚠ Le fichier a changé sur GitHub</h2>
+            <button class="ghost" id="conflictClose">✕</button>
+          </div>
+          <div class="modal-body">
+            <p style="margin-bottom:12px;">Le fichier <strong>data.js</strong> a été modifié depuis que ce panneau l'a chargé — par un autre onglet, un autre administrateur, ou une modification faite entre-temps.</p>
+            <p style="margin-bottom:14px;color:#ff3b30;font-weight:700;">Si tu écrases, tout ce qui a été ajouté au fichier depuis l'ouverture de cet onglet sera définitivement perdu.</p>
+            <div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;">
+              <button class="danger" id="conflictOverwrite">Écraser quand même</button>
+              <button class="primary" id="conflictReload">Recharger la version de GitHub</button>
+            </div>
+            <small style="display:block;margin-top:10px;color:var(--text-dim);">« Recharger » abandonne tes modifications non enregistrées dans ce panneau et repart de la version en ligne. Fermer cette fenêtre ne touche à rien.</small>
+          </div>
+        </div>
+      </div>
+    `;
+    const close = (r) => { modalRoot.innerHTML = ''; resolve(r); };
+    document.getElementById('conflictReload').onclick = () => close('reload');
+    document.getElementById('conflictOverwrite').onclick = () => {
+      if (confirm('Écraser la version présente sur GitHub avec le contenu de cet onglet ?')) close('overwrite');
+    };
+    document.getElementById('conflictClose').onclick = () => close('cancel');
+    document.getElementById('conflictOverlay').onclick = (e) => { if (e.target === e.currentTarget) close('cancel'); };
+  });
+}
+
 async function saveAll(){
   const btn = document.getElementById('saveBtn');
   btn.disabled = true;
@@ -1080,10 +1115,17 @@ async function saveAll(){
       dataFileSha = newSha;
     }catch(e){
       if (e.status === 409){
-        // Le fichier a changé sur GitHub depuis le dernier chargement (autre admin, autre onglet...).
-        // On récupère juste le sha le plus récent (sans toucher aux données en mémoire) et on retente
-        // une fois, en écrasant avec l'état actuel du panneau.
-        toast('Le fichier a changé sur GitHub entre-temps, nouvelle tentative...', 'error');
+        // GitHub refuse l'écriture parce que data.js a changé depuis notre chargement (autre
+        // onglet, autre admin, modification faite entre-temps). C'est une protection : on ne
+        // la contourne pas tout seul, car réécrire depuis la mémoire de cet onglet effacerait
+        // silencieusement tout ce qui a été ajouté au fichier depuis son ouverture.
+        const suite = await confirmConflictModal();
+        if (suite === 'reload'){
+          toast('Rechargement de la version présente sur GitHub…', 'error');
+          await reloadFromGitHub();
+          return;
+        }
+        if (suite !== 'overwrite') return;   // fermeture : on ne touche à rien
         const fresh = await getFile('data.js');
         dataFileSha = fresh.sha;
         const newSha = await putFile('data.js', content, dataFileSha, message, currentUser);
@@ -1220,6 +1262,8 @@ function addHero(){
     spells: [],
     talentPool: [],
     tips: [],
+    bugs: [],
+    bugsUpdatedAt: { fr:'', en:'' },
     builds: []
   });
   markDirty();
@@ -1282,6 +1326,7 @@ function renderHeroPanel(){
       <div class="tab ${currentTab==='spells'?'active':''}" onclick="switchTab('spells')">Sorts</div>
       <div class="tab ${currentTab==='talentpool'?'active':''}" onclick="switchTab('talentpool')">Talents</div>
       <div class="tab ${currentTab==='tips'?'active':''}" onclick="switchTab('tips')">Astuces</div>
+      <div class="tab ${currentTab==='bugs'?'active':''}" onclick="switchTab('bugs')">Bugs connus</div>
       <div class="tab ${currentTab==='builds'?'active':''}" onclick="switchTab('builds')">Builds &amp; vidéos</div>
     </div>
     <div id="tabBody"></div>
@@ -1291,6 +1336,7 @@ function renderHeroPanel(){
   if (currentTab === 'spells') body.innerHTML = renderSpellsTab(hero);
   if (currentTab === 'talentpool') body.innerHTML = renderTalentPoolTab(hero);
   if (currentTab === 'tips') body.innerHTML = renderTipsTab(hero);
+  if (currentTab === 'bugs') body.innerHTML = renderBugsTab(hero);
   if (currentTab === 'builds') body.innerHTML = renderBuildsTab(hero);
 }
 
@@ -1578,7 +1624,10 @@ function addSpell(idx){
   markDirty(); renderHeroPanel();
 }
 function removeSpell(idx, spIdx){
-  HEROES[idx].spells.splice(spIdx,1);
+  const hero = HEROES[idx];
+  const parti = hero.spells[spIdx];
+  hero.spells.splice(spIdx,1);
+  if (parti) hero.bugs = (hero.bugs||[]).filter(b => b.talentId !== spellBugId(hero, parti));
   markDirty(); renderHeroPanel();
 }
 
@@ -1604,6 +1653,109 @@ function addTip(idx){
 function removeTip(idx, tIdx){
   HEROES[idx].tips.splice(tIdx,1);
   markDirty(); renderHeroPanel();
+}
+
+/* ---------- Onglet Bugs connus ---------- */
+// Une case à cocher par talent du réservoir : cocher ouvre les deux champs de
+// description juste en dessous. hero.bugs est tenu dans l'ordre du réservoir, qui est
+// aussi celui du jeu, pour que la carte du site suive toujours l'ordre des paliers.
+// Les sorts n'ont pas d'id : on les désigne par "spell:<touche>", suffixé de la forme
+// quand deux sorts partagent la même touche (héros à transformation).
+function spellBugId(hero, s){
+  const partagee = (hero.spells||[]).filter(x => x.key === s.key).length > 1;
+  const forme = Array.isArray(s.form) ? s.form[0] : s.form;
+  return 'spell:' + s.key + (partagee && forme ? '|' + forme : '');
+}
+function renderBugsTab(hero){
+  const pool = hero.talentPool || [];
+  const sorts = hero.spells || [];
+  if (!pool.length && !sorts.length){
+    return `<p style="color:var(--text-dim);font-size:13px;">Ce héros n'a ni sort ni talent pour l'instant. Va dans les onglets "Sorts" et "Talents" pour en créer, ils apparaîtront ici ensuite.</p>`;
+  }
+  hero.bugs = hero.bugs || [];
+  hero.bugsUpdatedAt = hero.bugsUpdatedAt || { fr:'', en:'' };
+  const connus = new Set([...pool.map(p => p.id), ...sorts.map(s => spellBugId(hero, s))]);
+  const coches = hero.bugs.filter(b => connus.has(b.talentId)).length;
+  const decrits = hero.bugs.filter(b => ((b.note?.fr||'').trim() || (b.note?.en||'').trim())).length;
+
+  const dateBloc = `
+    <div class="subitem">
+      <div class="row">
+        <div class="field"><label>Date affichée dans le titre (FR)</label><input placeholder="ex. 19 Août 2026" value="${escapeHtml(hero.bugsUpdatedAt.fr||'')}" oninput="setNested(HEROES[${currentHeroIndex}],'bugsUpdatedAt.fr',this.value)" /></div>
+        <div class="field"><label>Date affichée dans le titre (EN)</label><input placeholder="e.g. August 19, 2026" value="${escapeHtml(hero.bugsUpdatedAt.en||'')}" oninput="setNested(HEROES[${currentHeroIndex}],'bugsUpdatedAt.en',this.value)" /></div>
+      </div>
+      <p style="color:var(--text-dim);font-size:12px;margin:4px 0 0;">Texte libre, affiché en petit à droite du titre « Bugs connus ». Laisse vide pour ne rien afficher.</p>
+    </div>`;
+
+  const entete = `<p style="color:var(--text-dim);font-size:13px;margin-top:0;">
+      Coche les sorts ou les talents touchés par un bug, puis décris-le. Sur le site, une carte
+      « Bugs connus » apparaît sous les builds du héros ; elle ne montre que les entrées
+      dont la description est remplie, et l'icône garde son infobulle habituelle au survol.
+      ${coches ? `<b style="color:var(--gold);">${coches} coché${coches>1?'s':''}, ${decrits} décrit${decrits>1?'s':''}.</b>` : ''}
+    </p>`;
+
+  // Une ligne = une case à cocher, l'icône, le nom, et les deux champs si c'est coché.
+  const ligne = (id, icon, nom) => {
+    const bug = hero.bugs.find(b => b.talentId === id);
+    const note = bug?.note || { fr:'', en:'' };
+    const champs = bug ? `
+        <div class="row" style="margin:8px 0 0 30px;">
+          <div class="field"><label>Bug (FR)</label><textarea oninput="setBugNote(${currentHeroIndex},'${id}','fr',this.value)">${escapeHtml(note.fr||'')}</textarea></div>
+          <div class="field"><label>Bug (EN)</label><textarea oninput="setBugNote(${currentHeroIndex},'${id}','en',this.value)">${escapeHtml(note.en||'')}</textarea></div>
+        </div>` : '';
+    return `
+      <div style="padding:6px 0;">
+        <div class="row" style="align-items:center;gap:10px;margin:0;flex-wrap:nowrap;">
+          <input type="checkbox" style="width:auto;flex:0 0 auto;" ${bug?'checked':''} onchange="toggleBug(${currentHeroIndex},'${id}',this.checked)" />
+          <img src="${assetRawUrl(icon)}" style="width:28px;height:28px;border-radius:4px;object-fit:cover;background:#000;flex:0 0 auto;" onerror="this.style.visibility='hidden'" />
+          <div style="flex:1;font-size:13px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(nom)}</div>
+        </div>
+        ${champs}
+      </div>`;
+  };
+
+  const blocSorts = sorts.length ? `<div class="subitem"><div style="font-weight:700;color:var(--gold);margin-bottom:4px;">Sorts</div>${
+    sorts.map(s => ligne(spellBugId(hero, s), s.icon, (s.key ? '[' + s.key + '] ' : '') + (s.name?.fr || 'Sort sans nom'))).join('')
+  }</div>` : '';
+
+  const levels = [...new Set(pool.map(p => p.level))].sort((a,b) => a - b);
+  const blocs = levels.map(level => `<div class="subitem"><div style="font-weight:700;color:var(--gold);margin-bottom:4px;">Palier ${escapeHtml(level)}</div>${
+    pool.filter(p => p.level === level).map(p => ligne(p.id, p.icon, p.name?.fr || 'Talent sans nom')).join('')
+  }</div>`).join('');
+
+  return entete + dateBloc + blocSorts + blocs;
+}
+// Ordre d'affichage sur le site : les sorts d'abord, puis les talents par palier.
+function sortBugs(hero){
+  const rang = {};
+  (hero.spells||[]).forEach((s,i) => { rang[spellBugId(hero, s)] = i; });
+  (hero.talentPool||[]).forEach((p,i) => { rang[p.id] = 1000 + i; });
+  (hero.bugs||[]).sort((a,b) => (rang[a.talentId] ?? 1e9) - (rang[b.talentId] ?? 1e9));
+}
+function toggleBug(idx, talentId, checked){
+  const hero = HEROES[idx];
+  hero.bugs = hero.bugs || [];
+  const at = hero.bugs.findIndex(b => b.talentId === talentId);
+  if (checked){
+    if (at < 0) hero.bugs.push({ talentId, note: { fr:'', en:'' } });
+    sortBugs(hero);
+  } else if (at >= 0){
+    const note = hero.bugs[at].note || {};
+    if (((note.fr||'').trim() || (note.en||'').trim()) &&
+        !confirm("Décocher ce talent ? Sa description de bug sera perdue.")){
+      renderHeroPanel();   // rétablit la case cochée
+      return;
+    }
+    hero.bugs.splice(at, 1);
+  }
+  markDirty(); renderHeroPanel();
+}
+function setBugNote(idx, talentId, lang, value){
+  const bug = (HEROES[idx].bugs||[]).find(b => b.talentId === talentId);
+  if (!bug) return;
+  bug.note = bug.note || { fr:'', en:'' };
+  bug.note[lang] = value;
+  markDirty();   // pas de re-rendu : on perdrait le curseur en cours de frappe
 }
 
 /* ---------- Onglet Builds ---------- */
@@ -1660,7 +1812,13 @@ function renderOneBuild(hero, b, i, pos){
       <small class="help" style="margin-top:-8px;margin-bottom:12px;">Affiche un badge "Nouveau" sur l'onglet de ce build, et un badge "Mis à jour" à côté du héros dans la liste (tant que le visiteur ne l'a pas encore vu). Pense à le décocher une fois que la mise à jour n'est plus "fraîche".</small>
       <div class="row">
         <div class="field"><label>Ordre d'affichage</label><input type="number" value="${b.order ?? 0}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}],'order',parseInt(this.value||'0'))" /></div>
-        <div class="field"><label>Code du build (talents)</label><input value="${escapeHtml(b.buildCode)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}],'buildCode',this.value)" /></div>
+        <div class="field"><label>Code du build (talents)</label>
+          <div class="row" style="gap:6px;flex-wrap:nowrap;align-items:center;">
+            <input style="flex:1;" value="${escapeHtml(b.buildCode)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}],'buildCode',this.value)" />
+            <button type="button" class="btn" style="flex:0 0 auto;" onclick="regenerateBuildCode(${currentHeroIndex},${i})">Générer</button>
+          </div>
+          <small class="help">Se met à jour tout seul dès que tu choisis un talent principal. Le bouton le recalcule à partir des talents cochés.</small>
+        </div>
       </div>
       <div class="row">
         <div class="field"><label>Nom du build (FR)</label><input value="${escapeHtml(b.label?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}],'label.fr',this.value)" /></div>
@@ -1805,7 +1963,7 @@ function addPoolTalent(idx, level){
   markDirty(); renderHeroPanel();
 }
 function removePoolTalent(idx, id){
-  if (!confirm("Supprimer cette option de talent ? Elle sera retirée de tous les builds qui l'utilisaient.")) return;
+  if (!confirm("Supprimer cette option de talent ? Elle sera retirée de tous les builds qui l'utilisaient, ainsi que des bugs connus.")) return;
   const hero = HEROES[idx];
   hero.talentPool = (hero.talentPool||[]).filter(p => p.id !== id);
   (hero.builds||[]).forEach(b => {
@@ -1814,6 +1972,7 @@ function removePoolTalent(idx, id){
       sel.alternativeIds = (sel.alternativeIds||[]).filter(aid => aid !== id);
     });
   });
+  hero.bugs = (hero.bugs||[]).filter(b => b.talentId !== id);
   markDirty(); renderHeroPanel();
 }
 
@@ -1856,10 +2015,46 @@ function renderBuildTalentSelectionUI(hero, build, buildIdx){
     `;
   }).join('');
 }
+// Code de build : chaque chiffre est le rang du talent principal dans son palier,
+// dans l'ordre où le jeu les présente — c'est aussi celui du réservoir de talents.
+// Renvoie null tant qu'un palier n'a pas de talent principal.
+const BUILD_LEVELS = [1,4,7,10,13,16,20];
+function computeBuildCode(hero, build){
+  if (!hero || !hero.codeKey || !build) return null;
+  const byLevel = {};
+  (hero.talentPool||[]).forEach(t => { (byLevel[t.level] = byLevel[t.level] || []).push(t); });
+  const chosen = {};
+  (build.talentSelections||[]).forEach(s => { chosen[s.level] = s.primaryId; });
+  const digits = [];
+  for (const lvl of BUILD_LEVELS){
+    const id = chosen[lvl];
+    if (!id) return null;
+    const pos = (byLevel[lvl]||[]).findIndex(t => t.id === id);
+    if (pos < 0) return null;
+    digits.push(pos + 1);
+  }
+  return '[T' + digits.join('') + ',' + hero.codeKey + ']';
+}
+function refreshBuildCode(heroIdx, buildIdx){
+  const hero = HEROES[heroIdx];
+  const build = hero.builds[buildIdx];
+  const code = computeBuildCode(hero, build);
+  if (code) build.buildCode = code;
+  return code;
+}
+function regenerateBuildCode(heroIdx, buildIdx){
+  const code = refreshBuildCode(heroIdx, buildIdx);
+  if (!code){
+    alert("Il manque un talent principal sur au moins un palier : le code ne peut pas être calculé.");
+    return;
+  }
+  markDirty(); renderHeroPanel();
+}
 function setBuildTalentPrimary(heroIdx, buildIdx, selIdx, poolId){
   const sel = HEROES[heroIdx].builds[buildIdx].talentSelections[selIdx];
   sel.primaryId = poolId;
   sel.alternativeIds = (sel.alternativeIds||[]).filter(id => id !== poolId);
+  refreshBuildCode(heroIdx, buildIdx);
   markDirty(); renderHeroPanel();
 }
 function toggleBuildTalentAlternative(heroIdx, buildIdx, selIdx, poolId, checked){
