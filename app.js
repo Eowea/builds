@@ -566,65 +566,73 @@ function renderHomeVideoSections() {
 }
 
 /* =========================================================================
-   ROTATION DES HÉROS GRATUITS (source: nexuscompendium.com, via proxy CORS
-   car cette API ne renvoie pas d'en-têtes Access-Control-Allow-Origin)
+   ROTATION DES HÉROS GRATUITS
+
+   La rotation suit une boucle fixe qui change les 1er, 8, 15 et 22 de chaque
+   mois : le calendrier des 48 fenêtres vit dans rotations.js et se rejoue
+   d'année en année. On le lit donc directement depuis la date du jour, sans
+   requête ni proxy — la page ne peut plus tomber en panne à cause d'une API.
    ========================================================================= */
-let heroRotationCache = null;
-let heroRotationPromise = null;
+const ROTATION_DAYS = [1, 8, 15, 22];
+
+// Fenêtre en cours pour une date donnée : la dernière borne atteinte dans le mois,
+// et sa date de fin, c'est-à-dire la veille de la borne suivante (celle du 22 court
+// jusqu'au 1er du mois d'après).
+function currentRotationWindow(today = new Date()) {
+  if (typeof HERO_ROTATIONS === 'undefined' || !Array.isArray(HERO_ROTATIONS)) return null;
+  const month = today.getMonth() + 1, day = today.getDate();
+  const startDay = ROTATION_DAYS.filter(d => d <= day).pop() || 1;
+  const entry = HERO_ROTATIONS.find(r => r[0] === month && r[1] === startDay);
+  if (!entry) return null;
+
+  const idx = ROTATION_DAYS.indexOf(startDay);
+  const start = new Date(today.getFullYear(), month - 1, startDay);
+  const next = idx === ROTATION_DAYS.length - 1
+    ? new Date(today.getFullYear(), month, 1)                       // le 1er du mois suivant
+    : new Date(today.getFullYear(), month - 1, ROTATION_DAYS[idx + 1]);
+  const end = new Date(next.getTime() - 86400000);
+  return { start, end, heroIds: entry[2] };
+}
 
 function renderHeroRotationSection() {
   return `<div class="video-group">
     <h2 class="section-title" style="text-align:center;margin-bottom:16px;">${t('heroRotationTitle')}</h2>
-    <section class="rotation-section" id="heroRotationBody"><div class="empty-state">${t('loading')}</div></section>
+    <section class="rotation-section" id="heroRotationBody"></section>
   </div>`;
 }
 
 function renderHeroRotationBody(rotation) {
   const container = document.getElementById('heroRotationBody');
   if (!container) return;
-  if (!rotation || !Array.isArray(rotation.Heroes) || !rotation.Heroes.length) {
+  if (!rotation || !rotation.heroIds || !rotation.heroIds.length) {
     container.innerHTML = `<div class="empty-state">${t('heroRotationError')}</div>`;
     return;
   }
   const fmt = new Intl.DateTimeFormat(state.lang === 'en' ? 'en-US' : 'fr-FR', { day: 'numeric', month: 'long' });
-  let dateRangeHtml = '';
-  const start = rotation.StartDate ? new Date(rotation.StartDate) : null;
-  const end = rotation.EndDate ? new Date(rotation.EndDate) : null;
-  if (start && !isNaN(start) && end && !isNaN(end)) {
-    dateRangeHtml = `<div class="rotation-date-range">${esc(fmt.format(start))} – ${esc(fmt.format(end))}</div>`;
-  }
-  const cardsHtml = rotation.Heroes.map(h => {
-    const lvl = h.ReqLevel;
-    const showLevel = lvl !== undefined && lvl !== null && lvl !== 0 && lvl !== '0' && lvl !== '';
-    return `
-    <div class="rotation-hero">
-      <div class="rotation-hero-portrait"><img src="${esc(h.ImageURL)}" alt="${esc(h.Name)}" loading="lazy" /></div>
-      <div class="rotation-hero-name">${esc(h.Name)}</div>
-      ${showLevel ? `<div class="rotation-hero-level">${esc(t('level'))} ${esc(String(lvl))}</div>` : ''}
-    </div>`;
-  }).join('');
+  const dateRangeHtml = `<div class="rotation-date-range">${esc(fmt.format(rotation.start))} – ${esc(fmt.format(rotation.end))}</div>`;
+
+  // Portraits et noms viennent du site lui-même : un héros de la rotation qui n'y
+  // figure pas encore est simplement ignoré plutôt que d'afficher une case vide.
+  const cardsHtml = rotation.heroIds.map(id => {
+    const h = HEROES.find(x => x.id === id);
+    if (!h) return '';
+    const name = loc(h.name);
+    const inner = `
+      <div class="rotation-hero-portrait" data-fallback="${esc(initials(name))}"><img src="${esc(h.portrait)}" alt="${esc(name)}" loading="lazy" onerror="this.parentNode.classList.add('fallback');this.remove();" /></div>
+      <div class="rotation-hero-name">${esc(name)}</div>`;
+    // Seul un héros qui a sa fiche sur le site est cliquable : les autres sont
+    // dans la rotation du jeu sans avoir encore de page ici.
+    return h.enabled
+      ? `<button class="rotation-hero" type="button" data-hero-id="${esc(h.id)}" title="${esc(name)}">${inner}</button>`
+      : `<div class="rotation-hero">${inner}</div>`;
+  }).filter(Boolean).join('');
+
   container.innerHTML = `${dateRangeHtml}<div class="rotation-hero-grid">${cardsHtml}</div>`;
 }
 
-async function loadHeroRotation() {
-  const container = document.getElementById('heroRotationBody');
-  if (!container) return;
-  if (heroRotationCache) { renderHeroRotationBody(heroRotationCache); return; }
-  if (!heroRotationPromise) {
-    const target = encodeURIComponent('https://nexuscompendium.com/api/currently/herorotation');
-    heroRotationPromise = fetch('https://corsproxy.io/?url=' + target)
-      .then(res => { if (!res.ok) throw new Error('HTTP ' + res.status); return res.json(); })
-      .then(data => data && data.RotationHero ? data.RotationHero : null);
-  }
-  try {
-    const rotation = await heroRotationPromise;
-    heroRotationCache = rotation;
-    renderHeroRotationBody(rotation);
-  } catch (e) {
-    heroRotationPromise = null;
-    const c = document.getElementById('heroRotationBody');
-    if (c) c.innerHTML = `<div class="empty-state">${t('heroRotationError')}</div>`;
-  }
+function loadHeroRotation() {
+  if (!document.getElementById('heroRotationBody')) return;
+  renderHeroRotationBody(currentRotationWindow());
 }
 
 // Carte "Bugs connus" : une liste de talents choisis à la main dans l'admin, chacun
@@ -1127,21 +1135,23 @@ window.goToBuild = (heroId, buildIndex) => {
   scrollToHeroes();
 });
 
-els.heroList.addEventListener('click', (e) => {
-    const btn = e.target.closest('[data-hero-id]');
-    if (!btn) return;
-
-    const heroId = btn.dataset.heroId;
+// Ouvre la fiche d'un héros et amène la vue dessus. Utilisé par la liste des héros
+// comme par les portraits de la rotation gratuite.
+function goToHero(heroId) {
     const heroObj = HEROES.find(h => h.id === heroId);
+    if (!heroObj) return;
 
-    if (heroObj) {
-        markEverythingAsSeen(heroObj); // On valide tout d'un coup au clic
-    }
+    markEverythingAsSeen(heroObj); // On valide tout d'un coup au clic
+
+    // Un filtre de rôle ou une recherche en cours écarterait aussitôt la sélection :
+    // on les lève pour que le clic aboutisse toujours.
+    if (state.role !== 'all' && heroObj.role !== state.role) state.role = 'all';
+    if (state.search) { state.search = ''; if (els.searchInput) els.searchInput.value = ''; }
 
     state.heroId = heroId;
     state.buildIndex = firstBuildIndex(heroObj);
     state.formId = null;
-    renderAll(); //
+    renderAll();
 
   setTimeout(() => {
     const detailEl = document.getElementById('detailViewWrap');
@@ -1151,6 +1161,19 @@ els.heroList.addEventListener('click', (e) => {
     const y = detailEl.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top: y, behavior: 'smooth' });
   }, 0);
+}
+
+els.heroList.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-hero-id]');
+    if (!btn) return;
+    goToHero(btn.dataset.heroId);
+});
+
+// Les portraits de la rotation vivent dans la vue de détail : même délégation, même effet.
+els.detailView.addEventListener('click', (e) => {
+    const btn = e.target.closest('.rotation-hero[data-hero-id]');
+    if (!btn) return;
+    goToHero(btn.dataset.heroId);
 });
     els.searchInput.addEventListener('input', e => {
       clearTimeout(searchTimeout);
