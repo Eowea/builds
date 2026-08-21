@@ -13197,8 +13197,8 @@ const HEROES = [
         "buildCode": "[T1331221,Cassia]",
         "videos": [],
         "updatedAt": {
-          "fr": "18 Août 2026",
-          "en": "August 18, 2026"
+          "fr": "21 Août 2026",
+          "en": "August 21, 2026"
         },
         "talentSelections": [
           {
