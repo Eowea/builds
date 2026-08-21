@@ -13245,7 +13245,8 @@ const HEROES = [
               "tmtje8oul21p1a"
             ]
           }
-        ]
+        ],
+        "isNew": true
       }
     ],
     "guideVideos": [],
