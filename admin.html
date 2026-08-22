@@ -2662,10 +2662,13 @@ async function diagnostiquerAcces(){
            (scriptPasse
              ? '<br><strong>Précision utile :</strong> le script de comptage se charge normalement, seules les requêtes de fond sont arrêtées. ' +
                'Le comptage de tes visiteurs n&rsquo;est donc pas affecté — c&rsquo;est uniquement la lecture des chiffres ici qui l&rsquo;est.'
-             : '') +
+             : '<br><strong>Précision utile :</strong> le script de comptage lui-même est refusé. ' +
+               'Dans ce navigateur, tes propres visites ne sont donc pas comptées — ce qui évite au passage ' +
+               'que tes essais ne faussent tes chiffres. Tes visiteurs, eux, ne sont pas concernés.') +
            '<br><br>Quatre sources possibles, et désactiver un bloqueur de publicités n&rsquo;écarte que la première :' +
            '<br>• une extension de blocage ;' +
-           '<br>• la protection anti-pistage intégrée au navigateur (Brave, Firefox en mode strict, Edge strict) ;' +
+           '<br>• la protection anti-pistage <strong>intégrée au navigateur</strong>, active sans extension : ' +
+           'Opera et Opera GX la fournissent d&rsquo;origine, tout comme Brave, Firefox en mode strict ou Edge strict ;' +
            '<br>• un filtrage DNS : Pi-hole, NextDNS, AdGuard DNS, ou celui de ta box ou de ton opérateur ;' +
            '<br>• le bouclier web d&rsquo;un antivirus.') +
       aide('<strong>Le plus simple :</strong> ouvre <a href="' + lien + '" target="_blank" rel="noopener">' + lien + '</a> ' +
