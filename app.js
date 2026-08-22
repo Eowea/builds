@@ -259,7 +259,7 @@ function markEverythingAsSeen(hero) {
         .filter(l => l.enabled !== false && l.showOnBuilds !== false)
         .map(l => {
           const isActive = (l.url || '').replace(/^\.?\//, '') === 'index.html';
-          return `<a class="header-nav-link${isActive ? ' active' : ''}" href="${escapeHtml(l.url || '#')}"${l.newTab ? ' target="_blank" rel="noreferrer"' : ''}>${escapeHtml(loc(l.label))}</a>`;
+          return `<a class="header-nav-link${isActive ? ' active' : ''}" href="${escapeHtml(l.url || '#')}" data-nav-id="${escapeHtml(navSlug(l))}"${l.newTab ? ' target="_blank" rel="noreferrer"' : ''}>${escapeHtml(loc(l.label))}</a>`;
         }).join('');
       renderSiteUpdate();
     }
@@ -336,6 +336,7 @@ function markEverythingAsSeen(hero) {
       const o = document.getElementById('changelogOverlay');
       if (!o) return;
       renderChangelog();
+      track('changements', 'Ce qui a changé');
       o.classList.add('active');
       o.setAttribute('aria-hidden', 'false');
       // Lu : le clignotement s'arrête sans attendre un nouveau rendu de l'en-tête.
@@ -493,9 +494,15 @@ function renderBuildCode(b) {
     }, 1600);
   };
 
+  // Le code copié est le signal le plus parlant : c'est le moment où un visiteur
+  // emporte vraiment un build en jeu.
+  const heros = currentHero();
+  const marquerCopie = () => track('build-copie/' + (heros ? heros.id : 'inconnu'), heros ? loc(heros.name) : 'Build copié');
+
   try {
     await navigator.clipboard.writeText(buildCode);
     setFeedback('copySuccess', false);
+    marquerCopie();
   } catch (err) {
     try {
       const temp = document.createElement('textarea');
@@ -508,6 +515,7 @@ function renderBuildCode(b) {
       document.execCommand('copy');
       document.body.removeChild(temp);
       setFeedback('copySuccess', false);
+      marquerCopie();
     } catch (fallbackErr) {
       setFeedback('copyError', true);
     }
@@ -642,6 +650,56 @@ function renderHomeVideoSections() {
 
   const rotationHtml = STREAMER_CONFIG.showHeroRotation !== false ? renderHeroRotationSection() : '';
   return `<div class="videos-layout with-guide">${col('latestVideoTitle', latestMarkup)}${col('patchAnalysisTitle', patchMarkup)}</div>${rotationHtml}`;
+}
+
+/* =========================================================================
+   MESURE D'AUDIENCE (GoatCounter)
+
+   Le code du compte est saisi dans l'admin, jamais codé en dur : sans lui,
+   aucun script n'est chargé et le site n'émet rien. L'outil ne pose pas de
+   cookie et ne stocke pas de donnée personnelle, d'où l'absence de bandeau
+   de consentement.
+   ========================================================================= */
+function analyticsCode() {
+  const a = (typeof STREAMER_CONFIG !== 'undefined' && STREAMER_CONFIG.analytics) || {};
+  return a.enabled === false ? '' : String(a.goatcounterCode || '').trim();
+}
+
+function initAnalytics() {
+  const code = analyticsCode();
+  if (!code || document.getElementById('gcScript')) return;
+  const s = document.createElement('script');
+  s.id = 'gcScript';
+  s.async = true;
+  s.dataset.goatcounter = `https://${code}.goatcounter.com/count`;
+  s.src = '//gc.zgo.at/count.js';
+  document.head.appendChild(s);
+}
+
+// Un évènement nommé, envoyé seulement si la mesure est active. Les échecs sont
+// silencieux : une statistique ne doit jamais casser une page.
+function track(nom, titre) {
+  try {
+    if (!analyticsCode() || !window.goatcounter || !window.goatcounter.count) return;
+    window.goatcounter.count({ path: nom, title: titre || nom, event: true });
+  } catch (e) { /* sans effet */ }
+}
+
+// Un identifiant lisible et stable pour un lien du header. On part du libellé
+// français : renommer un lien en anglais ne doit pas couper l'historique.
+function navSlug(lien) {
+  const brut = (lien && lien.label && lien.label.fr) || (lien && lien.label && lien.label.en) || (lien && lien.url) || 'lien';
+  return normalize(brut).replace(/ /g, '-') || 'lien';
+}
+
+// Clics sur les liens du header. L'écoute est posée sur le document car le
+// header est réécrit à chaque changement de langue.
+function initNavTracking() {
+  document.addEventListener('click', e => {
+    const a = e.target.closest && e.target.closest('#headerNav a');
+    if (!a) return;
+    track('lien/' + (a.dataset.navId || 'lien'), a.textContent.trim());
+  });
 }
 
 /* =========================================================================
@@ -1230,6 +1288,7 @@ function goToHero(heroId) {
     if (state.role !== 'all' && heroObj.role !== state.role) state.role = 'all';
     if (state.search) { state.search = ''; if (els.searchInput) els.searchInput.value = ''; }
 
+    track('heros/' + heroId, heroObj.name.fr);
     state.heroId = heroId;
     state.buildIndex = firstBuildIndex(heroObj);
     state.formId = null;
@@ -1361,6 +1420,8 @@ els.homeBtn.addEventListener('click', (e) => {
     window.addEventListener('resize',()=>{queueTooltipPosition();queueLayoutSync();});
     window.addEventListener('scroll', queueTooltipPosition, { passive: true, capture: true });
 
+initAnalytics();
+initNavTracking();
 restoreFromHash(); renderAll();
 
     // --- NOUVEAU : Auto-scroll au chargement si on arrive via un lien de partage ---

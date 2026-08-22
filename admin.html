@@ -329,6 +329,7 @@
       <div class="sidebar-footer">
         <button onclick="addHero()">+ Nouveau héros</button>
         <button onclick="showBattlegroundsPanel()">🗺 Cartes</button>
+        <button onclick="showStatsPanel()">📊 Statistiques</button>
         <button onclick="showConfigPanel()">⚙ Configuration du site</button>
         <button id="adminsPanelBtn" onclick="showAdminsPanel()">👤 Administrateurs</button>
       </div>
@@ -2410,11 +2411,319 @@ function showConfigPanel(){
         <div class="field"><label>Date (EN)</label><input ${STREAMER_CONFIG.siteUpdate?.autoDate !== false ? 'disabled' : ''} value="${escapeHtml(STREAMER_CONFIG.siteUpdate?.date?.en)}" oninput="setNested(STREAMER_CONFIG,'siteUpdate.date.en',this.value)" placeholder="Ex: August 15, 2026" /></div>
       </div>
 
+      <h3 style="margin-top:20px;">Mesure d'audience</h3>
+      <small class="help" style="margin-top:-4px;margin-bottom:10px;">GoatCounter : pas de cookie, pas de donnée personnelle, donc pas de bandeau de consentement à afficher. Laisse vide pour ne rien mesurer du tout.</small>
+      <div class="checkbox-row">
+        <input type="checkbox" ${STREAMER_CONFIG.analytics?.enabled !== false ? 'checked' : ''} onchange="setNested(STREAMER_CONFIG,'analytics.enabled',this.checked)" />
+        <label style="margin:0;text-transform:none;">Activer la mesure d'audience</label>
+      </div>
+      <div class="field">
+        <label>Code du site GoatCounter</label>
+        <input value="${escapeHtml(STREAMER_CONFIG.analytics?.goatcounterCode || '')}" oninput="setNested(STREAMER_CONFIG,'analytics.goatcounterCode',this.value.trim())" placeholder="ex. eowea  (pour eowea.goatcounter.com)" />
+      </div>
+
       <h3 style="margin-top:20px;">Ce qui a changé</h3>
       <small class="help" style="margin-top:-4px;margin-bottom:10px;">Une bulle apparaît à côté de la date : cliquée, elle ouvre une fenêtre avec ces lignes. La bulle reste invisible tant qu'aucune ligne n'est remplie. Range les entrées de la plus récente à la plus ancienne.</small>
       ${renderChangelogEditor()}
     </div>
   `;
+}
+
+/* =========================================================================
+   STATISTIQUES DE FRÉQUENTATION (GoatCounter)
+   GoatCounter refuse d'être affiché dans un cadre (en-tête X-Frame-Options),
+   son tableau de bord s'ouvre donc dans un onglet. Les chiffres montrés ici
+   viennent de son API, lue directement depuis cette page.
+   Le jeton d'API reste dans le navigateur : il n'est jamais écrit dans data.js.
+   ========================================================================= */
+function statsCode(){
+  const a = (STREAMER_CONFIG && STREAMER_CONFIG.analytics) || {};
+  return String(a.goatcounterCode || '').trim();
+}
+function gcToken(){ return localStorage.getItem('eowea_admin_gc_token') || ''; }
+function setGcToken(v){
+  const t = String(v || '').trim();
+  if (t) localStorage.setItem('eowea_admin_gc_token', t);
+  else localStorage.removeItem('eowea_admin_gc_token');
+}
+function enregistrerGcToken(){
+  const champ = document.getElementById('gcTokenInput');
+  if (!champ) return;
+  setGcToken(champ.value);
+  toast(gcToken() ? 'Jeton enregistré dans ce navigateur' : 'Jeton effacé', 'success');
+  showStatsPanel();
+}
+function oublierGcToken(){ setGcToken(''); toast('Jeton effacé', 'success'); showStatsPanel(); }
+
+// Bornes de la période, arrondies à l'heure comme l'attend l'API.
+function bornesPeriode(jours){
+  const fin = new Date();
+  fin.setMinutes(0, 0, 0);
+  const rfc = d => d.toISOString().slice(0, 13) + ':00:00Z';
+  if (!jours) return { end: rfc(fin) };            // sans début : tout l'historique
+  const debut = new Date(fin.getTime() - jours * 864e5);
+  return { start: rfc(debut), end: rfc(fin) };
+}
+
+async function appelGc(chemin, params){
+  const url = new URL('https://' + statsCode() + '.goatcounter.com/api/v0/' + chemin);
+  Object.entries(params || {}).forEach(([k, v]) => { if (v != null) url.searchParams.set(k, v); });
+  const r = await fetch(url, { headers: { 'Authorization': 'Bearer ' + gcToken() } });
+  if (!r.ok){
+    const brut = await r.text().catch(() => '');
+    const e = new Error('HTTP ' + r.status);
+    e.statut = r.status;
+    // GoatCounter renvoie soit du JSON, soit une page d'erreur entière : seul le JSON est lisible.
+    try { const j = JSON.parse(brut); e.detail = String(j.error || (j.errors ? JSON.stringify(j.errors) : '')).slice(0, 300); }
+    catch (_){ e.detail = ''; }
+    throw e;
+  }
+  return r.json();
+}
+
+const STATS_PERIODES = [[7, '7 jours'], [30, '30 jours'], [90, '90 jours'], [0, 'Depuis le début']];
+let statsPeriode = 30;
+
+function setStatsPeriode(j){ statsPeriode = j; showStatsPanel(); }
+
+function nomHerosParId(id){
+  const h = (HEROES || []).find(x => x.id === id);
+  return h ? (h.name && h.name.fr ? h.name.fr : h.id) : id;
+}
+
+// Même règle de fabrication d'identifiant que navSlug() dans app.js, pour
+// retrouver le libellé d'un lien à partir de ce qui a été mesuré.
+function slugLien(lien){
+  const brut = (lien && lien.label && lien.label.fr) || (lien && lien.label && lien.label.en) || (lien && lien.url) || 'lien';
+  return String(brut).normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().replace(/ /g, '-') || 'lien';
+}
+function nomLienParId(id){
+  const l = ((STREAMER_CONFIG && STREAMER_CONFIG.navLinks) || []).find(x => slugLien(x) === id);
+  return l ? (l.label && l.label.fr ? l.label.fr : id) : id;
+}
+
+// Un tableau « libellé / nombre », avec une barre proportionnelle pour situer les écarts.
+function tableauStats(lignes, videTexte){
+  if (!lignes.length) return '<p style="color:var(--text-dim);font-size:13px;margin:0;">' + escapeHtml(videTexte) + '</p>';
+  const max = Math.max.apply(null, lignes.map(l => l.n)) || 1;
+  return '<table style="width:100%;border-collapse:collapse;font-size:13px;">' + lignes.map(l =>
+    '<tr>' +
+      '<td style="padding:4px 8px 4px 0;color:var(--text);white-space:nowrap;">' + escapeHtml(l.label) + '</td>' +
+      '<td style="padding:4px 0;width:100%;">' +
+        '<div style="background:var(--gold-border);height:8px;border-radius:2px;width:' +
+          Math.round(l.n / max * 100) + '%;min-width:2px;"></div>' +
+      '</td>' +
+      '<td style="padding:4px 0 4px 10px;text-align:right;color:var(--text-dim);white-space:nowrap;">' + l.n + '</td>' +
+    '</tr>').join('') + '</table>';
+}
+
+async function chargerStats(){
+  const zone = document.getElementById('statsResultat');
+  if (!zone) return;
+  zone.innerHTML = '<p style="color:var(--text-dim);font-size:13px;margin:0;">Lecture en cours…</p>';
+  const bornes = bornesPeriode(statsPeriode);
+  try {
+    const reponses = await Promise.all([
+      appelGc('stats/total', bornes),
+      appelGc('stats/hits', Object.assign({ limit: 200 }, bornes)),
+      // Les pays viennent d'un autre point d'accès. S'il échoue, le reste doit
+      // quand même s'afficher : on récupère l'échec sans le propager.
+      appelGc('stats/locations', Object.assign({ limit: 20 }, bornes)).catch(() => null)
+    ]);
+    const total = reponses[0], hits = reponses[1], pays = reponses[2];
+
+    const liste = (hits.hits || []).map(h => ({
+      chemin: String(h.path || '').replace(/^\//, ''),
+      evenement: !!h.event,
+      n: h.count || 0
+    }));
+    const prendre = prefixe => liste
+      .filter(l => l.evenement && l.chemin.indexOf(prefixe) === 0)
+      .map(l => ({ label: nomHerosParId(l.chemin.slice(prefixe.length)), n: l.n }))
+      .sort((a, b) => b.n - a.n);
+
+    const heros   = prendre('heros/');
+    const copies  = prendre('build-copie/');
+    const journal = liste.filter(l => l.evenement && l.chemin === 'changements')
+                         .reduce((s, l) => s + l.n, 0);
+    const pages   = liste.filter(l => !l.evenement)
+                         .map(l => ({ label: '/' + l.chemin, n: l.n }))
+                         .sort((a, b) => b.n - a.n).slice(0, 10);
+    // Les liens du header portent le libellé qu'ils avaient au moment du clic.
+    const liens   = liste.filter(l => l.evenement && l.chemin.indexOf('lien/') === 0)
+                         .map(l => ({ label: nomLienParId(l.chemin.slice(5)), n: l.n }))
+                         .sort((a, b) => b.n - a.n);
+    const listePays = ((pays && pays.stats) || [])
+                         .map(p => ({ label: p.name || p.id || '—', n: p.count || 0 }))
+                         .sort((a, b) => b.n - a.n);
+
+    const somme = t => t.reduce((s, x) => s + x.n, 0);
+    const bloc = (titre, contenu) =>
+      '<div style="margin-bottom:18px;"><div style="font-weight:600;font-size:13px;margin-bottom:6px;">' +
+      titre + '</div>' + contenu + '</div>';
+    const chiffre = (v, l) =>
+      '<div style="flex:1;min-width:120px;"><div style="font-size:24px;font-weight:600;">' + v +
+      '</div><div style="color:var(--text-dim);font-size:12px;">' + l + '</div></div>';
+
+    zone.innerHTML =
+      '<div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:20px;">' +
+        chiffre(total.total || 0, 'pages vues') +
+        chiffre(total.total_events || 0, 'évènements') +
+        chiffre(somme(heros), 'fiches de héros ouvertes') +
+        chiffre(somme(copies), 'codes de build copiés') +
+        chiffre(journal, 'ouvertures du journal') +
+      '</div>' +
+      bloc('Héros les plus consultés', tableauStats(heros.slice(0, 15), 'Aucune fiche ouverte sur la période.')) +
+      bloc('Builds les plus copiés', tableauStats(copies.slice(0, 15), 'Aucun code copié sur la période.')) +
+      bloc('Liens du header', tableauStats(liens, 'Aucun clic sur un lien du header sur la période.')) +
+      bloc('Pays', pays
+        ? tableauStats(listePays, 'Aucune visite localisée sur la période.')
+        : '<p style="color:var(--text-dim);font-size:13px;margin:0;">Les pays n\'ont pas pu être lus.</p>') +
+      bloc('Pages les plus vues', tableauStats(pages, 'Aucune page vue sur la période.')) +
+      (hits.more ? '<small class="help">Seules les 200 premières entrées sont lues ; au-delà, passe par le tableau de bord.</small>' : '');
+  } catch (e){
+    const messages = {
+      401: "Jeton refusé. Vérifie qu'il est bien copié en entier, et qu'il autorise la lecture des statistiques.",
+      403: "Ce jeton n'a pas le droit de lire les statistiques : recrée-le en cochant « Read statistics ».",
+      404: 'Le site « ' + statsCode() + ' » est introuvable chez GoatCounter. Vérifie le code dans Configuration du site.'
+    };
+    // Sans statut HTTP, la requête n'est jamais arrivée : le jeton n'y est pour rien.
+    // On cherche alors qui l'a arrêtée plutôt que de renvoyer « Failed to fetch ».
+    if (!e.statut){
+      zone.innerHTML = '<p style="color:var(--text-dim);font-size:13px;margin:0;">La requête n&rsquo;a pas abouti, recherche de la cause…</p>';
+      zone.innerHTML = await diagnostiquerAcces();
+      return;
+    }
+    zone.innerHTML =
+      '<p style="color:var(--danger,#e06c6c);font-size:13px;margin:0 0 6px;">' +
+        escapeHtml(messages[e.statut] || ('Lecture impossible (' + e.message + ').')) + '</p>' +
+      (e.detail ? '<small class="help" style="white-space:pre-wrap;">' + escapeHtml(e.detail) + '</small>' : '');
+  }
+}
+
+// Deux sondes suffisent à trancher : une vers GoatCounter, une vers un domaine
+// ordinaire. En mode no-cors la réponse est opaque, mais un échec reste un échec,
+// ce qui est exactement ce qu'on veut mesurer ici.
+async function diagnostiquerAcces(){
+  const sonde = async url => {
+    try { await fetch(url, { mode: 'no-cors', cache: 'no-store' }); return true; }
+    catch (err) { return false; }
+  };
+  const resultats = await Promise.all([
+    sonde('https://' + statsCode() + '.goatcounter.com/api/v0/stats/total'),
+    sonde('https://api.github.com/')
+  ]);
+  const gc = resultats[0], ailleurs = resultats[1];
+  const local = location.protocol === 'file:';
+
+  const alerte = t => '<p style="color:var(--danger,#e06c6c);font-size:13px;margin:0 0 8px;">' + t + '</p>';
+  const aide = t => '<small class="help" style="line-height:1.7;">' + t + '</small>';
+
+  if (local){
+    return alerte('La page est ouverte depuis un fichier local.') +
+      aide('Ouverte en <code>file://</code>, la page n&rsquo;a pas le droit d&rsquo;interroger GoatCounter. ' +
+           'Ouvre l&rsquo;administration depuis son adresse en ligne — la mesure, elle, fonctionne normalement sur le site publié.');
+  }
+  if (!gc && ailleurs){
+    return alerte('Les requêtes vers goatcounter.com sont bloquées par ton navigateur.') +
+      aide('Les autres domaines répondent, seul GoatCounter est arrêté : c&rsquo;est presque toujours un bloqueur de publicités ' +
+           '(uBlock, AdGuard…) ou la protection anti-pistage du navigateur, qui rangent les outils de mesure dans leurs listes. ' +
+           'Ajoute <code>' + escapeHtml(statsCode()) + '.goatcounter.com</code> en exception, ou consulte le tableau de bord dans un onglet. ' +
+           'À noter : ce même blocage empêche aussi ta propre visite d&rsquo;être comptée — les visiteurs, eux, ne sont pas concernés.');
+  }
+  if (!gc && !ailleurs){
+    return alerte('Aucune requête ne sort de cette page.') +
+      aide('Ni GoatCounter ni les autres domaines ne répondent : vérifie la connexion réseau, un pare-feu ou un proxy.');
+  }
+  return alerte('GoatCounter répond, mais refuse la lecture depuis cette page.') +
+    aide('Le domaine est joignable et la requête part bien. Si tu utilises une extension de confidentialité, ' +
+         'elle peut retirer l&rsquo;en-tête d&rsquo;autorisation. Le tableau de bord reste accessible dans un onglet.');
+}
+
+function showStatsPanel(){
+  currentHeroIndex = null;
+  renderHeroList();
+  const code = statsCode();
+  const url = code ? 'https://' + code + '.goatcounter.com' : '';
+  const jeton = gcToken();
+
+  const guide =
+    '<div class="card">' +
+      '<div class="card-head"><span class="title">À configurer</span></div>' +
+      '<p style="color:var(--text-dim);font-size:13px;line-height:1.7;">' +
+        "Aucun code GoatCounter n'est renseigné : <strong>le site n'envoie rien pour l'instant</strong>, " +
+        "et il n'y a donc rien à afficher ici." +
+      '</p>' +
+      '<ol style="color:var(--text-dim);font-size:13px;line-height:1.9;padding-left:18px;">' +
+        '<li>Crée un compte sur <a href="https://www.goatcounter.com" target="_blank" rel="noopener">goatcounter.com</a>.</li>' +
+        '<li>Choisis un code de site, par exemple <code>eowea</code> — ton tableau de bord sera alors <code>eowea.goatcounter.com</code>.</li>' +
+        '<li>Reviens dans <strong>Configuration du site</strong>, colle ce code, puis enregistre sur GitHub.</li>' +
+        '<li>Repasse ici et colle un jeton d&rsquo;API pour voir les chiffres sans quitter le panneau.</li>' +
+      '</ol>' +
+    '</div>';
+
+  const carteTableau =
+    '<div class="card">' +
+      '<div class="card-head"><span class="title">Tableau de bord</span></div>' +
+      '<p style="color:var(--text-dim);font-size:13px;line-height:1.7;margin:0 0 10px;">' +
+        'Le tableau de bord complet — référents, pays, navigateurs, graphiques — vit chez GoatCounter. ' +
+        "Il refuse d'être intégré dans une autre page, il s'ouvre donc dans un onglet." +
+      '</p>' +
+      '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener" class="list-add-btn" ' +
+        'style="display:inline-block;text-decoration:none;">Ouvrir ' + escapeHtml(code) + '.goatcounter.com ↗</a>' +
+    '</div>';
+
+  const carteJeton =
+    '<div class="card">' +
+      '<div class="card-head"><span class="title">Jeton d&rsquo;API</span></div>' +
+      (jeton
+        ? '<p style="color:var(--text-dim);font-size:13px;line-height:1.7;margin:0 0 10px;">' +
+            'Un jeton est enregistré dans ce navigateur. Il sert uniquement à lire les chiffres ci-dessous ' +
+            "et n'est jamais écrit dans <code>data.js</code>." +
+          '</p><button class="ghost" onclick="oublierGcToken()">Oublier ce jeton</button>'
+        : '<p style="color:var(--text-dim);font-size:13px;line-height:1.7;margin:0 0 10px;">' +
+            'Pour afficher les chiffres ici, crée un jeton dans ' +
+            '<a href="' + escapeHtml(url) + '/user/api" target="_blank" rel="noopener">Paramètres → API</a> ' +
+            'en cochant <strong>Read statistics</strong>, puis colle-le ci-dessous. ' +
+            "Il reste dans ce navigateur et n'est jamais publié." +
+          '</p>' +
+          '<div class="row">' +
+            '<div class="field"><input id="gcTokenInput" type="password" placeholder="Jeton d&rsquo;API GoatCounter" /></div>' +
+            '<button class="list-add-btn" style="flex:0 0 auto;margin-bottom:10px;" onclick="enregistrerGcToken()">Enregistrer</button>' +
+          '</div>') +
+    '</div>';
+
+  const carteChiffres = !jeton ? '' :
+    '<div class="card">' +
+      '<div class="card-head"><span class="title">Chiffres</span><div style="display:flex;gap:6px;">' +
+        STATS_PERIODES.map(p => '<button class="ghost" onclick="setStatsPeriode(' + p[0] + ')" style="' +
+          (p[0] === statsPeriode ? 'border-color:var(--gold);color:var(--gold-bright);' : '') + '">' + p[1] + '</button>').join('') +
+      '</div></div>' +
+      '<div id="statsResultat"></div>' +
+    '</div>';
+
+  const carteMesure =
+    '<div class="card">' +
+      '<div class="card-head"><span class="title">Ce qui est mesuré</span></div>' +
+      '<p style="color:var(--text-dim);font-size:13px;line-height:1.6;margin:0 0 10px;">' +
+        'En plus des pages vues et des pays, le site envoie quatre évènements nommés. ' +
+        'Ils apparaissent dans l&rsquo;onglet <em>Events</em> du tableau de bord.' +
+      '</p>' +
+      '<ul style="color:var(--text-dim);font-size:13px;line-height:1.8;margin:0;padding-left:18px;">' +
+        '<li><code>heros/&lt;identifiant&gt;</code> — une fiche de héros ouverte</li>' +
+        '<li><code>build-copie/&lt;identifiant&gt;</code> — un code de build copié</li>' +
+        '<li><code>lien/&lt;identifiant&gt;</code> — un lien du header cliqué</li>' +
+        '<li><code>changements</code> — la fenêtre « Ce qui a changé » ouverte</li>' +
+      '</ul>' +
+    '</div>';
+
+  document.getElementById('contentEl').innerHTML =
+    '<div class="hero-header"><div><h2 style="margin-bottom:4px;">Statistiques</h2>' +
+      '<div style="color:var(--text-dim);font-size:12px;">Fréquentation du site, sans cookie ni donnée personnelle</div></div></div>' +
+    (code ? carteTableau + carteJeton + carteChiffres + carteMesure : guide);
+
+  if (code && jeton) chargerStats();
 }
 
 /* ---------- Journal des changements ---------- */
