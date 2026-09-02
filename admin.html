@@ -8,20 +8,41 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* Palette reprise telle quelle de style.css : mêmes valeurs, mêmes noms côté site,
+     pour que le panneau et les pages publiques ne divergent jamais. */
   :root{
-    --bg:#0d0a26;
-    --panel:#151238;
-    --panel-alt:#1c1845;
-    --border:#2e2a5c;
-    --text:#e0e6ed;
-    --text-dim:#98a1b3;
+    --bg:#0d0a26;            /* --bg-deep */
+    --bg-0:#131238;
+    --panel:#191642;         /* --bg-1 */
+    --panel-alt:#201c50;     /* --bg-2 */
+    --panel-hi:#29245e;      /* --bg-3 */
+
     --gold:#f0b429;
+    --gold-bright:#ffd873;
     --gold-dim:#a67c00;
-    --blue:#c9c0f5;
-    --red:#c1554d;
-    --red-dim:#7a2e2a;
+    --gold-glow:rgba(240,180,41,.25);
+    --gold-border:rgba(240,180,41,.5);
+    --gold-soft:rgba(240,180,41,.08);
+
+    --blue:#e2d8ff;
+    --blue-bright:#f2ecff;
+    --blue-glow:rgba(226,216,255,.25);
+    --blue-soft:rgba(226,216,255,.05);
+    --border:rgba(226,216,255,.35);   /* --blue-border */
+    --border-hover:rgba(226,216,255,.8);
+
+    --text:#e0e6ed;
+    --text-bright:#ffffff;
+    --text-dim:#9aa5b5;
+    --text-muted:#5c7a9a;
+
+    --red:#ff6b5e;
+    --red-dim:rgba(255,107,94,.45);
     --green:#5f9e6f;
-    --radius:8px;
+
+    --card-bg:linear-gradient(180deg,rgba(20,28,44,.8),rgba(12,18,28,.9));
+    --card-shadow:inset 0 1px 0 rgba(255,255,255,.05), 0 5px 15px rgba(0,0,0,.5);
+    --radius:4px;            /* --radius-sm : le site est anguleux, pas arrondi */
   }
   @font-face {
     font-family: 'Metronic for Blizzard';
@@ -162,6 +183,19 @@
   .subitem{border:1px dashed var(--border);border-radius:6px;padding:12px;margin-bottom:10px;position:relative;}
   .subitem .remove-btn{position:absolute;top:8px;right:8px;}
 
+  /* Infobulle de survol. En position fixe et attachée au body : les panneaux de
+     l'admin sont en overflow:hidden, une bulle en CSS pur y serait rognée. */
+  #adminTip{
+    position:fixed;z-index:9999;max-width:340px;pointer-events:none;
+    display:none;padding:8px 10px;border-radius:6px;
+    background:#12151c;border:1px solid var(--border);
+    box-shadow:0 8px 24px rgba(0,0,0,.55);
+    font-size:12px;line-height:1.5;color:var(--text);
+  }
+  #adminTip .t{display:block;margin-bottom:4px;font-weight:700;color:var(--gold);}
+
+
+
   details.collapsible{background:var(--panel-alt);border:1px solid var(--border);border-radius:8px;margin-bottom:10px;overflow:hidden;}
   details.collapsible > summary{list-style:none;cursor:pointer;padding:10px 14px;display:flex;align-items:center;gap:10px;user-select:none;}
   .drag-handle{cursor:grab;color:var(--text-dim);font-size:14px;flex:0 0 auto;padding:2px 4px;touch-action:none;}
@@ -225,6 +259,67 @@
 
     .login-card, .token-card{width:100%;padding:22px;}
   }
+  /* ═══ Harmonisation avec le site ═══════════════════════════════════════════
+     Les règles ci-dessous reprennent les traitements caractéristiques de
+     style.css : fond de carte en dégradé avec liseré intérieur, or réservé à
+     ce qui est actif ou sélectionné, libellés capitales espacées, halo doré
+     sur les titres. La géométrie des panneaux n'est pas touchée. */
+
+  /* Surfaces : le fond de carte du site, plutôt qu'un aplat. */
+  .card, .login-card, .token-card, .subitem, details.collapsible{
+    background:var(--card-bg);
+    box-shadow:var(--card-shadow);
+  }
+  /* Le site est anguleux : on ramène les coins arrondis codés en dur au rayon commun. */
+  .login-card, .token-card, details.collapsible, .subitem, .card, .snippet,
+  .hero-item, .hero-item img, .thumb-picker img{border-radius:var(--radius);}
+  .topbar, .sidebar{background:linear-gradient(180deg,var(--panel),var(--bg-0));}
+
+  /* Titres : or et halo, comme les en-têtes de carte du site. */
+  h1,h2{text-shadow:0 0 8px var(--gold-glow);}
+  h1{text-transform:uppercase;letter-spacing:.05em;}
+
+  /* Libellés de champ : capitales espacées, teinte bleutée du site. */
+  label{color:var(--text-muted);letter-spacing:.05em;}
+
+  /* Onglets : soulignement doré et halo sur l'actif. */
+  .tab{transition:color .15s,border-color .15s;}
+  .tab:hover{color:var(--blue-bright);}
+  .tab.active{color:var(--gold-bright);border-color:var(--gold-bright);text-shadow:0 0 8px var(--gold-glow);}
+
+  /* Boutons : le principal reprend le dégradé métallique du site. */
+  button.primary{
+    background:linear-gradient(180deg,var(--gold-bright),var(--gold));
+    border-color:var(--gold);color:#1b1400;
+  }
+  button.primary:hover{box-shadow:0 0 12px var(--gold-glow);}
+  button:hover{border-color:var(--gold-border);}
+  button:focus-visible{outline:2px solid var(--gold-border);outline-offset:2px;}
+
+  /* Champs : liseré doré et halo à la saisie, comme les éléments actifs du site. */
+  input:focus,textarea:focus,select:focus{
+    border-color:var(--gold-border);
+    box-shadow:0 0 0 1px var(--gold-soft),0 0 10px var(--gold-glow);
+  }
+
+  /* Héros sélectionné : rail doré à gauche, repris de .hero-link du site. */
+  .hero-item{border-left:3px solid transparent;transition:background .15s,border-color .15s;}
+  .hero-item:hover{background:linear-gradient(90deg,var(--blue-soft),transparent);border-left-color:var(--border-hover);}
+  .hero-item.active{
+    background:linear-gradient(90deg,var(--gold-soft),transparent);
+    border:1px solid var(--gold-border);border-left:3px solid var(--gold-bright);
+  }
+
+  /* Le badge de la barre supérieure devient l'hexagone du site. */
+  .topbar .brand .badge{
+    border-radius:0;
+    clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+    filter:drop-shadow(0 0 8px var(--gold-glow));
+  }
+
+  /* Pastilles d'état : mêmes rouges que la carte « Bugs connus ». */
+  .dot.off{background:var(--red);}
+  .topbar .status.dirty{color:var(--gold-bright);}
 </style>
 </head>
 <body>
@@ -1696,7 +1791,7 @@ function renderBugsTab(hero){
     </p>`;
 
   // Une ligne = une case à cocher, l'icône, le nom, et les deux champs si c'est coché.
-  const ligne = (id, icon, nom) => {
+  const ligne = (id, icon, nom, desc) => {
     const bug = hero.bugs.find(b => b.talentId === id);
     const note = bug?.note || { fr:'', en:'' };
     const champs = bug ? `
@@ -1708,7 +1803,7 @@ function renderBugsTab(hero){
       <div style="padding:6px 0;">
         <div class="row" style="align-items:center;gap:10px;margin:0;flex-wrap:nowrap;">
           <input type="checkbox" style="width:auto;flex:0 0 auto;" ${bug?'checked':''} onchange="toggleBug(${currentHeroIndex},'${id}',this.checked)" />
-          <img src="${assetRawUrl(icon)}" style="width:28px;height:28px;border-radius:4px;object-fit:cover;background:#000;flex:0 0 auto;" onerror="this.style.visibility='hidden'" />
+          <img src="${assetRawUrl(icon)}" data-tip-title="${escapeHtml(nom)}" data-tip="${escapeHtml((desc || '').trim() || 'Pas de description.')}" style="width:28px;height:28px;border-radius:4px;object-fit:cover;background:#000;flex:0 0 auto;cursor:help;" onerror="this.style.visibility='hidden'" />
           <div style="flex:1;font-size:13px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(nom)}</div>
         </div>
         ${champs}
@@ -1716,12 +1811,12 @@ function renderBugsTab(hero){
   };
 
   const blocSorts = sorts.length ? `<div class="subitem"><div style="font-weight:700;color:var(--gold);margin-bottom:4px;">Sorts</div>${
-    sorts.map(s => ligne(spellBugId(hero, s), s.icon, (s.key ? '[' + s.key + '] ' : '') + (s.name?.fr || 'Sort sans nom'))).join('')
+    sorts.map(s => ligne(spellBugId(hero, s), s.icon, (s.key ? '[' + s.key + '] ' : '') + (s.name?.fr || 'Sort sans nom'), s.description?.fr)).join('')
   }</div>` : '';
 
   const levels = [...new Set(pool.map(p => p.level))].sort((a,b) => a - b);
   const blocs = levels.map(level => `<div class="subitem"><div style="font-weight:700;color:var(--gold);margin-bottom:4px;">Palier ${escapeHtml(level)}</div>${
-    pool.filter(p => p.level === level).map(p => ligne(p.id, p.icon, p.name?.fr || 'Talent sans nom')).join('')
+    pool.filter(p => p.level === level).map(p => ligne(p.id, p.icon, p.name?.fr || 'Talent sans nom', p.description?.fr)).join('')
   }</div>`).join('');
 
   return entete + dateBloc + blocSorts + blocs;
@@ -1773,7 +1868,7 @@ function renderOneBuild(hero, b, i, pos){
   const videosHtml = (b.videos||[]).map((v, vi) => `
     <div class="subitem" data-drag-item data-drag-list="buildVideos:${i}" data-drag-index="${vi}" style="padding-left:34px;">
       <span class="drag-handle" title="Glisser pour réordonner" style="position:absolute;left:8px;top:12px;">⠿</span>
-      <button class="ghost remove-btn" onclick="HEROES[${currentHeroIndex}].builds[${i}].videos.splice(${vi},1); markDirty(); renderHeroPanel();">✕</button>
+      <button class="ghost remove-btn" onclick="HEROES[${currentHeroIndex}].builds[${i}].videos.splice(${vi},1); touchBuild(${currentHeroIndex},${i}); markDirty(); renderHeroPanel();">✕</button>
       <div class="row">
         <div class="field"><label>Titre (FR)</label><input value="${escapeHtml(v.title?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}].videos[${vi}],'title.fr',this.value)" /></div>
         <div class="field"><label>Titre (EN)</label><input value="${escapeHtml(v.title?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}].videos[${vi}],'title.en',this.value)" /></div>
@@ -1790,7 +1885,7 @@ function renderOneBuild(hero, b, i, pos){
     </div>
   `).join('');
   return `
-    <details class="collapsible" data-uid="${buildUid}"${collapsibleState[buildUid]?' open':''} data-drag-item data-drag-list="builds" data-drag-index="${pos}">
+    <details class="collapsible" data-uid="${buildUid}"${collapsibleState[buildUid]?' open':''} data-build-index="${i}" data-drag-item data-drag-list="builds" data-drag-index="${pos}">
       <summary>
         <span class="drag-handle" title="Glisser pour réordonner">⠿</span>
         <span class="chevron">▸</span>
@@ -1830,12 +1925,13 @@ function renderOneBuild(hero, b, i, pos){
         <div class="field"><label>Résumé (EN)</label><textarea oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}],'summary.en',this.value)">${escapeHtml(b.summary?.en)}</textarea></div>
       </div>
       <div class="row">
-        <div class="field"><label>Date de mise à jour (FR)</label><input value="${escapeHtml(b.updatedAt?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}],'updatedAt.fr',this.value)" /></div>
-        <div class="field"><label>Date de mise à jour (EN)</label><input value="${escapeHtml(b.updatedAt?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}],'updatedAt.en',this.value)" /></div>
+        <div class="field"><label>Date de mise à jour (FR)</label><input data-no-touch value="${escapeHtml(b.updatedAt?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}],'updatedAt.fr',this.value)" /></div>
+        <div class="field"><label>Date de mise à jour (EN)</label><input data-no-touch value="${escapeHtml(b.updatedAt?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}],'updatedAt.en',this.value)" /></div>
       </div>
+      <small class="help" style="margin-top:-6px;">Ces deux dates se remplissent toutes seules dès que tu modifies quoi que ce soit dans ce build. Tu peux les corriger à la main : ta saisie tient jusqu'à la prochaine modification du build.</small>
       <div class="field"><label>Vidéos liées au build (YouTube ou fichier assets)</label>
         ${videosHtml}
-        <button onclick="HEROES[${currentHeroIndex}].builds[${i}].videos=(HEROES[${currentHeroIndex}].builds[${i}].videos||[]); HEROES[${currentHeroIndex}].builds[${i}].videos.push({title:{fr:'',en:''},desc:{fr:'',en:''},youtubeId:''}); markDirty(); renderHeroPanel();">+ Ajouter une vidéo</button>
+        <button onclick="HEROES[${currentHeroIndex}].builds[${i}].videos=(HEROES[${currentHeroIndex}].builds[${i}].videos||[]); HEROES[${currentHeroIndex}].builds[${i}].videos.push({title:{fr:'',en:''},desc:{fr:'',en:''},youtubeId:''}); touchBuild(${currentHeroIndex},${i}); markDirty(); renderHeroPanel();">+ Ajouter une vidéo</button>
       </div>
       <h3 style="margin-top:16px;">Talents (sélection pour ce build)</h3>
       <small class="help" style="margin-top:-4px;margin-bottom:10px;">Coche "Principal" pour le talent recommandé à chaque palier, et "Alternatif" pour ceux à proposer en option. Un talent non coché n'apparaîtra pas du tout sur ce build. Pour ajouter de nouveaux talents disponibles, va dans l'onglet "Talents".</small>
@@ -1997,7 +2093,7 @@ function renderBuildTalentSelectionUI(hero, build, buildIdx){
       const isAlt = (sel.alternativeIds||[]).includes(p.id);
       return `
         <div class="row" style="align-items:center;gap:10px;margin-bottom:6px;flex-wrap:nowrap;">
-          <img src="${assetRawUrl(p.icon)}" style="width:28px;height:28px;border-radius:4px;object-fit:cover;background:#000;flex:0 0 auto;" onerror="this.style.visibility='hidden'" />
+          <img src="${assetRawUrl(p.icon)}" data-tip-title="${escapeHtml(p.name?.fr || 'Talent sans nom')}" data-tip="${escapeHtml((p.description?.fr || '').trim() || 'Pas de description.')}" style="width:28px;height:28px;border-radius:4px;object-fit:cover;background:#000;flex:0 0 auto;cursor:help;" onerror="this.style.visibility='hidden'" />
           <div style="flex:1;font-size:13px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(p.name?.fr || 'Talent sans nom')}</div>
           <label style="display:flex;align-items:center;gap:4px;font-size:11px;text-transform:none;margin:0;flex:0 0 auto;">
             <input type="radio" style="width:auto;" name="primary-${currentHeroIndex}-${buildIdx}-${level}" ${isPrimary?'checked':''} onchange="setBuildTalentPrimary(${currentHeroIndex},${buildIdx},${selIdx},'${p.id}')" /> Principal
@@ -2049,6 +2145,7 @@ function regenerateBuildCode(heroIdx, buildIdx){
     alert("Il manque un talent principal sur au moins un palier : le code ne peut pas être calculé.");
     return;
   }
+  touchBuild(heroIdx, buildIdx);
   markDirty(); renderHeroPanel();
 }
 function setBuildTalentPrimary(heroIdx, buildIdx, selIdx, poolId){
@@ -2072,7 +2169,7 @@ function toggleBuildTalentAlternative(heroIdx, buildIdx, selIdx, poolId, checked
 function addBuild(idx){
   const b = {
     enabled: true, order: (HEROES[idx].builds.length+1),
-    label:{fr:'Nouveau build',en:'New build'}, updatedAt:{fr:'',en:''},
+    label:{fr:'Nouveau build',en:'New build'}, updatedAt:dateDuJour(),
     summary:{fr:'',en:''}, buildCodeTitle:{fr:"A COLLER DANS L'ARBRE DES TALENTS",en:"PASTE IN TALENT TREE"},
     buildCode:'', videos:[], talentSelections:[]
   };
@@ -2428,6 +2525,87 @@ function showConfigPanel(){
     </div>
   `;
 }
+
+/* ---------- Date de mise à jour d'un build ----------
+   Elle s'affiche sur le site sous les onglets de build ; un build retouché
+   aujourd'hui qui montre une vieille date raconte quelque chose de faux.
+   On la repose donc à la date du jour dès qu'une valeur du build change. */
+function dateDuJour(){
+  const d = new Date();
+  return {
+    // "20 août 2026" → "20 Août 2026", pour coller aux dates déjà saisies.
+    fr: d.toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' })
+         .replace(/ (\p{L})/u, (m, c) => ' ' + c.toUpperCase()),
+    en: d.toLocaleDateString('en-US', { month:'long', day:'numeric', year:'numeric' })
+  };
+}
+function touchBuild(heroIdx, buildIdx){
+  const b = HEROES[heroIdx]?.builds?.[buildIdx];
+  if (!b) return;
+  const jour = dateDuJour();
+  if (b.updatedAt && b.updatedAt.fr === jour.fr && b.updatedAt.en === jour.en) return;
+  b.updatedAt = jour;
+  // Le champ visible est rafraîchi sans re-rendre le panneau : un re-rendu en pleine
+  // frappe ferait perdre le curseur dans le champ en cours d'édition.
+  const bloc = document.querySelector(`[data-build-index="${buildIdx}"]`);
+  if (bloc){
+    const champs = bloc.querySelectorAll('input[data-no-touch]');
+    if (champs[0]) champs[0].value = jour.fr;
+    if (champs[1]) champs[1].value = jour.en;
+  }
+}
+
+// Toute saisie dans le bloc d'un build le date, sauf dans les deux champs de date
+// eux-mêmes : sinon corriger la date à la main la réécrirait aussitôt.
+(function bindBuildTouch(){
+  const marquer = e => {
+    if (currentHeroIndex === null) return;
+    const champ = e.target;
+    if (champ.closest('[data-no-touch]') || champ.hasAttribute?.('data-no-touch')) return;
+    const bloc = champ.closest?.('[data-build-index]');
+    if (!bloc) return;
+    touchBuild(currentHeroIndex, Number(bloc.dataset.buildIndex));
+  };
+  document.addEventListener('input', marquer, true);
+  document.addEventListener('change', marquer, true);
+})();
+
+/* ---------- Infobulle de survol ----------
+   Un seul élément réutilisé, posé sur le body et suivi à la souris. La délégation
+   sur document survit aux nombreux re-rendus des panneaux, contrairement à des
+   écouteurs posés sur chaque ligne. */
+(function bindAdminTip(){
+  const tip = document.createElement('div');
+  tip.id = 'adminTip';
+  document.body.appendChild(tip);
+
+  const placer = (x, y) => {
+    // On garde la bulle dans la fenêtre : elle bascule à gauche ou au-dessus si
+    // le curseur est près d'un bord.
+    const r = tip.getBoundingClientRect();
+    const gx = x + 16 + r.width > innerWidth ? x - r.width - 12 : x + 16;
+    const gy = y + 16 + r.height > innerHeight ? y - r.height - 12 : y + 16;
+    tip.style.left = Math.max(8, gx) + 'px';
+    tip.style.top = Math.max(8, gy) + 'px';
+  };
+
+  document.addEventListener('mouseover', e => {
+    const el = e.target.closest('[data-tip]');
+    if (!el) return;
+    const titre = el.getAttribute('data-tip-title');
+    tip.innerHTML = (titre ? '<span class="t">' + escapeHtml(titre) + '</span>' : '') + escapeHtml(el.getAttribute('data-tip'));
+    tip.style.display = 'block';
+    placer(e.clientX, e.clientY);
+  });
+  document.addEventListener('mousemove', e => {
+    if (tip.style.display === 'block') placer(e.clientX, e.clientY);
+  });
+  document.addEventListener('mouseout', e => {
+    if (e.target.closest('[data-tip]')) tip.style.display = 'none';
+  });
+  // Un panneau qui défile sous une bulle ouverte la laisserait flotter dans le vide.
+  document.addEventListener('scroll', () => { tip.style.display = 'none'; }, true);
+})();
 
 /* =========================================================================
    STATISTIQUES DE FRÉQUENTATION (GoatCounter)
