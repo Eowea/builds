@@ -53,6 +53,13 @@ const STREAMER_CONFIG = {
   "latestVideos": [
     {
       "title": {
+        "fr": "Gameplay Xal'atath PTR - Heroes of the Storm",
+        "en": "Xal'atath PTR Gameplay - Heroes of the Storm"
+      },
+      "youtubeId": "xRsVIfNHcMA"
+    },
+    {
+      "title": {
         "fr": "Comment draft sur Heroes of the Storm",
         "en": "How to Draft in Heroes of the Storm"
       },
@@ -71,13 +78,6 @@ const STREAMER_CONFIG = {
         "en": "Another Hero after Xal'atath? - Heroes of the Storm"
       },
       "youtubeId": "0-Genm604b0"
-    },
-    {
-      "title": {
-        "fr": "Présentation de Xal'atath - Heroes of the Storm",
-        "en": "Xal'atath Overview - Heroes of the Storm"
-      },
-      "youtubeId": "n6pxfcxrXEA"
     }
   ],
   "patchVideos": [
@@ -94,10 +94,22 @@ const STREAMER_CONFIG = {
     "enabled": true,
     "autoDate": true,
     "date": {
-      "fr": "22 Septembre 2026",
-      "en": "September 22, 2026"
+      "fr": "26 Septembre 2026",
+      "en": "September 26, 2026"
     },
     "changelog": [
+      {
+        "date": {
+          "fr": "26 Septembre 2026",
+          "en": "September 26, 2026"
+        },
+        "items": [
+          {
+            "fr": "Deux nouveaux builds : « Build E » sur Maiev et « Build A » sur Johanna.",
+            "en": "Two new builds: “E build” on Maiev and “Q build” on Johanna."
+          }
+        ]
+      },
       {
         "date": {
           "fr": "22 Septembre 2026",
@@ -25345,6 +25357,66 @@ const HEROES = [
           }
         ],
         "isNew": false
+      },
+      {
+        "enabled": true,
+        "order": 2,
+        "label": {
+          "fr": "Build A",
+          "en": "Q build"
+        },
+        "summary": {
+          "fr": "Build centré sur Correction : ralentissement maximal, soins adverses coupés, et Éblouissement pour se maintenir.",
+          "en": "Focused on Punish: maximum slow, enemy healing cut, and Shield Glare to stay standing."
+        },
+        "buildCodeTitle": {
+          "fr": "CLIQUER POUR COPIER LE BUILD",
+          "en": "CLICK TO COPY THE BUILD"
+        },
+        "buildCode": "[T1112122,Johanna]",
+        "videos": [],
+        "updatedAt": {
+          "fr": "26 Septembre 2026",
+          "en": "September 26, 2026"
+        },
+        "talentSelections": [
+          {
+            "level": 1,
+            "primaryId": "tm4ay2y4m01cbt",
+            "alternativeIds": []
+          },
+          {
+            "level": 4,
+            "primaryId": "tm4ay2y4m044ny",
+            "alternativeIds": []
+          },
+          {
+            "level": 7,
+            "primaryId": "tm4ay2y4m07f0p",
+            "alternativeIds": []
+          },
+          {
+            "level": 10,
+            "primaryId": "tm4ay2y4m11s5b",
+            "alternativeIds": []
+          },
+          {
+            "level": 13,
+            "primaryId": "tm4ay2y4m12mgo",
+            "alternativeIds": []
+          },
+          {
+            "level": 16,
+            "primaryId": "tm4ay2y4m16kq7",
+            "alternativeIds": []
+          },
+          {
+            "level": 20,
+            "primaryId": "tm4ay2y4m19b1k",
+            "alternativeIds": []
+          }
+        ],
+        "isNew": false
       }
     ],
     "guideVideos": [],
@@ -29631,6 +29703,66 @@ const HEROES = [
           {
             "level": 20,
             "primaryId": "tm3j6xrib20ne4",
+            "alternativeIds": []
+          }
+        ],
+        "isNew": false
+      },
+      {
+        "enabled": true,
+        "order": 2,
+        "label": {
+          "fr": "Build E",
+          "en": "E build"
+        },
+        "summary": {
+          "fr": "Build centré sur Esprit vengeur : l'ombre revient vite et chaque héros touché fait monter les dégâts.",
+          "en": "Focused on Spirit of Vengeance: the shadow comes back fast and every Hero hit raises the damage."
+        },
+        "buildCodeTitle": {
+          "fr": "CLIQUER POUR COPIER LE BUILD",
+          "en": "CLICK TO COPY THE BUILD"
+        },
+        "buildCode": "[T2331321,Maiev]",
+        "videos": [],
+        "updatedAt": {
+          "fr": "26 Septembre 2026",
+          "en": "September 26, 2026"
+        },
+        "talentSelections": [
+          {
+            "level": 1,
+            "primaryId": "tm3j6xrib025d0",
+            "alternativeIds": []
+          },
+          {
+            "level": 4,
+            "primaryId": "tm3j6xrib066fc",
+            "alternativeIds": []
+          },
+          {
+            "level": 7,
+            "primaryId": "tm3j6xrib097pj",
+            "alternativeIds": []
+          },
+          {
+            "level": 10,
+            "primaryId": "tm3j6xrib10dt8",
+            "alternativeIds": []
+          },
+          {
+            "level": 13,
+            "primaryId": "tm3j6xrib14400",
+            "alternativeIds": []
+          },
+          {
+            "level": 16,
+            "primaryId": "tm3j6xrib16z7u",
+            "alternativeIds": []
+          },
+          {
+            "level": 20,
+            "primaryId": "tm3j6xrib18wk9",
             "alternativeIds": []
           }
         ],
