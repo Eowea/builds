@@ -48139,7 +48139,7 @@ const HEROES = [
       },
       {
         "id": "tmtzw8rkws50bs",
-        "level": 13,
+        "level": 16,
         "name": {
           "fr": "Appel du cœur obscur",
           "en": "Pull of the Dark Heart"
@@ -48162,6 +48162,20 @@ const HEROES = [
         "description": {
           "fr": "Invoquer le cœur obscur réduit au silence les ennemis pris dans son rayon. Xal'atath et ses alliés gagnent de l'armure anti-sort tant qu'ils restent à l'intérieur.",
           "en": "Casting the Dark Heart Silences the enemies caught in its radius. Xal'atath and her allies gain Spell Armor while they remain inside."
+        },
+        "demoYoutubeId": null
+      },
+      {
+        "id": "tmtzw8rk4lndz4",
+        "level": 13,
+        "name": {
+          "fr": "Pummeling Step",
+          "en": "Pummeling Step"
+        },
+        "icon": "assets/heroes/base_spells/xalatath/images/spells/storm_ui_icon_xalatath_w_voidstep.png",
+        "description": {
+          "fr": "",
+          "en": ""
         },
         "demoYoutubeId": null
       },
