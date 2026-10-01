@@ -8,6 +8,14 @@
        de la page : on y lisait la barre de filtres et les liens des réseaux sociaux. -->
   <meta name="description" content="Les builds Heroes of the Storm d'Eowea : pour chaque héros, les talents à prendre, le code à copier en jeu et des conseils pour bien le jouer." />
 
+  <!-- PROPRE AU DÉPÔT builds : ne pas écraser en recopiant buildtest.
+       Sans slash final, GitHub Pages renvoie une 301 vers .../builds/. Cette balise
+       désigne l’adresse avec slash comme la bonne, pour que Google et les robots
+       d’aperçu ne traitent pas les deux formes comme deux pages distinctes.
+       Elle n’existe que dans builds : buildtest n’a pas la même adresse, une URL
+       en dur y serait fausse. Même raison que pour l’absence d’og:url ci-dessous. -->
+  <link rel="canonical" href="https://eowea.github.io/builds/" />
+
   <!-- Open Graph : ce qu'affichent Discord, X et Facebook quand on partage le lien.
        og:site_name sert aussi à Google, qui devinait « GitHub Pages documentation ».
        Pas d'og:url : ce fichier est recopié tel quel entre buildtest et builds, qui
