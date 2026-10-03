@@ -422,10 +422,10 @@
       </div>
       <div class="hero-list" id="heroListEl"></div>
       <div class="sidebar-footer">
-        <button onclick="addHero()">+ Nouveau héros</button>
-        <button onclick="showBattlegroundsPanel()">🗺 Cartes</button>
-        <button onclick="showStatsPanel()">📊 Statistiques</button>
-        <button onclick="showConfigPanel()">⚙ Configuration du site</button>
+        <button id="newHeroBtn" onclick="addHero()">+ Nouveau héros</button>
+        <button id="bgPanelBtn" onclick="showBattlegroundsPanel()">🗺 Cartes</button>
+        <button id="statsPanelBtn" onclick="showStatsPanel()">📊 Statistiques</button>
+        <button id="configPanelBtn" onclick="showConfigPanel()">⚙ Configuration du site</button>
         <button id="adminsPanelBtn" onclick="showAdminsPanel()">👤 Administrateurs</button>
       </div>
     </div>
@@ -463,7 +463,30 @@ let dataFileSha = null;
 let adminsFileSha = null;
 let githubToken = null;
 let currentUser = null;
-let currentUserRole = 'admin'; // 'admin' (accès complet) ou 'editor' (limité au dépôt buildtest)
+let currentUserRole = 'admin'; // 'admin' (accès complet) ou 'editor' (limité aux builds, sur buildtest)
+
+/* Un éditeur ne peut que travailler les builds d'un héros : tout le reste de l'admin
+   lui est fermé. Les boutons correspondants sont masqués, mais chaque fonction se
+   garde aussi elle-même — un bouton caché reste appelable depuis la console ou par
+   une vue restaurée, et l'interface seule ne protège rien. */
+const ONGLET_EDITEUR = 'builds';
+function estEditeur(){ return currentUserRole === 'editor'; }
+function refuserEditeur(quoi){
+  toast("Ton compte éditeur ne peut que travailler les builds" + (quoi ? " : " + quoi + " est réservé à Eowea" : ''), 'error');
+  return false;
+}
+
+/* Chaque build porte le pseudo du compte qui l'a créé (champ author), affiché sur le
+   site sous le build. Les builds d'avant ce champ n'en ont pas : ils sont d'Eowea,
+   comme le site les présente. */
+const AUTEUR_PAR_DEFAUT = 'Eowea';
+function auteurDuBuild(b){ return String((b && b.author) || '').trim() || AUTEUR_PAR_DEFAUT; }
+// Un éditeur ne touche qu'à ses propres builds. Sans ça, il pourrait réécrire un build
+// d'Eowea qui continuerait d'afficher « Auteur : Eowea » sur le site : l'attribution
+// serait fausse. L'admin, lui, peut tout modifier.
+function peutModifierBuild(b){
+  return !estEditeur() || auteurDuBuild(b).toLowerCase() === String(currentUser || '').toLowerCase();
+}
 let currentHeroIndex = null;
 let currentTab = 'infos';
 let dirty = false;
@@ -887,8 +910,11 @@ function serializeDataFile(){
 async function bootApp(){
   document.getElementById('tokenScreen').classList.add('hidden');
   document.getElementById('appScreen').style.display = 'flex';
-  const adminsBtn = document.getElementById('adminsPanelBtn');
-  if (adminsBtn) adminsBtn.style.display = currentUserRole === 'editor' ? 'none' : '';
+  // Tout ce qui ne sert pas à faire un build disparaît pour un éditeur.
+  ['adminsPanelBtn', 'newHeroBtn', 'bgPanelBtn', 'statsPanelBtn', 'configPanelBtn'].forEach(id => {
+    const b = document.getElementById(id);
+    if (b) b.style.display = estEditeur() ? 'none' : '';
+  });
   populateTopbarRepoSelect();
   await reloadFromGitHub();
 }
@@ -1344,6 +1370,7 @@ function assetRawUrl(path){
 }
 
 function addHero(){
+  if (estEditeur()) return refuserEditeur('la création de héros');
   const id = prompt("Identifiant technique du héros (ex: 'jaina', sans espace) :");
   if (!id) return;
   if (HEROES.some(h => h.id === id)){ toast('Cet identifiant existe déjà', 'error'); return; }
@@ -1368,6 +1395,7 @@ function addHero(){
 }
 
 function duplicateHero(idx){
+  if (estEditeur()) return refuserEditeur('la duplication de héros');
   const copy = JSON.parse(JSON.stringify(HEROES[idx]));
   copy.id = copy.id + '_copie';
   HEROES.splice(idx+1, 0, copy);
@@ -1377,6 +1405,7 @@ function duplicateHero(idx){
 }
 
 function deleteHero(idx){
+  if (estEditeur()) return refuserEditeur('la suppression de héros');
   if (!confirm(`Supprimer définitivement "${HEROES[idx].name?.fr || HEROES[idx].id}" ?`)) return;
   HEROES.splice(idx,1);
   currentHeroIndex = null;
@@ -1398,7 +1427,8 @@ function selectHero(idx){
   if (window.matchMedia('(max-width: 860px)').matches) toggleSidebar(false);
 }
 function switchTab(tab){
-  currentTab = tab;
+  // Un éditeur n'a qu'un onglet : toute autre demande est ramenée dessus.
+  currentTab = (estEditeur() && tab !== ONGLET_EDITEUR) ? ONGLET_EDITEUR : tab;
   renderHeroPanel();
   saveViewState();
 }
@@ -1406,6 +1436,9 @@ function switchTab(tab){
 function renderHeroPanel(){
   const hero = HEROES[currentHeroIndex];
   const content = document.getElementById('contentEl');
+  // Une vue restaurée depuis la session précédente peut pointer sur un autre onglet :
+  // on ramène l'éditeur sur les builds avant de rendre quoi que ce soit.
+  if (estEditeur() && currentTab !== ONGLET_EDITEUR) currentTab = ONGLET_EDITEUR;
   content.innerHTML = `
     <div class="hero-header">
       <div>
@@ -1413,16 +1446,16 @@ function renderHeroPanel(){
         <div style="color:var(--text-dim);font-size:12px;">id: ${escapeHtml(hero.id)}</div>
       </div>
       <div style="display:flex;gap:8px;">
-        <button onclick="duplicateHero(${currentHeroIndex})">⧉ Dupliquer</button>
-        <button class="danger" onclick="deleteHero(${currentHeroIndex})">🗑 Supprimer</button>
+        ${estEditeur() ? '' : `<button onclick="duplicateHero(${currentHeroIndex})">⧉ Dupliquer</button>
+        <button class="danger" onclick="deleteHero(${currentHeroIndex})">🗑 Supprimer</button>`}
       </div>
     </div>
     <div class="tabs">
-      <div class="tab ${currentTab==='infos'?'active':''}" onclick="switchTab('infos')">Informations</div>
+      ${estEditeur() ? '' : `<div class="tab ${currentTab==='infos'?'active':''}" onclick="switchTab('infos')">Informations</div>
       <div class="tab ${currentTab==='spells'?'active':''}" onclick="switchTab('spells')">Sorts</div>
       <div class="tab ${currentTab==='talentpool'?'active':''}" onclick="switchTab('talentpool')">Talents</div>
       <div class="tab ${currentTab==='tips'?'active':''}" onclick="switchTab('tips')">Astuces</div>
-      <div class="tab ${currentTab==='bugs'?'active':''}" onclick="switchTab('bugs')">Bugs connus</div>
+      <div class="tab ${currentTab==='bugs'?'active':''}" onclick="switchTab('bugs')">Bugs connus</div>`}
       <div class="tab ${currentTab==='builds'?'active':''}" onclick="switchTab('builds')">Builds &amp; vidéos</div>
     </div>
     <div id="tabBody"></div>
@@ -1856,9 +1889,15 @@ function setBugNote(idx, talentId, lang, value){
 
 /* ---------- Onglet Builds ---------- */
 function renderBuildsTab(hero){
-  const indices = hero.builds.map((_, i) => i);
+  // Un éditeur ne voit que ses propres builds : ceux des autres ne lui sont pas proposés.
+  const indices = hero.builds.map((_, i) => i).filter(i => peutModifierBuild(hero.builds[i]));
   indices.sort((a, b) => (hero.builds[a].order ?? 0) - (hero.builds[b].order ?? 0));
-  let html = indices.map((i, pos) => renderOneBuild(hero, hero.builds[i], i, pos)).join('');
+  const caches = hero.builds.length - indices.length;
+  let html = '';
+  if (caches) {
+    html += `<small class="help" style="display:block;margin-bottom:12px;">${caches} build${caches > 1 ? 's' : ''} d'autres auteurs ${caches > 1 ? 'ne sont pas affichés' : "n'est pas affiché"} ici : tu ne peux travailler que les tiens.</small>`;
+  }
+  html += indices.map((i, pos) => renderOneBuild(hero, hero.builds[i], i, pos)).join('');
   html += `<button class="list-add-btn" onclick="addBuild(${currentHeroIndex})">+ Ajouter un build</button>`;
   return html;
 }
@@ -1884,13 +1923,18 @@ function renderOneBuild(hero, b, i, pos){
       </div>
     </div>
   `).join('');
+  // Le glisser-déposer renumérote l'ordre de TOUS les builds du héros d'après les positions
+  // affichées. Un éditeur ne voit que les siens : ses positions ne correspondraient pas à
+  // la liste complète et bousculeraient les builds d'Eowea. Il garde le champ « Ordre ».
+  const glisser = estEditeur() ? '' : ` data-drag-item data-drag-list="builds" data-drag-index="${pos}"`;
   return `
-    <details class="collapsible" data-uid="${buildUid}"${collapsibleState[buildUid]?' open':''} data-build-index="${i}" data-drag-item data-drag-list="builds" data-drag-index="${pos}">
+    <details class="collapsible" data-uid="${buildUid}"${collapsibleState[buildUid]?' open':''} data-build-index="${i}"${glisser}>
       <summary>
-        <span class="drag-handle" title="Glisser pour réordonner">⠿</span>
+        ${estEditeur() ? '' : '<span class="drag-handle" title="Glisser pour réordonner">⠿</span>'}
         <span class="chevron">▸</span>
         <span class="s-title">${escapeHtml(b.label?.fr || 'Build sans nom')}</span>
         <span class="s-sub">
+          <span style="color:var(--text-dim);">par ${escapeHtml(auteurDuBuild(b))}</span>
           ${b.isNew?'<span style="color:var(--gold);">● MàJ</span>':''}
           <span class="s-dot ${b.enabled?'on':'off'}" style="background:${b.enabled?'var(--green)':'var(--red)'}"></span>
           <span style="color:${b.enabled?'var(--green)':'var(--red)'};font-weight:700;">${b.enabled?'PUBLIÉ':'NON PUBLIÉ'}</span>
@@ -1919,6 +1963,16 @@ function renderOneBuild(hero, b, i, pos){
       <div class="row">
         <div class="field"><label>Nom du build (FR)</label><input value="${escapeHtml(b.label?.fr)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}],'label.fr',this.value)" /></div>
         <div class="field"><label>Nom du build (EN)</label><input value="${escapeHtml(b.label?.en)}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}],'label.en',this.value)" /></div>
+      </div>
+      <!-- data-no-touch sur le conteneur et non sur l'input : réattribuer un build ne le
+           modifie pas, il ne doit donc pas le redater. Et touchBuild() écrit la date dans
+           les deux premiers input[data-no-touch] du bloc — un input marqué ici, placé
+           avant les dates, recevrait la date à leur place. -->
+      <div class="field" data-no-touch><label>Auteur</label>
+        ${estEditeur()
+          ? `<input value="${escapeHtml(auteurDuBuild(b))}" disabled />`
+          : `<input value="${escapeHtml(auteurDuBuild(b))}" oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}],'author',this.value.trim())" />`}
+        <small class="help">Pseudo affiché sous ce build sur le site, et dans « Voir les builds de ». Rempli tout seul avec le compte qui crée le build${estEditeur() ? '.' : ' ; tu peux le réattribuer.'}</small>
       </div>
       <div class="row">
         <div class="field"><label>Résumé (FR)</label><textarea oninput="setNested(HEROES[${currentHeroIndex}].builds[${i}],'summary.fr',this.value)">${escapeHtml(b.summary?.fr)}</textarea></div>
@@ -2171,13 +2225,19 @@ function addBuild(idx){
     enabled: true, order: (HEROES[idx].builds.length+1),
     label:{fr:'Nouveau build',en:'New build'}, updatedAt:dateDuJour(),
     summary:{fr:'',en:''}, buildCodeTitle:{fr:"A COLLER DANS L'ARBRE DES TALENTS",en:"PASTE IN TALENT TREE"},
-    buildCode:'', videos:[], talentSelections:[]
+    buildCode:'', videos:[], talentSelections:[],
+    // Le build appartient au compte connecté : c'est ce nom qu'affiche le site.
+    author: currentUser || AUTEUR_PAR_DEFAUT
   };
   collapsibleState[assignUid(b)] = true;
   HEROES[idx].builds.push(b);
   markDirty(); renderHeroPanel();
 }
 function removeBuild(idx, bIdx){
+  if (!peutModifierBuild(HEROES[idx].builds[bIdx])){
+    toast("Ton compte éditeur ne peut supprimer que ses propres builds", 'error');
+    return false;
+  }
   if (!confirm('Supprimer ce build ?')) return;
   HEROES[idx].builds.splice(bIdx,1);
   markDirty(); renderHeroPanel();
@@ -2369,6 +2429,7 @@ function pickAsset(path){
    CONFIGURATION DU SITE (APP_CONFIG / STREAMER_CONFIG)
    ========================================================================= */
 function showConfigPanel(){
+  if (estEditeur()) return refuserEditeur('la configuration du site');
   currentHeroIndex = null;
   currentPanelView = 'config';
   renderHeroList();
@@ -2872,6 +2933,7 @@ async function diagnostiquerAcces(){
 }
 
 function showStatsPanel(){
+  if (estEditeur()) return refuserEditeur('les statistiques');
   currentHeroIndex = null;
   renderHeroList();
   const code = statsCode();
@@ -3006,6 +3068,7 @@ function removeChangelogItem(i, j){
    GESTION DES CARTES (BATTLEGROUNDS)
    ========================================================================= */
 function showBattlegroundsPanel(){
+  if (estEditeur()) return refuserEditeur('les cartes');
   currentHeroIndex = null;
   currentPanelView = 'battlegrounds';
   renderHeroList();
