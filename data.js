@@ -43,6 +43,17 @@ const STREAMER_CONFIG = {
     {
       "enabled": true,
       "label": {
+        "fr": "Cartes",
+        "en": "Maps"
+      },
+      "url": "https://eowea.github.io/maps/",
+      "newTab": false,
+      "showOnBuilds": true,
+      "showOnBattlegrounds": false
+    },
+    {
+      "enabled": true,
+      "label": {
         "fr": "Patchs",
         "en": "Patches"
       },
