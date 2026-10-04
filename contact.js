@@ -37,6 +37,7 @@ const CT_DICT = {
   },
   backToHero: { fr: "Retour sur {n}", en: "Back to {n}" },
   backToBuilds: { fr: "Retour aux builds", en: "Back to the builds" },
+  backToMaps: { fr: "Retour aux cartes", en: "Back to the maps" },
 };
 
 /* ── Utilities (copie autonome des helpers d'app.js, page indépendante) ── */
@@ -136,6 +137,20 @@ const CT_FLECHE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" st
 
 function renderRetour() {
   if (!ctEls.retourZone) return;
+  // Venu du site des cartes (?depuis=maps) : le retour y renvoie, sur la carte qu'on
+  // lisait si le lien la transmet. Le fragment est repris tel quel, comme pour les héros.
+  let depuis = '', retourCarte = '';
+  try {
+    const p = new URLSearchParams(location.search);
+    depuis = p.get('depuis') || '';
+    retourCarte = p.get('retour') || '';
+  } catch {}
+  if (depuis === 'maps') {
+    const cible = 'https://eowea.github.io/maps/' + (retourCarte ? '#' + retourCarte : '');
+    ctEls.retourZone.innerHTML = `<a class="retour-lien" href="${ctEsc(cible)}">${CT_FLECHE}`
+      + `<span>${ctEsc(ctT('backToMaps'))}</span></a>`;
+    return;
+  }
   const r = ctRetour();
   if (!r) {
     // Venu de l'accueil, ou héros inconnu : on ne promet pas un retour qu'on ne sait pas tenir.
