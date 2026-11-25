@@ -107,10 +107,26 @@ const STREAMER_CONFIG = {
     "enabled": true,
     "autoDate": true,
     "date": {
-      "fr": "4 Novembre 2026",
-      "en": "November 4, 2026"
+      "fr": "25 Novembre 2026",
+      "en": "November 25, 2026"
     },
     "changelog": [
+      {
+        "date": {
+          "fr": "25 Novembre 2026",
+          "en": "November 25, 2026"
+        },
+        "items": [
+          {
+            "fr": "Les talents de Gazleu, Grisetête, Medivh, Thrall et Xal'atath ont été mis à jour avec le patch du 23 novembre.",
+            "en": "Gazlowe, Greymane, Medivh, Thrall and Xal'atath's Talents have been updated for the November 23 patch."
+          },
+          {
+            "fr": "Un bug connu sur Xal'atath : depuis ce patch, la quête d'Adepte du Vide ne gagne plus de cumuls.",
+            "en": "A known bug on Xal'atath: since this patch, Void Adept's quest no longer gains stacks."
+          }
+        ]
+      },
       {
         "date": {
           "fr": "1 Novembre 2026",
@@ -21130,8 +21146,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/gazlowe/images/spells/storm_ui_icon_gazlowe_explodiumcharge.png",
         "description": {
-          "fr": "Charge d'X-plosium gagne une deuxième charge et lâche des bombes supplémentaires en explosant.",
-          "en": "Xplodium Charge gains a second charge and drops extra bombs when it detonates."
+          "fr": "Charge d'X-plosium voit son temps de recharge réduit et lâche des bombes supplémentaires en explosant.",
+          "en": "Xplodium Charge gets a shorter cooldown and drops extra bombs when it detonates."
         },
         "demoYoutubeId": null
       }
@@ -22140,8 +22156,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/greymane/images/spells/storm_ui_icon_greymane_snapshot.png",
         "description": {
-          "fr": "Balle maudite ampute une part un peu moindre des points de vie, mais son temps de recharge est très nettement réduit.",
-          "en": "Cursed Bullet strips a slightly smaller share of Health, but its cooldown drops dramatically."
+          "fr": "Le temps de recharge de Balle maudite est très nettement réduit.",
+          "en": "Cursed Bullet's cooldown drops dramatically."
         },
         "demoYoutubeId": null
       },
@@ -31289,8 +31305,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/medivh/images/spells/storm_ui_icon_medivh_ravenform.png",
         "description": {
-          "fr": "Double le bonus à la vitesse de déplacement de la forme de corbeau.",
-          "en": "Doubles Raven Form's Movement Speed bonus."
+          "fr": "Double le bonus à la vitesse de déplacement de la forme de corbeau, et Medivh prend cette forme plus vite.",
+          "en": "Doubles Raven Form's Movement Speed bonus, and Medivh takes that form faster."
         },
         "demoYoutubeId": null
       },
@@ -31317,8 +31333,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/medivh/images/spells/storm_ui_icon_medivh_portal.png",
         "description": {
-          "fr": "Permet de placer soi-même les deux portails, sans quitter la forme de corbeau. Le trait annule un portail resté seul.",
-          "en": "Lets him place both portals himself, without breaking Raven Form. His trait cancels a portal left unlinked."
+          "fr": "Permet de placer soi-même les deux portails, sans quitter la forme de corbeau, mais Portail coûte bien plus de mana. Le trait annule un portail resté seul.",
+          "en": "Lets him place both portals himself, without breaking Raven Form, but Portal costs far more Mana. His trait cancels a portal left unlinked."
         },
         "demoYoutubeId": null
       },
@@ -41364,8 +41380,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/thrall/images/spells/storm_ui_icon_thrall_chainlightning.png",
         "description": {
-          "fr": "Quête : tuer des ennemis juste après les avoir touchés avec Chaîne d'éclairs. Récompenses : son coût en mana baisse, puis elle gagne une charge, et enfin chaque rebond frappe une cible de plus.",
-          "en": "Quest: kill enemies right after hitting them with Chain Lightning. Rewards: its Mana cost drops, then it gains a charge, and finally each bounce hits one more target."
+          "fr": "Quête : tuer des ennemis juste après les avoir touchés avec Chaîne d'éclairs. Récompenses : son coût en mana baisse, puis elle gagne une charge, et enfin chaque rebond frappe une cible de plus. Mourir coûte des cumuls, sans jamais faire redescendre sous un palier atteint.",
+          "en": "Quest: kill enemies right after hitting them with Chain Lightning. Rewards: its Mana cost drops, then it gains a charge, and finally each bounce hits one more target. Dying costs stacks, but never drops him below a reward tier he has reached."
         },
         "demoYoutubeId": null
       },
@@ -48195,8 +48211,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/xalatath/images/spells/storm_ui_icon_xalatath_e_darkheartritual.png",
         "description": {
-          "fr": "Le cœur obscur gagne en rayon et en durée, et ses dégâts rebondissent deux fois vers les ennemis proches.",
-          "en": "The Dark Heart gains radius and duration, and its damage bounces twice to nearby enemies."
+          "fr": "Le cœur obscur gagne en rayon, et ses dégâts rebondissent deux fois vers les ennemis proches.",
+          "en": "The Dark Heart gains radius, and its damage bounces twice to nearby enemies."
         },
         "demoYoutubeId": null
       },
@@ -48209,8 +48225,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/xalatath/images/spells/storm_ui_icon_xalatath_w_voidstep.png",
         "description": {
-          "fr": "Activer Pas du Vide augmente la vitesse de déplacement de Xal'atath et lui confère de l'armure anti-sort, effet renouvelé à chaque téléportation.",
-          "en": "Activating Void Step grants Xal'atath Movement Speed and Spell Armor, refreshed on every teleport."
+          "fr": "Activer Pas du Vide augmente la vitesse de déplacement de Xal'atath, effet renouvelé à chaque téléportation. Elle gagne aussi de l'armure anti-sort, mais seulement pendant les sauts.",
+          "en": "Activating Void Step grants Xal'atath Movement Speed, refreshed on every teleport. She also gains Spell Armor, but only while she is blinking."
         },
         "demoYoutubeId": null
       },
@@ -48265,8 +48281,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/xalatath/images/spells/storm_ui_icon_xalatath_q_shadowmark.png",
         "description": {
-          "fr": "Marque de l'ombre dure plus longtemps, ses dégâts sur la durée montent avec le maximum de points de vie de la cible, et le héros marqué perd de l'armure.",
-          "en": "Shadow Mark lasts longer, its damage over time scales with the target's maximum Health, and the Marked Hero loses Armor."
+          "fr": "Les dégâts sur la durée de Marque de l'ombre montent avec le maximum de points de vie de la cible, et le héros marqué perd de l'armure. Ces effets profitent de la durée allongée par Croche-pied.",
+          "en": "Shadow Mark's damage over time scales with the target's maximum Health, and the Marked Hero loses Armor. These effects benefit from Cold Feet's longer duration."
         },
         "demoYoutubeId": null
       },
@@ -48391,8 +48407,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/xalatath/images/spells/storm_ui_icon_xalatath_w_voidstep.png",
         "description": {
-          "fr": "Tant que Pas du Vide est actif, la vitesse d'attaque de Xal'atath grimpe énormément.",
-          "en": "While Void Step is active, Xal'atath's Attack Speed climbs enormously."
+          "fr": "Tant que Pas du Vide est actif, chaque téléportation renforce bien davantage les attaques de base de Xal'atath.",
+          "en": "While Void Step is active, each teleport strengthens Xal'atath's Basic Attacks far more."
         },
         "demoYoutubeId": null
       },
@@ -48461,8 +48477,8 @@ const HEROES = [
         },
         "icon": "assets/heroes/base_spells/xalatath/images/spells/storm_ui_icon_xalatath_e_darkheartritual.png",
         "description": {
-          "fr": "Quand le cœur obscur se termine ou explose sur une cible marquée, il laisse derrière lui des flammes du Vide qui infligent des dégâts sur la durée aux ennemis qui s'y attardent.",
-          "en": "When the Dark Heart ends or detonates on a Marked target, it leaves behind Void flames that deal damage over time to enemies lingering in them."
+          "fr": "Quand le cœur obscur se termine ou explose sur une cible marquée, il laisse derrière lui des flammes du Vide qui blessent d'un coup les ennemis qu'elles touchent.",
+          "en": "When the Dark Heart ends or detonates on a Marked target, it leaves behind Void flames that damage the enemies they hit in a single burst."
         },
         "demoYoutubeId": null
       },
@@ -48483,7 +48499,20 @@ const HEROES = [
     ],
     "forms": [],
     "codeKey": "Xalatath",
-    "isNew": true
+    "isNew": true,
+    "bugs": [
+      {
+        "talentId": "tmtzw8rkp78f1m",
+        "note": {
+          "fr": "Depuis le patch du 23 novembre, la quête ne gagne plus aucun cumul : le talent ne fait rien.",
+          "en": "Since the November 23 patch, the quest no longer gains any stacks: the Talent does nothing."
+        }
+      }
+    ],
+    "bugsUpdatedAt": {
+      "fr": "25 Novembre 2026",
+      "en": "November 25, 2026"
+    }
   }
 ];
 
