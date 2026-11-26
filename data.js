@@ -107,8 +107,8 @@ const STREAMER_CONFIG = {
     "enabled": true,
     "autoDate": true,
     "date": {
-      "fr": "25 Novembre 2026",
-      "en": "November 25, 2026"
+      "fr": "26 Novembre 2026",
+      "en": "November 26, 2026"
     },
     "changelog": [
       {
@@ -48500,18 +48500,10 @@ const HEROES = [
     "forms": [],
     "codeKey": "Xalatath",
     "isNew": true,
-    "bugs": [
-      {
-        "talentId": "tmtzw8rkp78f1m",
-        "note": {
-          "fr": "Depuis le patch du 23 novembre, la quête ne gagne plus aucun cumul : le talent ne fait rien.",
-          "en": "Since the November 23 patch, the quest no longer gains any stacks: the Talent does nothing."
-        }
-      }
-    ],
+    "bugs": [],
     "bugsUpdatedAt": {
-      "fr": "25 Novembre 2026",
-      "en": "November 25, 2026"
+      "fr": "",
+      "en": ""
     }
   }
 ];
